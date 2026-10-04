@@ -4,7 +4,7 @@ const c = site.chat_demo;
 ---
 
 <figure class="chat mx-auto w-full max-w-md" aria-label={`${c.hinweis}: Gästenachricht und Antwort`}>
-  <div class="karte overflow-hidden shadow-[0_24px_60px_-28px_rgb(15_60_55/0.35)]">
+  <div class="karte overflow-hidden shadow-[0_24px_60px_-28px_rgb(154_52_18/0.22)]">
     <div class="flex items-center gap-3 border-b border-linie px-5 py-3.5">
       <span class="grid size-9 place-items-center rounded-full bg-karte-2 text-sm font-semibold text-leise" aria-hidden="true">FW</span>
       <div class="leading-tight">
@@ -23,10 +23,7 @@ const c = site.chat_demo;
         </div>
         <div class="antwort ml-auto max-w-[88%]">
           <p class="rounded-2xl rounded-br-md bg-akzent-hell px-4 py-3 text-[0.95rem] leading-snug">{c.antwort_text}</p>
-          <p class="mt-1.5 flex items-center justify-end gap-2 pr-1 text-xs text-leise">
-            <span class="rounded-full bg-akzent px-2 py-0.5 font-semibold text-auf-akzent">{c.antwort_label}</span>
-            <time>{c.antwort_zeit}</time>
-          </p>
+          <p class="mt-1.5 pr-1 text-right text-xs text-leise"><time>{c.antwort_zeit}</time></p>
         </div>
       </div>
     </div>

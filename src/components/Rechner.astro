@@ -13,11 +13,11 @@ const start = rechnen({
   preisProBuchung: preis,
 });
 
-const felder = [
-  { id: "objekte", label: r.label_objekte, wert: r.start_objekte, min: 1, schritt: 1 },
-  { id: "buchungen", label: r.label_buchungen, wert: r.start_buchungen, min: 0, schritt: 1 },
-  { id: "buchungswert", label: r.label_buchungswert, wert: r.start_buchungswert, min: 0, schritt: 10 },
-  { id: "anteil", label: r.label_anteil, wert: r.start_anteil, min: 0, max: 100, schritt: 1 },
+const f_liste = [
+  { id: "objekte", label: r.label_objekte, wert: r.start_objekte, min: 1, max: 20, schritt: 1 },
+  { id: "buchungen", label: r.label_buchungen, wert: r.start_buchungen, min: 0, max: 100, schritt: 1 },
+  { id: "buchungswert", label: r.label_buchungswert, wert: r.start_buchungswert, min: 50, max: 2000, schritt: 10 },
+  { id: "anteil", label: r.label_anteil, wert: r.start_anteil, min: 0, max: 50, schritt: 1 },
 ];
 ---
 
@@ -25,23 +25,39 @@ const felder = [
   <div class="p-5 md:p-6">
     <h3 id="rechner-titel" class="text-lg">{r.titel}</h3>
     <p class="mt-1 text-sm text-leise">{r.intro}</p>
-    <form class="mt-4 grid grid-cols-2 gap-3" aria-label="Eingaben für die Beispielrechnung" onsubmit="return false">
+    <form class="mt-5 space-y-4" aria-label="Eingaben für die Beispielrechnung" onsubmit="return false">
       {
-        felder.map((f) => (
-          <label class="block text-sm font-medium leading-snug">
-            {f.label}
+        f_liste.map((f) => (
+          <div>
+            <div class="flex items-center justify-between gap-3">
+              <label for={`r-${f.id}`} class="text-sm font-medium leading-snug">
+                {f.label}
+              </label>
+              <input
+                type="number"
+                id={`r-${f.id}`}
+                name={f.id}
+                data-feld={f.id}
+                min={f.min}
+                max={f.max}
+                step={f.schritt}
+                value={f.wert}
+                inputmode="numeric"
+                class="w-20 shrink-0 rounded-lg border-[1.5px] border-rahmen bg-flaeche px-2 py-1.5 text-right text-base tabular-nums"
+              />
+            </div>
             <input
-              type="number"
-              name={f.id}
+              type="range"
               data-feld={f.id}
               min={f.min}
               max={f.max}
               step={f.schritt}
               value={f.wert}
-              inputmode="numeric"
-              class="mt-1.5 block w-full rounded-lg border-[1.5px] border-rahmen bg-flaeche px-3 py-2 text-right text-base tabular-nums"
+              aria-hidden="true"
+              tabindex="-1"
+              class="regler mt-2 w-full"
             />
-          </label>
+          </div>
         ))
       }
     </form>
@@ -68,12 +84,16 @@ const felder = [
 
   document.querySelectorAll<HTMLElement>(".rechner").forEach((box) => {
     const preis = Number(box.dataset.preis);
-    const wert = (id: string) => Number(box.querySelector<HTMLInputElement>(`input[data-feld="${id}"]`)?.value);
+    const wert = (id: string) => Number(box.querySelector<HTMLInputElement>(`input[type=number][data-feld="${id}"]`)?.value);
     const ausgabe = (name: string, text: string) => {
       const el = box.querySelector(`[data-aus="${name}"]`);
       if (el) el.textContent = text;
     };
-    box.addEventListener("input", () => {
+    box.addEventListener("input", (ereignis) => {
+      const quelle = ereignis.target as HTMLInputElement;
+      box.querySelectorAll<HTMLInputElement>(`input[data-feld="${quelle.dataset.feld}"]`).forEach((partner) => {
+        if (partner !== quelle) partner.value = quelle.value;
+      });
       const e = rechnen({
         objekte: wert("objekte"),
         buchungenProMonat: wert("buchungen"),
@@ -87,3 +107,41 @@ const felder = [
     });
   });
 </script>
+
+<style>
+  /* Freundliche, gut greifbare Schieberegler in der Akzentfarbe */
+  .regler {
+    appearance: none;
+    height: 1.75rem;
+    background: transparent;
+    cursor: pointer;
+  }
+  .regler::-webkit-slider-runnable-track {
+    height: 6px;
+    border-radius: 999px;
+    background: var(--akzent-hell);
+  }
+  .regler::-moz-range-track {
+    height: 6px;
+    border-radius: 999px;
+    background: var(--akzent-hell);
+  }
+  .regler::-webkit-slider-thumb {
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    margin-top: -8px;
+    border-radius: 50%;
+    background: var(--akzent);
+    border: 3px solid #fff;
+    box-shadow: 0 1px 4px rgb(154 52 18 / 0.35);
+  }
+  .regler::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--akzent);
+    border: 3px solid #fff;
+    box-shadow: 0 1px 4px rgb(154 52 18 / 0.35);
+  }
+</style>

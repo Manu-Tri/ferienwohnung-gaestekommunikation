@@ -47,7 +47,6 @@ export const siteSchema = z.object({
     gast_text: text,
     antwort_zeit: text,
     antwort_text: text,
-    antwort_label: text,
     hinweis: text,
   }),
   problem: z.object({ titel: text, karten: z.array(karte) }),

@@ -98,7 +98,7 @@ cta:
   check_kurz: "Inserats-Check"
 
 hero:
-  titel: "Ihre Gäste bekommen immer eine Antwort. Sie bekommen Ihren Feierabend zurück."
+  titel: "Ihre Gäste bekommen immer eine Antwort. Sie bekommen mehr Freiheit."
   unterzeile: "Wir beantworten jede Gästenachricht auf Airbnb und Booking.com von {start} bis {ende} Uhr, vom ersten Kontakt bis zur Bewertung nach der Abreise. Für {preis} € pro Buchung, ohne Grundgebühr. Die ersten {test_tage} Tage sind kostenlos."
   vertrauen:
     - "Keine Nachricht bleibt unbeantwortet"
@@ -113,9 +113,8 @@ chat_demo:
   gast_name: "Familie Weber"
   gast_zeit: "So, 21:47"
   gast_text: "Hallo, wir stehen vor der Tür und der Schlüsselsafe geht nicht auf. Was können wir tun?"
-  antwort_zeit: "So, 21:53"
+  antwort_zeit: "So, 21:47"
   antwort_text: "Guten Abend Frau Weber, das tut mir leid. Drücken Sie bitte nach dem Code einmal fest auf die Taste unten rechts, dann öffnet die Klappe. Falls es nicht klappt, ruft Sie in 10 Minuten unser Partner vor Ort an."
-  antwort_label: "Antwort nach 6 Minuten"
   hinweis: "Beispieldarstellung"
 
 problem:
@@ -347,7 +346,7 @@ faq:
 
 abschluss:
   titel: "Der nächste Sonntagabend gehört Ihnen."
-  text: "Jeder Gast bekommt eine Antwort, Sie bekommen Ihre Abende zurück. Testen Sie {test_tage} Tage ohne Kosten und ohne Vertrag. Oder lassen Sie zuerst Ihr Inserat prüfen: {verbesserungen} konkrete Verbesserungen innerhalb von {check_stunden} Stunden."
+  text: "Jeder Gast bekommt eine Antwort, Sie bekommen mehr Freiheit. Testen Sie {test_tage} Tage ohne Kosten und ohne Vertrag. Oder lassen Sie zuerst Ihr Inserat prüfen: {verbesserungen} konkrete Verbesserungen innerhalb von {check_stunden} Stunden."
 
 footer:
   hinweis_marken: "Airbnb und Booking.com sind Marken ihrer jeweiligen Inhaber. {marke} ist ein unabhängiger Dienstleister und steht in keiner Verbindung zu diesen Unternehmen."

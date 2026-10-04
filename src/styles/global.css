@@ -1,44 +1,26 @@
-@import "@fontsource-variable/inter/wght.css";
+@import "@fontsource-variable/figtree/wght.css";
 @import "tailwindcss";
 
-/* Farben: eine Akzentfarbe (Petrol), Hell- und Dunkelmodus nach Systemeinstellung */
+/* Helles, warmes Farbschema mit einer Akzentfarbe (Terrakotta) */
 :root {
-  color-scheme: light dark;
-  --flaeche: #f8f8f5;
+  color-scheme: light;
+  --flaeche: #fffaf3;
   --karte: #ffffff;
-  --karte-2: #eff2f1;
-  --text: #13201f;
-  --text-leise: #475654;
-  --linie: #dfe5e3;
-  --rahmen: #7d8b89;
-  --akzent: #0f766e;
-  --akzent-stark: #0b5e58;
+  --karte-2: #f8efe4;
+  --text: #2a1f17;
+  --text-leise: #67533f;
+  --linie: #efe3d4;
+  --rahmen: #a3876f;
+  --akzent: #c2410c;
+  --akzent-stark: #9a3412;
   --auf-akzent: #ffffff;
-  --akzent-hell: #e3f1ef;
-  --akzent-text: #0b5e58;
+  --akzent-hell: #ffedd9;
+  --akzent-text: #9a3412;
   --fehler: #b42318;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --flaeche: #0b1416;
-    --karte: #111d20;
-    --karte-2: #182729;
-    --text: #e8efee;
-    --text-leise: #a6b6b4;
-    --linie: #24363a;
-    --rahmen: #62777a;
-    --akzent: #2dd4bf;
-    --akzent-stark: #5eead4;
-    --auf-akzent: #052522;
-    --akzent-hell: #0f2b29;
-    --akzent-text: #5eead4;
-    --fehler: #fda29b;
-  }
-}
-
 @theme inline {
-  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-sans: "Figtree Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --color-flaeche: var(--flaeche);
   --color-karte: var(--karte);
   --color-karte-2: var(--karte-2);
@@ -61,7 +43,11 @@
     scroll-padding-top: 5rem;
   }
   body {
-    background: var(--flaeche);
+    background:
+      radial-gradient(60rem 36rem at 85% -8rem, #ffe4c7 0%, transparent 70%),
+      radial-gradient(40rem 28rem at -10% 10rem, #fff1dc 0%, transparent 70%),
+      var(--flaeche);
+    background-repeat: no-repeat;
     color: var(--text);
     font-family: var(--font-sans);
     font-size: 1.0625rem;
@@ -73,9 +59,9 @@
   h2,
   h3 {
     line-height: 1.15;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.015em;
     text-wrap: balance;
-    font-weight: 650;
+    font-weight: 700;
   }
   p {
     text-wrap: pretty;

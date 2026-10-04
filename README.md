@@ -1,7 +1,7 @@
 # Landingpage [MARKENNAME]
 
 Statische Lead-Seite für Remote-Gästekommunikation (Airbnb, Booking.com).
-Astro 7, Tailwind CSS 4, keine Cookies, kein Tracking, Schrift lokal.
+Astro 7, Tailwind CSS 4, keine Cookies, kein Tracking, Schrift (Figtree) lokal. Helles, warmes Farbschema.
 
 ## Seiten
 
@@ -82,6 +82,13 @@ Lokal (`npm run dev`, `npm run preview`) schlägt das Absenden fehl, weil Netlif
 - `inhalte/site.yaml` wird beim Build gelesen und per Zod-Schema geprüft (`src/config/schema.ts`, `src/config/laden.ts`).
 - Kein Framework im Browser. Kleine Skripte: Rechner, Mehrschritt-Formular, Sticky-Leiste, Scroll-Einblendung, Leadquelle.
 - Ohne JavaScript funktioniert das Formular als normales Formular mit allen Feldern untereinander.
-- Hell- und Dunkelmodus folgen der Systemeinstellung. Animationen sind bei „Bewegung reduzieren“ aus.
+- Bewusst nur ein helles Farbschema (Farben in src/styles/global.css). Animationen sind bei „Bewegung reduzieren“ aus.
 - Strukturierte Daten: `Service` mit `areaServed` und `FAQPage`.
 - Lighthouse mobil (lokal gemessen): 100 in allen vier Kategorien auf `/`, `/inserats-check`, `/mosel`.
+
+## Vorschau auf GitHub Pages
+
+Bei jedem Push auf `main` baut GitHub automatisch eine Vorschau:
+https://manu-tri.github.io/ferienwohnung-gaestekommunikation/
+
+Die Vorschau ist für Suchmaschinen gesperrt, und das Formular sendet dort nichts (GitHub Pages hat kein Formular-Backend). Für echte Anfragen auf Netlify veröffentlichen.
