@@ -28,7 +28,7 @@ const ziel = (anker: string) => (istStart || !anker.startsWith("#") ? anker : pf
             <ul class="flex items-center gap-7 text-[0.95rem]">
               {navigation.map((punkt) => (
                 <li>
-                  <a href={ziel(punkt.ziel)} class="text-text no-underline hover:text-akzent-text">
+                  <a href={ziel(punkt.ziel)} class="font-medium text-text no-underline decoration-akzent decoration-[3px] underline-offset-[6px] hover:underline">
                     {punkt.text}
                   </a>
                 </li>
@@ -40,14 +40,18 @@ const ziel = (anker: string) => (istStart || !anker.startsWith("#") ? anker : pf
               {site.cta.test}
             </a>
             <details class="relative lg:hidden">
-              <summary class="knopf knopf-sekundaer !min-h-11 !px-4 list-none text-[0.95rem] [&::-webkit-details-marker]:hidden">
-                Menü
+              <summary class="grid size-11 cursor-pointer list-none place-items-center rounded-full border-[1.5px] border-linie bg-karte [&::-webkit-details-marker]:hidden">
+                <span class="sr-only">Menü</span>
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                  <path class="menue-zu" d="M4 7h16M4 12h16M4 17h10" />
+                  <path class="menue-auf" d="M6 6l12 12M18 6L6 18" />
+                </svg>
               </summary>
-              <nav aria-label="Hauptnavigation mobil" class="karte absolute right-0 mt-2 w-60 p-2 shadow-lg">
+              <nav aria-label="Hauptnavigation mobil" class="karte absolute right-0 mt-2 w-[min(18rem,calc(100vw-2.5rem))] p-2 shadow-[0_20px_50px_-20px_rgb(28_26_23/0.35)]">
                 <ul>
                   {navigation.map((punkt) => (
                     <li>
-                      <a href={ziel(punkt.ziel)} class="block rounded-lg px-3 py-3 text-text no-underline hover:bg-karte-2">
+                      <a href={ziel(punkt.ziel)} class="block rounded-lg px-3 py-3 font-medium text-text no-underline hover:bg-karte-2">
                         {punkt.text}
                       </a>
                     </li>
@@ -70,3 +74,15 @@ const ziel = (anker: string) => (istStart || !anker.startsWith("#") ? anker : pf
     });
   });
 </script>
+
+<style>
+  .menue-auf {
+    display: none;
+  }
+  details[open] .menue-auf {
+    display: inline;
+  }
+  details[open] .menue-zu {
+    display: none;
+  }
+</style>

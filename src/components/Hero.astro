@@ -6,19 +6,38 @@ import Haken from "./Haken.astro";
 interface Props {
   titel?: string;
   unterzeile?: string;
+  kicker?: string;
 }
-const { titel = site.hero.titel, unterzeile = site.hero.unterzeile } = Astro.props;
+const { titel = site.hero.titel, unterzeile = site.hero.unterzeile, kicker = site.hero.kicker } = Astro.props;
+// Zweiten Satz der Überschrift mit Textmarker hervorheben
+const trenner = titel.indexOf(". ");
+const satz1 = trenner > 0 ? titel.slice(0, trenner + 1) : titel;
+const satz2 = trenner > 0 ? titel.slice(trenner + 2) : "";
 ---
 
-<section id="hero" class="behaelter grid items-center gap-12 pt-10 pb-16 md:pt-16 md:pb-24 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
+<section id="hero" class="behaelter grid items-center gap-10 pt-8 pb-14 md:pt-16 md:pb-24 lg:grid-cols-[1.3fr_1fr] lg:gap-14">
   <div>
-    <h1 class="text-[2.15rem] sm:text-5xl lg:text-[3.4rem]">{titel}</h1>
-    <p class="mt-6 max-w-[38rem] text-lg text-leise md:text-xl">{unterzeile}</p>
-    <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+    {
+      kicker && (
+        <p class="inline-flex items-center gap-2 rounded-full border border-linie bg-karte px-3.5 py-1.5 text-sm font-semibold shadow-sm">
+          <span class="relative flex size-2.5" aria-hidden="true">
+            <span class="absolute inline-flex size-full animate-ping rounded-full bg-akzent opacity-75 motion-reduce:animate-none" />
+            <span class="relative inline-flex size-2.5 rounded-full bg-akzent-stark" />
+          </span>
+          {kicker}
+        </p>
+      )
+    }
+    <h1 class="mt-5 text-[2.1rem] leading-[1.08] sm:text-5xl lg:text-[3.4rem]">
+      {satz1}
+      {satz2 && <><br class="hidden sm:inline" /> <span class="marker">{satz2}</span></>}
+    </h1>
+    <p class="mt-5 max-w-[38rem] text-[1.075rem] text-leise md:mt-6 md:text-xl">{unterzeile}</p>
+    <div class="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap md:mt-8">
       <a href="#anfrage" data-anliegen="test" class="knopf knopf-primaer text-[1.05rem]">{site.cta.test}</a>
       <a href="#anfrage" data-anliegen="check" class="knopf knopf-sekundaer text-[1.05rem]">{site.cta.check}</a>
     </div>
-    <ul class="mt-8 grid gap-x-6 gap-y-2 text-[0.95rem] text-leise sm:grid-cols-2" aria-label="Das Wichtigste in Kürze">
+    <ul class="mt-7 flex flex-wrap gap-x-5 gap-y-2.5 text-[0.95rem] font-medium" aria-label="Das Wichtigste in Kürze">
       {
         site.hero.vertrauen.map((punkt) => (
           <li class="flex items-center gap-2">
@@ -31,3 +50,12 @@ const { titel = site.hero.titel, unterzeile = site.hero.unterzeile } = Astro.pro
   </div>
   <ChatDemo />
 </section>
+
+<style>
+  .marker {
+    background: linear-gradient(transparent 62%, var(--akzent) 62%, var(--akzent) 92%, transparent 92%);
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    padding-inline: 0.06em;
+  }
+</style>

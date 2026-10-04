@@ -1,16 +1,18 @@
 ---
 import { pfad } from "../config/pfad";
 import { site } from "../config/laden";
+import LogoZeichen from "./LogoZeichen.astro";
 ---
 
-<a href={pfad("/")} class="flex items-center gap-2.5 font-semibold text-text no-underline" aria-label={`${site.marke.name}, zur Startseite`}>
-  <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true" class="shrink-0">
-    <!-- Die Sprechblase ist das Haus mit flachem Dach, Tür und Sprossenfenster sind ausgespart, der Zipfel ist der Weg zur Tür -->
-    <path
-      fill="var(--akzent)"
-      fill-rule="evenodd"
-      d="M2 13c0-2.2 1.5-3.2 3-4l8.6-4.1q2.4-1.1 4.8 0L27 9c1.5.8 3 1.8 3 4v4a7 7 0 0 1-7 7h-7c-2.5 0-6 3.6-11 6.8q-.7.3-.4-.4C7.6 28 9 26.2 9 24a7 7 0 0 1-7-7zM9.5 15a2 2 0 0 1 4 0v6.5h-4zM18 12h3v3h-3zM22 12h3v3h-3zM18 16h3v3h-3zM22 16h3v3h-3z"
-    ></path>
-  </svg>
-  <span class="text-[1.05rem]">{site.marke.name}</span>
+<a href={pfad("/")} class="group flex items-center gap-2 text-text no-underline" aria-label={`${site.marke.name}, zur Startseite`}>
+  <LogoZeichen class="transition-transform duration-300 group-hover:-rotate-6" />
+  <span class="logo-wort text-[1.45rem] leading-none">{site.marke.name.toLowerCase()}</span>
 </a>
+
+<style>
+  .logo-wort {
+    font-weight: 820;
+    letter-spacing: -0.045em;
+    padding-bottom: 0.12em;
+  }
+</style>

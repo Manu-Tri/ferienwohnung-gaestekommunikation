@@ -1,0 +1,16 @@
+---
+/** Bildmarke: Sprechblase mit zwei Häkchen (Nachricht gelesen und beantwortet). */
+interface Props {
+  groesse?: number;
+  class?: string;
+}
+const { groesse = 34, class: klasse = "" } = Astro.props;
+---
+
+<svg width={groesse} height={groesse} viewBox="0 0 32 32" aria-hidden="true" class:list={["shrink-0", klasse]}>
+  <path
+    d="M10 2.5h12A8 8 0 0 1 30 10.5v6a8 8 0 0 1-8 8h-8.6l-6.1 4.9c-.8.6-1.8.1-1.8-.9v-4.6A8 8 0 0 1 2 16.5v-6a8 8 0 0 1 8-8z"
+    fill="var(--tinte)"></path>
+  <path d="M7.6 13.9l3.2 3.2 6.1-6.6M13.9 16.6l.5.5 6.1-6.6" fill="none" stroke="var(--akzent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+  ></path>
+</svg>

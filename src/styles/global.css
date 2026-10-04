@@ -1,22 +1,25 @@
 @import "@fontsource-variable/figtree/wght.css";
 @import "tailwindcss";
 
-/* Helles, warmes Farbschema mit einer Akzentfarbe (Terrakotta) */
+/* Helles, freundliches Farbschema: Sonnengelb als einzige Akzentfarbe, Tintenschwarz für Text.
+   Gelb nur als Fläche mit dunkler Schrift einsetzen (auf Weiß zu wenig Kontrast für Text). */
 :root {
   color-scheme: light;
-  --flaeche: #fffaf3;
+  --flaeche: #fffdf7;
   --karte: #ffffff;
-  --karte-2: #f8efe4;
-  --text: #2a1f17;
-  --text-leise: #67533f;
-  --linie: #efe3d4;
-  --rahmen: #a3876f;
-  --akzent: #c2410c;
-  --akzent-stark: #9a3412;
-  --auf-akzent: #ffffff;
-  --akzent-hell: #ffedd9;
-  --akzent-text: #9a3412;
+  --karte-2: #f6f2e9;
+  --text: #1c1a17;
+  --text-leise: #5d574c;
+  --linie: #ece6da;
+  --rahmen: #968d7c;
+  --akzent: #f5b82e;
+  --akzent-stark: #e9a514;
+  --auf-akzent: #1c1a17;
+  --akzent-hell: #fff4d4;
+  --akzent-text: #7a5200;
+  --tinte: #1c1a17;
   --fehler: #b42318;
+  --fokus: #1c1a17;
 }
 
 @theme inline {
@@ -34,6 +37,7 @@
   --color-akzent-hell: var(--akzent-hell);
   --color-akzent-text: var(--akzent-text);
   --color-fehler: var(--fehler);
+  --color-tinte: var(--tinte);
 }
 
 @layer base {
@@ -44,14 +48,14 @@
   }
   body {
     background:
-      radial-gradient(60rem 36rem at 85% -8rem, #ffe4c7 0%, transparent 70%),
-      radial-gradient(40rem 28rem at -10% 10rem, #fff1dc 0%, transparent 70%),
+      radial-gradient(56rem 34rem at 88% -6rem, #ffeab0 0%, transparent 68%),
+      radial-gradient(38rem 26rem at -12% 12rem, #fff5d9 0%, transparent 70%),
       var(--flaeche);
     background-repeat: no-repeat;
     color: var(--text);
     font-family: var(--font-sans);
     font-size: 1.0625rem;
-    line-height: 1.65;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
@@ -59,9 +63,9 @@
   h2,
   h3 {
     line-height: 1.15;
-    letter-spacing: -0.015em;
+    letter-spacing: -0.022em;
     text-wrap: balance;
-    font-weight: 700;
+    font-weight: 750;
   }
   p {
     text-wrap: pretty;
@@ -71,7 +75,7 @@
     text-underline-offset: 3px;
   }
   :focus-visible {
-    outline: 3px solid var(--akzent);
+    outline: 3px solid var(--fokus);
     outline-offset: 3px;
     border-radius: 6px;
   }
@@ -102,7 +106,7 @@
     }
   }
   .abschnitt {
-    padding-block: 4.5rem;
+    padding-block: 3.75rem;
   }
   @media (min-width: 768px) {
     .abschnitt {
@@ -110,7 +114,11 @@
     }
   }
   .h2 {
-    font-size: clamp(1.75rem, 1.2rem + 2.2vw, 2.6rem);
+    font-size: clamp(1.7rem, 1.2rem + 2.2vw, 2.6rem);
+  }
+  .h2 + p,
+  .kicker + .h2 {
+    margin-top: 0.75rem;
   }
   .karte {
     background: var(--karte);
@@ -141,9 +149,37 @@
   .knopf-primaer {
     background: var(--akzent);
     color: var(--auf-akzent);
+    box-shadow:
+      inset 0 -2px 0 rgb(0 0 0 / 0.08),
+      0 6px 18px -8px rgb(201 138 0 / 0.7);
   }
   .knopf-primaer:hover {
     background: var(--akzent-stark);
+  }
+  .knopf-dunkel {
+    background: var(--tinte);
+    color: #fff;
+  }
+  .knopf-dunkel:hover {
+    background: #3a362f;
+  }
+  /* Kleines Label über Abschnittsüberschriften */
+  .kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--akzent-text);
+  }
+  .kicker::before {
+    content: "";
+    width: 1.25rem;
+    height: 3px;
+    border-radius: 3px;
+    background: var(--akzent);
   }
   .knopf-sekundaer {
     border: 1.5px solid var(--rahmen);

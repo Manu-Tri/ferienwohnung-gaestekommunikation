@@ -1,23 +1,25 @@
 ---
 import { site } from "../config/laden";
+import Kopf from "./Kopf.astro";
 
 interface Props {
   fragen?: { frage: string; antwort: string }[];
   titel?: string;
+  kicker?: string;
 }
-const { fragen = site.faq.fragen, titel = site.faq.titel } = Astro.props;
+const { fragen = site.faq.fragen, titel = site.faq.titel, kicker = site.faq.kicker } = Astro.props;
 ---
 
 <section id="faq" class="abschnitt border-t border-linie bg-karte" aria-labelledby="faq-titel">
   <div class="behaelter max-w-4xl">
-    <h2 id="faq-titel" class="h2 reveal">{titel}</h2>
+    <Kopf id="faq-titel" kicker={kicker} titel={titel} />
     <div class="mt-10 divide-y divide-linie border-y border-linie">
       {
         fragen.map((f) => (
           <details class="group">
-            <summary class="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-5 text-lg font-medium [&::-webkit-details-marker]:hidden">
+            <summary class="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-5 text-[1.05rem] font-semibold md:text-lg [&::-webkit-details-marker]:hidden">
               {f.frage}
-              <span class="grid size-8 shrink-0 place-items-center rounded-full bg-karte-2 text-xl leading-none transition-transform group-open:rotate-45" aria-hidden="true">
+              <span class="grid size-8 shrink-0 place-items-center rounded-full bg-karte-2 text-xl leading-none transition group-open:rotate-45 group-open:bg-akzent" aria-hidden="true">
                 +
               </span>
             </summary>

@@ -1,6 +1,7 @@
 ---
 /** Wunschpaket: Besucher schalten ein, welche Aufgaben sie abgeben möchten. */
 import { site } from "../config/laden";
+import Kopf from "./Kopf.astro";
 const v = site.vergleich;
 const gesamt = v.zeilen.length;
 const startAnzahl = v.zeilen.filter((z) => z.wer === "wir").length;
@@ -10,13 +11,10 @@ const zusammenfassung = (anzahl: number) =>
 
 <section id="wunschpaket" class="abschnitt" aria-labelledby="wunschpaket-titel">
   <div class="behaelter">
-    <div class="max-w-3xl">
-      <h2 id="wunschpaket-titel" class="h2 reveal">{v.titel}</h2>
-      <p class="reveal mt-5 text-lg text-leise">{v.intro}</p>
-    </div>
+    <Kopf id="wunschpaket-titel" kicker={v.kicker} titel={v.titel} text={v.intro} />
 
     <div
-      class="wunschpaket karte reveal mt-12 overflow-hidden"
+      class="wunschpaket karte reveal mt-10 overflow-hidden md:mt-12"
       data-zusammenfassung={v.zusammenfassung}
       data-gesamt={gesamt}
       data-leer={v.leer}
@@ -27,11 +25,11 @@ const zusammenfassung = (anzahl: number) =>
           {
             v.zeilen.map((zeile, i) => (
               <li>
-                <label class="flex min-h-16 cursor-pointer items-center gap-4 px-5 py-4 transition-colors hover:bg-flaeche md:px-8">
-                  <span class="flex-1 font-medium">{zeile.aufgabe}</span>
+                <label class="flex min-h-15 cursor-pointer items-center gap-4 px-4 py-3.5 transition-colors hover:bg-flaeche sm:px-5 md:px-8">
+                  <span class="flex-1 text-[0.98rem] leading-snug font-medium sm:text-base">{zeile.aufgabe}</span>
                   <span class="status hidden min-w-28 text-right text-sm whitespace-nowrap text-leise sm:block" aria-hidden="true">
                     <span class="status-sie">{v.label_sie}</span>
-                    <span class="status-wir font-semibold text-akzent-text">{v.label_wir}</span>
+                    <span class="status-wir font-semibold text-text">{v.label_wir}</span>
                   </span>
                   <input
                     type="checkbox"
@@ -49,7 +47,7 @@ const zusammenfassung = (anzahl: number) =>
         </ul>
       </fieldset>
 
-      <div class="flex flex-col gap-4 border-t border-linie bg-akzent-hell px-5 py-6 sm:flex-row sm:items-center sm:justify-between md:px-8">
+      <div class="flex flex-col gap-3 border-t border-linie bg-akzent-hell px-4 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-5 md:px-8">
         <div>
           <p class="font-semibold" data-paket-text aria-live="polite">{zusammenfassung(startAnzahl)}</p>
           <p class="mt-1 text-sm text-leise">{v.cta_hinweis}</p>
@@ -86,6 +84,9 @@ const zusammenfassung = (anzahl: number) =>
     transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
   .schalter:checked {
+    background: var(--tinte);
+  }
+  .schalter:checked::after {
     background: var(--akzent);
   }
   .schalter:checked::after {
@@ -99,7 +100,7 @@ const zusammenfassung = (anzahl: number) =>
     display: inline;
   }
   label:has(.schalter:checked) {
-    background: color-mix(in srgb, var(--akzent-hell) 45%, transparent);
+    background: color-mix(in srgb, var(--akzent-hell) 55%, transparent);
   }
 </style>
 

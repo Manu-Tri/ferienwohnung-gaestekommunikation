@@ -9,17 +9,24 @@ const esc = (t) => String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replac
 const marke = esc(s.marke.name);
 
 const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <rect width="1200" height="630" fill="#fffaf3"/>
-  <rect x="0" y="0" width="16" height="630" fill="#c2410c"/>
-  <g font-family="Figtree, Helvetica, Arial, sans-serif" fill="#2a1f17">
-    <svg x="88" y="84" width="56" height="56" viewBox="0 0 32 32">
-      <path fill="#c2410c" fill-rule="evenodd" d="M2 13c0-2.2 1.5-3.2 3-4l8.6-4.1q2.4-1.1 4.8 0L27 9c1.5.8 3 1.8 3 4v4a7 7 0 0 1-7 7h-7c-2.5 0-6 3.6-11 6.8q-.7.3-.4-.4C7.6 28 9 26.2 9 24a7 7 0 0 1-7-7zM9.5 15a2 2 0 0 1 4 0v6.5h-4zM18 12h3v3h-3zM22 12h3v3h-3zM18 16h3v3h-3zM22 16h3v3h-3z"/>
+  <defs>
+    <radialGradient id="schein" cx="0.92" cy="0" r="0.75">
+      <stop offset="0" stop-color="#ffe49a"/>
+      <stop offset="1" stop-color="#fffdf7" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#fffdf7"/>
+  <rect width="1200" height="630" fill="url(#schein)"/>
+  <g font-family="Figtree, Helvetica, Arial, sans-serif" fill="#1c1a17">
+    <svg x="88" y="78" width="64" height="64" viewBox="0 0 32 32">
+      <path fill="#1c1a17" d="M10 2.5h12A8 8 0 0 1 30 10.5v6a8 8 0 0 1-8 8h-8.6l-6.1 4.9c-.8.6-1.8.1-1.8-.9v-4.6A8 8 0 0 1 2 16.5v-6a8 8 0 0 1 8-8z"/>
+      <path d="M7.6 13.9l3.2 3.2 6.1-6.6M13.9 16.6l.5.5 6.1-6.6" fill="none" stroke="#f5b82e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
-    <text x="164" y="123" font-size="32" font-weight="600">${marke}</text>
-    <text x="88" y="270" font-size="66" font-weight="700" letter-spacing="-1.5">Ihre Gäste bekommen</text>
-    <text x="88" y="350" font-size="66" font-weight="700" letter-spacing="-1.5">immer eine Antwort.</text>
-    <text x="88" y="440" font-size="34" fill="#67533f">Gästekommunikation für Ferienwohnungen,</text>
-    <text x="88" y="488" font-size="34" fill="#67533f">von ${s.service.start_uhr} bis ${s.service.ende_uhr} Uhr. ${s.preise.test_tage} Tage kostenlos testen.</text>
+    <text x="166" y="126" font-size="44" font-weight="800" letter-spacing="-2">${marke.toLowerCase()}</text>
+    <text x="88" y="285" font-size="70" font-weight="800" letter-spacing="-2">Ihre Gäste bekommen</text>
+    <text x="88" y="370" font-size="70" font-weight="800" letter-spacing="-2">immer eine Antwort.</text>
+    <rect x="88" y="420" width="120" height="8" rx="4" fill="#f5b82e"/>
+    <text x="88" y="495" font-size="34" fill="#5d574c">Gästekommunikation für Ferienwohnungen. ${s.preise.test_tage} Tage kostenlos testen.</text>
   </g>
 </svg>`;
 

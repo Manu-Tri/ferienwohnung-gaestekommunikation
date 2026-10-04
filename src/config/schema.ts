@@ -39,7 +39,8 @@ export const siteSchema = z.object({
   seo: z.object({ titel: text, beschreibung: text }),
   navigation: z.array(z.object({ text: text, ziel: text })),
   cta: z.object({ test: text, test_kurz: text, check: text, check_kurz: text }),
-  hero: z.object({ titel: text, unterzeile: text, vertrauen: liste }),
+  hero: z.object({
+    kicker: text.optional(), titel: text, unterzeile: text, vertrauen: liste }),
   chat_demo: z.object({
     kopf: text,
     gast_name: text,
@@ -49,7 +50,8 @@ export const siteSchema = z.object({
       .array(z.object({ von: z.enum(["gast", "wir", "trenner"]), zeit: text.optional(), text: text }))
       .min(2),
   }),
-  problem: z.object({ titel: text, karten: z.array(karte) }),
+  problem: z.object({
+    kicker: text.optional(), titel: text, karten: z.array(karte) }),
   rechner: z.object({
     titel: text,
     intro: text,
@@ -67,13 +69,17 @@ export const siteSchema = z.object({
     cta: text,
   }),
   gaestereise: z.object({
+    kicker: text.optional(),
     titel: text,
     text: text,
     phasen: z.array(z.object({ titel: text, punkte: liste })),
   }),
-  ablauf: z.object({ titel: text, schritte: z.array(karte.extend({ dauer: text })) }),
-  leistungen: z.object({ titel: text, karten: z.array(karte) }),
+  ablauf: z.object({
+    kicker: text.optional(), titel: text, schritte: z.array(karte.extend({ dauer: text })) }),
+  leistungen: z.object({
+    kicker: text.optional(), titel: text, karten: z.array(karte) }),
   vergleich: z.object({
+    kicker: text.optional(),
     titel: text,
     intro: text,
     beschriftung: text,
@@ -94,6 +100,7 @@ export const siteSchema = z.object({
       .transform((v) => v ?? []),
   }),
   preise_abschnitt: z.object({
+    kicker: text.optional(),
     titel: text,
     einheit: text,
     punkte: liste,
@@ -109,8 +116,10 @@ export const siteSchema = z.object({
     gp_titel: text,
     gp_bedingungen: liste,
   }),
-  white_label: z.object({ titel: text, text: text, punkte: liste, cta: text }),
+  white_label: z.object({
+    kicker: text.optional(), titel: text, text: text, punkte: liste, cta: text }),
   anfrage: z.object({
+    kicker: text.optional(),
     titel: text,
     anliegen_frage: text,
     anliegen: z.object({ test: text, check: text, agentur: text }),
@@ -144,7 +153,8 @@ export const siteSchema = z.object({
     fehler_url: text,
     fehler_senden: text,
   }),
-  faq: z.object({ titel: text, fragen: z.array(faqEintrag).min(1) }),
+  faq: z.object({
+    kicker: text.optional(), titel: text, fragen: z.array(faqEintrag).min(1) }),
   abschluss: z.object({ titel: text, text: text }),
   footer: z.object({ hinweis_marken: text }),
   inserats_check: z.object({

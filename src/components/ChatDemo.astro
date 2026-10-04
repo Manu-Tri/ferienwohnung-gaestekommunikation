@@ -6,7 +6,7 @@ const SOFORT = 2;
 ---
 
 <figure class="chat mx-auto w-full max-w-md" aria-label={`${c.hinweis}: Gespräch mit einem Gast`}>
-  <div class="karte overflow-hidden shadow-[0_24px_60px_-28px_rgb(154_52_18/0.22)]">
+  <div class="karte overflow-hidden shadow-[0_24px_60px_-28px_rgb(28_26_23/0.25)]">
     <div class="flex items-center gap-3 border-b border-linie px-5 py-3.5">
       <span class="grid size-9 place-items-center rounded-full bg-karte-2 text-sm font-semibold text-leise" aria-hidden="true">{c.gast_kuerzel}</span>
       <div class="leading-tight">
@@ -56,7 +56,7 @@ const SOFORT = 2;
   /* Mit JavaScript und erlaubter Bewegung: feste Höhe, neue Nachrichten schieben alte nach oben.
      So verschiebt sich das Layout der Seite nicht. Ohne JavaScript sind alle Nachrichten sichtbar. */
   :global(.reveal-an) .chat-verlauf {
-    height: 25rem;
+    height: 21.5rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -107,6 +107,11 @@ const SOFORT = 2;
     to {
       opacity: 1;
       transform: none;
+    }
+  }
+  @media (min-width: 768px) {
+    :global(.reveal-an) .chat-verlauf {
+      height: 25rem;
     }
   }
 </style>

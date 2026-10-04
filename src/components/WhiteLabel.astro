@@ -6,16 +6,17 @@ const w = site.white_label;
 
 <section id="agenturen" class="abschnitt" aria-labelledby="agenturen-titel">
   <div class="behaelter">
-    <div class="karte reveal grid gap-10 p-7 md:p-12 lg:grid-cols-[1.2fr_1fr] lg:items-center">
+    <div class="karte reveal grid gap-8 p-6 md:gap-10 md:p-12 lg:grid-cols-[1.2fr_1fr] lg:items-center">
       <div>
-        <h2 id="agenturen-titel" class="h2">{w.titel}</h2>
+        {w.kicker && <p class="kicker">{w.kicker}</p>}
+        <h2 id="agenturen-titel" class="h2 mt-3">{w.titel}</h2>
         <p class="mt-5 text-lg text-leise">{w.text}</p>
-        <a href="#anfrage" data-anliegen="agentur" class="knopf knopf-primaer mt-8">{w.cta}</a>
+        <a href="#anfrage" data-anliegen="agentur" class="knopf knopf-dunkel mt-7 w-full sm:w-auto">{w.cta}</a>
       </div>
       <ul class="space-y-3.5">
         {
           w.punkte.map((punkt) => (
-            <li class="flex items-start gap-3 rounded-xl bg-karte-2 px-4 py-3.5">
+            <li class="flex items-start gap-3 rounded-xl bg-karte-2 px-4 py-3.5 font-medium">
               <Haken class="mt-0.5" />
               {punkt}
             </li>

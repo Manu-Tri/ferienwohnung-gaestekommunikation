@@ -1,6 +1,7 @@
 ---
 import { site } from "../config/laden";
 import Haken from "./Haken.astro";
+import Kopf from "./Kopf.astro";
 const g = site.gaestereise;
 
 // Einfache Symbole je Phase: Schlüssel, Sprechblase, Stern
@@ -13,32 +14,29 @@ const symbole = [
 
 <section id="betreuung" class="abschnitt" aria-labelledby="betreuung-titel">
   <div class="behaelter">
-    <div class="max-w-3xl">
-      <h2 id="betreuung-titel" class="h2 reveal">{g.titel}</h2>
-      <p class="reveal mt-5 text-lg text-leise">{g.text}</p>
-    </div>
+    <Kopf id="betreuung-titel" kicker={g.kicker} titel={g.titel} text={g.text} />
 
     <div class="phasen reveal relative mt-14">
       <!-- Verbindungslinie, füllt sich beim Einblenden von links nach rechts -->
-      <div class="phasen-linie absolute top-7 right-[16%] left-[16%] hidden h-1 overflow-hidden rounded-full bg-akzent-hell md:block" aria-hidden="true">
+      <div class="phasen-linie absolute top-7 right-[16%] left-[16%] hidden h-1 overflow-hidden rounded-full bg-linie md:block" aria-hidden="true">
         <span class="block h-full w-full origin-left rounded-full bg-akzent"></span>
       </div>
       <ol class="relative grid gap-6 md:grid-cols-3">
         {
           g.phasen.map((phase, i) => (
             <li class="phase group flex flex-col items-center text-center md:items-stretch md:text-left" style={`--i:${i}`}>
-              <span class="phase-symbol relative z-10 mx-auto grid size-14 place-items-center rounded-full bg-akzent text-auf-akzent shadow-[0_8px_24px_-8px_rgb(194_65_12/0.6)]">
+              <span class="phase-symbol relative z-10 mx-auto grid size-14 place-items-center rounded-full bg-akzent text-auf-akzent ring-4 ring-flaeche shadow-[0_8px_24px_-8px_rgb(201_138_0/0.8)]">
                 <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
                   <path d={symbole[i % symbole.length]} fill="currentColor" />
                 </svg>
               </span>
               <div
                 class:list={[
-                  "phase-karte karte mt-5 w-full flex-1 p-6 transition duration-300 group-hover:shadow-[0_20px_40px_-20px_rgb(154_52_18/0.35)] md:p-7",
-                  i === g.phasen.length - 1 && "border-2 border-akzent",
+                  "phase-karte karte mt-5 w-full flex-1 p-6 transition duration-300 group-hover:shadow-[0_20px_40px_-20px_rgb(28_26_23/0.25)] md:p-7",
+                  i === g.phasen.length - 1 && "border-2 border-tinte",
                 ]}
               >
-                <p class="text-sm font-semibold text-akzent-text">Phase {i + 1}</p>
+                <p class="kicker !text-xs">Phase {i + 1}</p>
                 <h3 class="mt-1 text-xl">{phase.titel}</h3>
                 <ul class="mt-5 space-y-3 text-left">
                   {phase.punkte.map((punkt, j) => (
@@ -118,10 +116,10 @@ const symbole = [
   }
   @keyframes puls {
     0% {
-      box-shadow: 0 0 0 0 rgb(194 65 12 / 0.45);
+      box-shadow: 0 0 0 0 rgb(245 184 46 / 0.7);
     }
     100% {
-      box-shadow: 0 0 0 18px rgb(194 65 12 / 0);
+      box-shadow: 0 0 0 18px rgb(245 184 46 / 0);
     }
   }
 </style>

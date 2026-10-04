@@ -1,0 +1,17 @@
+---
+/** Einheitlicher Abschnittskopf: kleines Label, Überschrift, optional Einleitung. */
+interface Props {
+  id: string;
+  titel: string;
+  kicker?: string;
+  text?: string;
+  zentriert?: boolean;
+}
+const { id, titel, kicker, text, zentriert = false } = Astro.props;
+---
+
+<div class:list={["reveal max-w-3xl", zentriert && "mx-auto text-center"]}>
+  {kicker && <p class:list={["kicker", zentriert && "justify-center"]}>{kicker}</p>}
+  <h2 id={id} class:list={["h2", kicker && "mt-3"]}>{titel}</h2>
+  {text && <p class="mt-4 text-lg text-leise md:mt-5">{text}</p>}
+</div>

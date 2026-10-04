@@ -1,22 +1,23 @@
 ---
 import { site } from "../config/laden";
+import Kopf from "./Kopf.astro";
 const a = site.ablauf;
 ---
 
 <section id="ablauf" class="abschnitt" aria-labelledby="ablauf-titel">
   <div class="behaelter">
-    <h2 id="ablauf-titel" class="h2 reveal max-w-3xl">{a.titel}</h2>
-    <ol class="mt-12 grid gap-5 md:grid-cols-3">
+    <Kopf id="ablauf-titel" kicker={a.kicker} titel={a.titel} />
+    <ol class="mt-10 grid gap-4 md:mt-12 md:grid-cols-3 md:gap-5">
       {
         a.schritte.map((schritt, i) => (
-          <li class="karte reveal p-6 md:p-8">
+          <li class="karte reveal p-5 md:p-8">
             <div class="flex items-center justify-between">
-              <span class="grid size-11 place-items-center rounded-full bg-akzent text-lg font-semibold text-auf-akzent" aria-hidden="true">
+              <span class="grid size-11 place-items-center rounded-full bg-tinte text-lg font-bold text-white" aria-hidden="true">
                 {i + 1}
               </span>
-              <span class="rounded-full bg-akzent-hell px-3 py-1 text-sm font-medium text-akzent-text">{schritt.dauer}</span>
+              <span class="rounded-full bg-akzent-hell px-3 py-1 text-sm font-semibold text-akzent-text">{schritt.dauer}</span>
             </div>
-            <h3 class="mt-6 text-xl">
+            <h3 class="mt-5 text-xl">
               <span class="sr-only">Schritt {i + 1}: </span>
               {schritt.titel}
             </h3>

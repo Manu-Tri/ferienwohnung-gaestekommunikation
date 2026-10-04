@@ -25,7 +25,7 @@ const f_liste = [
   <div class="p-5 md:p-6">
     <h3 id="rechner-titel" class="text-lg">{r.titel}</h3>
     <p class="mt-1 text-sm text-leise">{r.intro}</p>
-    <form class="mt-5 space-y-4" aria-label="Eingaben für die Beispielrechnung" onsubmit="return false">
+    <form class="mt-4 space-y-2.5 md:space-y-3.5" aria-label="Eingaben für die Beispielrechnung" onsubmit="return false">
       {
         f_liste.map((f) => (
           <div>
@@ -55,7 +55,7 @@ const f_liste = [
               value={f.wert}
               aria-hidden="true"
               tabindex="-1"
-              class="regler mt-2 w-full"
+              class="regler mt-1 w-full"
             />
           </div>
         ))
@@ -119,12 +119,12 @@ const f_liste = [
   .regler::-webkit-slider-runnable-track {
     height: 6px;
     border-radius: 999px;
-    background: var(--akzent-hell);
+    background: var(--karte-2);
   }
   .regler::-moz-range-track {
     height: 6px;
     border-radius: 999px;
-    background: var(--akzent-hell);
+    background: var(--karte-2);
   }
   .regler::-webkit-slider-thumb {
     appearance: none;
@@ -133,15 +133,15 @@ const f_liste = [
     margin-top: -8px;
     border-radius: 50%;
     background: var(--akzent);
-    border: 3px solid #fff;
-    box-shadow: 0 1px 4px rgb(154 52 18 / 0.35);
+    border: 3px solid var(--tinte);
+    box-shadow: 0 1px 4px rgb(0 0 0 / 0.2);
   }
   .regler::-moz-range-thumb {
     width: 16px;
     height: 16px;
     border-radius: 50%;
     background: var(--akzent);
-    border: 3px solid #fff;
-    box-shadow: 0 1px 4px rgb(154 52 18 / 0.35);
+    border: 3px solid var(--tinte);
+    box-shadow: 0 1px 4px rgb(0 0 0 / 0.2);
   }
 </style>

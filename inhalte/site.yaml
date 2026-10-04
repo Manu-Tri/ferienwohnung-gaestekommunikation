@@ -99,13 +99,13 @@ cta:
   check_kurz: "Inserats-Check"
 
 hero:
+  # Kleine Zeile über der Überschrift: sagt in 3 Sekunden, was Sie anbieten
+  kicker: "Gästekommunikation für Ferienwohnungen"
   titel: "Ihre Gäste bekommen immer eine Antwort. Sie bekommen mehr Freiheit."
   unterzeile: "Wir beantworten jede Gästenachricht auf Airbnb und Booking.com von {start} bis {ende} Uhr, vom ersten Kontakt bis zur Bewertung nach der Abreise. Für {preis} € pro Buchung, ohne Grundgebühr. Die ersten {test_tage} Tage sind kostenlos."
   vertrauen:
-    - "Keine Nachricht bleibt unbeantwortet"
-    - "Nachkontakt und Bewertungen inklusive"
-    - "Monatlich kündbar"
     - "Keine Grundgebühr"
+    - "Monatlich kündbar"
     - "DSGVO-konform"
     - "KI-gestützt, von Menschen kontrolliert"
 
@@ -136,6 +136,7 @@ chat_demo:
       text: "Vielen Dank für Ihren Besuch, Familie Weber. Gute Heimreise! Wir würden uns sehr über eine kurze Bewertung freuen."
 
 problem:
+  kicker: "Das Problem"
   titel: "Gästekommunikation hält sich nicht an Ihre Arbeitszeiten."
   karten:
     - titel: "Sonntag, 21:47 Uhr."
@@ -165,6 +166,7 @@ rechner:
   cta: "{test_tage} Tage kostenlos testen"
 
 gaestereise:
+  kicker: "Rundum betreut"
   titel: "Jede Nachricht bekommt eine Antwort. Das spüren Ihre Gäste."
   text: "Gäste bewerten nicht nur die Wohnung, sondern auch, wie gut sie sich betreut gefühlt haben. Kommunikation ist bei Airbnb eine eigene Bewertungskategorie. Wer immer eine Rückmeldung bekommt, fragt weniger nach, reist entspannter an und schreibt eher eine gute Bewertung."
   phasen:
@@ -186,6 +188,7 @@ gaestereise:
         - "Monatlicher Bericht: was Gäste loben, was sie stört"
 
 ablauf:
+  kicker: "So starten Sie"
   titel: "In 3 Schritten startklar. Ihr Aufwand: etwa 45 Minuten."
   schritte:
     - titel: "Co-Host-Einladung"
@@ -199,6 +202,7 @@ ablauf:
       text: "Wir beantworten alle Nachrichten. Sie bekommen eine tägliche Zusammenfassung und werden nur bei Dingen gefragt, die Ihre Entscheidung brauchen."
 
 leistungen:
+  kicker: "Leistungen"
   titel: "Was wir für Sie übernehmen"
   karten:
     - titel: "Antworten von {start} bis {ende} Uhr"
@@ -217,6 +221,7 @@ leistungen:
       text: "Jeden Abend eine E-Mail: was gefragt wurde, was wir geantwortet haben, was offen ist. Einmal im Monat: was Gäste in Bewertungen loben und was sie stört."
 
 vergleich:
+  kicker: "Ihr Wunschpaket"
   titel: "Ganz nach Ihren Bedürfnissen."
   intro: "Sie entscheiden, was Sie selbst machen und was Sie abgeben. Stellen Sie Ihr Wunschpaket zusammen, auch unterschiedlich für einzelne Objekte. Wir schicken Ihnen ein passendes Angebot."
   beschriftung: "Aufgaben, die Sie an {marke} abgeben können"
@@ -256,6 +261,7 @@ ergebnisse:
   stimmen: []
 
 preise_abschnitt:
+  kicker: "Preis"
   titel: "Ein Preis. Nur wenn Sie Buchungen haben."
   einheit: "pro Buchung"
   punkte:
@@ -284,7 +290,8 @@ preise_abschnitt:
     - "Danach gilt der reguläre Preis von {preis} € pro Buchung. Wir erinnern Sie {erinnerung} vorher. Sie können weiterhin monatlich kündigen."
 
 white_label:
-  titel: "Für Agenturen und Co-Hosts: Ihre Marke, unser Team."
+  kicker: "Für Agenturen und Co-Hosts"
+  titel: "Ihre Marke, unser Team."
   text: "Sie betreuen Ferienwohnungen für Eigentümer und wollen abends und am Wochenende nicht mehr selbst ans Telefon? Wir antworten in Ihrem Namen und mit Ihrem Ton. Ihre Eigentümer sehen nur Ihre Agentur."
   punkte:
     - "Antworten unter Ihrem Namen"
@@ -294,12 +301,13 @@ white_label:
   cta: "Gespräch für Agenturen anfragen"
 
 anfrage:
-  titel: "In 4 kurzen Schritten zu Ihrem Test oder Inserats-Check"
+  kicker: "Anfrage"
+  titel: "In 4 kurzen Schritten zu Ihrem Angebot"
   anliegen_frage: "Ich möchte"
   anliegen:
     test: "{test_tage} Tage testen"
     check: "Inserats-Check"
-    agentur: "Als Agentur anfragen"
+    agentur: "Für Agenturen"
   schritt: "Schritt {nr} von 4"
   frage_objekte: "Wie viele Ferienwohnungen betreuen Sie?"
   objekte:
@@ -345,6 +353,7 @@ anfrage:
   fehler_senden: "Das hat nicht geklappt. Bitte versuchen Sie es noch einmal oder schreiben Sie an {email}."
 
 faq:
+  kicker: "FAQ"
   titel: "Häufige Fragen"
   fragen:
     - frage: "Ist das mit den Regeln von Airbnb vereinbar?"
