@@ -1,0 +1,55 @@
+---
+/** Fokussierte Landingpage für Briefaktionen, Partner und Anzeigen. Ohne Hauptnavigation. */
+import Basis from "../layouts/Basis.astro";
+import Anfrageformular from "../components/Anfrageformular.astro";
+import FAQ from "../components/FAQ.astro";
+import StickyCTA from "../components/StickyCTA.astro";
+import Haken from "../components/Haken.astro";
+import { site } from "../config/laden";
+import { faqSeite, service } from "../config/jsonld";
+
+const c = site.inserats_check;
+const url = new URL("/inserats-check", Astro.site).href;
+const jsonld = [service(site.marke.einsatzgebiet, c.seo_beschreibung, url), faqSeite(c.faq)];
+---
+
+<Basis titel={c.seo_titel} beschreibung={c.seo_beschreibung} fokus jsonld={jsonld}>
+  <section id="hero" class="behaelter grid gap-12 pt-10 pb-14 md:pt-16 lg:grid-cols-[1.2fr_1fr] lg:items-center">
+    <div>
+      <h1 class="text-[2.05rem] sm:text-5xl">{c.titel}</h1>
+      <p class="mt-6 text-lg text-leise md:text-xl">{c.unterzeile}</p>
+      <a href="#anfrage" class="knopf knopf-primaer mt-8 text-[1.05rem]">{site.cta.check}</a>
+    </div>
+    <div class="karte p-7 md:p-8">
+      <h2 class="text-xl">{c.was_titel}</h2>
+      <ul class="mt-5 space-y-3">
+        {
+          c.was_punkte.map((punkt) => (
+            <li class="flex items-start gap-2.5">
+              <Haken class="mt-1" />
+              {punkt}
+            </li>
+          ))
+        }
+      </ul>
+      <p class="mt-5 text-sm text-leise">{c.was_hinweis}</p>
+    </div>
+  </section>
+
+  <section class="border-y border-linie bg-karte py-12" aria-label="Ihre Vorteile">
+    <ul class="behaelter grid gap-6 md:grid-cols-3">
+      {
+        c.nutzen.map((n) => (
+          <li>
+            <h2 class="text-lg">{n.titel}</h2>
+            <p class="mt-2 text-leise">{n.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <Anfrageformular titel={c.formular_titel} anliegenFest="check" />
+  <FAQ fragen={c.faq} />
+  <StickyCTA slot="ende" nurCheck />
+</Basis>

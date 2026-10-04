@@ -1,0 +1,59 @@
+---
+/**
+ * Vorlage für Regionsseiten. Jede Datei in inhalte/regionen/ wird zu einer Seite,
+ * z. B. inhalte/regionen/mosel.yaml  ->  /mosel
+ */
+import Basis from "../layouts/Basis.astro";
+import Hero from "../components/Hero.astro";
+import Problem from "../components/Problem.astro";
+import Gaestereise from "../components/Gaestereise.astro";
+import Ablauf from "../components/Ablauf.astro";
+import Leistungen from "../components/Leistungen.astro";
+import Vergleich from "../components/Vergleich.astro";
+import Ergebnisse from "../components/Ergebnisse.astro";
+import Preise from "../components/Preise.astro";
+import WhiteLabel from "../components/WhiteLabel.astro";
+import Anfrageformular from "../components/Anfrageformular.astro";
+import FAQ from "../components/FAQ.astro";
+import Abschluss from "../components/Abschluss.astro";
+import StickyCTA from "../components/StickyCTA.astro";
+import { regionen, site } from "../config/laden";
+import { faqSeite, service } from "../config/jsonld";
+import type { Region } from "../config/schema";
+
+export function getStaticPaths() {
+  return regionen.map((region) => ({ params: { region: region.slug }, props: { region } }));
+}
+
+const { region } = Astro.props as { region: Region };
+const url = new URL(`/${region.slug}`, Astro.site).href;
+const jsonld = [service(region.einsatzgebiet, region.seo_beschreibung, url), faqSeite(site.faq.fragen)];
+---
+
+<Basis titel={region.seo_titel} beschreibung={region.seo_beschreibung} jsonld={jsonld} lokaleAnker>
+  <Hero titel={region.titel} unterzeile={region.unterzeile} />
+  <section class="abschnitt border-t border-linie bg-karte" aria-labelledby="region-titel">
+    <div class="behaelter grid gap-10 md:grid-cols-2">
+      <div class="reveal">
+        <h2 id="region-titel" class="h2">{region.einleitung_titel}</h2>
+        <p class="mt-5 text-lg text-leise">{region.einleitung}</p>
+      </div>
+      <div class="reveal rounded-[1.25rem] border border-linie bg-flaeche p-7">
+        <h3 class="text-xl">{region.partner_titel}</h3>
+        <p class="mt-3 text-leise">{region.partner_text}</p>
+      </div>
+    </div>
+  </section>
+  <Problem />
+  <Gaestereise />
+  <Ablauf />
+  <Leistungen />
+  <Vergleich />
+  <Ergebnisse />
+  <Preise />
+  <WhiteLabel />
+  <Anfrageformular region={region.name} />
+  <FAQ />
+  <Abschluss />
+  <StickyCTA slot="ende" />
+</Basis>

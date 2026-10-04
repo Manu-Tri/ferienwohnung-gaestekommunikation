@@ -1,0 +1,46 @@
+---
+import Basis from "../layouts/Basis.astro";
+import { site } from "../config/laden";
+const d = site.danke;
+const hatTerminlink = /^https?:\/\//.test(site.links.buchungslink);
+---
+
+<Basis titel={`${d.titel} | ${site.marke.name}`} beschreibung={d.text_allgemein} noindex>
+  <section class="behaelter max-w-3xl py-16 md:py-24">
+    <div class="karte p-7 md:p-12">
+      <span class="grid size-14 place-items-center rounded-full bg-akzent text-auf-akzent" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="28" height="28"><path d="M6 12.5l4 4L18 8" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </span>
+      <h1 class="mt-7 text-4xl md:text-5xl">{d.titel}</h1>
+      <p class="mt-5 text-lg" data-danke-text data-check={d.text_check} data-test={d.text_test} data-agentur={d.text_agentur}>
+        {d.text_allgemein}
+      </p>
+
+      <div class="mt-10 border-t border-linie pt-8">
+        <h2 class="text-2xl">{d.naechster_titel}</h2>
+        <p class="mt-3 text-leise">{d.naechster_text}</p>
+        {
+          hatTerminlink ? (
+            <a href={site.links.buchungslink} target="_blank" rel="noopener" class="knopf knopf-primaer mt-6">
+              {d.termin_button}
+            </a>
+          ) : (
+            <p class="mt-6 rounded-xl bg-karte-2 px-4 py-3 font-medium">
+              {d.termin_button}: {site.links.buchungslink}
+            </p>
+          )
+        }
+        <p class="mt-3 text-sm text-leise">{d.termin_hinweis}</p>
+      </div>
+      <p class="mt-10"><a href="/">{d.zurueck}</a></p>
+    </div>
+  </section>
+</Basis>
+
+<script>
+  const absatz = document.querySelector<HTMLElement>("[data-danke-text]");
+  const anliegen = new URLSearchParams(window.location.search).get("anliegen");
+  if (absatz && anliegen && ["check", "test", "agentur"].includes(anliegen)) {
+    absatz.textContent = absatz.dataset[anliegen] ?? absatz.textContent;
+  }
+</script>

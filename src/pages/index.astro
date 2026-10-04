@@ -1,0 +1,36 @@
+---
+import Basis from "../layouts/Basis.astro";
+import Hero from "../components/Hero.astro";
+import Problem from "../components/Problem.astro";
+import Gaestereise from "../components/Gaestereise.astro";
+import Ablauf from "../components/Ablauf.astro";
+import Leistungen from "../components/Leistungen.astro";
+import Vergleich from "../components/Vergleich.astro";
+import Ergebnisse from "../components/Ergebnisse.astro";
+import Preise from "../components/Preise.astro";
+import WhiteLabel from "../components/WhiteLabel.astro";
+import Anfrageformular from "../components/Anfrageformular.astro";
+import FAQ from "../components/FAQ.astro";
+import Abschluss from "../components/Abschluss.astro";
+import StickyCTA from "../components/StickyCTA.astro";
+import { site } from "../config/laden";
+import { faqSeite, service } from "../config/jsonld";
+
+const jsonld = [service(site.marke.einsatzgebiet, site.seo.beschreibung, site.marke.domain), faqSeite(site.faq.fragen)];
+---
+
+<Basis titel={site.seo.titel} beschreibung={site.seo.beschreibung} jsonld={jsonld}>
+  <Hero />
+  <Problem />
+  <Gaestereise />
+  <Ablauf />
+  <Leistungen />
+  <Vergleich />
+  <Ergebnisse />
+  <Preise />
+  <WhiteLabel />
+  <Anfrageformular />
+  <FAQ />
+  <Abschluss />
+  <StickyCTA slot="ende" />
+</Basis>

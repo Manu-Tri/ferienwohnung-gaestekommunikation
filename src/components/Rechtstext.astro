@@ -1,0 +1,37 @@
+---
+interface Props {
+  titel: string;
+}
+const { titel } = Astro.props;
+---
+
+<article class="behaelter rechtstext max-w-3xl py-14 md:py-20">
+  <h1 class="text-4xl md:text-5xl">{titel}</h1>
+  <slot />
+</article>
+
+<style>
+  .rechtstext :global(h2) {
+    margin-top: 2.5rem;
+    font-size: 1.4rem;
+  }
+  .rechtstext :global(h3) {
+    margin-top: 1.5rem;
+    font-size: 1.1rem;
+  }
+  .rechtstext :global(p),
+  .rechtstext :global(ul) {
+    margin-top: 0.85rem;
+  }
+  .rechtstext :global(ul) {
+    list-style: disc;
+    padding-left: 1.25rem;
+  }
+  .rechtstext :global(.hinweis) {
+    margin-top: 2rem;
+    padding: 1rem 1.25rem;
+    border-radius: 0.75rem;
+    background: var(--karte-2);
+    font-size: 0.95rem;
+  }
+</style>

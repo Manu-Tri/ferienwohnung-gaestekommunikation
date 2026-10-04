@@ -1,0 +1,39 @@
+---
+import Basis from "../layouts/Basis.astro";
+import Rechtstext from "../components/Rechtstext.astro";
+import { site } from "../config/laden";
+const i = site.impressum;
+---
+
+<Basis titel={`Impressum | ${site.marke.name}`} beschreibung={`Impressum von ${site.marke.name}, Angaben nach § 5 DDG.`}>
+  <Rechtstext titel="Impressum">
+    <h2>Angaben nach § 5 DDG</h2>
+    <p>
+      {i.name}<br />
+      {i.firmenzusatz && <>{i.firmenzusatz}<br /></>}
+      {i.strasse}<br />
+      {i.plz_ort}<br />
+      {i.land}
+    </p>
+
+    <h2>Kontakt</h2>
+    <p>
+      Telefon: {i.telefon}<br />
+      E-Mail: <a href={`mailto:${i.email}`}>{i.email}</a>
+    </p>
+
+    <h2>Umsatzsteuer</h2>
+    {i.ust_id ? <p>Umsatzsteuer-Identifikationsnummer nach § 27a UStG: {i.ust_id}</p> : null}
+    {i.wirtschafts_id ? <p>Wirtschafts-Identifikationsnummer nach § 139c AO: {i.wirtschafts_id}</p> : null}
+    <p>Kleinunternehmer im Sinne von § 19 UStG. Es wird keine Umsatzsteuer berechnet.</p>
+
+    <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
+    <p>{i.verantwortlich_inhalt}</p>
+
+    <h2>Verbraucherstreitbeilegung</h2>
+    <p>Wir sind nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+
+    <h2>Hinweis zu Marken</h2>
+    <p>{site.footer.hinweis_marken}</p>
+  </Rechtstext>
+</Basis>

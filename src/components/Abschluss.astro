@@ -1,0 +1,17 @@
+---
+import { site } from "../config/laden";
+const a = site.abschluss;
+---
+
+<section class="abschnitt" aria-labelledby="abschluss-titel">
+  <div class="behaelter">
+    <div class="reveal rounded-[1.75rem] bg-akzent px-7 py-14 text-center text-auf-akzent md:px-16 md:py-20">
+      <h2 id="abschluss-titel" class="h2 mx-auto max-w-2xl">{a.titel}</h2>
+      <p class="mx-auto mt-5 max-w-2xl text-lg opacity-95">{a.text}</p>
+      <div class="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
+        <a href="#anfrage" data-anliegen="test" class="knopf bg-auf-akzent text-akzent-stark hover:opacity-90">{site.cta.test}</a>
+        <a href="#anfrage" data-anliegen="check" class="knopf border-[1.5px] border-current text-auf-akzent hover:bg-white/10">{site.cta.check}</a>
+      </div>
+    </div>
+  </div>
+</section>

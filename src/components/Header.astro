@@ -1,0 +1,71 @@
+---
+import { site } from "../config/laden";
+import Logo from "./Logo.astro";
+
+interface Props {
+  fokus?: boolean;
+  /** Abschnitte liegen auf dieser Seite */
+  lokal?: boolean;
+}
+const { fokus = false, lokal = false } = Astro.props;
+const zeigeErgebnisse = site.ergebnisse.kennzahlen.length + site.ergebnisse.stimmen.length > 0;
+const navigation = zeigeErgebnisse
+  ? [...site.navigation.slice(0, 2), { text: "Ergebnisse", ziel: "#ergebnisse" }, ...site.navigation.slice(2)]
+  : site.navigation;
+// Auf Unterseiten ohne diese Abschnitte zeigen Anker auf die Startseite
+const istStart = lokal;
+const ziel = (anker: string) => (istStart || !anker.startsWith("#") ? anker : `/${anker}`);
+---
+
+<header class="sticky top-0 z-40 border-b border-linie/70 bg-flaeche/90 backdrop-blur supports-[backdrop-filter]:bg-flaeche/75">
+  <div class="behaelter flex h-16 items-center justify-between gap-4">
+    <Logo />
+    {
+      !fokus && (
+        <>
+          <nav aria-label="Hauptnavigation" class="hidden lg:block">
+            <ul class="flex items-center gap-7 text-[0.95rem]">
+              {navigation.map((punkt) => (
+                <li>
+                  <a href={ziel(punkt.ziel)} class="text-text no-underline hover:text-akzent-text">
+                    {punkt.text}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <div class="flex items-center gap-2">
+            <a href={istStart ? "#anfrage" : "/?anliegen=test#anfrage"} data-anliegen="test" class="knopf knopf-primaer hidden !min-h-11 !px-4 text-[0.95rem] sm:inline-flex">
+              {site.cta.test}
+            </a>
+            <details class="relative lg:hidden">
+              <summary class="knopf knopf-sekundaer !min-h-11 !px-4 list-none text-[0.95rem] [&::-webkit-details-marker]:hidden">
+                Menü
+              </summary>
+              <nav aria-label="Hauptnavigation mobil" class="karte absolute right-0 mt-2 w-60 p-2 shadow-lg">
+                <ul>
+                  {navigation.map((punkt) => (
+                    <li>
+                      <a href={ziel(punkt.ziel)} class="block rounded-lg px-3 py-3 text-text no-underline hover:bg-karte-2">
+                        {punkt.text}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </details>
+          </div>
+        </>
+      )
+    }
+  </div>
+</header>
+
+<script>
+  // Mobiles Menü nach Klick auf einen Eintrag schließen
+  document.querySelectorAll<HTMLDetailsElement>("header details").forEach((menue) => {
+    menue.addEventListener("click", (e) => {
+      if ((e.target as HTMLElement).closest("a")) menue.open = false;
+    });
+  });
+</script>

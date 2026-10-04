@@ -1,0 +1,32 @@
+---
+import { site } from "../config/laden";
+import Haken from "./Haken.astro";
+const g = site.gaestereise;
+---
+
+<section id="betreuung" class="abschnitt" aria-labelledby="betreuung-titel">
+  <div class="behaelter">
+    <div class="max-w-3xl">
+      <h2 id="betreuung-titel" class="h2 reveal">{g.titel}</h2>
+      <p class="reveal mt-5 text-lg text-leise">{g.text}</p>
+    </div>
+    <ol class="mt-12 grid gap-5 md:grid-cols-3">
+      {
+        g.phasen.map((phase, i) => (
+          <li class:list={["reveal karte p-6 md:p-7", i === g.phasen.length - 1 && "border-2 border-akzent"]}>
+            <p class="text-sm font-semibold text-akzent-text">Phase {i + 1}</p>
+            <h3 class="mt-1 text-xl">{phase.titel}</h3>
+            <ul class="mt-5 space-y-3">
+              {phase.punkte.map((punkt) => (
+                <li class="flex items-start gap-2.5">
+                  <Haken class="mt-1" />
+                  {punkt}
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

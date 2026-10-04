@@ -1,0 +1,24 @@
+# =====================================================================
+# VORLAGE FÜR EINE REGIONSSEITE
+# Neue Region anlegen: Datei kopieren und umbenennen, z. B. eifel.yaml.
+# Der Dateiname wird zur Adresse: eifel.yaml  ->  www.ihre-domain.de/eifel
+# Nur Kleinbuchstaben, Zahlen und Bindestriche im Dateinamen verwenden.
+# Variablen wie {antwortzeit} funktionieren wie in site.yaml.
+# {region} ist hier der Name unten.
+# =====================================================================
+
+name: "Mosel"
+# Wie die Region im Satz heißt: "an der Mosel", "in der Eifel", "an der Nordsee"
+im_satz: "an der Mosel"
+seo_titel: "Gästekommunikation für Ferienwohnungen an der Mosel | {marke}"
+seo_beschreibung: "Gästenachrichten für Ihre Ferienwohnung an der Mosel: Jede Nachricht bekommt eine Antwort, von {start} bis {ende} Uhr. {preis} € pro Buchung, {test_tage} Tage kostenlos testen."
+titel: "Gästekommunikation für Ferienwohnungen an der Mosel. Jede Nachricht bekommt eine Antwort, von {start} bis {ende} Uhr."
+unterzeile: "Für Gastgeberinnen und Gastgeber mit 2 bis 10 Ferienwohnungen {im_satz}. {preis} € pro Buchung, ohne Grundgebühr, die ersten {test_tage} Tage kostenlos."
+einleitung_titel: "Warum gerade {im_satz}"
+einleitung: "[REGIONALER TEXT: typische Gäste, Saison, Besonderheiten der Region, z. B. Weinfeste, Radtouristen, kurze Aufenthalte am Wochenende]"
+partner_titel: "Partner vor Ort"
+partner_text: "[PLATZHALTER: Wer übernimmt bei Notfällen vor Ort? Hausmeisterdienst, Reinigung, Schlüsselservice. Nur echte Partner mit deren Zustimmung nennen.]"
+# Orte für Suchmaschinen (areaServed)
+einsatzgebiet:
+  - "Mosel"
+  - "[ORTE, z. B. Bernkastel-Kues, Traben-Trarbach, Cochem]"

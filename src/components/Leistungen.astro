@@ -1,0 +1,21 @@
+---
+import { site } from "../config/laden";
+const l = site.leistungen;
+---
+
+<section id="leistungen" class="abschnitt border-t border-linie bg-karte" aria-labelledby="leistungen-titel">
+  <div class="behaelter">
+    <h2 id="leistungen-titel" class="h2 reveal max-w-3xl">{l.titel}</h2>
+    <ul class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        l.karten.map((karte) => (
+          <li class="reveal rounded-[1.25rem] border border-linie bg-flaeche p-6 md:p-7">
+            <span class="block h-1 w-10 rounded-full bg-akzent" aria-hidden="true" />
+            <h3 class="mt-5 text-lg">{karte.titel}</h3>
+            <p class="mt-2.5 text-leise">{karte.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

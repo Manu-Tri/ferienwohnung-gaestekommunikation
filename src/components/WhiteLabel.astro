@@ -1,0 +1,27 @@
+---
+import { site } from "../config/laden";
+import Haken from "./Haken.astro";
+const w = site.white_label;
+---
+
+<section id="agenturen" class="abschnitt" aria-labelledby="agenturen-titel">
+  <div class="behaelter">
+    <div class="karte reveal grid gap-10 p-7 md:p-12 lg:grid-cols-[1.2fr_1fr] lg:items-center">
+      <div>
+        <h2 id="agenturen-titel" class="h2">{w.titel}</h2>
+        <p class="mt-5 text-lg text-leise">{w.text}</p>
+        <a href="#anfrage" data-anliegen="agentur" class="knopf knopf-primaer mt-8">{w.cta}</a>
+      </div>
+      <ul class="space-y-3.5">
+        {
+          w.punkte.map((punkt) => (
+            <li class="flex items-start gap-3 rounded-xl bg-karte-2 px-4 py-3.5">
+              <Haken class="mt-0.5" />
+              {punkt}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>

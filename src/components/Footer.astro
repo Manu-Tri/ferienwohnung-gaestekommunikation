@@ -1,0 +1,26 @@
+---
+import { site } from "../config/laden";
+import Logo from "./Logo.astro";
+const jahr = new Date().getFullYear();
+---
+
+<footer class="border-t border-linie bg-karte">
+  <div class="behaelter grid gap-8 py-12 text-[0.95rem] md:grid-cols-[1.2fr_1fr]">
+    <div class="space-y-3">
+      <Logo />
+      <p class="text-leise">{site.marke.ort}</p>
+      <p class="max-w-prose text-sm text-leise">{site.footer.hinweis_marken}</p>
+    </div>
+    <nav aria-label="Rechtliches und Kontakt" class="md:justify-self-end">
+      <ul class="space-y-2">
+        <li><a href="/impressum">Impressum</a></li>
+        <li><a href="/datenschutz">Datenschutz</a></li>
+        <li><a href="/inserats-check">Kostenloser Inserats-Check</a></li>
+        <li>Kontakt: <a href={`mailto:${site.marke.email}`}>{site.marke.email}</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="behaelter border-t border-linie py-5 text-sm text-leise">
+    © {jahr} {site.marke.name}
+  </div>
+</footer>

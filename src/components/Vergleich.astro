@@ -1,0 +1,41 @@
+---
+import { site } from "../config/laden";
+const v = site.vergleich;
+---
+
+<section class="abschnitt" aria-labelledby="vergleich-titel">
+  <div class="behaelter">
+    <h2 id="vergleich-titel" class="h2 reveal max-w-3xl">{v.titel}</h2>
+    <div class="karte reveal mt-12 overflow-hidden">
+      <table class="w-full border-collapse text-left">
+        <caption class="sr-only">{v.beschriftung}</caption>
+        <thead class="bg-karte-2 text-sm">
+          <tr>
+            <th scope="col" class="px-5 py-4 font-semibold md:px-8">{v.spalte_aufgabe}</th>
+            <th scope="col" class="px-5 py-4 font-semibold md:px-8">{v.spalte_zustaendig}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            v.zeilen.map((zeile) => (
+              <tr class="border-t border-linie align-top">
+                <th scope="row" class="px-5 py-4 font-normal md:px-8">{zeile.aufgabe}</th>
+                <td class="px-5 py-4 md:px-8">
+                  <span
+                    class:list={[
+                      "inline-block rounded-full px-3 py-1 text-sm font-semibold whitespace-nowrap",
+                      zeile.wer === "wir" ? "bg-akzent text-auf-akzent" : "bg-karte-2 text-text",
+                    ]}
+                  >
+                    {zeile.wer === "wir" ? site.marke.name : "Sie"}
+                  </span>
+                  {zeile.hinweis && <span class="mt-1 block text-sm text-leise">{zeile.hinweis}</span>}
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

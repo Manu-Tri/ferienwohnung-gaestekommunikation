@@ -1,0 +1,72 @@
+---
+import { euro, site } from "../config/laden";
+import Haken from "./Haken.astro";
+
+const p = site.preise_abschnitt;
+const gp = site.preise.gruenderpreis;
+const frei = gp.plaetze_frei;
+const zeigeZaehler = typeof frei === "number";
+---
+
+<section id="preise" class="abschnitt border-t border-linie bg-karte" aria-labelledby="preise-titel">
+  <div class="behaelter">
+    <h2 id="preise-titel" class="h2 reveal max-w-3xl">{p.titel}</h2>
+
+    <div class="mt-12 grid gap-5 lg:grid-cols-2">
+      <div class="reveal rounded-[1.25rem] border-2 border-akzent bg-flaeche p-7 md:p-9">
+        <p class="flex items-baseline gap-2">
+          <span class="text-6xl font-semibold tracking-tight">{euro(site.preise.pro_buchung)}</span>
+          <span class="text-lg text-leise">{p.einheit}</span>
+        </p>
+        <ul class="mt-7 space-y-3">
+          {
+            p.punkte.map((punkt) => (
+              <li class="flex items-start gap-2.5">
+                <Haken class="mt-1" />
+                {punkt}
+              </li>
+            ))
+          }
+        </ul>
+        <p class="mt-5 text-sm text-leise">{p.abrechnung_booking}</p>
+        <p class="mt-2 text-sm text-leise">{p.buchung_definition}</p>
+        <p class="mt-5 text-sm font-medium">{p.steuer}</p>
+        <a href="#anfrage" data-anliegen="test" class="knopf knopf-primaer mt-7 w-full sm:w-auto">{site.cta.test}</a>
+      </div>
+
+      <div class="reveal rounded-[1.25rem] border border-linie bg-akzent-hell p-7 md:p-9">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <h3 class="text-2xl">{p.gruenderpreis_titel}</h3>
+          {
+            zeigeZaehler && (
+              <p class="rounded-full bg-akzent px-3.5 py-1.5 text-sm font-semibold text-auf-akzent">
+                {p.zaehler_text.replace("{frei}", String(frei))}
+              </p>
+            )
+          }
+        </div>
+        <p class="mt-4 text-lg">{p.gruenderpreis_text}</p>
+        {zeigeZaehler && <p class="mt-1 text-sm text-leise">{p.zaehler_hinweis}</p>}
+
+        <h4 class="mt-7 font-semibold">{p.gp_titel}</h4>
+        <ul class="mt-3 list-disc space-y-1.5 pl-5">
+          {p.gp_bedingungen.map((b) => <li>{b}</li>)}
+        </ul>
+      </div>
+    </div>
+
+    <div class="reveal mt-5 rounded-[1.25rem] border border-linie bg-flaeche p-7 md:p-9">
+      <h3 class="text-xl">{p.test_titel}</h3>
+      <dl class="mt-5 grid gap-x-8 gap-y-4 md:grid-cols-2">
+        {
+          p.test_bedingungen.map((b) => (
+            <div>
+              <dt class="font-semibold">{b.titel}</dt>
+              <dd class="text-leise">{b.text}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </div>
+</section>

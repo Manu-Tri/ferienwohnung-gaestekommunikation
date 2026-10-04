@@ -1,0 +1,423 @@
+# =====================================================================
+# ZENTRALE INHALTSDATEI
+# Hier stehen alle Texte, Preise, Zeiten und Links der Website.
+#
+# So ändern Sie Inhalte:
+# 1. Text zwischen den Anführungszeichen ändern. Einrückung (Leerzeichen
+#    am Zeilenanfang) bitte genau so lassen.
+# 2. Speichern. Beim nächsten Build (oder automatisch auf Netlify)
+#    ist die Änderung online. Ist die Datei fehlerhaft, bricht der Build
+#    mit einer verständlichen Meldung ab und die alte Seite bleibt online.
+#
+# Variablen in geschweiften Klammern werden automatisch ersetzt:
+#   {marke} {preis} {start} {ende} {antwortzeit} {test_tage}
+#   {gp_preis} {gp_monate} {gp_plaetze} {check_stunden}
+#   {verbesserungen} {region} {email} {antwort_frist}
+# Wenn Sie also unten den Preis ändern, ändert er sich überall.
+#
+# Eckige Klammern wie [MARKENNAME] sind offene Platzhalter.
+# Liste aller offenen Platzhalter: im Terminal "npm run platzhalter".
+#
+# Bitte keine Gedankenstriche verwenden. Prüfung: "npm run pruefen:striche".
+# =====================================================================
+
+marke:
+  name: "[MARKENNAME]"
+  # Vollständige Adresse der Website, ohne Schrägstrich am Ende
+  domain: "https://www.example.de"
+  email: "[E-MAIL-ADRESSE]"
+  telefon: "[TELEFONNUMMER]"
+  ort: "[ORT]"
+  # Region, die auf der Startseite genannt wird
+  region: "[REGION, z. B. Mosel, Eifel, Nordsee]"
+  # Regionen für Suchmaschinen (strukturierte Daten "areaServed")
+  einsatzgebiet:
+    - "Deutschland"
+
+service:
+  start_uhr: 7
+  ende_uhr: 23
+  antwortzeit_minuten: 15
+  # Wie schnell melden Sie sich nach einer Testanfrage?
+  antwort_frist: "[24 Stunden]"
+
+preise:
+  pro_buchung: 9
+  test_tage: 30
+  gruenderpreis:
+    pro_buchung: 6
+    monate: 12
+    plaetze_gesamt: 10
+    # Freie Plätze. Nur von Hand pflegen. Leer lassen = kein Zähler sichtbar.
+    # Beispiel:  plaetze_frei: 7
+    plaetze_frei:
+    erinnerung_vorher: "[4 Wochen]"
+
+lead_magnet:
+  check_stunden: 48
+  verbesserungen: 5
+
+links:
+  # Link zur Terminbuchung (z. B. Cal.com, Calendly). Wird nur als Link geöffnet.
+  buchungslink: "[BUCHUNGSLINK]"
+  buchungsanbieter: "[ANBIETER DER TERMINBUCHUNG]"
+
+formular:
+  # "netlify" = Netlify Forms (Standard). "extern" = anderer Formulardienst,
+  # dann unten die Adresse eintragen, an die das Formular gesendet wird.
+  anbieter: "netlify"
+  endpunkt: ""
+  name: "anfrage"
+
+analytics:
+  # true = cookieloses Plausible einbinden. Absatz in der Datenschutz-
+  # erklärung erscheint dann automatisch.
+  plausible: false
+  plausible_domain: "www.example.de"
+
+seo:
+  titel: "Gästekommunikation für Ferienwohnungen | Jede Nachricht beantwortet | {marke}"
+  beschreibung: "Wir beantworten alle Gästenachrichten auf Airbnb und Booking.com von {start} bis {ende} Uhr. {preis} € pro Buchung, ohne Grundgebühr, {test_tage} Tage kostenlos testen."
+
+# ---------------------------------------------------------------------
+# TEXTE DER STARTSEITE (von oben nach unten)
+# ---------------------------------------------------------------------
+
+navigation:
+  - { text: "Betreuung", ziel: "#betreuung" }
+  - { text: "Ablauf", ziel: "#ablauf" }
+  - { text: "Leistungen", ziel: "#leistungen" }
+  - { text: "Preise", ziel: "#preise" }
+  - { text: "Für Agenturen", ziel: "#agenturen" }
+  - { text: "FAQ", ziel: "#faq" }
+
+cta:
+  test: "{test_tage} Tage kostenlos testen"
+  test_kurz: "{test_tage} Tage testen"
+  check: "Kostenlosen Inserats-Check anfordern"
+  check_kurz: "Inserats-Check"
+
+hero:
+  titel: "Ihre Gäste bekommen immer eine Antwort. Sie bekommen Ihren Feierabend zurück."
+  unterzeile: "Wir beantworten jede Gästenachricht auf Airbnb und Booking.com von {start} bis {ende} Uhr, vom ersten Kontakt bis zur Bewertung nach der Abreise. Für {preis} € pro Buchung, ohne Grundgebühr. Die ersten {test_tage} Tage sind kostenlos."
+  vertrauen:
+    - "Keine Nachricht bleibt unbeantwortet"
+    - "Nachkontakt und Bewertungen inklusive"
+    - "Monatlich kündbar"
+    - "Keine Grundgebühr"
+    - "DSGVO-konform"
+    - "KI-gestützt, von Menschen kontrolliert"
+
+chat_demo:
+  kopf: "Nachrichten · Ferienwohnung Moselblick"
+  gast_name: "Familie Weber"
+  gast_zeit: "So, 21:47"
+  gast_text: "Hallo, wir stehen vor der Tür und der Schlüsselsafe geht nicht auf. Was können wir tun?"
+  antwort_zeit: "So, 21:53"
+  antwort_text: "Guten Abend Frau Weber, das tut mir leid. Drücken Sie bitte nach dem Code einmal fest auf die Taste unten rechts, dann öffnet die Klappe. Falls es nicht klappt, ruft Sie in 10 Minuten unser Partner vor Ort an."
+  antwort_label: "Antwort nach 6 Minuten"
+  hinweis: "Beispieldarstellung"
+
+problem:
+  titel: "Gästekommunikation hält sich nicht an Ihre Arbeitszeiten."
+  karten:
+    - titel: "Sonntag, 21:47 Uhr."
+      text: "Die Frage nach dem WLAN-Passwort kommt nicht dann, wenn Sie Zeit haben. Sie kommt beim Abendessen, im Meeting oder im Urlaub."
+    - titel: "Langsame Antworten kosten Buchungen."
+      text: "Plattformen zeigen Ihre Antwortrate und Antwortzeit an. Wer auf eine Anfrage erst am nächsten Morgen reagiert, verliert den Gast oft an das nächste Inserat."
+    - titel: "Check-in ohne Plan."
+      text: "Anreisezeit, Schlüsselübergabe, Parkplatz: Dieselben fünf Fragen kommen bei jeder Buchung. Fehlt eine Antwort, steht der Gast vor verschlossener Tür."
+    - titel: "Bewertungen hängen an der Kommunikation."
+      text: "Eine gute Unterkunft mit holpriger Kommunikation bekommt trotzdem 4 statt 5 Sterne."
+
+rechner:
+  titel: "Was kosten Sie langsame Antworten?"
+  intro: "Ihre Zahlen, grob geschätzt. Nichts wird gespeichert."
+  # Startwerte der Eingabefelder
+  start_objekte: 3
+  start_buchungen: 12
+  start_buchungswert: 450
+  start_anteil: 10
+  label_objekte: "Ferienwohnungen"
+  label_buchungen: "Buchungen pro Monat"
+  label_buchungswert: "Wert pro Buchung in €"
+  label_anteil: "Verlorene Buchungen in %"
+  ergebnis_verlust: "Möglicher Umsatzverlust pro Jahr"
+  ergebnis_kosten: "Kosten mit {marke} pro Jahr"
+  hinweis: "Beispielrechnung mit Ihren Schätzwerten, kein Versprechen."
+  cta: "{test_tage} Tage kostenlos testen"
+
+gaestereise:
+  titel: "Jede Nachricht bekommt eine Antwort. Das spüren Ihre Gäste."
+  text: "Gäste bewerten nicht nur die Wohnung, sondern auch, wie gut sie sich betreut gefühlt haben. Kommunikation ist bei Airbnb eine eigene Bewertungskategorie. Wer immer eine Rückmeldung bekommt, fragt weniger nach, reist entspannter an und schreibt eher eine gute Bewertung."
+  phasen:
+    - titel: "Vor der Anreise"
+      punkte:
+        - "Antwort auf jede Anfrage, auch abends und am Wochenende"
+        - "Begrüßung direkt nach der Buchung"
+        - "Anreiseinfos zum richtigen Zeitpunkt"
+    - titel: "Während des Aufenthalts"
+      punkte:
+        - "Jede Frage wird beantwortet, von {start} bis {ende} Uhr"
+        - "Kurze Nachfrage am ersten Abend, ob alles passt"
+        - "Probleme lösen, bevor sie in der Bewertung stehen"
+    - titel: "Nach der Abreise"
+      punkte:
+        - "Persönliche Dankesnachricht am Abreisetag"
+        - "Bitte um eine Bewertung an jeden Gast, mit einer Erinnerung"
+        - "Antwort auf jede Bewertung in Ihrem Namen"
+        - "Monatlicher Bericht: was Gäste loben, was sie stört"
+
+ablauf:
+  titel: "In 3 Schritten startklar. Ihr Aufwand: etwa 45 Minuten."
+  schritte:
+    - titel: "Co-Host-Einladung"
+      dauer: "10 Minuten"
+      text: "Sie laden uns auf Airbnb als Co-Host mit der Berechtigung „Kalender und Postfach“ ein. Auf Booking.com legen Sie einen eigenen Benutzer für uns an. Ihre Zugangsdaten bleiben bei Ihnen."
+    - titel: "Wissensbasis zu Ihrer Unterkunft"
+      dauer: "30 Minuten"
+      text: "Wir schicken Ihnen einen Fragebogen: Check-in, Hausregeln, WLAN, Parken, Ansprechpartner vor Ort. Daraus entsteht die Grundlage für jede Antwort."
+    - titel: "Wir übernehmen"
+      dauer: "ab dem vereinbarten Tag"
+      text: "Wir beantworten alle Nachrichten. Sie bekommen eine tägliche Zusammenfassung und werden nur bei Dingen gefragt, die Ihre Entscheidung brauchen."
+
+leistungen:
+  titel: "Was wir für Sie übernehmen"
+  karten:
+    - titel: "Antworten von {start} bis {ende} Uhr"
+      text: "Jeden Tag, auch am Wochenende und an Feiertagen. Keine Nachricht bleibt liegen."
+    - titel: "Check-in-Kommunikation"
+      text: "Anreiseinfos zum richtigen Zeitpunkt, Rückfragen zur Schlüsselübergabe, Erinnerung vor dem Check-out."
+    - titel: "Notfälle an Ihre Partner vor Ort"
+      text: "Wasserschaden, Stromausfall, ausgesperrte Gäste: Wir informieren sofort Ihre hinterlegte Hausmeisterin, Reinigung oder Sie selbst. Nach festem Ablauf."
+    - titel: "Nachkontakt nach der Abreise"
+      text: "Am Abreisetag bedanken wir uns persönlich und fragen nach einer Bewertung. Fehlt sie nach einigen Tagen, erinnern wir einmal freundlich."
+    - titel: "Bewertungsmanagement"
+      text: "Wir beantworten jede Bewertung in Ihrem Namen, gute wie kritische. Kritik melden wir Ihnen sofort, damit Sie reagieren können."
+    - titel: "KI-gestützt, von Menschen kontrolliert"
+      text: "Eine KI schreibt Entwürfe auf Basis Ihrer Wissensbasis. Jede kritische Antwort, etwa zu Geld, Stornierung, Beschwerde oder Notfall, prüft ein Mensch vor dem Versand."
+    - titel: "Tägliche Zusammenfassung und Monatsbericht"
+      text: "Jeden Abend eine E-Mail: was gefragt wurde, was wir geantwortet haben, was offen ist. Einmal im Monat: was Gäste in Bewertungen loben und was sie stört."
+
+vergleich:
+  titel: "Was Sie behalten. Was wir übernehmen."
+  beschriftung: "Aufgabenteilung zwischen Ihnen und {marke}"
+  spalte_aufgabe: "Aufgabe"
+  spalte_zustaendig: "Zuständig"
+  zeilen:
+    - { aufgabe: "Preise, Kalender und Hausregeln festlegen", wer: "sie" }
+    - { aufgabe: "Buchungsanfragen annehmen oder ablehnen", wer: "sie", hinweis: "auf Wunsch nach Ihren Regeln wir" }
+    - { aufgabe: "Erstattungen und Kulanz entscheiden", wer: "sie" }
+    - { aufgabe: "Gästefragen beantworten", wer: "wir" }
+    - { aufgabe: "Check-in-Infos und Erinnerungen versenden", wer: "wir" }
+    - { aufgabe: "Notfälle an Partner vor Ort weitergeben", wer: "wir" }
+    - { aufgabe: "Nachkontakt und Bitte um Bewertung", wer: "wir" }
+    - { aufgabe: "Bewertungen beantworten", wer: "wir" }
+    - { aufgabe: "Reinigung und Instandhaltung organisieren", wer: "sie", hinweis: "oder Ihre Partner vor Ort" }
+
+# Nur echte, belegbare Zahlen und Kundenstimmen mit dokumentierter Einwilligung.
+# Solange beide Listen leer sind ( [] ), wird der Abschnitt nicht angezeigt.
+# Beispiel für einen Eintrag (Rauten am Zeilenanfang entfernen):
+#  kennzahlen:
+#    - wert: "8 Minuten"
+#      beschreibung: "durchschnittliche Antwortzeit"
+#      quelle: "Auswertung Januar bis März 2027, 6 Objekte"
+#  stimmen:
+#    - zitat: "..."
+#      name: "Vorname N."
+#      ort: "Bernkastel-Kues"
+#      objekte: "3 Ferienwohnungen"
+ergebnisse:
+  titel: "Ergebnisse unserer Kunden"
+  kennzahlen: []
+  stimmen: []
+
+preise_abschnitt:
+  titel: "Ein Preis. Nur wenn Sie Buchungen haben."
+  einheit: "pro Buchung"
+  punkte:
+    - "Keine Grundgebühr"
+    - "Monatlich kündbar"
+    - "Alle Leistungen inklusive"
+    - "Abrechnung über die Airbnb-Co-Host-Auszahlung"
+  abrechnung_booking: "[ZU KLÄREN: Abrechnung für Booking.com-Buchungen, Vorschlag: monatliche Rechnung]"
+  steuer: "Gemäß § 19 UStG wird keine Umsatzsteuer berechnet. Der Preis ist ein Endpreis."
+  buchung_definition: "Als Buchung zählt: [ZU KLÄREN, Vorschlag: jede bestätigte, nicht stornierte Buchung mit Anreise im Abrechnungsmonat]."
+  gruenderpreis_titel: "Gründerpreis"
+  gruenderpreis_text: "{gp_preis} € pro Buchung für {gp_monate} Monate für die ersten {gp_plaetze} Kunden."
+  # {frei} wird durch die Zahl freier Plätze ersetzt
+  zaehler_text: "{frei} von {gp_plaetze} Plätzen frei"
+  zaehler_hinweis: "Stand von Hand gepflegt."
+  test_titel: "Bedingungen der Testphase"
+  test_bedingungen:
+    - { titel: "Beginn", text: "an dem Tag, an dem wir die erste Gästenachricht für Sie beantworten." }
+    - { titel: "Dauer", text: "{test_tage} Kalendertage. Danach endet der Test automatisch." }
+    - { titel: "Kosten", text: "0 €. Für Buchungen in diesem Zeitraum berechnen wir nichts." }
+    - { titel: "Danach", text: "Es passiert nichts automatisch. Wir fragen Sie, ob Sie weitermachen möchten. Ein Vertrag entsteht nur, wenn Sie und wir ihn ausdrücklich bestätigen, zum Beispiel per E-Mail. Ohne Bestätigung entfernen Sie uns einfach als Co-Host." }
+  gp_titel: "Bedingungen des Gründerpreises"
+  gp_bedingungen:
+    - "Gilt für die ersten {gp_plaetze} Kunden, die nach der Testphase einen Vertrag mit uns schließen."
+    - "{gp_preis} € pro Buchung für {gp_monate} Monate ab Vertragsbeginn."
+    - "Danach gilt der reguläre Preis von {preis} € pro Buchung. Wir erinnern Sie {erinnerung} vorher. Sie können weiterhin monatlich kündigen."
+
+white_label:
+  titel: "Für Agenturen und Co-Hosts: Ihre Marke, unser Team."
+  text: "Sie betreuen Ferienwohnungen für Eigentümer und wollen abends und am Wochenende nicht mehr selbst ans Telefon? Wir antworten in Ihrem Namen und mit Ihrem Ton. Ihre Eigentümer sehen nur Ihre Agentur."
+  punkte:
+    - "Antworten unter Ihrem Namen"
+    - "Eigene Wissensbasis pro Objekt"
+    - "Monatliche Auswertung pro Eigentümer"
+    - "Preis nach Volumen: [PREIS WHITE LABEL]"
+  cta: "Gespräch für Agenturen anfragen"
+
+anfrage:
+  titel: "In 4 kurzen Schritten zu Ihrem Test oder Inserats-Check"
+  anliegen_frage: "Ich möchte"
+  anliegen:
+    test: "{test_tage} Tage testen"
+    check: "Inserats-Check"
+    agentur: "Als Agentur anfragen"
+  schritt: "Schritt {nr} von 4"
+  frage_objekte: "Wie viele Ferienwohnungen betreuen Sie?"
+  objekte:
+    - "1"
+    - "2 bis 3"
+    - "4 bis 6"
+    - "7 bis 10"
+    - "mehr als 10"
+  frage_plattformen: "Auf welchen Plattformen vermieten Sie?"
+  plattformen:
+    - "Airbnb"
+    - "Booking.com"
+    - "Eigene Website"
+    - "Andere"
+  label_region: "In welcher Region liegen Ihre Unterkünfte?"
+  frage_problem: "Was kostet Sie heute am meisten Nerven?"
+  probleme:
+    - "Nachrichten abends und am Wochenende"
+    - "Antwortzeit und Ranking"
+    - "Fragen rund um den Check-in"
+    - "Bewertungen"
+    - "Etwas anderes"
+  label_problem_text: "Möchten Sie etwas ergänzen? (optional)"
+  frage_kontakt: "Wohin dürfen wir Ihnen antworten?"
+  label_name: "Ihr Name"
+  label_email: "E-Mail-Adresse"
+  label_telefon: "Telefon (optional)"
+  label_inserat: "Link zu Ihrem Inserat (optional)"
+  hinweis_inserat_check: "Für den Inserats-Check brauchen wir den öffentlichen Link zu Ihrem Inserat."
+  weiter: "Weiter"
+  zurueck: "Zurück"
+  absenden: "Anfrage absenden"
+  senden_laeuft: "Wird gesendet …"
+  datenschutz: "Wir verwenden Ihre Angaben nur, um Ihre Anfrage zu bearbeiten und Sie dazu zu kontaktieren. Keine Weitergabe, kein Newsletter. Details in der"
+  datenschutz_link: "Datenschutzerklärung"
+  fehler_auswahl: "Bitte wählen Sie eine Antwort aus."
+  fehler_plattform: "Bitte wählen Sie mindestens eine Plattform aus."
+  fehler_name: "Bitte geben Sie Ihren Namen ein."
+  fehler_email: "Bitte geben Sie eine gültige E-Mail-Adresse ein."
+  fehler_url: "Bitte geben Sie einen vollständigen Link ein, beginnend mit https://"
+  fehler_senden: "Das hat nicht geklappt. Bitte versuchen Sie es noch einmal oder schreiben Sie an {email}."
+
+faq:
+  titel: "Häufige Fragen"
+  fragen:
+    - frage: "Ist das mit den Regeln von Airbnb vereinbar?"
+      antwort: "Ja. Airbnb sieht Co-Hosts ausdrücklich vor, mit verschiedenen Berechtigungsstufen und der Möglichkeit, Co-Hosts an der Auszahlung zu beteiligen. Wir kommunizieren ausschließlich über das Postfach der Plattform. Wir sind ein unabhängiger Dienstleister und nicht mit Airbnb oder Booking.com verbunden. [ZU PRÜFEN: welche Berechtigungsstufe für die Auszahlungsbeteiligung nötig ist]"
+    - frage: "Welche Plattformen unterstützen Sie?"
+      antwort: "Airbnb und Booking.com. [WEITERE PLATTFORMEN ODER CHANNEL MANAGER]"
+    - frage: "Wie gehen Sie mit den Daten meiner Gäste um?"
+      antwort: "Wir verarbeiten Gästedaten nur in Ihrem Auftrag und schließen dafür einen Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO. Wir sehen nur, was die Plattform einem Co-Host zeigt. [SPEICHERORT UND HOSTING DER WISSENSBASIS UND DER KI]"
+    - frage: "Wofür setzen Sie KI ein?"
+      antwort: "Für Entwürfe von Antworten auf Basis Ihrer Wissensbasis. Routinefragen wie WLAN oder Anreise können nach Ihrer Freigabe direkt beantwortet werden. Alles zu Geld, Stornierung, Beschwerden, Schäden und Notfällen prüft vor dem Versand ein Mensch."
+    - frage: "Wie läuft der Nachkontakt mit den Gästen?"
+      antwort: "Am Abreisetag schicken wir eine persönliche Dankesnachricht und bitten um eine Bewertung. Wir fragen jeden Gast, ohne Gegenleistung und nach den Regeln der Plattform. Fehlt die Bewertung nach einigen Tagen, erinnern wir einmal. Jede eingehende Bewertung beantworten wir in Ihrem Namen."
+    - frage: "Was passiert bei einem Notfall in der Nacht?"
+      antwort: "Zwischen {ende} und {start} Uhr ist das Postfach nicht besetzt. [ZU KLÄREN: Notfallregel nachts, z. B. automatischer Hinweis mit der Notfallnummer Ihres Partners vor Ort.] Ab {start} Uhr bearbeiten wir offene Nachrichten zuerst."
+    - frage: "Was passiert, wenn Ihnen ein Fehler unterläuft?"
+      antwort: "Wir sagen es Ihnen am selben Tag, korrigieren die Antwort gegenüber dem Gast und ergänzen die Wissensbasis, damit es nicht wieder passiert. [HAFTUNG UND BETRIEBSHAFTPFLICHT]"
+    - frage: "Wie kündige ich?"
+      antwort: "Monatlich, per E-Mail, ohne Begründung. Zusätzlich entfernen Sie uns als Co-Host. Damit endet unser Zugriff sofort."
+    - frage: "Wie läuft die Abrechnung, und weisen Sie Umsatzsteuer aus?"
+      antwort: "Auf Airbnb automatisch über die Co-Host-Auszahlung, Sie erhalten zusätzlich eine monatliche Übersicht. Gemäß § 19 UStG wird keine Umsatzsteuer berechnet, die Rechnung weist deshalb keine Umsatzsteuer aus."
+    - frage: "Wird der Test automatisch zum Vertrag?"
+      antwort: "Nein. Nach {test_tage} Tagen fragen wir Sie. Ohne Ihre und unsere Bestätigung entsteht kein Vertrag."
+    - frage: "Muss ich meine Zugangsdaten herausgeben?"
+      antwort: "Nein. Sie laden uns als Co-Host oder als eigenen Benutzer ein und können den Zugriff jederzeit selbst entziehen."
+
+abschluss:
+  titel: "Der nächste Sonntagabend gehört Ihnen."
+  text: "Jeder Gast bekommt eine Antwort, Sie bekommen Ihre Abende zurück. Testen Sie {test_tage} Tage ohne Kosten und ohne Vertrag. Oder lassen Sie zuerst Ihr Inserat prüfen: {verbesserungen} konkrete Verbesserungen innerhalb von {check_stunden} Stunden."
+
+footer:
+  hinweis_marken: "Airbnb und Booking.com sind Marken ihrer jeweiligen Inhaber. {marke} ist ein unabhängiger Dienstleister und steht in keiner Verbindung zu diesen Unternehmen."
+
+# ---------------------------------------------------------------------
+# SEITE /inserats-check (für Briefe, Partner, Anzeigen)
+# ---------------------------------------------------------------------
+inserats_check:
+  seo_titel: "Kostenloser Inserats-Check für Ferienwohnungen | {marke}"
+  seo_beschreibung: "{verbesserungen} konkrete Verbesserungen für Ihr Airbnb- oder Booking.com-Inserat, innerhalb von {check_stunden} Stunden per E-Mail. Kostenlos und ohne Verpflichtung."
+  titel: "Kostenloser Inserats-Check: {verbesserungen} konkrete Verbesserungen für Ihr Ferienwohnungs-Inserat."
+  unterzeile: "Innerhalb von {check_stunden} Stunden per E-Mail. Kostenlos und ohne Verpflichtung."
+  was_titel: "Was wir uns ansehen"
+  was_punkte:
+    - "Titel und erste Bildzeile"
+    - "Beschreibung und Hausregeln"
+    - "Antwortverhalten und Check-in-Infos"
+    - "Hinweise zu Preis und Mindestaufenthalt"
+    - "Bewertungen und Ihre Antworten darauf"
+  was_hinweis: "[INHALT DES CHECKS BESTÄTIGEN]"
+  nutzen:
+    - titel: "{verbesserungen} konkrete Punkte"
+      text: "Keine allgemeinen Tipps, sondern Änderungen, die Sie direkt umsetzen können."
+    - titel: "In {check_stunden} Stunden"
+      text: "Per E-Mail, als kurze Liste mit Begründung."
+    - titel: "Ohne Konto-Zugang"
+      text: "Der öffentliche Link zu Ihrem Inserat genügt."
+  formular_titel: "Inserats-Check anfordern"
+  faq:
+    - frage: "Kostet das etwas?"
+      antwort: "Nein. Der Inserats-Check ist kostenlos und verpflichtet Sie zu nichts."
+    - frage: "Brauchen Sie Zugang zu meinem Konto?"
+      antwort: "Nein. Der öffentliche Link zu Ihrem Inserat genügt."
+    - frage: "Was passiert danach?"
+      antwort: "Sie bekommen die {verbesserungen} Punkte per E-Mail. Wenn Sie möchten, sprechen wir danach über einen {test_tage}-Tage-Test. Wenn nicht, hören Sie nichts weiter von uns."
+    - frage: "Wer prüft mein Inserat?"
+      antwort: "[WER PRÜFT: Name oder Rolle, Erfahrung in Worten, keine erfundenen Zahlen]"
+
+# ---------------------------------------------------------------------
+# SEITE /danke
+# ---------------------------------------------------------------------
+danke:
+  titel: "Danke. Ihre Anfrage ist da."
+  text_allgemein: "Wir melden uns innerhalb von {antwort_frist}. Wenn Sie einen Inserats-Check angefordert haben, kommt er innerhalb von {check_stunden} Stunden per E-Mail."
+  text_check: "Ihr Inserats-Check kommt innerhalb von {check_stunden} Stunden an die angegebene E-Mail-Adresse."
+  text_test: "Wir melden uns innerhalb von {antwort_frist} mit den nächsten Schritten für Ihren {test_tage}-Tage-Test."
+  text_agentur: "Wir melden uns innerhalb von {antwort_frist}, um ein Gespräch zu vereinbaren."
+  naechster_titel: "Nächster Schritt"
+  naechster_text: "Wenn Sie direkt einen Termin für ein 15-minütiges Gespräch wählen möchten:"
+  termin_button: "Termin auswählen"
+  termin_hinweis: "Öffnet die Seite von {anbieter} in einem neuen Tab."
+  zurueck: "Zurück zur Startseite"
+
+# ---------------------------------------------------------------------
+# RECHTLICHES (Impressum und Datenschutz)
+# ---------------------------------------------------------------------
+impressum:
+  name: "[VOR- UND NACHNAME]"
+  firmenzusatz: "[GGF. GESCHÄFTSBEZEICHNUNG]"
+  strasse: "[STRASSE UND HAUSNUMMER]"
+  plz_ort: "[PLZ ORT]"
+  land: "Deutschland"
+  telefon: "[TELEFONNUMMER]"
+  email: "[E-MAIL-ADRESSE]"
+  # Leer lassen, wenn keine vorhanden
+  ust_id: ""
+  wirtschafts_id: ""
+  verantwortlich_inhalt: "[VOR- UND NACHNAME, ANSCHRIFT WIE OBEN]"
+
+datenschutz:
+  stand: "[DATUM]"
+  speicherdauer_anfragen: "[z. B. 6 Monate nach Abschluss der Anfrage, sofern kein Vertrag zustande kommt]"
+  aufsichtsbehoerde: "[ZUSTÄNDIGE LANDESDATENSCHUTZBEHÖRDE, z. B. Der Landesbeauftragte für den Datenschutz und die Informationsfreiheit Rheinland-Pfalz]"

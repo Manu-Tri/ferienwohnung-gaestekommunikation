@@ -1,0 +1,96 @@
+---
+import { site } from "../config/laden";
+const c = site.chat_demo;
+---
+
+<figure class="chat mx-auto w-full max-w-md" aria-label={`${c.hinweis}: Gästenachricht und Antwort`}>
+  <div class="karte overflow-hidden shadow-[0_24px_60px_-28px_rgb(15_60_55/0.35)]">
+    <div class="flex items-center gap-3 border-b border-linie px-5 py-3.5">
+      <span class="grid size-9 place-items-center rounded-full bg-karte-2 text-sm font-semibold text-leise" aria-hidden="true">FW</span>
+      <div class="leading-tight">
+        <p class="text-[0.95rem] font-semibold">{c.gast_name}</p>
+        <p class="text-xs text-leise">{c.kopf}</p>
+      </div>
+    </div>
+    <div class="space-y-4 px-5 py-6">
+      <div class="max-w-[85%]">
+        <p class="rounded-2xl rounded-bl-md bg-karte-2 px-4 py-3 text-[0.95rem] leading-snug">{c.gast_text}</p>
+        <p class="mt-1.5 pl-1 text-xs text-leise"><time>{c.gast_zeit}</time></p>
+      </div>
+      <div class="relative">
+        <div class="tippen absolute top-0 right-0 rounded-2xl rounded-br-md bg-akzent-hell px-4 py-3" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+        <div class="antwort ml-auto max-w-[88%]">
+          <p class="rounded-2xl rounded-br-md bg-akzent-hell px-4 py-3 text-[0.95rem] leading-snug">{c.antwort_text}</p>
+          <p class="mt-1.5 flex items-center justify-end gap-2 pr-1 text-xs text-leise">
+            <span class="rounded-full bg-akzent px-2 py-0.5 font-semibold text-auf-akzent">{c.antwort_label}</span>
+            <time>{c.antwort_zeit}</time>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <figcaption class="mt-3 text-center text-xs text-leise">{c.hinweis}</figcaption>
+</figure>
+
+<style>
+  .tippen {
+    display: none;
+  }
+  .tippen span {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin: 0 2px;
+    border-radius: 50%;
+    background: var(--akzent-text);
+  }
+  /* Kurze Tippanimation ohne Layoutverschiebung, nur wenn Bewegung erlaubt ist */
+  @media (prefers-reduced-motion: no-preference) {
+    .tippen {
+      display: block;
+      animation: ausblenden 0.2s 1.5s forwards;
+    }
+    .tippen span {
+      animation: punkt 0.9s infinite ease-in-out;
+    }
+    .tippen span:nth-child(2) {
+      animation-delay: 0.15s;
+    }
+    .tippen span:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+    .antwort {
+      opacity: 0;
+      animation: erscheinen 0.45s 1.6s ease-out forwards;
+    }
+  }
+  @keyframes punkt {
+    0%,
+    100% {
+      transform: translateY(0);
+      opacity: 0.35;
+    }
+    50% {
+      transform: translateY(-3px);
+      opacity: 0.9;
+    }
+  }
+  @keyframes ausblenden {
+    to {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+  @keyframes erscheinen {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>

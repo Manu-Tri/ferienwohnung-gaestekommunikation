@@ -1,0 +1,30 @@
+---
+import { site } from "../config/laden";
+
+interface Props {
+  fragen?: { frage: string; antwort: string }[];
+  titel?: string;
+}
+const { fragen = site.faq.fragen, titel = site.faq.titel } = Astro.props;
+---
+
+<section id="faq" class="abschnitt border-t border-linie bg-karte" aria-labelledby="faq-titel">
+  <div class="behaelter max-w-4xl">
+    <h2 id="faq-titel" class="h2 reveal">{titel}</h2>
+    <div class="mt-10 divide-y divide-linie border-y border-linie">
+      {
+        fragen.map((f) => (
+          <details class="group">
+            <summary class="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-5 text-lg font-medium [&::-webkit-details-marker]:hidden">
+              {f.frage}
+              <span class="grid size-8 shrink-0 place-items-center rounded-full bg-karte-2 text-xl leading-none transition-transform group-open:rotate-45" aria-hidden="true">
+                +
+              </span>
+            </summary>
+            <p class="max-w-prose pb-6 text-leise">{f.antwort}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>

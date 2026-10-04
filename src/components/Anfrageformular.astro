@@ -1,0 +1,233 @@
+---
+import { site } from "../config/laden";
+
+interface Props {
+  titel?: string;
+  /** Anliegen fest vorgeben (Fokusseite Inserats-Check) */
+  anliegenFest?: "test" | "check" | "agentur";
+  /** Region vorbefüllen (Regionsseiten) */
+  region?: string;
+}
+const { titel = site.anfrage.titel, anliegenFest, region = "" } = Astro.props;
+const a = site.anfrage;
+const f = site.formular;
+const istNetlify = f.anbieter === "netlify";
+const action = istNetlify ? "/danke" : f.endpunkt;
+const anliegen = [
+  { wert: "test", text: a.anliegen.test },
+  { wert: "check", text: a.anliegen.check },
+  { wert: "agentur", text: a.anliegen.agentur },
+] as const;
+
+const kachel =
+  "flex min-h-14 cursor-pointer items-center gap-3 rounded-xl border-[1.5px] border-rahmen bg-flaeche px-4 py-3 transition-colors hover:border-akzent has-checked:border-akzent has-checked:bg-akzent-hell";
+const eingabe =
+  "mt-2 block w-full rounded-xl border-[1.5px] border-rahmen bg-flaeche px-4 py-3 text-[1.05rem] aria-invalid:border-fehler";
+const frage = "text-xl font-semibold md:text-2xl";
+---
+
+<section id="anfrage" class="abschnitt" aria-labelledby="anfrage-titel">
+  <div class="behaelter max-w-3xl">
+    <h2 id="anfrage-titel" class="h2 text-center">{titel}</h2>
+
+    <form
+      name={f.name}
+      method="POST"
+      action={action}
+      class="anfrage karte mt-10 p-5 sm:p-8 md:p-10"
+      data-anbieter={f.anbieter}
+      data-schritt-text={a.schritt}
+      data-fehler-senden={a.fehler_senden}
+      data-senden-laeuft={a.senden_laeuft}
+      {...istNetlify ? { "data-netlify": "true", "netlify-honeypot": "firma_website" } : {}}
+    >
+      <input type="hidden" name="form-name" value={f.name} />
+      <input type="hidden" name="quelle" value="direkt" data-quelle />
+      <input type="hidden" name="seite" value={Astro.url.pathname} />
+      <p class="hidden" aria-hidden="true">
+        <label>Bitte nicht ausfüllen <input name="firma_website" tabindex="-1" autocomplete="off" /></label>
+      </p>
+
+      {
+        anliegenFest ? (
+          <input type="hidden" name="anliegen" value={anliegenFest} />
+        ) : (
+          <fieldset class="mb-8">
+            <legend class="mb-3 font-medium">{a.anliegen_frage}</legend>
+            <div class="grid gap-2 sm:grid-cols-3">
+              {anliegen.map((option, i) => (
+                <label class={kachel + " !min-h-12 justify-center text-center sm:!px-2"}>
+                  <input type="radio" name="anliegen" value={option.wert} checked={i === 0} class="size-4 accent-[var(--akzent)]" />
+                  <span class="font-medium">{option.text}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+        )
+      }
+
+      <div class="nur-js mb-8">
+        <p class="text-sm font-medium text-leise" data-fortschritt-text aria-live="polite">
+          {a.schritt.replace("{nr}", "1")}
+        </p>
+        <div class="mt-2 h-2 overflow-hidden rounded-full bg-karte-2" aria-hidden="true">
+          <div class="h-full w-1/4 rounded-full bg-akzent transition-[width] duration-300" data-fortschritt-balken></div>
+        </div>
+      </div>
+
+      <!-- Schritt 1 -->
+      <div data-schritt data-aktiv>
+        <fieldset aria-describedby="fehler-1">
+          <legend class={frage}>{a.frage_objekte}</legend>
+          <div class="mt-5 grid gap-2.5 sm:grid-cols-2" data-auto-weiter>
+            {
+              a.objekte.map((option) => (
+                <label class={kachel}>
+                  <input type="radio" name="objekte" value={option} required class="size-5 accent-[var(--akzent)]" data-fehler={a.fehler_auswahl} />
+                  <span>{option}</span>
+                </label>
+              ))
+            }
+          </div>
+        </fieldset>
+        <p id="fehler-1" class="fehler mt-3 font-medium text-fehler" data-fehler-box></p>
+      </div>
+
+      <!-- Schritt 2 -->
+      <div data-schritt>
+        <fieldset aria-describedby="fehler-2">
+          <legend class={frage}>{a.frage_plattformen}</legend>
+          <div class="mt-5 grid gap-2.5 sm:grid-cols-2" data-mindestens-eins={a.fehler_plattform}>
+            {
+              a.plattformen.map((option) => (
+                <label class={kachel}>
+                  <input type="checkbox" name="plattformen[]" value={option} class="size-5 accent-[var(--akzent)]" />
+                  <span>{option}</span>
+                </label>
+              ))
+            }
+          </div>
+        </fieldset>
+        <p id="fehler-2" class="fehler mt-3 font-medium text-fehler" data-fehler-box></p>
+        <label class="mt-6 block font-medium">
+          {a.label_region}
+          <input type="text" name="region" value={region} autocomplete="address-level2" class={eingabe} />
+        </label>
+      </div>
+
+      <!-- Schritt 3 -->
+      <div data-schritt>
+        <fieldset aria-describedby="fehler-3">
+          <legend class={frage}>{a.frage_problem}</legend>
+          <div class="mt-5 grid gap-2.5" data-auto-weiter>
+            {
+              a.probleme.map((option) => (
+                <label class={kachel}>
+                  <input type="radio" name="problem" value={option} required class="size-5 accent-[var(--akzent)]" data-fehler={a.fehler_auswahl} />
+                  <span>{option}</span>
+                </label>
+              ))
+            }
+          </div>
+        </fieldset>
+        <p id="fehler-3" class="fehler mt-3 font-medium text-fehler" data-fehler-box></p>
+        <label class="mt-6 block font-medium">
+          {a.label_problem_text}
+          <textarea name="problem_text" rows="3" class={eingabe}></textarea>
+        </label>
+      </div>
+
+      <!-- Schritt 4 -->
+      <div data-schritt>
+        <fieldset>
+          <legend class={frage}>{a.frage_kontakt}</legend>
+          <div class="mt-5 space-y-5">
+            <div>
+              <label for="f-name" class="font-medium">{a.label_name}</label>
+              <input id="f-name" type="text" name="name" required autocomplete="name" class={eingabe} data-fehler={a.fehler_name} aria-describedby="f-name-fehler" />
+              <p id="f-name-fehler" class="fehler mt-2 font-medium text-fehler"></p>
+            </div>
+            <div>
+              <label for="f-email" class="font-medium">{a.label_email}</label>
+              <input
+                id="f-email"
+                type="email"
+                name="email"
+                required
+                autocomplete="email"
+                inputmode="email"
+                class={eingabe}
+                data-fehler={a.fehler_email}
+                aria-describedby="f-email-fehler"
+              />
+              <p id="f-email-fehler" class="fehler mt-2 font-medium text-fehler"></p>
+            </div>
+            <div>
+              <label for="f-telefon" class="font-medium">{a.label_telefon}</label>
+              <input id="f-telefon" type="tel" name="telefon" autocomplete="tel" class={eingabe} />
+            </div>
+            <div>
+              <label for="f-inserat" class="font-medium">{a.label_inserat}</label>
+              <input
+                id="f-inserat"
+                type="url"
+                name="inserat"
+                placeholder="https://"
+                inputmode="url"
+                class={eingabe}
+                data-fehler={a.fehler_url}
+                aria-describedby="f-inserat-hinweis f-inserat-fehler"
+              />
+              <p id="f-inserat-hinweis" class="mt-2 text-sm text-leise" data-nur-check hidden={anliegenFest !== "check"}>
+                {a.hinweis_inserat_check}
+              </p>
+              <p id="f-inserat-fehler" class="fehler mt-2 font-medium text-fehler"></p>
+            </div>
+          </div>
+        </fieldset>
+
+        <p class="mt-7 text-sm text-leise">
+          {a.datenschutz} <a href="/datenschutz">{a.datenschutz_link}</a>.
+        </p>
+        <button type="submit" class="knopf knopf-primaer mt-5 w-full text-[1.05rem] sm:w-auto" data-absenden>
+          {a.absenden}
+        </button>
+        <p class="fehler mt-4 font-medium text-fehler" role="alert" data-sende-fehler></p>
+      </div>
+
+      <div class="nur-js mt-8 items-center justify-between gap-3 border-t border-linie pt-6" data-navigation>
+        <button type="button" class="knopf knopf-sekundaer" data-zurueck>{a.zurueck}</button>
+        <button type="button" class="knopf knopf-primaer ml-auto" data-weiter>{a.weiter}</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<style>
+  .nur-js {
+    display: none;
+  }
+  .anfrage[data-js] .nur-js {
+    display: block;
+  }
+  .anfrage[data-js] [data-navigation] {
+    display: flex;
+  }
+  /* Ohne JavaScript stehen alle Schritte untereinander */
+  [data-schritt] + [data-schritt] {
+    margin-top: 2.5rem;
+  }
+  .anfrage[data-js] [data-schritt] {
+    margin-top: 0;
+  }
+  .anfrage[data-js] [data-schritt]:not([data-aktiv]) {
+    display: none;
+  }
+  .fehler:empty {
+    display: none;
+  }
+</style>
+
+<script>
+  import "../scripts/formular";
+</script>
