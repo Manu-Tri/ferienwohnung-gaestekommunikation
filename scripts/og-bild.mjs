@@ -20,7 +20,7 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" v
   <g font-family="Figtree, Helvetica, Arial, sans-serif" fill="#1c1a17">
     <svg x="88" y="78" width="64" height="64" viewBox="0 0 32 32">
       <path fill="#1c1a17" d="M10 2.5h12A8 8 0 0 1 30 10.5v6a8 8 0 0 1-8 8h-8.6l-6.1 4.9c-.8.6-1.8.1-1.8-.9v-4.6A8 8 0 0 1 2 16.5v-6a8 8 0 0 1 8-8z"/>
-      <path d="M9.55 13.6l3.2 3.2 6.1-6.6M15.85 16.3l.5.5 6.1-6.6" fill="none" stroke="#f5b82e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M8.6 13.7l2.2 2.2 4.4-4.8M16.4 13.7l2.2 2.2 4.4-4.8" fill="none" stroke="#f5b82e" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
     <text x="166" y="126" font-size="44" font-weight="800" letter-spacing="-2">${marke.toLowerCase()}</text>
     <text x="88" y="285" font-size="70" font-weight="800" letter-spacing="-2">Ihre Gäste bekommen</text>
