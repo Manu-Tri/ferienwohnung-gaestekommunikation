@@ -1,4 +1,5 @@
 ---
+import { istVorschau, ohneBasis, pfad } from "../config/pfad";
 import "../styles/global.css";
 import interLatin from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
 import Header from "../components/Header.astro";
@@ -18,7 +19,8 @@ interface Props {
 
 const { titel, beschreibung, fokus = false, noindex = false, jsonld = [], lokaleAnker = false } = Astro.props;
 const kanonisch = new URL(Astro.url.pathname, Astro.site).href;
-const ogBild = new URL("/og.png", Astro.site).href;
+const ogBild = new URL(pfad("/og.png"), Astro.site).href;
+const robots = istVorschau ? "noindex, nofollow" : noindex ? "noindex, follow" : null;
 ---
 
 <!doctype html>
@@ -29,10 +31,10 @@ const ogBild = new URL("/og.png", Astro.site).href;
     <title>{titel}</title>
     <meta name="description" content={beschreibung} />
     <link rel="canonical" href={kanonisch} />
-    {noindex && <meta name="robots" content="noindex, follow" />}
+    {robots && <meta name="robots" content={robots} />}
     <meta name="theme-color" content="#f8f8f5" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0b1416" media="(prefers-color-scheme: dark)" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href={pfad("/favicon.svg")} type="image/svg+xml" />
     <link rel="preload" href={interLatin} as="font" type="font/woff2" crossorigin />
 
     <meta property="og:type" content="website" />
@@ -65,7 +67,7 @@ const ogBild = new URL("/og.png", Astro.site).href;
       class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-lg focus:bg-karte focus:px-4 focus:py-2"
       >Zum Inhalt springen</a
     >
-    <Header fokus={fokus} lokal={lokaleAnker || Astro.url.pathname === "/"} />
+    <Header fokus={fokus} lokal={lokaleAnker || ohneBasis(Astro.url.pathname) === "/"} />
     <main id="inhalt">
       <slot />
     </main>

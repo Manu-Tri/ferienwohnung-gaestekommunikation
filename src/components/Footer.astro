@@ -1,4 +1,5 @@
 ---
+import { pfad } from "../config/pfad";
 import { site } from "../config/laden";
 import Logo from "./Logo.astro";
 const jahr = new Date().getFullYear();
@@ -13,9 +14,9 @@ const jahr = new Date().getFullYear();
     </div>
     <nav aria-label="Rechtliches und Kontakt" class="md:justify-self-end">
       <ul class="space-y-2">
-        <li><a href="/impressum">Impressum</a></li>
-        <li><a href="/datenschutz">Datenschutz</a></li>
-        <li><a href="/inserats-check">Kostenloser Inserats-Check</a></li>
+        <li><a href={pfad("/impressum")}>Impressum</a></li>
+        <li><a href={pfad("/datenschutz")}>Datenschutz</a></li>
+        <li><a href={pfad("/inserats-check")}>Kostenloser Inserats-Check</a></li>
         <li>Kontakt: <a href={`mailto:${site.marke.email}`}>{site.marke.email}</a></li>
       </ul>
     </nav>

@@ -1,4 +1,5 @@
 ---
+import { pfad } from "../config/pfad";
 import { site } from "../config/laden";
 
 interface Props {
@@ -12,7 +13,7 @@ const { titel = site.anfrage.titel, anliegenFest, region = "" } = Astro.props;
 const a = site.anfrage;
 const f = site.formular;
 const istNetlify = f.anbieter === "netlify";
-const action = istNetlify ? "/danke" : f.endpunkt;
+const action = istNetlify ? pfad("/danke") : f.endpunkt;
 const anliegen = [
   { wert: "test", text: a.anliegen.test },
   { wert: "check", text: a.anliegen.check },
@@ -187,7 +188,7 @@ const frage = "text-xl font-semibold md:text-2xl";
         </fieldset>
 
         <p class="mt-7 text-sm text-leise">
-          {a.datenschutz} <a href="/datenschutz">{a.datenschutz_link}</a>.
+          {a.datenschutz} <a href={pfad("/datenschutz")}>{a.datenschutz_link}</a>.
         </p>
         <button type="submit" class="knopf knopf-primaer mt-5 w-full text-[1.05rem] sm:w-auto" data-absenden>
           {a.absenden}

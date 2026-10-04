@@ -132,7 +132,7 @@ function einrichten(form: HTMLFormElement) {
         return;
       }
     }
-    const ziel = `/danke?anliegen=${encodeURIComponent(anliegen())}`;
+    const ziel = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/danke?anliegen=${encodeURIComponent(anliegen())}`;
     const daten = new FormData(form);
     // Honeypot ausgefüllt: so tun, als wäre alles gut
     if (String(daten.get("firma_website") ?? "") !== "") {

@@ -1,4 +1,5 @@
 ---
+import { pfad } from "../config/pfad";
 import Basis from "../layouts/Basis.astro";
 import { site } from "../config/laden";
 ---
@@ -7,6 +8,6 @@ import { site } from "../config/laden";
   <section class="behaelter max-w-2xl py-24 text-center">
     <h1 class="text-4xl md:text-5xl">Diese Seite gibt es nicht.</h1>
     <p class="mt-5 text-lg text-leise">Vielleicht hilft Ihnen die Startseite weiter.</p>
-    <a href="/" class="knopf knopf-primaer mt-8">Zur Startseite</a>
+    <a href={pfad("/")} class="knopf knopf-primaer mt-8">Zur Startseite</a>
   </section>
 </Basis>
