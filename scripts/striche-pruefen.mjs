@@ -11,10 +11,27 @@ function durchsuchen(pfad) {
     const voll = join(pfad, name);
     if (statSync(voll).isDirectory()) durchsuchen(voll);
     else if (/\.(ya?ml|astro|md)$/.test(name)) {
+      let imCode = false;
+      let frontmatter = 0;
       readFileSync(voll, "utf8")
         .split("\n")
         .forEach((zeile, i) => {
-          // Kommentare und Code-Ausdrücke wie "a - b" in geschweiften Klammern ignorieren
+          // Frontmatter, <script> und <style> sind Code, keine Texte
+          if (name.endsWith(".astro")) {
+            if (/^---\s*$/.test(zeile) && frontmatter < 2) {
+              frontmatter++;
+              return;
+            }
+            if (frontmatter === 1) return;
+            if (/<(script|style)\b/.test(zeile) && !/<\/(script|style)>/.test(zeile)) imCode = true;
+            if (/<\/(script|style)>/.test(zeile)) {
+              imCode = false;
+              return;
+            }
+            if (imCode) return;
+          }
+          // Kommentare, Code-Ausdrücke in geschweiften Klammern und Vergleiche ignorieren
+          if (/===|=>|\.length/.test(zeile)) return;
           const text = zeile.replace(/^\s*#.*$/, "").replace(/\{[^}]*\}/g, "");
           if (muster.test(text)) {
             treffer++;

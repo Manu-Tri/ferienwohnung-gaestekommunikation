@@ -45,6 +45,7 @@ const frage = "text-xl font-semibold md:text-2xl";
       <input type="hidden" name="form-name" value={f.name} />
       <input type="hidden" name="quelle" value="direkt" data-quelle />
       <input type="hidden" name="seite" value={Astro.url.pathname} />
+      <input type="hidden" name="wunschpaket" value="" data-wunschpaket />
       <p class="hidden" aria-hidden="true">
         <label>Bitte nicht ausfüllen <input name="firma_website" tabindex="-1" autocomplete="off" /></label>
       </p>
@@ -66,6 +67,12 @@ const frage = "text-xl font-semibold md:text-2xl";
           </fieldset>
         )
       }
+
+      <div class="mb-8 rounded-xl border-[1.5px] border-akzent bg-akzent-hell px-4 py-3.5" data-wunschpaket-box hidden>
+        <p class="text-sm font-semibold">{a.label_wunschpaket}</p>
+        <ul class="mt-1.5 list-disc pl-5 text-sm" data-wunschpaket-liste></ul>
+        <a href="#wunschpaket" class="mt-2 inline-block text-sm font-medium">{a.wunschpaket_aendern}</a>
+      </div>
 
       <div class="nur-js mb-8">
         <p class="text-sm font-medium text-leise" data-fortschritt-text aria-live="polite">

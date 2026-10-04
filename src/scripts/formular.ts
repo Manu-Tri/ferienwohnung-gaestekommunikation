@@ -177,6 +177,27 @@ function anliegenWaehlen(wert: string | null) {
 }
 
 document.querySelectorAll<HTMLFormElement>("form.anfrage").forEach(einrichten);
+
+// Wunschpaket aus dem Abschnitt „Ganz nach Ihren Bedürfnissen“ übernehmen
+document.addEventListener("wunschpaket", (e) => {
+  const aufgaben = (e as CustomEvent<string[]>).detail;
+  document.querySelectorAll<HTMLFormElement>("form.anfrage").forEach((form) => {
+    const feld = form.querySelector<HTMLInputElement>("[data-wunschpaket]");
+    const box = form.querySelector<HTMLElement>("[data-wunschpaket-box]");
+    const liste = form.querySelector<HTMLElement>("[data-wunschpaket-liste]");
+    if (feld) feld.value = aufgaben.join("; ");
+    if (liste) {
+      liste.replaceChildren(
+        ...aufgaben.map((a) => {
+          const li = document.createElement("li");
+          li.textContent = a;
+          return li;
+        }),
+      );
+    }
+    if (box) box.hidden = aufgaben.length === 0;
+  });
+});
 anliegenWaehlen(new URLSearchParams(window.location.search).get("anliegen"));
 document.addEventListener("click", (e) => {
   const link = (e.target as HTMLElement).closest<HTMLElement>("[data-anliegen]");

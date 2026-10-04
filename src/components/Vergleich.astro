@@ -1,41 +1,125 @@
 ---
+/** Wunschpaket: Besucher schalten ein, welche Aufgaben sie abgeben möchten. */
 import { site } from "../config/laden";
 const v = site.vergleich;
+const gesamt = v.zeilen.length;
+const startAnzahl = v.zeilen.filter((z) => z.wer === "wir").length;
+const zusammenfassung = (anzahl: number) =>
+  v.zusammenfassung.replace("{anzahl}", String(anzahl)).replace("{gesamt}", String(gesamt));
 ---
 
-<section class="abschnitt" aria-labelledby="vergleich-titel">
+<section id="wunschpaket" class="abschnitt" aria-labelledby="wunschpaket-titel">
   <div class="behaelter">
-    <h2 id="vergleich-titel" class="h2 reveal max-w-3xl">{v.titel}</h2>
-    <div class="karte reveal mt-12 overflow-hidden">
-      <table class="w-full border-collapse text-left">
-        <caption class="sr-only">{v.beschriftung}</caption>
-        <thead class="bg-karte-2 text-sm">
-          <tr>
-            <th scope="col" class="px-5 py-4 font-semibold md:px-8">{v.spalte_aufgabe}</th>
-            <th scope="col" class="px-5 py-4 font-semibold md:px-8">{v.spalte_zustaendig}</th>
-          </tr>
-        </thead>
-        <tbody>
+    <div class="max-w-3xl">
+      <h2 id="wunschpaket-titel" class="h2 reveal">{v.titel}</h2>
+      <p class="reveal mt-5 text-lg text-leise">{v.intro}</p>
+    </div>
+
+    <div
+      class="wunschpaket karte reveal mt-12 overflow-hidden"
+      data-zusammenfassung={v.zusammenfassung}
+      data-gesamt={gesamt}
+      data-leer={v.leer}
+    >
+      <fieldset>
+        <legend class="sr-only">{v.beschriftung}</legend>
+        <ul class="divide-y divide-linie">
           {
-            v.zeilen.map((zeile) => (
-              <tr class="border-t border-linie align-top">
-                <th scope="row" class="px-5 py-4 font-normal md:px-8">{zeile.aufgabe}</th>
-                <td class="px-5 py-4 md:px-8">
-                  <span
-                    class:list={[
-                      "inline-block rounded-full px-3 py-1 text-sm font-semibold whitespace-nowrap",
-                      zeile.wer === "wir" ? "bg-akzent text-auf-akzent" : "bg-karte-2 text-text",
-                    ]}
-                  >
-                    {zeile.wer === "wir" ? site.marke.name : "Sie"}
+            v.zeilen.map((zeile, i) => (
+              <li>
+                <label class="flex min-h-16 cursor-pointer items-center gap-4 px-5 py-4 transition-colors hover:bg-flaeche md:px-8">
+                  <span class="flex-1 font-medium">{zeile.aufgabe}</span>
+                  <span class="status hidden min-w-28 text-right text-sm whitespace-nowrap text-leise sm:block" aria-hidden="true">
+                    <span class="status-sie">{v.label_sie}</span>
+                    <span class="status-wir font-semibold text-akzent-text">{v.label_wir}</span>
                   </span>
-                  {zeile.hinweis && <span class="mt-1 block text-sm text-leise">{zeile.hinweis}</span>}
-                </td>
-              </tr>
+                  <input
+                    type="checkbox"
+                    role="switch"
+                    name="aufgabe"
+                    value={zeile.aufgabe}
+                    checked={zeile.wer === "wir"}
+                    class="schalter"
+                    id={`aufgabe-${i}`}
+                  />
+                </label>
+              </li>
             ))
           }
-        </tbody>
-      </table>
+        </ul>
+      </fieldset>
+
+      <div class="flex flex-col gap-4 border-t border-linie bg-akzent-hell px-5 py-6 sm:flex-row sm:items-center sm:justify-between md:px-8">
+        <div>
+          <p class="font-semibold" data-paket-text aria-live="polite">{zusammenfassung(startAnzahl)}</p>
+          <p class="mt-1 text-sm text-leise">{v.cta_hinweis}</p>
+        </div>
+        <a href="#anfrage" data-anliegen="test" data-paket-senden class="knopf knopf-primaer shrink-0">{v.cta}</a>
+      </div>
     </div>
   </div>
 </section>
+
+<style>
+  /* Kippschalter */
+  .schalter {
+    appearance: none;
+    flex-shrink: 0;
+    position: relative;
+    width: 3.25rem;
+    height: 1.9rem;
+    border-radius: 999px;
+    background: var(--rahmen);
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  .schalter::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: calc(1.9rem - 6px);
+    height: calc(1.9rem - 6px);
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.25);
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .schalter:checked {
+    background: var(--akzent);
+  }
+  .schalter:checked::after {
+    transform: translateX(1.35rem);
+  }
+  .status-wir,
+  label:has(.schalter:checked) .status-sie {
+    display: none;
+  }
+  label:has(.schalter:checked) .status-wir {
+    display: inline;
+  }
+  label:has(.schalter:checked) {
+    background: color-mix(in srgb, var(--akzent-hell) 45%, transparent);
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>(".wunschpaket").forEach((box) => {
+    const text = box.querySelector<HTMLElement>("[data-paket-text]")!;
+    const vorlage = box.dataset.zusammenfassung ?? "";
+    const gesamt = box.dataset.gesamt ?? "";
+    const auswahl = () =>
+      Array.from(box.querySelectorAll<HTMLInputElement>("input[name=aufgabe]:checked")).map((e) => e.value);
+
+    const aktualisieren = () => {
+      const anzahl = auswahl().length;
+      text.textContent = anzahl === 0 ? (box.dataset.leer ?? "") : vorlage.replace("{anzahl}", String(anzahl)).replace("{gesamt}", gesamt);
+    };
+    box.addEventListener("change", aktualisieren);
+
+    // Auswahl ins Anfrageformular übernehmen
+    box.querySelector("[data-paket-senden]")?.addEventListener("click", () => {
+      document.dispatchEvent(new CustomEvent("wunschpaket", { detail: auswahl() }));
+    });
+  });
+</script>

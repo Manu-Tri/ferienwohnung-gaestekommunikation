@@ -1,30 +1,51 @@
 ---
 import { site } from "../config/laden";
 const c = site.chat_demo;
+/** Die ersten zwei Nachrichten sind sofort sichtbar, die weiteren laufen beim Scrollen ein. */
+const SOFORT = 2;
 ---
 
-<figure class="chat mx-auto w-full max-w-md" aria-label={`${c.hinweis}: Gästenachricht und Antwort`}>
+<figure class="chat mx-auto w-full max-w-md" aria-label={`${c.hinweis}: Gespräch mit einem Gast`}>
   <div class="karte overflow-hidden shadow-[0_24px_60px_-28px_rgb(154_52_18/0.22)]">
     <div class="flex items-center gap-3 border-b border-linie px-5 py-3.5">
-      <span class="grid size-9 place-items-center rounded-full bg-karte-2 text-sm font-semibold text-leise" aria-hidden="true">FW</span>
+      <span class="grid size-9 place-items-center rounded-full bg-karte-2 text-sm font-semibold text-leise" aria-hidden="true">{c.gast_kuerzel}</span>
       <div class="leading-tight">
         <p class="text-[0.95rem] font-semibold">{c.gast_name}</p>
         <p class="text-xs text-leise">{c.kopf}</p>
       </div>
     </div>
-    <div class="space-y-4 px-5 py-6">
-      <div class="max-w-[85%]">
-        <p class="rounded-2xl rounded-bl-md bg-karte-2 px-4 py-3 text-[0.95rem] leading-snug">{c.gast_text}</p>
-        <p class="mt-1.5 pl-1 text-xs text-leise"><time>{c.gast_zeit}</time></p>
-      </div>
-      <div class="relative">
-        <div class="tippen absolute top-0 right-0 rounded-2xl rounded-br-md bg-akzent-hell px-4 py-3" aria-hidden="true">
-          <span></span><span></span><span></span>
-        </div>
-        <div class="antwort ml-auto max-w-[88%]">
-          <p class="rounded-2xl rounded-br-md bg-akzent-hell px-4 py-3 text-[0.95rem] leading-snug">{c.antwort_text}</p>
-          <p class="mt-1.5 pr-1 text-right text-xs text-leise"><time>{c.antwort_zeit}</time></p>
-        </div>
+    <div class="chat-verlauf space-y-4 px-5 py-6">
+      {
+        c.nachrichten.map((n, i) =>
+          n.von === "trenner" ? (
+            <p class="chat-nachricht py-1 text-center text-xs font-medium text-leise" data-spaeter={i >= SOFORT ? "" : undefined}>
+              <span class="rounded-full bg-karte-2 px-3 py-1">{n.text}</span>
+            </p>
+          ) : (
+            <div
+              class:list={["chat-nachricht", n.von === "wir" ? "ml-auto max-w-[88%]" : "max-w-[85%]"]}
+              data-spaeter={i >= SOFORT ? "" : undefined}
+              data-von={n.von}
+            >
+              <p
+                class:list={[
+                  "rounded-2xl px-4 py-3 text-[0.95rem] leading-snug",
+                  n.von === "wir" ? "rounded-br-md bg-akzent-hell" : "rounded-bl-md bg-karte-2",
+                ]}
+              >
+                {n.text}
+              </p>
+              {n.zeit && (
+                <p class:list={["mt-1.5 text-xs text-leise", n.von === "wir" ? "pr-1 text-right" : "pl-1"]}>
+                  <time>{n.zeit}</time>
+                </p>
+              )}
+            </div>
+          ),
+        )
+      }
+      <div class="chat-tippen ml-auto w-fit rounded-2xl rounded-br-md bg-akzent-hell px-4 py-3" aria-hidden="true" hidden>
+        <span></span><span></span><span></span>
       </div>
     </div>
   </div>
@@ -32,36 +53,40 @@ const c = site.chat_demo;
 </figure>
 
 <style>
-  .tippen {
+  /* Mit JavaScript und erlaubter Bewegung: feste Höhe, neue Nachrichten schieben alte nach oben.
+     So verschiebt sich das Layout der Seite nicht. Ohne JavaScript sind alle Nachrichten sichtbar. */
+  :global(.reveal-an) .chat-verlauf {
+    height: 25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+    mask-image: linear-gradient(to bottom, transparent 0, #000 2.5rem);
+  }
+  :global(.reveal-an) .chat-nachricht[data-spaeter] {
     display: none;
   }
-  .tippen span {
+  :global(.reveal-an) .chat-nachricht.eingelaufen {
+    display: block;
+    animation: einlaufen 0.45s ease-out both;
+  }
+  .chat-tippen[hidden] {
+    display: none;
+  }
+  .chat-tippen span {
     display: inline-block;
     width: 6px;
     height: 6px;
     margin: 0 2px;
     border-radius: 50%;
     background: var(--akzent-text);
+    animation: punkt 0.9s infinite ease-in-out;
   }
-  /* Kurze Tippanimation ohne Layoutverschiebung, nur wenn Bewegung erlaubt ist */
-  @media (prefers-reduced-motion: no-preference) {
-    .tippen {
-      display: block;
-      animation: ausblenden 0.2s 1.5s forwards;
-    }
-    .tippen span {
-      animation: punkt 0.9s infinite ease-in-out;
-    }
-    .tippen span:nth-child(2) {
-      animation-delay: 0.15s;
-    }
-    .tippen span:nth-child(3) {
-      animation-delay: 0.3s;
-    }
-    .antwort {
-      opacity: 0;
-      animation: erscheinen 0.45s 1.6s ease-out forwards;
-    }
+  .chat-tippen span:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+  .chat-tippen span:nth-child(3) {
+    animation-delay: 0.3s;
   }
   @keyframes punkt {
     0%,
@@ -74,16 +99,10 @@ const c = site.chat_demo;
       opacity: 0.9;
     }
   }
-  @keyframes ausblenden {
-    to {
-      opacity: 0;
-      visibility: hidden;
-    }
-  }
-  @keyframes erscheinen {
+  @keyframes einlaufen {
     from {
       opacity: 0;
-      transform: translateY(6px);
+      transform: translateY(10px) scale(0.98);
     }
     to {
       opacity: 1;
@@ -91,3 +110,59 @@ const c = site.chat_demo;
     }
   }
 </style>
+
+<script>
+  // Nachrichten nacheinander einblenden, während der Besucher scrollt.
+  // Scrollt er nicht, laufen sie nach einer Pause von selbst ein.
+  const SCHRITT_PX = 70;
+  const PAUSE_MS = 4500;
+
+  document.querySelectorAll<HTMLElement>(".chat").forEach((chat) => {
+    if (!document.documentElement.classList.contains("reveal-an")) return;
+    const spaeter = Array.from(chat.querySelectorAll<HTMLElement>(".chat-nachricht[data-spaeter]"));
+    const tippen = chat.querySelector<HTMLElement>(".chat-tippen");
+    if (!spaeter.length) return;
+
+    let gezeigt = 0;
+    let laeuft = false;
+    let timer = 0;
+
+    const naechste = () => {
+      if (laeuft || gezeigt >= spaeter.length) return;
+      const el = spaeter[gezeigt++];
+      const zeigen = () => {
+        if (tippen) tippen.hidden = true;
+        el.classList.add("eingelaufen");
+        laeuft = false;
+        planen();
+        // Wurde inzwischen weiter gescrollt, die nächste Nachricht kurz danach nachholen
+        window.setTimeout(beimScrollen, 350);
+      };
+      laeuft = true;
+      // Vor unseren Antworten kurz „schreibt …“ anzeigen
+      if (el.dataset.von === "wir" && tippen) {
+        tippen.hidden = false;
+        window.setTimeout(zeigen, 650);
+      } else {
+        zeigen();
+      }
+    };
+
+    const planen = () => {
+      window.clearTimeout(timer);
+      if (gezeigt < spaeter.length) timer = window.setTimeout(naechste, PAUSE_MS);
+    };
+
+    const beimScrollen = () => {
+      const box = chat.getBoundingClientRect();
+      // Zählung beginnt an der Scrollposition, an der der Chat vollständig im Bild ist
+      const start = Math.max(0, box.bottom + window.scrollY - window.innerHeight);
+      const ziel = Math.floor((window.scrollY - start) / SCHRITT_PX);
+      if (ziel > gezeigt) naechste();
+    };
+
+    window.addEventListener("scroll", beimScrollen, { passive: true });
+    beimScrollen();
+    timer = window.setTimeout(naechste, PAUSE_MS);
+  });
+</script>

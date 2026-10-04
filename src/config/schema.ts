@@ -43,11 +43,11 @@ export const siteSchema = z.object({
   chat_demo: z.object({
     kopf: text,
     gast_name: text,
-    gast_zeit: text,
-    gast_text: text,
-    antwort_zeit: text,
-    antwort_text: text,
+    gast_kuerzel: text,
     hinweis: text,
+    nachrichten: z
+      .array(z.object({ von: z.enum(["gast", "wir", "trenner"]), zeit: text.optional(), text: text }))
+      .min(2),
   }),
   problem: z.object({ titel: text, karten: z.array(karte) }),
   rechner: z.object({
@@ -75,10 +75,15 @@ export const siteSchema = z.object({
   leistungen: z.object({ titel: text, karten: z.array(karte) }),
   vergleich: z.object({
     titel: text,
+    intro: text,
     beschriftung: text,
-    spalte_aufgabe: text,
-    spalte_zustaendig: text,
-    zeilen: z.array(z.object({ aufgabe: text, wer: z.enum(["sie", "wir"]), hinweis: text.optional() })),
+    label_sie: text,
+    label_wir: text,
+    zusammenfassung: text,
+    leer: text,
+    cta: text,
+    cta_hinweis: text,
+    zeilen: z.array(z.object({ aufgabe: text, wer: z.enum(["sie", "wir"]) })).min(1),
   }),
   ergebnisse: z.object({
     titel: text,
@@ -123,6 +128,8 @@ export const siteSchema = z.object({
     label_email: text,
     label_telefon: text,
     label_inserat: text,
+    label_wunschpaket: text,
+    wunschpaket_aendern: text,
     hinweis_inserat_check: text,
     weiter: text,
     zurueck: text,

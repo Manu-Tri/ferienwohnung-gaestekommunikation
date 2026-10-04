@@ -12,8 +12,9 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" v
   <rect width="1200" height="630" fill="#fffaf3"/>
   <rect x="0" y="0" width="16" height="630" fill="#c2410c"/>
   <g font-family="Figtree, Helvetica, Arial, sans-serif" fill="#2a1f17">
-    <rect x="88" y="84" width="56" height="56" rx="15" fill="#c2410c"/>
-    <path d="M103 104a5 5 0 0 1 5-5h14a5 5 0 0 1 5 5v9a5 5 0 0 1-5 5h-8l-6 6v-6a5 5 0 0 1-5-5z" fill="#fff"/>
+    <svg x="88" y="84" width="56" height="56" viewBox="0 0 32 32">
+      <path fill="#c2410c" fill-rule="evenodd" d="M14.6 2.9Q16 1.9 17.4 2.9L28.9 10.6Q30 11.4 30 12.8V17a7 7 0 0 1-7 7h-7c-2.5 0-3 2-4.5 4-.7 1-1.3 2-1.5 3H4.5c1.5-2.5 4.5-4 4.5-7a7 7 0 0 1-7-7v-4.2q0-1.4 1.1-2.2zM9.5 15a2 2 0 0 1 4 0v6.5h-4zM18 12h3v3h-3zM22 12h3v3h-3zM18 16h3v3h-3zM22 16h3v3h-3z"/>
+    </svg>
     <text x="164" y="123" font-size="32" font-weight="600">${marke}</text>
     <text x="88" y="270" font-size="66" font-weight="700" letter-spacing="-1.5">Ihre Gäste bekommen</text>
     <text x="88" y="350" font-size="66" font-weight="700" letter-spacing="-1.5">immer eine Antwort.</text>

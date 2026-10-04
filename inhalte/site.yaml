@@ -86,6 +86,7 @@ seo:
 navigation:
   - { text: "Betreuung", ziel: "#betreuung" }
   - { text: "Ablauf", ziel: "#ablauf" }
+  - { text: "Wunschpaket", ziel: "#wunschpaket" }
   - { text: "Leistungen", ziel: "#leistungen" }
   - { text: "Preise", ziel: "#preise" }
   - { text: "Für Agenturen", ziel: "#agenturen" }
@@ -111,11 +112,28 @@ hero:
 chat_demo:
   kopf: "Nachrichten · Ferienwohnung Moselblick"
   gast_name: "Familie Weber"
-  gast_zeit: "So, 21:47"
-  gast_text: "Hallo, wir stehen vor der Tür und der Schlüsselsafe geht nicht auf. Was können wir tun?"
-  antwort_zeit: "So, 21:47"
-  antwort_text: "Guten Abend Frau Weber, das tut mir leid. Drücken Sie bitte nach dem Code einmal fest auf die Taste unten rechts, dann öffnet die Klappe. Falls es nicht klappt, ruft Sie in 10 Minuten unser Partner vor Ort an."
+  gast_kuerzel: "FW"
   hinweis: "Beispieldarstellung"
+  # Die ersten zwei Nachrichten sind sofort sichtbar, die weiteren laufen beim Scrollen ein.
+  # von: "gast" = Nachricht des Gastes, "wir" = unsere Antwort, "trenner" = Zwischenzeile (z. B. neuer Tag)
+  nachrichten:
+    - von: "gast"
+      zeit: "So, 21:47"
+      text: "Hallo, wir stehen vor der Tür und der Schlüsselsafe geht nicht auf. Was können wir tun?"
+    - von: "wir"
+      zeit: "So, 21:47"
+      text: "Guten Abend Frau Weber, das tut mir leid. Drücken Sie bitte nach dem Code einmal fest auf die Taste unten rechts, dann öffnet die Klappe. Falls es nicht klappt, ruft Sie in 10 Minuten unser Partner vor Ort an."
+    - von: "gast"
+      zeit: "So, 21:49"
+      text: "Hat geklappt, danke! Gibt es in der Nähe noch etwas zu essen?"
+    - von: "wir"
+      zeit: "So, 21:49"
+      text: "Wie schön, willkommen! Die Gaststätte an der Ecke hat bis 22:30 Uhr warme Küche, 3 Minuten zu Fuß. Einen schönen Abend!"
+    - von: "trenner"
+      text: "Donnerstag, Abreisetag"
+    - von: "wir"
+      zeit: "Do, 10:05"
+      text: "Vielen Dank für Ihren Besuch, Familie Weber. Gute Heimreise! Wir würden uns sehr über eine kurze Bewertung freuen."
 
 problem:
   titel: "Gästekommunikation hält sich nicht an Ihre Arbeitszeiten."
@@ -199,20 +217,26 @@ leistungen:
       text: "Jeden Abend eine E-Mail: was gefragt wurde, was wir geantwortet haben, was offen ist. Einmal im Monat: was Gäste in Bewertungen loben und was sie stört."
 
 vergleich:
-  titel: "Was Sie behalten. Was wir übernehmen."
-  beschriftung: "Aufgabenteilung zwischen Ihnen und {marke}"
-  spalte_aufgabe: "Aufgabe"
-  spalte_zustaendig: "Zuständig"
+  titel: "Ganz nach Ihren Bedürfnissen."
+  intro: "Sie entscheiden, was Sie selbst machen und was Sie abgeben. Stellen Sie Ihr Wunschpaket zusammen, auch unterschiedlich für einzelne Objekte. Wir schicken Ihnen ein passendes Angebot."
+  beschriftung: "Aufgaben, die Sie an {marke} abgeben können"
+  label_sie: "Bei Ihnen"
+  label_wir: "Übernimmt {marke}"
+  # {anzahl} und {gesamt} werden automatisch ersetzt
+  zusammenfassung: "{anzahl} von {gesamt} Aufgaben geben Sie ab."
+  leer: "Noch nichts ausgewählt. Schalten Sie die Aufgaben ein, die wir übernehmen sollen."
+  cta: "Wunschpaket anfragen"
+  cta_hinweis: "Ihre Auswahl wird mit der Anfrage gesendet. Sie können sie danach jederzeit ändern."
+  # wer: "wir" = am Anfang eingeschaltet, "sie" = am Anfang ausgeschaltet
   zeilen:
-    - { aufgabe: "Preise, Kalender und Hausregeln festlegen", wer: "sie" }
-    - { aufgabe: "Buchungsanfragen annehmen oder ablehnen", wer: "sie", hinweis: "auf Wunsch nach Ihren Regeln wir" }
-    - { aufgabe: "Erstattungen und Kulanz entscheiden", wer: "sie" }
     - { aufgabe: "Gästefragen beantworten", wer: "wir" }
     - { aufgabe: "Check-in-Infos und Erinnerungen versenden", wer: "wir" }
     - { aufgabe: "Notfälle an Partner vor Ort weitergeben", wer: "wir" }
     - { aufgabe: "Nachkontakt und Bitte um Bewertung", wer: "wir" }
     - { aufgabe: "Bewertungen beantworten", wer: "wir" }
-    - { aufgabe: "Reinigung und Instandhaltung organisieren", wer: "sie", hinweis: "oder Ihre Partner vor Ort" }
+    - { aufgabe: "Buchungsanfragen nach Ihren Regeln annehmen oder ablehnen", wer: "sie" }
+    - { aufgabe: "Reinigung und Übergaben mit Ihren Partnern abstimmen", wer: "sie" }
+    - { aufgabe: "Preise, Kalender und Hausregeln pflegen", wer: "sie" }
 
 # Nur echte, belegbare Zahlen und Kundenstimmen mit dokumentierter Einwilligung.
 # Solange beide Listen leer sind ( [] ), wird der Abschnitt nicht angezeigt.
@@ -304,6 +328,8 @@ anfrage:
   label_email: "E-Mail-Adresse"
   label_telefon: "Telefon (optional)"
   label_inserat: "Link zu Ihrem Inserat (optional)"
+  label_wunschpaket: "Ihr Wunschpaket wird mitgesendet:"
+  wunschpaket_aendern: "Auswahl ändern"
   hinweis_inserat_check: "Für den Inserats-Check brauchen wir den öffentlichen Link zu Ihrem Inserat."
   weiter: "Weiter"
   zurueck: "Zurück"
