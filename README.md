@@ -1,4 +1,4 @@
-# Landingpage [MARKENNAME]
+# Landingpage Replee
 
 Statische Lead-Seite für Remote-Gästekommunikation (Airbnb, Booking.com).
 Astro 7, Tailwind CSS 4, keine Cookies, kein Tracking, Schrift (Figtree) lokal. Helles, warmes Farbschema.

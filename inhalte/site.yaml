@@ -22,7 +22,7 @@
 # =====================================================================
 
 marke:
-  name: "[MARKENNAME]"
+  name: "Replee"
   # Vollständige Adresse der Website, ohne Schrägstrich am Ende
   domain: "https://www.example.de"
   email: "[E-MAIL-ADRESSE]"
