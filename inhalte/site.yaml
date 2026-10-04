@@ -190,16 +190,17 @@ gaestereise:
 
 ablauf:
   kicker: "So einfach geht's"
-  titel: "In 3 Schritten startklar. Ihr Aufwand: etwa 45 Minuten."
+  titel: "In 3 Schritten startklar. Den Rest übernehmen wir."
+  # "hinweis" ist das kleine Etikett oben rechts (leer lassen = kein Etikett)
   schritte:
     - titel: "Co-Host-Einladung"
-      dauer: "10 Minuten"
-      text: "Sie laden uns auf Airbnb als Co-Host mit der Berechtigung „Kalender und Postfach“ ein. Auf Booking.com legen Sie einen eigenen Benutzer für uns an. Ihre Zugangsdaten bleiben bei Ihnen."
-    - titel: "Wissensbasis zu Ihrer Unterkunft"
-      dauer: "30 Minuten"
-      text: "Erzählen Sie uns von Ihrer Unterkunft: Check-in, Hausregeln, WLAN, Parken, Ansprechpartner vor Ort. Gern auch am Telefon. Daraus wird unser Spickzettel für jede Antwort."
+      hinweis: "Wir helfen dabei"
+      text: "Sie laden uns auf Airbnb als Co-Host mit der Berechtigung „Kalender und Postfach“ ein, auf Booking.com als eigenen Benutzer. Wir zeigen Ihnen, wo Sie klicken müssen. Ihre Zugangsdaten bleiben bei Ihnen."
+    - titel: "Wir lernen Ihre Unterkunft kennen"
+      hinweis: "Wir machen die Arbeit"
+      text: "Wir rufen Sie kurz an und fragen alles ab, was Gäste wissen wollen: Check-in, Hausregeln, WLAN, Parken, Ansprechpartner vor Ort. Daraus schreiben wir unseren Spickzettel für jede Antwort."
     - titel: "Wir übernehmen"
-      dauer: "ab dem vereinbarten Tag"
+      hinweis: "Sie lehnen sich zurück"
       text: "Ab jetzt antworten wir Ihren Gästen. Sie bekommen abends eine kurze Zusammenfassung und hören nur dann von uns, wenn Sie wirklich entscheiden müssen."
 
 leistungen:

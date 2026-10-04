@@ -15,7 +15,7 @@ const a = site.ablauf;
               <span class="grid size-11 place-items-center rounded-full bg-akzent text-lg font-bold text-white" aria-hidden="true">
                 {i + 1}
               </span>
-              <span class="rounded-full bg-akzent-hell px-3 py-1 text-sm font-semibold text-akzent-text">{schritt.dauer}</span>
+              {schritt.hinweis && <span class="rounded-full bg-akzent-hell px-3 py-1 text-sm font-semibold text-akzent-text">{schritt.hinweis}</span>}
             </div>
             <h3 class="mt-5 text-xl">
               <span class="sr-only">Schritt {i + 1}: </span>

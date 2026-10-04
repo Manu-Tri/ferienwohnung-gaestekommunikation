@@ -76,7 +76,7 @@ export const siteSchema = z.object({
     phasen: z.array(z.object({ titel: text, punkte: liste })),
   }),
   ablauf: z.object({
-    kicker: text.optional(), titel: text, schritte: z.array(karte.extend({ dauer: text })) }),
+    kicker: text.optional(), titel: text, schritte: z.array(karte.extend({ hinweis: text.optional() })) }),
   leistungen: z.object({
     kicker: text.optional(), titel: text, karten: z.array(karte) }),
   vergleich: z.object({
