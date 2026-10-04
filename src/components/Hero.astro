@@ -15,7 +15,7 @@ const satz1 = trenner > 0 ? titel.slice(0, trenner + 1) : titel;
 const satz2 = trenner > 0 ? titel.slice(trenner + 2) : "";
 ---
 
-<section id="hero" class="behaelter grid items-center gap-10 pt-8 pb-14 md:pt-16 md:pb-24 lg:grid-cols-[1.3fr_1fr] lg:gap-14">
+<section id="hero" class="behaelter grid items-center gap-10 pt-8 pb-10 md:pt-14 md:pb-16 lg:grid-cols-[1.3fr_1fr] lg:gap-14">
   <div>
     {
       kicker && (
@@ -48,15 +48,16 @@ const satz2 = trenner > 0 ? titel.slice(trenner + 2) : "";
       }
     </ul>
   </div>
-  <div class="relative">
+  <div>
     <ChatDemo />
     {
       site.hero.notiz && (
-        <p class="hand pointer-events-none absolute -bottom-3 left-2 flex max-w-[15rem] -rotate-3 items-end gap-1 text-[1.35rem] leading-tight text-akzent-text sm:-left-6 lg:-bottom-6 lg:-left-16">
-          <svg viewBox="0 0 60 40" width="46" height="31" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true" class="mb-3 shrink-0 -scale-x-100 rotate-12">
-            <path d="M4 34C18 30 36 22 50 6M50 6l-10 2M50 6l-1 10" />
+        <p class="hand mt-1 mr-3 ml-auto flex w-fit max-w-[17rem] -rotate-2 items-end gap-1.5 text-right text-[1.4rem] leading-[1.1] text-akzent-text sm:mr-8">
+          <span>{site.hero.notiz}</span>
+          <svg viewBox="0 0 48 44" width="40" height="37" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="mb-4 shrink-0">
+            <path d="M4 40C22 38 36 28 42 7" />
+            <path d="M42 7l-8.5 4.5M42 7l2.5 9.5" />
           </svg>
-          {site.hero.notiz}
         </p>
       )
     }

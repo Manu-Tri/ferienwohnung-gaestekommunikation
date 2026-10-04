@@ -110,11 +110,11 @@
     }
   }
   .abschnitt {
-    padding-block: 3.75rem;
+    padding-block: 3rem;
   }
   @media (min-width: 768px) {
     .abschnitt {
-      padding-block: 6.5rem;
+      padding-block: 4.75rem;
     }
   }
   .h2 {
