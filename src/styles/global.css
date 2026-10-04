@@ -13,12 +13,12 @@
   --text-leise: #55605a;
   --linie: #e3eae2;
   --rahmen: #8a958e;
-  --akzent: #1a7f45;
-  --akzent-stark: #146c39;
+  --akzent: #0d7a3a;
+  --akzent-stark: #095f2c;
   --auf-akzent: #ffffff;
-  --akzent-hell: #e6f6e4;
-  --akzent-leuchtend: #3ccf75;
-  --akzent-text: #146c39;
+  --akzent-hell: #dff5e5;
+  --akzent-leuchtend: #1fc45f;
+  --akzent-text: #0a6630;
   --tinte: #17201b;
   --fehler: #b42318;
   --fokus: #17201b;
@@ -52,8 +52,8 @@
   }
   body {
     background:
-      radial-gradient(56rem 34rem at 88% -6rem, #d9f3dc 0%, transparent 68%),
-      radial-gradient(38rem 26rem at -12% 12rem, #eef9ec 0%, transparent 70%),
+      radial-gradient(56rem 34rem at 88% -6rem, #cdf0d6 0%, transparent 68%),
+      radial-gradient(38rem 26rem at -12% 12rem, #e8f8ec 0%, transparent 70%),
       var(--flaeche);
     background-repeat: no-repeat;
     color: var(--text);
@@ -155,7 +155,7 @@
     color: var(--auf-akzent);
     box-shadow:
       inset 0 -2px 0 rgb(0 0 0 / 0.08),
-      0 6px 18px -8px rgb(26 127 69 / 0.6);
+      0 6px 18px -8px rgb(13 122 58 / 0.55);
   }
   .knopf-primaer:hover {
     background: var(--akzent-stark);

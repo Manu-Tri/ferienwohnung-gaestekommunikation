@@ -25,7 +25,7 @@ const symbole = [
         {
           g.phasen.map((phase, i) => (
             <li class="phase group flex flex-col items-center text-center md:items-stretch md:text-left" style={`--i:${i}`}>
-              <span class="phase-symbol relative z-10 mx-auto grid size-14 place-items-center rounded-full bg-akzent text-auf-akzent ring-4 ring-flaeche shadow-[0_8px_24px_-8px_rgb(26_127_69/0.7)]">
+              <span class="phase-symbol relative z-10 mx-auto grid size-14 place-items-center rounded-full bg-akzent text-auf-akzent ring-4 ring-flaeche shadow-[0_8px_24px_-8px_rgb(13_122_58/0.7)]">
                 <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
                   <path d={symbole[i % symbole.length]} fill="currentColor" />
                 </svg>
@@ -116,10 +116,10 @@ const symbole = [
   }
   @keyframes puls {
     0% {
-      box-shadow: 0 0 0 0 rgb(60 207 117 / 0.55);
+      box-shadow: 0 0 0 0 rgb(31 196 95 / 0.55);
     }
     100% {
-      box-shadow: 0 0 0 18px rgb(60 207 117 / 0);
+      box-shadow: 0 0 0 18px rgb(31 196 95 / 0);
     }
   }
 </style>

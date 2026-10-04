@@ -6,7 +6,7 @@ const a = site.abschluss;
 
 <section class="abschnitt" aria-labelledby="abschluss-titel">
   <div class="behaelter">
-    <div class="abschluss reveal relative overflow-hidden rounded-[1.75rem] bg-tinte px-6 py-14 text-center text-white md:px-16 md:py-20">
+    <div class="abschluss reveal relative overflow-hidden rounded-[1.75rem] bg-[#0b3a21] px-6 py-14 text-center text-white md:px-16 md:py-20">
       <div class="pointer-events-none absolute -top-24 -right-24 size-72 rounded-full bg-akzent-leuchtend opacity-30 blur-3xl" aria-hidden="true"></div>
       <LogoZeichen groesse={52} class="relative mx-auto [--logo-blase:#fff] [--logo-haken:var(--akzent)]" />
       <h2 id="abschluss-titel" class="h2 relative mx-auto mt-6 max-w-2xl">{a.titel}</h2>
@@ -21,6 +21,15 @@ const a = site.abschluss;
 
 <style>
   .abschluss {
-    --fokus: #3ccf75;
+    --fokus: #1fc45f;
+  }
+  /* Auf dem dunklen Grün: Leuchtgrün mit dunkler Schrift, damit der Knopf heraussticht */
+  .abschluss .knopf-primaer {
+    background: #1fc45f;
+    color: #062814;
+    box-shadow: 0 8px 24px -10px rgb(31 196 95 / 0.8);
+  }
+  .abschluss .knopf-primaer:hover {
+    background: #3ad677;
   }
 </style>
