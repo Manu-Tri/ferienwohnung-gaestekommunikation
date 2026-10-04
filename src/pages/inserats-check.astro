@@ -5,6 +5,7 @@ import Anfrageformular from "../components/Anfrageformular.astro";
 import FAQ from "../components/FAQ.astro";
 import StickyCTA from "../components/StickyCTA.astro";
 import Haken from "../components/Haken.astro";
+import Persoenlich from "../components/Persoenlich.astro";
 import { site } from "../config/laden";
 import { faqSeite, service } from "../config/jsonld";
 
@@ -49,6 +50,7 @@ const jsonld = [service(site.marke.einsatzgebiet, c.seo_beschreibung, url), faqS
     </ul>
   </section>
 
+  <Persoenlich />
   <Anfrageformular titel={c.formular_titel} anliegenFest="check" />
   <FAQ fragen={c.faq} />
   <StickyCTA slot="ende" nurCheck />

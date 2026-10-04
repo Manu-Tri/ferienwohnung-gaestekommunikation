@@ -1,0 +1,63 @@
+---
+/** Wer hinter dem Angebot steht: Foto, persönliche Worte, Unterschrift. */
+import { site } from "../config/laden";
+import { pfad } from "../config/pfad";
+import Haken from "./Haken.astro";
+const p = site.persoenlich;
+---
+
+{
+  p.sichtbar && (
+    <section id="team" class="abschnitt border-t border-linie bg-karte" aria-labelledby="team-titel">
+      <div class="behaelter">
+        <div class="reveal grid items-center gap-10 md:grid-cols-[minmax(0,20rem)_1fr] md:gap-14">
+          <div class="relative mx-auto w-full max-w-[14rem] md:max-w-none">
+            <div class="absolute -inset-3 -rotate-3 rounded-[2rem] bg-akzent-hell" aria-hidden="true" />
+            {p.foto ? (
+              <img
+                src={pfad(p.foto)}
+                alt={p.foto_alt}
+                width="640"
+                height="760"
+                loading="lazy"
+                decoding="async"
+                class="relative aspect-[4/5] w-full rounded-[1.75rem] object-cover shadow-[0_24px_50px_-30px_rgb(23_32_27/0.5)]"
+              />
+            ) : (
+              <div class="relative grid aspect-[4/5] w-full place-items-center rounded-[1.75rem] border-2 border-dashed border-rahmen bg-flaeche text-center text-leise">
+                <div>
+                  <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="mx-auto" aria-hidden="true">
+                    <path d="M4 8h3l2-2.5h6L17 8h3v11H4z" />
+                    <circle cx="12" cy="13" r="3.5" />
+                  </svg>
+                  <p class="mt-2 px-6 text-sm font-medium">[FOTO VON IHNEN ODER IHREM TEAM]</p>
+                </div>
+              </div>
+            )}
+            <p class="hand absolute -right-2 -bottom-5 rotate-[-4deg] rounded-xl bg-karte px-3 py-1.5 text-xl text-akzent-text shadow-md">
+              Hallo! 👋
+            </p>
+          </div>
+
+          <div>
+            {p.kicker && <p class="kicker">{p.kicker}</p>}
+            <h2 id="team-titel" class="h2 mt-3">{p.titel}</h2>
+            <div class="mt-5 space-y-4 text-lg text-leise">
+              {p.text.map((absatz) => <p>{absatz}</p>)}
+            </div>
+            <p class="hand mt-6 text-4xl text-text">{p.unterschrift}</p>
+            <p class="text-sm text-leise">{p.rolle}</p>
+            <ul class="mt-7 flex flex-wrap gap-2.5">
+              {p.versprechen.map((punkt) => (
+                <li class="flex items-center gap-2 rounded-full bg-akzent-hell px-3.5 py-2 text-[0.95rem] font-medium">
+                  <Haken />
+                  {punkt}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}

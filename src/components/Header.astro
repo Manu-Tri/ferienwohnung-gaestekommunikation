@@ -28,7 +28,7 @@ const ziel = (anker: string) => (istStart || !anker.startsWith("#") ? anker : pf
             <ul class="flex items-center gap-7 text-[0.95rem]">
               {navigation.map((punkt) => (
                 <li>
-                  <a href={ziel(punkt.ziel)} class="font-medium text-text no-underline decoration-akzent decoration-[3px] underline-offset-[6px] hover:underline">
+                  <a href={ziel(punkt.ziel)} class="font-medium text-text no-underline decoration-akzent-leuchtend decoration-[3px] underline-offset-[6px] hover:underline">
                     {punkt.text}
                   </a>
                 </li>

@@ -25,7 +25,7 @@ const symbole = [
         {
           g.phasen.map((phase, i) => (
             <li class="phase group flex flex-col items-center text-center md:items-stretch md:text-left" style={`--i:${i}`}>
-              <span class="phase-symbol relative z-10 mx-auto grid size-14 place-items-center rounded-full bg-akzent text-auf-akzent ring-4 ring-flaeche shadow-[0_8px_24px_-8px_rgb(201_138_0/0.8)]">
+              <span class="phase-symbol relative z-10 mx-auto grid size-14 place-items-center rounded-full bg-akzent text-auf-akzent ring-4 ring-flaeche shadow-[0_8px_24px_-8px_rgb(26_127_69/0.7)]">
                 <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
                   <path d={symbole[i % symbole.length]} fill="currentColor" />
                 </svg>
@@ -33,10 +33,10 @@ const symbole = [
               <div
                 class:list={[
                   "phase-karte karte mt-5 w-full flex-1 p-6 transition duration-300 group-hover:shadow-[0_20px_40px_-20px_rgb(28_26_23/0.25)] md:p-7",
-                  i === g.phasen.length - 1 && "border-2 border-tinte",
+                  i === g.phasen.length - 1 && "border-2 border-akzent",
                 ]}
               >
-                <p class="kicker !text-xs">Phase {i + 1}</p>
+                <p class="hand text-xl text-akzent-text">Phase {i + 1}</p>
                 <h3 class="mt-1 text-xl">{phase.titel}</h3>
                 <ul class="mt-5 space-y-3 text-left">
                   {phase.punkte.map((punkt, j) => (
@@ -116,10 +116,10 @@ const symbole = [
   }
   @keyframes puls {
     0% {
-      box-shadow: 0 0 0 0 rgb(245 184 46 / 0.7);
+      box-shadow: 0 0 0 0 rgb(60 207 117 / 0.55);
     }
     100% {
-      box-shadow: 0 0 0 18px rgb(245 184 46 / 0);
+      box-shadow: 0 0 0 18px rgb(60 207 117 / 0);
     }
   }
 </style>

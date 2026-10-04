@@ -40,7 +40,8 @@ export const siteSchema = z.object({
   navigation: z.array(z.object({ text: text, ziel: text })),
   cta: z.object({ test: text, test_kurz: text, check: text, check_kurz: text }),
   hero: z.object({
-    kicker: text.optional(), titel: text, unterzeile: text, vertrauen: liste }),
+    kicker: text.optional(),
+    notiz: text.optional(), titel: text, unterzeile: text, vertrauen: liste }),
   chat_demo: z.object({
     kopf: text,
     gast_name: text,
@@ -99,6 +100,17 @@ export const siteSchema = z.object({
       .nullish()
       .transform((v) => v ?? []),
   }),
+  persoenlich: z.object({
+    sichtbar: z.boolean(),
+    kicker: text.optional(),
+    titel: text,
+    text: liste,
+    unterschrift: text,
+    rolle: text,
+    foto: text,
+    foto_alt: text,
+    versprechen: liste,
+  }),
   preise_abschnitt: z.object({
     kicker: text.optional(),
     titel: text,
@@ -120,6 +132,7 @@ export const siteSchema = z.object({
     kicker: text.optional(), titel: text, text: text, punkte: liste, cta: text }),
   anfrage: z.object({
     kicker: text.optional(),
+    untertitel: text.optional(),
     titel: text,
     anliegen_frage: text,
     anliegen: z.object({ test: text, check: text, agentur: text }),

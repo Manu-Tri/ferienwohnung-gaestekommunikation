@@ -21,8 +21,8 @@ const satz2 = trenner > 0 ? titel.slice(trenner + 2) : "";
       kicker && (
         <p class="inline-flex items-center gap-2 rounded-full border border-linie bg-karte px-3.5 py-1.5 text-sm font-semibold shadow-sm">
           <span class="relative flex size-2.5" aria-hidden="true">
-            <span class="absolute inline-flex size-full animate-ping rounded-full bg-akzent opacity-75 motion-reduce:animate-none" />
-            <span class="relative inline-flex size-2.5 rounded-full bg-akzent-stark" />
+            <span class="absolute inline-flex size-full animate-ping rounded-full bg-akzent-leuchtend opacity-75 motion-reduce:animate-none" />
+            <span class="relative inline-flex size-2.5 rounded-full bg-akzent" />
           </span>
           {kicker}
         </p>
@@ -48,12 +48,24 @@ const satz2 = trenner > 0 ? titel.slice(trenner + 2) : "";
       }
     </ul>
   </div>
-  <ChatDemo />
+  <div class="relative">
+    <ChatDemo />
+    {
+      site.hero.notiz && (
+        <p class="hand pointer-events-none absolute -bottom-3 left-2 flex max-w-[15rem] -rotate-3 items-end gap-1 text-[1.35rem] leading-tight text-akzent-text sm:-left-6 lg:-bottom-6 lg:-left-16">
+          <svg viewBox="0 0 60 40" width="46" height="31" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true" class="mb-3 shrink-0 -scale-x-100 rotate-12">
+            <path d="M4 34C18 30 36 22 50 6M50 6l-10 2M50 6l-1 10" />
+          </svg>
+          {site.hero.notiz}
+        </p>
+      )
+    }
+  </div>
 </section>
 
 <style>
   .marker {
-    background: linear-gradient(transparent 62%, var(--akzent) 62%, var(--akzent) 92%, transparent 92%);
+    background: linear-gradient(transparent 60%, #bdeccb 60%, #bdeccb 94%, transparent 94%);
     -webkit-box-decoration-break: clone;
     box-decoration-break: clone;
     padding-inline: 0.06em;

@@ -7,10 +7,10 @@ const a = site.abschluss;
 <section class="abschnitt" aria-labelledby="abschluss-titel">
   <div class="behaelter">
     <div class="abschluss reveal relative overflow-hidden rounded-[1.75rem] bg-tinte px-6 py-14 text-center text-white md:px-16 md:py-20">
-      <div class="pointer-events-none absolute -top-24 -right-24 size-72 rounded-full bg-akzent opacity-25 blur-3xl" aria-hidden="true"></div>
-      <LogoZeichen groesse={52} class="relative mx-auto [--logo-blase:#fff] [--logo-haken:var(--tinte)]" />
+      <div class="pointer-events-none absolute -top-24 -right-24 size-72 rounded-full bg-akzent-leuchtend opacity-30 blur-3xl" aria-hidden="true"></div>
+      <LogoZeichen groesse={52} class="relative mx-auto [--logo-blase:#fff] [--logo-haken:var(--akzent)]" />
       <h2 id="abschluss-titel" class="h2 relative mx-auto mt-6 max-w-2xl">{a.titel}</h2>
-      <p class="relative mx-auto mt-5 max-w-2xl text-lg text-[#e9e4da]">{a.text}</p>
+      <p class="relative mx-auto mt-5 max-w-2xl text-lg text-[#dfe8e1]">{a.text}</p>
       <div class="relative mt-9 flex flex-col justify-center gap-3 sm:flex-row">
         <a href="#anfrage" data-anliegen="test" class="knopf knopf-primaer">{site.cta.test}</a>
         <a href="#anfrage" data-anliegen="check" class="knopf border-[1.5px] border-white/60 text-white hover:bg-white/10">{site.cta.check}</a>
@@ -21,6 +21,6 @@ const a = site.abschluss;
 
 <style>
   .abschluss {
-    --fokus: #f5b82e;
+    --fokus: #3ccf75;
   }
 </style>
