@@ -5,16 +5,16 @@ const c = site.chat_demo;
 const SOFORT = 2;
 ---
 
-<figure class="chat mx-auto w-full max-w-md" aria-label={`${c.hinweis}: Gespräch mit einem Gast`}>
+<figure class="chat mx-auto w-full max-w-[22rem]" aria-label={`${c.hinweis}: Gespräch mit einem Gast`}>
   <div class="karte overflow-hidden shadow-[0_24px_60px_-28px_rgb(28_26_23/0.25)]">
-    <div class="flex items-center gap-3 border-b border-linie px-5 py-3.5">
-      <span class="grid size-9 place-items-center rounded-full bg-karte-2 text-sm font-semibold text-leise" aria-hidden="true">{c.gast_kuerzel}</span>
+    <div class="flex items-center gap-3 border-b border-linie px-4 py-3">
+      <span class="grid size-8 place-items-center rounded-full bg-karte-2 text-xs font-semibold text-leise" aria-hidden="true">{c.gast_kuerzel}</span>
       <div class="leading-tight">
-        <p class="text-[0.95rem] font-semibold">{c.gast_name}</p>
+        <p class="text-sm font-semibold">{c.gast_name}</p>
         <p class="text-xs text-leise">{c.kopf}</p>
       </div>
     </div>
-    <div class="chat-verlauf space-y-4 px-5 py-6">
+    <div class="chat-verlauf space-y-3 px-4 py-5">
       {
         c.nachrichten.map((n, i) =>
           n.von === "trenner" ? (
@@ -29,14 +29,14 @@ const SOFORT = 2;
             >
               <p
                 class:list={[
-                  "rounded-2xl px-4 py-3 text-[0.95rem] leading-snug",
+                  "rounded-2xl px-3.5 py-2.5 text-sm leading-snug",
                   n.von === "wir" ? "rounded-br-md bg-akzent-hell" : "rounded-bl-md bg-karte-2",
                 ]}
               >
                 {n.text}
               </p>
               {n.zeit && (
-                <p class:list={["mt-1.5 text-xs text-leise", n.von === "wir" ? "pr-1 text-right" : "pl-1"]}>
+                <p class:list={["mt-1 text-[0.7rem] text-leise", n.von === "wir" ? "pr-1 text-right" : "pl-1"]}>
                   <time>{n.zeit}</time>
                 </p>
               )}
@@ -44,7 +44,7 @@ const SOFORT = 2;
           ),
         )
       }
-      <div class="chat-tippen ml-auto w-fit rounded-2xl rounded-br-md bg-akzent-hell px-4 py-3" aria-hidden="true" hidden>
+      <div class="chat-tippen ml-auto w-fit rounded-2xl rounded-br-md bg-akzent-hell px-3.5 py-2.5" aria-hidden="true" hidden>
         <span></span><span></span><span></span>
       </div>
     </div>
@@ -56,7 +56,7 @@ const SOFORT = 2;
   /* Mit JavaScript und erlaubter Bewegung: feste Höhe, neue Nachrichten schieben alte nach oben.
      So verschiebt sich das Layout der Seite nicht. Ohne JavaScript sind alle Nachrichten sichtbar. */
   :global(.reveal-an) .chat-verlauf {
-    height: 21.5rem;
+    height: 18.5rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -111,7 +111,7 @@ const SOFORT = 2;
   }
   @media (min-width: 768px) {
     :global(.reveal-an) .chat-verlauf {
-      height: 25rem;
+      height: 21rem;
     }
   }
 </style>
@@ -147,7 +147,7 @@ const SOFORT = 2;
       // Vor unseren Antworten kurz „schreibt …“ anzeigen
       if (el.dataset.von === "wir" && tippen) {
         tippen.hidden = false;
-        window.setTimeout(zeigen, 650);
+        window.setTimeout(zeigen, 1700);
       } else {
         zeigen();
       }
