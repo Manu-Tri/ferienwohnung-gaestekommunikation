@@ -6,7 +6,7 @@ const jahr = new Date().getFullYear();
 ---
 
 <footer class="fuss border-t border-auf-tinte/15 bg-tinte text-auf-tinte-leise">
-  <div class="behaelter flex flex-wrap items-center gap-x-7 gap-y-4 py-7 text-[0.94rem] font-medium">
+  <div class="behaelter flex flex-wrap items-center gap-x-7 gap-y-1 py-5 text-[0.94rem] font-medium md:py-7">
     <div class="text-auf-tinte [--logo-blase:var(--akzent)]">
       <Logo klein />
     </div>
@@ -33,6 +33,8 @@ const jahr = new Date().getFullYear();
     --fokus: var(--mint);
   }
   .fuss a {
+    display: inline-block;
+    padding-block: 11px;
     color: var(--auf-tinte-leise);
   }
   .fuss a:hover {

@@ -95,12 +95,22 @@
   p {
     text-wrap: pretty;
   }
+  /* Mindestens 16 px in Eingabefeldern, sonst zoomt das iPhone beim Antippen in die Seite */
+  input:not([type="range"], [type="checkbox"], [type="radio"]),
+  select,
+  textarea {
+    font-size: max(16px, 1rem);
+  }
   a {
     color: var(--text);
     text-underline-offset: 4px;
   }
   a:hover {
     color: var(--akzent-text);
+  }
+  /* Abschnitte, zu denen gesprungen wird, bekommen keinen Fokusrahmen */
+  [tabindex="-1"]:focus {
+    outline: none;
   }
   :focus-visible {
     outline: 3px solid var(--fokus);
@@ -212,6 +222,8 @@
   }
   /* Unterstrichener Textlink als zweite Handlung neben dem Hauptknopf */
   .textlink {
+    display: inline-block;
+    padding-block: 12px;
     font-weight: 700;
     text-decoration: underline;
     text-decoration-thickness: 2px;
@@ -240,6 +252,29 @@
   .hand {
     font-family: var(--font-hand);
     font-weight: 600;
+  }
+  /* Auf dem Handy: Karten als wischbare Reihe, die nächste Karte schaut am Rand hervor.
+     Ab 640 px gilt wieder das normale Raster der jeweiligen Liste. */
+  @media (max-width: 639px) {
+    .wischen {
+      display: flex !important;
+      gap: 0.75rem;
+      margin-inline: calc(-1 * clamp(1.25rem, 5vw, 4rem));
+      padding-inline: clamp(1.25rem, 5vw, 4rem);
+      padding-bottom: 0.5rem;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x mandatory;
+      scroll-padding-inline: clamp(1.25rem, 5vw, 4rem);
+      scrollbar-width: none;
+    }
+    .wischen::-webkit-scrollbar {
+      display: none;
+    }
+    .wischen > * {
+      flex: 0 0 84%;
+      scroll-snap-align: start;
+    }
   }
   /* Feine diagonale Streifen auf grünen Flächen */
   .streifen {

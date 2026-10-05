@@ -30,12 +30,15 @@ const { nurCheck = false } = Astro.props;
 <script>
   const leiste = document.getElementById("sticky-cta");
   const hero = document.getElementById("hero");
-  const formular = document.getElementById("anfrage");
+  // Leiste ausblenden, solange Hero, Formular oder ein Bereich mit eigenem großen Knopf (data-ohne-leiste) sichtbar ist
+  const verdecker = [document.getElementById("anfrage"), ...document.querySelectorAll<HTMLElement>("[data-ohne-leiste]")].filter(
+    (el): el is HTMLElement => el !== null,
+  );
   if (leiste && "IntersectionObserver" in window) {
     let heroSichtbar = true;
-    let formularSichtbar = false;
+    const sichtbar = new Set<Element>();
     const setzen = () => {
-      const zeigen = !heroSichtbar && !formularSichtbar;
+      const zeigen = !heroSichtbar && sichtbar.size === 0;
       leiste.classList.toggle("translate-y-full", !zeigen);
       leiste.toggleAttribute("inert", !zeigen);
       leiste.dataset.zustand = zeigen ? "sichtbar" : "versteckt";
@@ -43,13 +46,14 @@ const { nurCheck = false } = Astro.props;
     const beobachter = new IntersectionObserver((eintraege) => {
       for (const e of eintraege) {
         if (e.target === hero) heroSichtbar = e.isIntersecting;
-        if (e.target === formular) formularSichtbar = e.isIntersecting;
+        else if (e.isIntersecting) sichtbar.add(e.target);
+        else sichtbar.delete(e.target);
       }
       setzen();
     });
     if (hero) beobachter.observe(hero);
     else heroSichtbar = false;
-    if (formular) beobachter.observe(formular);
+    verdecker.forEach((el) => beobachter.observe(el));
     setzen();
   }
 </script>

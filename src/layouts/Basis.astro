@@ -52,9 +52,36 @@ const robots = istVorschau ? "noindex, nofollow" : noindex ? "noindex, follow" :
     {jsonld.map((daten) => <script type="application/ld+json" set:html={JSON.stringify(daten)} />)}
 
     <script is:inline>
-      // Beim Laden oben starten, statt an die zuletzt gescrollte Stelle zu springen (Anker wie #anfrage bleiben)
-      if ("scrollRestoration" in history) history.scrollRestoration = "manual";
-      if (!location.hash) addEventListener("load", () => scrollTo(0, 0));
+      // Seite startet immer oben. Ein Anker (#preise) bleibt nur, wenn man von einer anderen
+      // eigenen Seite gezielt dorthin kommt (z. B. „Kostenlos testen“ im Impressum).
+      (() => {
+        if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+        const ohneAnker = () => history.replaceState(history.state, "", location.pathname + location.search);
+        let vonEigenerSeite = false;
+        try {
+          const herkunft = new URL(document.referrer);
+          vonEigenerSeite = herkunft.origin === location.origin && herkunft.pathname !== location.pathname;
+        } catch {}
+        const art = performance.getEntriesByType("navigation")[0]?.type;
+        if (location.hash && !(art === "navigate" && vonEigenerSeite)) ohneAnker();
+        addEventListener("load", () => {
+          const ziel = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+          if (ziel) ziel.scrollIntoView({ behavior: "instant" });
+          else scrollTo(0, 0);
+        });
+        // Sprünge innerhalb der Seite: hinscrollen, aber keinen Anker in die Adresse schreiben,
+        // damit Neuladen wieder oben beginnt. Fokus wandert mit (wichtig für Tastatur und Sprunglink).
+        document.addEventListener("click", (e) => {
+          const link = e.target instanceof Element ? e.target.closest('a[href^="#"]') : null;
+          if (!link || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey) return;
+          const ziel = document.getElementById(decodeURIComponent(link.hash.slice(1)));
+          if (!ziel) return;
+          e.preventDefault();
+          ziel.scrollIntoView();
+          if (!ziel.hasAttribute("tabindex")) ziel.setAttribute("tabindex", "-1");
+          ziel.focus({ preventScroll: true });
+        });
+      })();
       if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
         document.documentElement.classList.add("reveal-an");
       }

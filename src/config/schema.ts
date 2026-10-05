@@ -42,7 +42,7 @@ export const siteSchema = z.object({
   hero: z.object({ kicker: text.optional(), titel: text, unterzeile: text, vertrauen: liste }),
   laufband: z.object({ punkte: liste.min(1) }),
   chat_demo: z.object({
-    uhrzeit: text,
+    uhrzeit: text.optional(),
     notiz: text.optional(),
     beschreibung: text,
     gast_absender: text,
@@ -97,7 +97,7 @@ export const siteSchema = z.object({
     titel: text,
     kennzahlen: z.array(z.object({ wert: text, beschreibung: text, quelle: text })).nullish().transform((v) => v ?? []),
     stimmen: z
-      .array(z.object({ zitat: text, name: text, ort: text.optional(), objekte: text.optional() }))
+      .array(z.object({ zitat: text, name: text, ort: text.optional(), objekte: text.optional(), beispiel: z.boolean().optional() }))
       .nullish()
       .transform((v) => v ?? []),
   }),
@@ -133,6 +133,7 @@ export const siteSchema = z.object({
     gruenderpreis_text: text,
     zaehler_text: text,
     zaehler_hinweis: text,
+    bedingungen_aufklappen: text,
     test_titel: text,
     test_bedingungen: z.array(karte),
     gp_titel: text,

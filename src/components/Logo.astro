@@ -10,7 +10,7 @@ interface Props {
 const { klein = false } = Astro.props;
 ---
 
-<a href={pfad("/")} class="logo group flex shrink-0 items-center gap-2.5 no-underline" aria-label={`${site.marke.name}, zur Startseite`}>
+<a href={pfad("/")} class="logo group flex min-h-[44px] shrink-0 items-center gap-2.5 no-underline" aria-label={`${site.marke.name}, zur Startseite`}>
   <LogoZeichen groesse={klein ? 24 : 30} class="transition-transform duration-300 group-hover:-rotate-6" />
   <span class:list={["logo-wort leading-none", klein ? "text-lg" : "text-[clamp(1.2rem,1.8vw,1.4rem)]"]}>{site.marke.name.toLowerCase()}</span>
 </a>

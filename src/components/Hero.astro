@@ -18,7 +18,7 @@ const lang = titel.length > 60;
 
 <section id="hero" class="hero mx-auto max-w-[80rem]">
   <div class="hero-text flex flex-col justify-end gap-[clamp(0.75rem,1.8vw,1.5rem)]">
-    {kicker && <p class="etikett !text-[clamp(0.8rem,1.2vw,0.94rem)]">{kicker}</p>}
+    {kicker && <p class="etikett !text-[clamp(0.875rem,1.2vw,0.94rem)]">{kicker}</p>}
     <h1 class:list={["leading-[0.95] font-extrabold tracking-[-0.035em]", lang ? "text-[clamp(2rem,3.7vw,3.5rem)]" : "text-[clamp(2.3rem,4.7vw,4.5rem)]"]}>
       {satz1}
       {satz2 && <> <span class="betont">{satz2}</span></>}
@@ -26,18 +26,18 @@ const lang = titel.length > 60;
     <p class="max-w-[37.5rem] text-[clamp(0.94rem,1.55vw,1.25rem)] leading-normal text-leise">{unterzeile}</p>
   </div>
 
-  <div class="hero-feld streifen relative flex items-center justify-center bg-akzent">
+  <div class="hero-feld relative flex items-center justify-center">
     <ChatDemo />
   </div>
 
   <div class="hero-handlung flex flex-col gap-[clamp(0.75rem,1.6vw,1.25rem)]">
     <div class="flex flex-wrap items-center gap-x-[1.375rem] gap-y-3">
-      <a href="#anfrage" data-anliegen="test" class="knopf knopf-primaer max-w-[21.25rem] flex-[1_1_16rem] text-[clamp(1.06rem,1.4vw,1.125rem)] !py-[clamp(1rem,1.5vw,1.2rem)]">
+      <a href="#anfrage" data-anliegen="test" class="knopf knopf-primaer w-full max-w-[21.25rem] sm:w-auto sm:flex-[1_1_16rem] text-[clamp(1.06rem,1.4vw,1.125rem)] !py-[clamp(1rem,1.5vw,1.2rem)]">
         {site.cta.test}
       </a>
       <a href="#anfrage" data-anliegen="check" class="textlink text-[clamp(0.9rem,1.3vw,1.06rem)]">{site.cta.check}</a>
     </div>
-    <ul class="flex flex-wrap gap-2 text-[clamp(0.75rem,1.1vw,0.875rem)] font-semibold" aria-label="Das Wichtigste in Kürze">
+    <ul class="flex flex-wrap gap-2 text-[clamp(0.875rem,1.1vw,0.9rem)] font-semibold" aria-label="Das Wichtigste in Kürze">
       {site.hero.vertrauen.map((punkt) => <li class="rounded-full border-[1.5px] border-linie px-3 py-1.5">{punkt}</li>)}
     </ul>
   </div>
@@ -47,7 +47,7 @@ const lang = titel.length > 60;
   .hero {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    grid-template-areas: "t" "g" "c";
+    grid-template-areas: "t" "c" "g";
   }
   .hero-text {
     grid-area: t;
@@ -55,23 +55,22 @@ const lang = titel.length > 60;
   }
   .hero-feld {
     grid-area: g;
-    margin: 1rem 0 0 1.75rem;
-    border-radius: 90px 0 0 90px;
-    padding: 1.125rem 1.25rem 2.75rem 1.75rem;
+    padding: 0.5rem clamp(1.25rem, 5vw, 4rem) 2rem;
   }
   .hero-handlung {
     grid-area: c;
-    padding: clamp(1rem, 2.2vw, 1.75rem) clamp(1.25rem, 4vw, 3rem) clamp(1.75rem, 5vw, 4rem) clamp(1.25rem, 5vw, 4rem);
+    padding: clamp(1.25rem, 2.2vw, 1.75rem) clamp(1.25rem, 4vw, 3rem) clamp(1.25rem, 5vw, 4rem) clamp(1.25rem, 5vw, 4rem);
   }
   @media (min-width: 860px) {
     .hero {
       grid-template-columns: minmax(0, 1fr) minmax(340px, 37%);
       grid-template-areas: "t g" "c g";
+      padding-block: clamp(0.75rem, 1.5vw, 1.5rem) clamp(1.25rem, 2.5vw, 2.5rem);
     }
+    /* Chat mittig neben dem Text, ohne eigene Fläche */
     .hero-feld {
-      margin: 0 0 clamp(2rem, 4.5vw, 4rem) 0;
-      border-radius: clamp(120px, 13vw, 200px) 0 0 clamp(120px, 13vw, 200px);
-      padding: clamp(4rem, 7.5vw, 7rem) clamp(1.25rem, 2.4vw, 2rem) clamp(4rem, 7.5vw, 7rem) clamp(2rem, 3.6vw, 3.25rem);
+      align-self: center;
+      padding: 1rem clamp(1.25rem, 5vw, 4rem) 1rem 0;
     }
   }
 </style>

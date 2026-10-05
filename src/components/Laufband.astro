@@ -12,13 +12,15 @@ interface Stimme {
   name: string;
   ort?: string;
   objekte?: string;
+  /** Ausgedachter Mustertext: Karte trägt sichtbar das Etikett „Beispiel“ */
+  beispiel?: boolean;
 }
 type Props =
   | { art: "punkte"; punkte: string[]; beschriftung: string; dauer?: number }
   | { art: "stimmen"; stimmen: Stimme[]; beschriftung: string; dauer?: number };
 
 const props = Astro.props;
-const dauer = props.dauer ?? (props.art === "punkte" ? 35 : 60);
+const dauer = props.dauer ?? (props.art === "punkte" ? 55 : 60);
 // Kurze Listen auffüllen, damit eine Gruppe breiter als der Bildschirm ist
 const wiederholen = <T,>(liste: T[], mindestens: number) =>
   Array.from({ length: Math.max(1, Math.ceil(mindestens / liste.length)) }, () => liste).flat();
@@ -39,9 +41,10 @@ const gruppen = [false, true];
               ))
             : wiederholen(props.stimmen, 4).map((s) => (
                 <li class="mr-4 flex w-[min(22rem,80vw)] shrink-0">
-                  <figure class="flex w-full flex-col justify-between gap-4 rounded-3xl bg-karte p-6">
+                  <figure class="flex w-full flex-col gap-3 rounded-3xl bg-karte p-6">
+                    {s.beispiel && <span class="self-start rounded-full bg-sand px-2.5 py-0.5 text-[0.875rem] font-bold text-leise">Beispiel</span>}
                     <blockquote class="leading-relaxed">„{s.zitat}“</blockquote>
-                    <figcaption class="text-sm text-leise">
+                    <figcaption class="mt-auto pt-1 text-sm text-leise">
                       <span class="font-display block text-base font-bold text-text">{s.name}</span>
                       {[s.ort, s.objekte].filter(Boolean).join(", ")}
                     </figcaption>

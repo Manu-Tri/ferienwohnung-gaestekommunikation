@@ -7,7 +7,7 @@ const satz1 = trenner > 0 ? a.titel.slice(0, trenner + 1) : a.titel;
 const satz2 = trenner > 0 ? a.titel.slice(trenner + 2) : "";
 ---
 
-<section class="abschluss bg-tinte text-auf-tinte" aria-labelledby="abschluss-titel">
+<section class="abschluss bg-tinte text-auf-tinte" aria-labelledby="abschluss-titel" data-ohne-leiste>
   <div class="behaelter reveal flex flex-col items-start gap-[clamp(1.25rem,3vw,2rem)] py-[clamp(4rem,9vw,8rem)]">
     {a.kicker && <p class="kicker !text-gold">{a.kicker}</p>}
     <h2 id="abschluss-titel" class="max-w-[62.5rem] text-[clamp(2.25rem,5.4vw,5rem)] leading-[0.92] font-extrabold tracking-[-0.04em]">

@@ -10,11 +10,11 @@ const c = site.chat_demo;
 
 <div class="chat relative flex w-full max-w-[23.75rem] flex-col gap-[clamp(0.5rem,1vw,0.75rem)]" role="img" aria-label={c.beschreibung}>
   <div class="flex flex-wrap items-baseline gap-x-3">
-    <span class="font-display text-[clamp(1.8rem,4.2vw,3.4rem)] leading-none font-extrabold tracking-[-0.03em] text-auf-tinte">{c.uhrzeit}</span>
-    {c.notiz && <span class="hand text-[clamp(1.5rem,2vw,1.65rem)] leading-[1.1] text-gold">{c.notiz}</span>}
+    {c.uhrzeit && <span class="font-display text-[clamp(1.8rem,4.2vw,3.4rem)] leading-none font-extrabold tracking-[-0.03em] text-tinte">{c.uhrzeit}</span>}
+    {c.notiz && <span class="hand text-[clamp(1.5rem,2vw,1.65rem)] leading-[1.1] text-akzent-text">{c.notiz}</span>}
   </div>
 
-  <div class="blase blase-gast max-w-[88%] self-start">
+  <div class="blase blase-gast gast max-w-[88%] self-start">
     <div class="absender text-[#6b604b]">{c.gast_absender}</div>
     {c.gast_text}
   </div>
@@ -29,7 +29,7 @@ const c = site.chat_demo;
     </div>
   </div>
 
-  <div class="geprueft self-end text-[clamp(0.75rem,1vw,0.8125rem)] font-semibold text-mint-hell">✓ {c.geprueft}</div>
+  <div class="geprueft self-end text-[0.875rem] font-semibold text-akzent-text">✓ {c.geprueft}</div>
 
   {c.dank_text && <div class="blase blase-gast dank max-w-[70%] self-start">{c.dank_text}</div>}
 </div>
@@ -37,24 +37,24 @@ const c = site.chat_demo;
 <style>
   .blase {
     padding: clamp(0.5625rem, 1vw, 0.8125rem) clamp(0.75rem, 1.3vw, 1rem);
-    font-size: clamp(0.84rem, 1.2vw, 0.94rem);
+    font-size: clamp(0.94rem, 1.2vw, 1rem);
     line-height: 1.4;
   }
   .blase-gast {
     background: #fff;
     color: var(--tinte);
     border-radius: 18px 18px 18px 4px;
-    box-shadow: 0 8px 24px rgb(0 0 0 / 0.15);
+    box-shadow: 0 10px 30px rgb(24 38 28 / 0.12);
   }
   .blase-wir {
     background: var(--tinte);
     color: var(--auf-tinte);
     border-radius: 18px 18px 4px 18px;
-    box-shadow: 0 8px 24px rgb(0 0 0 / 0.2);
+    box-shadow: 0 10px 30px rgb(24 38 28 / 0.22);
   }
   .absender {
     margin-bottom: 3px;
-    font-size: 0.75rem;
+    font-size: 0.875rem;
     font-weight: 700;
   }
   .tippen {
@@ -87,20 +87,34 @@ const c = site.chat_demo;
       transform: translateY(-3px);
     }
   }
+  /* Nachrichten tauchen weich auf: leicht von unten, etwas kleiner, unscharf */
+  .gast,
   .antwort,
   .dank {
+    transform-origin: bottom left;
     transition:
-      opacity 0.45s,
-      transform 0.45s;
+      opacity 0.6s ease,
+      transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      filter 0.6s ease;
+  }
+  .antwort {
+    transform-origin: bottom right;
   }
   .geprueft {
     transition: opacity 0.4s;
   }
-  /* Ablauf: 0 = nur Gast, 1 = schreibt …, 2 = Antwort, 3 = geprüft, 4 = Dank */
+  /* Ablauf: leer = noch nichts, 0 = Gast, 1 = schreibt …, 2 = Antwort, 3 = geprüft, 4 = Dank */
+  .chat[data-schritt] .gast,
   .chat[data-schritt] .antwort,
   .chat[data-schritt] .dank {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(14px) scale(0.96);
+    filter: blur(6px);
+  }
+  .chat[data-schritt]:not([data-schritt="leer"]) .gast {
+    opacity: 1;
+    transform: none;
+    filter: none;
   }
   .chat[data-schritt] .geprueft {
     opacity: 0;
@@ -112,6 +126,7 @@ const c = site.chat_demo;
   .chat[data-schritt="4"] .dank {
     opacity: 1;
     transform: none;
+    filter: none;
   }
   .chat:is([data-schritt="3"], [data-schritt="4"]) .geprueft {
     opacity: 1;
@@ -119,19 +134,20 @@ const c = site.chat_demo;
 </style>
 
 <script>
-  const ABLAUF: [number, number][] = [
-    [0, 700],
-    [1, 1800],
-    [2, 700],
-    [3, 1300],
-    [4, 5000],
+  const ABLAUF: [string, number][] = [
+    ["leer", 900],
+    ["0", 1000],
+    ["1", 1800],
+    ["2", 700],
+    ["3", 1300],
+    ["4", 5000],
   ];
   document.querySelectorAll<HTMLElement>(".chat").forEach((chat) => {
     if (!document.documentElement.classList.contains("reveal-an")) return;
     let i = 0;
     const weiter = () => {
       const [schritt, warten] = ABLAUF[i];
-      chat.dataset.schritt = String(schritt);
+      chat.dataset.schritt = schritt;
       i = (i + 1) % ABLAUF.length;
       window.setTimeout(weiter, warten);
     };

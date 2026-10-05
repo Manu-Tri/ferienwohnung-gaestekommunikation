@@ -124,8 +124,9 @@ laufband:
 
 # Kleines Gespräch im grünen Feld oben rechts. Ohne JavaScript ist alles sofort sichtbar.
 chat_demo:
-  uhrzeit: "21:47"
-  # Handschriftliche Notiz neben der Uhrzeit
+  # Große Uhrzeit über dem Chat (leer lassen = keine Uhrzeit, z. B.  uhrzeit: "21:47")
+  uhrzeit: ""
+  # Handschriftliche Notiz über dem Chat
   notiz: "Sie sitzen gerade beim Abendessen."
   # Für Screenreader: beschreibt das Bild in einem Satz
   beschreibung: "Beispiel: Ein Gast schreibt um 21:47, {marke} antwortet um 21:49"
@@ -261,7 +262,29 @@ vergleich:
 ergebnisse:
   titel: "Ergebnisse unserer Kunden"
   kennzahlen: []
-  stimmen: []
+  # MUSTERTEXTE: ausgedacht, nur zur Ansicht. Jede Karte zeigt deshalb das Etikett "Beispiel".
+  # Vor dem Livegang durch echte Stimmen mit Einwilligung ersetzen (Zeile "beispiel: true" dann löschen)
+  # oder die Liste wieder auf  stimmen: []  setzen.
+  stimmen:
+    - zitat: "Früher lag das Handy beim Abendessen immer neben dem Teller. Heute lese ich abends nur noch die kurze Zusammenfassung und weiß: Es ist alles erledigt."
+      name: "Sabine K."
+      ort: "Bernkastel-Kues"
+      objekte: "3 Ferienwohnungen"
+      beispiel: true
+    - zitat: "Am Pfingstsonntag stand eine Familie vor dem Schlüsselsafe. Ich war auf einer Hochzeit und habe erst am Abend davon erfahren, da war längst alles gelöst."
+      name: "Thomas R."
+      ort: "Traben-Trarbach"
+      objekte: "1 Ferienwohnung"
+      beispiel: true
+    - zitat: "Die Antworten klingen wirklich nach mir, nur freundlicher. Unsere Gäste merken keinen Unterschied, außer dass sie schneller eine Antwort bekommen."
+      name: "Familie Weber"
+      ort: "Cochem"
+      objekte: "2 Ferienwohnungen"
+      beispiel: true
+    - zitat: "Der Inserats-Check hat mir fünf Dinge gezeigt, die ich in zehn Jahren nie bemerkt habe. Zwei davon habe ich noch am selben Abend geändert."
+      name: "Monika S."
+      ort: "Zell an der Mosel"
+      beispiel: true
 
 # Persönlicher Abschnitt: wer hinter dem Angebot steht.
 # Das wichtigste Element, damit die Seite menschlich wirkt. Bitte mit echten Angaben füllen.
@@ -312,6 +335,8 @@ preise_abschnitt:
   # {frei} wird durch die Zahl freier Plätze ersetzt
   zaehler_text: "{frei} von {gp_plaetze} Plätzen frei"
   zaehler_hinweis: "Stand von Hand gepflegt."
+  # Beschriftung zum Aufklappen der Bedingungen unter dem Gründerpreis
+  bedingungen_aufklappen: "Bedingungen von Testphase und Gründerpreis"
   test_titel: "Bedingungen der Testphase"
   test_bedingungen:
     - { titel: "Beginn", text: "an dem Tag, an dem wir die erste Gästenachricht für Sie beantworten." }

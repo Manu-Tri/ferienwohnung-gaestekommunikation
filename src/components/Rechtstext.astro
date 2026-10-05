@@ -6,7 +6,7 @@ const { titel } = Astro.props;
 ---
 
 <article class="behaelter rechtstext max-w-3xl py-14 md:py-20">
-  <h1 class="text-4xl md:text-5xl">{titel}</h1>
+  <h1 class="text-[clamp(1.75rem,7.5vw,3rem)] [overflow-wrap:break-word] hyphens-auto">{titel}</h1>
   <slot />
 </article>
 

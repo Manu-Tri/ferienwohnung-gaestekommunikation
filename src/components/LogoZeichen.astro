@@ -1,6 +1,7 @@
 ---
 /**
- * Bildmarke: grüne Sprechblase als Quadrat mit spitzer Ecke unten links und einem Häkchen.
+ * Bildmarke: grüne Sprechblase als Quadrat mit spitzer Ecke unten links und Doppelhäkchen
+ * (gesendet und gelesen, wie im Chat).
  * Farben über --logo-blase und --logo-haken anpassbar (z. B. im dunklen Fußbereich).
  */
 interface Props {
@@ -9,10 +10,10 @@ interface Props {
 }
 const { groesse = 30, class: klasse = "" } = Astro.props;
 const blase = "M9 1h14a8 8 0 0 1 8 8v14a8 8 0 0 1-8 8H3a2 2 0 0 1-2-2V9a8 8 0 0 1 8-8z";
-const haken = "M9.5 16.5l4.2 4.2 8.8-9.4";
+const haken = "M7.6 16.6l3.7 3.7 7.9-8.5M15.4 19.3l1 1 7.9-8.5";
 ---
 
 <svg width={groesse} height={groesse} viewBox="0 0 32 32" aria-hidden="true" class:list={["logo-zeichen shrink-0", klasse]}>
   <path d={blase} style="fill: var(--logo-blase, var(--akzent))"></path>
-  <path d={haken} fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--logo-haken, #fff)"></path>
+  <path d={haken} fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--logo-haken, #fff)"></path>
 </svg>

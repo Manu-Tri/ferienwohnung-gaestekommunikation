@@ -25,10 +25,10 @@ const symbole = [
 <section id="leistungen" class="abschnitt pt-0" aria-labelledby="leistungen-titel">
   <div class="behaelter flex flex-col gap-[clamp(1.75rem,4vw,3.5rem)]">
     <Kopf id="leistungen-titel" kicker={l.kicker} titel={l.titel} />
-    <ul class="grid gap-[clamp(0.75rem,1.6vw,1.25rem)] sm:grid-cols-2 lg:grid-cols-3">
+    <ul class="wischen grid gap-[clamp(0.75rem,1.6vw,1.25rem)] sm:grid-cols-2 lg:grid-cols-3">
       {
         l.karten.map((karte, i) => (
-          <li class="reveal flex gap-4 rounded-3xl bg-karte p-[clamp(1.375rem,2.6vw,2rem)] sm:flex-col">
+          <li class="reveal flex flex-col gap-4 rounded-3xl bg-karte p-[clamp(1.375rem,2.6vw,2rem)]">
             <span class="grid size-11 shrink-0 place-items-center rounded-[11px_11px_11px_3px] bg-akzent text-white" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
                 <path d={symbole[i % symbole.length]} />
