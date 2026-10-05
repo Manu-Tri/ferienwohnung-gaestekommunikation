@@ -2,7 +2,7 @@
 import { site } from "../config/laden";
 
 interface Props {
-  /** Nur ein Knopf (Fokusseite Inserats-Check) */
+  /** Knopf für den Inserats-Check (Fokusseite) */
   nurCheck?: boolean;
 }
 const { nurCheck = false } = Astro.props;
@@ -10,28 +10,21 @@ const { nurCheck = false } = Astro.props;
 
 <div
   id="sticky-cta"
-  class="fixed inset-x-0 bottom-0 z-30 translate-y-full border-t border-linie bg-karte/95 px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur transition-transform duration-300 md:hidden"
+  class="fixed inset-x-0 bottom-0 z-30 translate-y-full border-t border-rahmen bg-flaeche/95 px-4 pt-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom))] backdrop-blur transition-transform duration-300 md:hidden"
   data-zustand="versteckt"
   inert
 >
-  <div class="flex gap-2">
-    {
-      nurCheck ? (
-        <a href="#anfrage" data-anliegen="check" class="knopf knopf-primaer flex-1 !px-3">
-          {site.cta.check_kurz} anfordern
-        </a>
-      ) : (
-        <>
-          <a href="#anfrage" data-anliegen="test" class="knopf knopf-primaer flex-1 !px-3 text-[0.95rem]">
-            {site.cta.test_kurz}
-          </a>
-          <a href="#anfrage" data-anliegen="check" class="knopf knopf-sekundaer flex-1 !px-3 text-[0.95rem]">
-            {site.cta.check_kurz}
-          </a>
-        </>
-      )
-    }
-  </div>
+  {
+    nurCheck ? (
+      <a href="#anfrage" data-anliegen="check" class="knopf knopf-primaer w-full !shadow-none">
+        {site.cta.check_kurz} anfordern
+      </a>
+    ) : (
+      <a href="#anfrage" data-anliegen="test" class="knopf knopf-primaer w-full !shadow-none">
+        {site.cta.test}
+      </a>
+    )
+  }
 </div>
 
 <script>

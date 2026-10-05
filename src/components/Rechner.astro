@@ -21,11 +21,11 @@ const f_liste = [
 ];
 ---
 
-<aside id="rechner" class="rechner karte overflow-hidden" data-preis={preis} aria-labelledby="rechner-titel">
-  <div class="p-5 md:p-6">
-    <h3 id="rechner-titel" class="text-lg">{r.titel}</h3>
+<aside id="rechner" class="rechner grid overflow-hidden rounded-3xl bg-flaeche text-text lg:grid-cols-[1fr_24rem]" data-preis={preis} aria-labelledby="rechner-titel">
+  <div class="p-[clamp(1.375rem,2.6vw,2rem)]">
+    <h3 id="rechner-titel" class="text-[clamp(1.25rem,2vw,1.5rem)]">{r.titel}</h3>
     <p class="mt-1 text-sm text-leise">{r.intro}</p>
-    <form class="mt-4 space-y-2.5 md:space-y-3.5" aria-label="Eingaben für die Beispielrechnung" onsubmit="return false">
+    <form class="mt-5 grid gap-x-8 gap-y-3 sm:grid-cols-2" aria-label="Eingaben für die Beispielrechnung" onsubmit="return false">
       {
         f_liste.map((f) => (
           <div>
@@ -43,7 +43,7 @@ const f_liste = [
                 step={f.schritt}
                 value={f.wert}
                 inputmode="numeric"
-                class="w-20 shrink-0 rounded-lg border-[1.5px] border-rahmen bg-flaeche px-2 py-1.5 text-right text-base tabular-nums"
+                class="w-20 shrink-0 rounded-[0.625rem] border-2 border-eingabe-rand bg-karte px-2 py-1.5 text-right text-base tabular-nums"
               />
             </div>
             <input
@@ -62,20 +62,20 @@ const f_liste = [
       }
     </form>
   </div>
-  <div class="bg-akzent-hell p-5 md:p-6">
+  <div class="flex flex-col justify-center bg-sand p-[clamp(1.375rem,2.6vw,2rem)]">
     <dl class="grid grid-cols-2 gap-4" aria-live="polite" aria-atomic="true">
       <div>
         <dt class="text-sm font-medium">{r.ergebnis_verlust}</dt>
-        <dd class="mt-1 text-2xl font-semibold tracking-tight tabular-nums" data-aus="verlust">{euro(start.verlorenerUmsatzJahr)}</dd>
+        <dd class="font-display mt-1 text-[1.75rem] leading-tight font-extrabold tabular-nums" data-aus="verlust">{euro(start.verlorenerUmsatzJahr)}</dd>
         <dd class="text-xs text-leise"><span data-aus="buchungen">{zahl(start.verloreneBuchungenJahr)}</span> Buchungen</dd>
       </div>
       <div>
         <dt class="text-sm font-medium">{r.ergebnis_kosten}</dt>
-        <dd class="mt-1 text-2xl font-semibold tracking-tight tabular-nums" data-aus="kosten">{euro(start.kostenJahr)}</dd>
+        <dd class="font-display mt-1 text-[1.75rem] leading-tight font-extrabold text-akzent-text tabular-nums" data-aus="kosten">{euro(start.kostenJahr)}</dd>
       </div>
     </dl>
-    <p class="mt-3 text-xs text-leise">{r.hinweis}</p>
-    <a href="#anfrage" data-anliegen="test" class="knopf knopf-primaer mt-4 w-full !min-h-11 text-[0.95rem]">{r.cta}</a>
+    <p class="mt-3 text-sm text-leise">{r.hinweis}</p>
+    <a href="#anfrage" data-anliegen="test" class="knopf knopf-primaer mt-5 w-full">{r.cta}</a>
   </div>
 </aside>
 
@@ -109,6 +109,10 @@ const f_liste = [
 </script>
 
 <style>
+  /* Helle Karte, auch auf dunklem Hintergrund: dunkler Fokusrahmen */
+  .rechner {
+    --fokus: var(--tinte);
+  }
   /* Freundliche, gut greifbare Schieberegler in der Akzentfarbe */
   .regler {
     appearance: none;
@@ -119,12 +123,12 @@ const f_liste = [
   .regler::-webkit-slider-runnable-track {
     height: 6px;
     border-radius: 999px;
-    background: var(--karte-2);
+    background: var(--sand);
   }
   .regler::-moz-range-track {
     height: 6px;
     border-radius: 999px;
-    background: var(--karte-2);
+    background: var(--sand);
   }
   .regler::-webkit-slider-thumb {
     appearance: none;

@@ -1,35 +1,39 @@
 ---
 import { site } from "../config/laden";
-import LogoZeichen from "./LogoZeichen.astro";
 const a = site.abschluss;
+// Satz nach dem ersten Punkt leuchtet in Mint
+const trenner = a.titel.indexOf(". ");
+const satz1 = trenner > 0 ? a.titel.slice(0, trenner + 1) : a.titel;
+const satz2 = trenner > 0 ? a.titel.slice(trenner + 2) : "";
 ---
 
-<section class="abschnitt" aria-labelledby="abschluss-titel">
-  <div class="behaelter">
-    <div class="abschluss reveal relative overflow-hidden rounded-[1.75rem] bg-[#0b3a21] px-6 py-14 text-center text-white md:px-16 md:py-20">
-      <div class="pointer-events-none absolute -top-24 -right-24 size-72 rounded-full bg-akzent-leuchtend opacity-30 blur-3xl" aria-hidden="true"></div>
-      <LogoZeichen groesse={52} class="relative mx-auto [--logo-blase:#fff] [--logo-haken:var(--akzent)]" />
-      <h2 id="abschluss-titel" class="h2 relative mx-auto mt-6 max-w-2xl">{a.titel}</h2>
-      <p class="relative mx-auto mt-5 max-w-2xl text-lg text-[#dfe8e1]">{a.text}</p>
-      <div class="relative mt-9 flex flex-col justify-center gap-3 sm:flex-row">
-        <a href="#anfrage" data-anliegen="test" class="knopf knopf-primaer">{site.cta.test}</a>
-        <a href="#anfrage" data-anliegen="check" class="knopf border-[1.5px] border-white/60 text-white hover:bg-white/10">{site.cta.check}</a>
-      </div>
+<section class="abschluss bg-tinte text-auf-tinte" aria-labelledby="abschluss-titel">
+  <div class="behaelter reveal flex flex-col items-start gap-[clamp(1.25rem,3vw,2rem)] py-[clamp(4rem,9vw,8rem)]">
+    {a.kicker && <p class="kicker !text-gold">{a.kicker}</p>}
+    <h2 id="abschluss-titel" class="max-w-[62.5rem] text-[clamp(2.25rem,5.4vw,5rem)] leading-[0.92] font-extrabold tracking-[-0.04em]">
+      {satz1}
+      {satz2 && <> <span class="text-mint">{satz2}</span></>}
+    </h2>
+    <p class="max-w-[42rem] text-[clamp(1rem,1.5vw,1.19rem)] leading-relaxed text-auf-tinte-leise">{a.text}</p>
+    <div class="flex flex-wrap items-center gap-x-[1.375rem] gap-y-3">
+      <a href="#anfrage" data-anliegen="test" class="knopf knopf-mint !px-7 !py-[1.125rem] text-lg">{site.cta.test}</a>
+      <a href="#anfrage" data-anliegen="check" class="textlink text-auf-tinte hover:text-mint">{site.cta.check}</a>
     </div>
   </div>
 </section>
 
 <style>
   .abschluss {
-    --fokus: #1fc45f;
+    --fokus: var(--mint);
   }
-  /* Auf dem dunklen Grün: Leuchtgrün mit dunkler Schrift, damit der Knopf heraussticht */
-  .abschluss .knopf-primaer {
-    background: #1fc45f;
-    color: #062814;
-    box-shadow: 0 8px 24px -10px rgb(31 196 95 / 0.8);
+  /* Auf dem dunklen Grund: Mint mit dunkler Schrift, damit der Knopf leuchtet */
+  .knopf-mint {
+    background: var(--mint);
+    color: var(--tinte);
+    box-shadow: 0 4px 0 var(--mint-schatten);
   }
-  .abschluss .knopf-primaer:hover {
-    background: #3ad677;
+  .knopf-mint:hover {
+    background: #a6dfb8;
+    color: var(--tinte);
   }
 </style>

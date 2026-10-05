@@ -10,20 +10,20 @@ interface Props {
 const { fragen = site.faq.fragen, titel = site.faq.titel, kicker = site.faq.kicker } = Astro.props;
 ---
 
-<section id="faq" class="abschnitt border-t border-linie bg-karte" aria-labelledby="faq-titel">
-  <div class="behaelter max-w-4xl">
+<section id="faq" class="abschnitt pt-0" aria-labelledby="faq-titel">
+  <div class="behaelter max-w-[60rem]">
     <Kopf id="faq-titel" kicker={kicker} titel={titel} />
-    <div class="mt-10 divide-y divide-linie border-y border-linie">
+    <div class="mt-[clamp(1.5rem,3vw,2.5rem)] border-t-2 border-tinte">
       {
         fragen.map((f) => (
-          <details class="group">
-            <summary class="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-5 text-[1.05rem] font-semibold md:text-lg [&::-webkit-details-marker]:hidden">
+          <details class="group border-b-[1.5px] border-linie">
+            <summary class="font-display flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-[1.375rem] text-[clamp(1.06rem,1.6vw,1.25rem)] leading-snug font-bold [&::-webkit-details-marker]:hidden">
               {f.frage}
-              <span class="grid size-8 shrink-0 place-items-center rounded-full bg-karte-2 text-xl leading-none transition group-open:rotate-45 group-open:bg-akzent" aria-hidden="true">
+              <span class="shrink-0 text-2xl leading-none text-akzent-text transition-transform group-open:rotate-45" aria-hidden="true">
                 +
               </span>
             </summary>
-            <p class="max-w-prose pb-6 text-leise">{f.antwort}</p>
+            <p class="max-w-[45rem] pb-[1.375rem] leading-relaxed text-leise">{f.antwort}</p>
           </details>
         ))
       }

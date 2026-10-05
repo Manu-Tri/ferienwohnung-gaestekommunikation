@@ -1,0 +1,81 @@
+---
+/**
+ * Endlos laufendes Band, reines CSS. Der Inhalt wird für die nahtlose Schleife einmal
+ * wiederholt; die Wiederholung ist für Screenreader ausgeblendet.
+ * Bei Mauszeiger oder Tastaturfokus hält das Band an, bei „Bewegung reduzieren“ steht es still
+ * und lässt sich seitlich wischen.
+ *
+ * Zwei Arten: kurze Punkte (grünes Band) oder Kundenstimmen (Karten).
+ */
+interface Stimme {
+  zitat: string;
+  name: string;
+  ort?: string;
+  objekte?: string;
+}
+type Props =
+  | { art: "punkte"; punkte: string[]; beschriftung: string; dauer?: number }
+  | { art: "stimmen"; stimmen: Stimme[]; beschriftung: string; dauer?: number };
+
+const props = Astro.props;
+const dauer = props.dauer ?? (props.art === "punkte" ? 35 : 60);
+// Kurze Listen auffüllen, damit eine Gruppe breiter als der Bildschirm ist
+const wiederholen = <T,>(liste: T[], mindestens: number) =>
+  Array.from({ length: Math.max(1, Math.ceil(mindestens / liste.length)) }, () => liste).flat();
+const gruppen = [false, true];
+---
+
+<section class:list={["laufband overflow-hidden", props.art === "punkte" ? "bg-akzent py-4 text-white" : "py-2"]} aria-label={props.beschriftung} style={`--dauer:${dauer}s`}>
+  <div class="laufband-spur flex w-max">
+    {
+      gruppen.map((kopie) => (
+        <ul class="laufband-gruppe flex shrink-0 items-stretch" aria-hidden={kopie ? "true" : undefined}>
+          {props.art === "punkte"
+            ? wiederholen(props.punkte, 8).map((punkt) => (
+                <li class="font-display flex items-center text-[clamp(1.05rem,1.6vw,1.3rem)] font-bold whitespace-nowrap">
+                  <span class="px-6">{punkt}</span>
+                  <span class="text-gold" aria-hidden="true">✦</span>
+                </li>
+              ))
+            : wiederholen(props.stimmen, 4).map((s) => (
+                <li class="mr-4 flex w-[min(22rem,80vw)] shrink-0">
+                  <figure class="flex w-full flex-col justify-between gap-4 rounded-3xl bg-karte p-6">
+                    <blockquote class="leading-relaxed">„{s.zitat}“</blockquote>
+                    <figcaption class="text-sm text-leise">
+                      <span class="font-display block text-base font-bold text-text">{s.name}</span>
+                      {[s.ort, s.objekte].filter(Boolean).join(", ")}
+                    </figcaption>
+                  </figure>
+                </li>
+              ))}
+        </ul>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .laufband-spur {
+    animation: laufen var(--dauer) linear infinite;
+  }
+  .laufband:hover .laufband-spur,
+  .laufband:focus-within .laufband-spur {
+    animation-play-state: paused;
+  }
+  @keyframes laufen {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .laufband {
+      overflow-x: auto;
+    }
+    .laufband-spur {
+      animation: none;
+    }
+    .laufband-gruppe[aria-hidden] {
+      display: none;
+    }
+  }
+</style>

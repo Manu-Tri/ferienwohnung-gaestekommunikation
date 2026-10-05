@@ -84,70 +84,71 @@ seo:
 # ---------------------------------------------------------------------
 
 navigation:
-  - { text: "Betreuung", ziel: "#betreuung" }
-  - { text: "Über uns", ziel: "#team" }
-  - { text: "Wunschpaket", ziel: "#wunschpaket" }
+  - { text: "So funktioniert's", ziel: "#ablauf" }
   - { text: "Preise", ziel: "#preise" }
+  - { text: "Inserats-Check", ziel: "#angebote" }
   - { text: "Für Agenturen", ziel: "#agenturen" }
   - { text: "FAQ", ziel: "#faq" }
 
 cta:
   test: "{test_tage} Tage kostenlos testen"
-  test_kurz: "{test_tage} Tage testen"
+  test_kurz: "Kostenlos testen"
   check: "Kostenlosen Inserats-Check anfordern"
   check_kurz: "Inserats-Check"
 
 hero:
   # Kleine Zeile über der Überschrift: sagt in 3 Sekunden, was Sie anbieten
   kicker: "Für Vermieter von Ferienwohnungen"
-  # Handschriftliche Notiz neben dem Chat (leer lassen = keine Notiz)
-  notiz: "Jede wichtige Antwort liest bei uns ein Mensch."
-  titel: "Ihre Ferienwohnung ist gut betreut. Ihre Freizeit gehört wieder Ihnen."
-  unterzeile: "Wir kümmern uns um Ihre Gäste, als wären es unsere eigenen: jede Nachricht auf Airbnb und Booking.com, von {start} bis {ende} Uhr, vom ersten Hallo bis zur Bewertung nach der Abreise. {preis} € pro Buchung, die ersten {test_tage} Tage kostenlos."
+  # Der Satz nach dem ersten Punkt wird grün hervorgehoben.
+  # Weitere Varianten aus dem Entwurf:
+  #   "Ihre Gäste bekommen Antwort. Sie bekommen Feierabend."
+  #   "Ihre Ferienwohnung ist gut betreut. Ihre Freizeit gehört wieder Ihnen."
+  titel: "Wir antworten Ihren Gästen. Sie haben frei."
+  unterzeile: "Alle Nachrichten auf Airbnb und Booking.com, von der Anfrage bis zur Bewertung. Täglich {start} bis {ende} Uhr, Antwort in etwa {antwortzeit} Minuten. Alles Wichtige prüft ein Mensch."
   vertrauen:
     - "Keine Grundgebühr"
     - "Monatlich kündbar"
     - "DSGVO-konform"
-    - "KI-gestützt, von Menschen kontrolliert"
+    - "Menschen kontrollieren die KI"
 
+# Laufendes Band unter dem ersten Bildschirm. Punkte laufen endlos von rechts nach links.
+laufband:
+  punkte:
+    - "Immer erreichbar"
+    - "Auch sonntags und an Feiertagen"
+    - "KI-unterstützt"
+    - "Herzliche Antworten in Ihrem Ton"
+    - "Keine Grundgebühr"
+    - "Monatlich kündbar"
+    - "{test_tage} Tage kostenlos testen"
+
+# Kleines Gespräch im grünen Feld oben rechts. Ohne JavaScript ist alles sofort sichtbar.
 chat_demo:
-  kopf: "Nachrichten · Ferienwohnung Moselblick"
-  gast_name: "Familie Weber"
-  gast_kuerzel: "FW"
-  hinweis: "Beispieldarstellung"
-  # Die ersten zwei Nachrichten sind sofort sichtbar, die weiteren laufen beim Scrollen ein.
-  # von: "gast" = Nachricht des Gastes, "wir" = unsere Antwort, "trenner" = Zwischenzeile (z. B. neuer Tag)
-  nachrichten:
-    - von: "gast"
-      zeit: "So, 21:47"
-      text: "Hallo, wir stehen vor der Tür und der Schlüsselsafe geht nicht auf. Was können wir tun?"
-    - von: "wir"
-      zeit: "So, 21:47"
-      text: "Guten Abend Frau Weber, das tut mir leid. Drücken Sie bitte nach dem Code einmal fest auf die Taste unten rechts, dann öffnet die Klappe. Falls es nicht klappt, ruft Sie in 10 Minuten unser Partner vor Ort an."
-    - von: "gast"
-      zeit: "So, 21:49"
-      text: "Hat geklappt, danke! 😊 Gibt es in der Nähe noch etwas zu essen?"
-    - von: "wir"
-      zeit: "So, 21:49"
-      text: "Wie schön, herzlich willkommen! Die Gaststätte an der Ecke hat bis 22:30 Uhr warme Küche, nur 3 Minuten zu Fuß. Lassen Sie es sich schmecken!"
-    - von: "trenner"
-      text: "Donnerstag, Abreisetag"
-    - von: "wir"
-      zeit: "Do, 10:05"
-      text: "Danke, dass Sie bei uns waren, Familie Weber! Kommen Sie gut nach Hause. Über eine kurze Bewertung würden wir uns sehr freuen."
+  uhrzeit: "21:47"
+  # Handschriftliche Notiz neben der Uhrzeit
+  notiz: "Sie sitzen gerade beim Abendessen."
+  # Für Screenreader: beschreibt das Bild in einem Satz
+  beschreibung: "Beispiel: Ein Gast schreibt um 21:47, {marke} antwortet um 21:49"
+  gast_absender: "Gast · Booking.com"
+  gast_text: "Hallo! Wir stehen vor dem Schlüsselsafe, der Code klappt nicht. Können Sie helfen?"
+  antwort_absender: "{marke} · 21:49"
+  antwort_text: "Guten Abend! Bitte den Bügel nach dem Code einmal fest nach unten drücken, dann öffnet die Klappe. Willkommen an der Mosel!"
+  geprueft: "von einem Menschen geprüft"
+  dank_text: "Hat geklappt, vielen Dank!"
 
 problem:
   kicker: "Kennen Sie das?"
-  titel: "Ihre Gäste schreiben, wann sie wollen. Nicht, wann Sie Zeit haben."
+  titel: "Ihre Wohnung macht nie Feierabend. Ihr Handy auch nicht."
+  # "titel" ist das große Stichwort oben in der Karte, die letzte Karte erscheint in Gold
   karten:
-    - titel: "Sonntag, 21:47 Uhr."
-      text: "Sie sitzen mit Freunden beim Essen, da vibriert das Handy: Wie war noch mal das WLAN-Passwort?"
-    - titel: "Die Antwort kommt zu spät."
-      text: "Wer abends anfragt und erst am nächsten Morgen etwas hört, hat oft schon woanders gebucht. Und die Plattform merkt sich Ihre Antwortzeit."
-    - titel: "Der Gast steht vor der Tür."
-      text: "Schlüsselsafe, Parkplatz, Anreisezeit: kleine Fragen, aus denen schnell großer Ärger wird, wenn niemand antwortet."
-    - titel: "Vier statt fünf Sterne."
-      text: "Die Wohnung war toll, aber der Gast hat sich allein gelassen gefühlt. Genau das steht dann in der Bewertung."
+    - titel: "19:30"
+      text: "Das Handy vibriert beim Abendessen. Eine Anfrage, die nicht warten will."
+    - titel: "Sonntag"
+      text: "Statt Ausflug mit der Familie beantworten Sie Fragen zu Parkplatz und Brötchenservice."
+    - titel: "Im Urlaub"
+      text: "Gäste stehen vor dem Schlüsselsafe, und Sie sitzen am Strand mit schlechtem Netz."
+    - titel: "★ ★ ★"
+      text: "Langsame Antworten kosten Buchungen und Sterne in der Bewertung."
 
 rechner:
   titel: "Was kosten Sie langsame Antworten?"
@@ -267,8 +268,17 @@ ergebnisse:
 # Foto: Datei nach public/ legen (z. B. public/team.jpg) und unten eintragen: foto: "/team.jpg"
 persoenlich:
   sichtbar: true
-  kicker: "Wer hinter anytime steht"
-  titel: "Bei uns antworten Menschen, keine Maschinen."
+  # Linke Seite: wie Mensch und KI zusammenarbeiten
+  kicker: "Kein Callcenter. Kein Roboter."
+  titel: "Eine KI schreibt vor. Ein Mensch entscheidet."
+  einleitung: "Die KI hilft uns, schnell zu sein. Bei allem, was zählt, liest ein Mensch mit, bevor eine Nachricht rausgeht. Wir kümmern uns um Ihre Gäste, als wären es unsere eigenen."
+  themen:
+    - "Geld"
+    - "Stornierungen"
+    - "Beschwerden"
+    - "Notfälle"
+  themen_hinweis: "Diese Themen prüft immer ein Mensch."
+  # Rechte Seite: wer hinter anytime steht
   text:
     - "Hallo, ich bin [VORNAME]. [2 bis 3 Sätze in Ihren eigenen Worten: Warum Sie anytime gegründet haben, z. B. eigene Erfahrung als Gastgeber oder Gastgeberin an der Mosel.]"
     - "[1 bis 2 Sätze: Wer im Team antwortet, und was Ihnen beim Umgang mit Gästen wichtig ist.]"
@@ -276,15 +286,19 @@ persoenlich:
   rolle: "[ROLLE, z. B. Gründer von anytime]"
   foto: ""
   foto_alt: "[BESCHREIBUNG DES FOTOS, z. B. Porträt von VORNAME NACHNAME]"
-  versprechen:
-    - "Feste Ansprechperson für Ihre Wohnungen"
-    - "Erreichbar per Telefon und E-Mail"
-    - "Antworten in Ihrem Ton, nicht von der Stange"
+  foto_platzhalter: "Foto: [Person hinter anytime, z. B. an der Mosel]"
 
 preise_abschnitt:
   kicker: "Fair und einfach"
   titel: "Ein Preis. Nur wenn Sie Buchungen haben."
   einheit: "pro Buchung"
+  test_hinweis: "Die ersten {test_tage} Tage sind kostenlos."
+  # Kleiner Kostenrechner mit Schieberegler
+  rechner_frage: "Wie viele Buchungen haben Sie im Monat?"
+  rechner_start: 8
+  rechner_max: 40
+  rechner_einheit: "Buchungen"
+  rechner_zeitraum: "im Monat"
   punkte:
     - "Keine Grundgebühr"
     - "Monatlich kündbar"
@@ -310,21 +324,52 @@ preise_abschnitt:
     - "{gp_preis} € pro Buchung für {gp_monate} Monate ab Vertragsbeginn."
     - "Danach gilt der reguläre Preis von {preis} € pro Buchung. Wir erinnern Sie {erinnerung} vorher. Sie können weiterhin monatlich kündigen."
 
-white_label:
-  kicker: "Für Agenturen und Co-Hosts"
-  titel: "Ihre Marke, unser Team."
-  text: "Sie betreuen Ferienwohnungen für Eigentümer und möchten abends und am Wochenende endlich wieder frei haben? Wir antworten in Ihrem Namen, in Ihrem Ton. Ihre Gäste und Eigentümer sehen nur Ihre Agentur."
-  punkte:
-    - "Antworten unter Ihrem Namen"
-    - "Eigene Wissensbasis pro Objekt"
-    - "Monatliche Auswertung pro Eigentümer"
-    - "Preis nach Volumen: [PREIS WHITE LABEL]"
-  cta: "Gespräch für Agenturen anfragen"
+# Drei Angebotskarten im grünen Preisbereich.
+# anliegen: "test", "check" oder "agentur" (wählt das passende Anliegen im Formular vor)
+# stil: "hell" oder "dunkel"; empfohlen: true = grünes Etikett und grüner Knopf
+angebote:
+  titel: "Wählen Sie Ihren Einstieg"
+  karten:
+    - etikett: "Empfohlen"
+      titel: "Gästekommunikation"
+      preis: "{preis} € pro Buchung"
+      anliegen: "test"
+      stil: "hell"
+      empfohlen: true
+      punkte:
+        - "Alle Nachrichten, {start} bis {ende} Uhr"
+        - "Antwort in etwa {antwortzeit} Minuten"
+        - "Mensch prüft alles Wichtige"
+        - "{test_tage} Tage kostenlos testen"
+      cta: "{test_tage} Tage kostenlos testen"
+    - etikett: "Zum Kennenlernen"
+      titel: "Inserats-Check"
+      preis: "kostenlos"
+      anliegen: "check"
+      stil: "hell"
+      punkte:
+        - "Wir sehen uns Ihr Inserat an"
+        - "{verbesserungen} konkrete Verbesserungen"
+        - "In {check_stunden} Stunden per E-Mail"
+      cta: "Check anfordern"
+    - etikett: "Für Agenturen und Co-Hosts"
+      titel: "White Label"
+      preis: "Preis nach Volumen: [PREIS WHITE LABEL]"
+      anliegen: "agentur"
+      stil: "dunkel"
+      punkte:
+        - "Wir antworten in Ihrem Namen und Ton"
+        - "Eigene Wissensbasis pro Objekt"
+        - "Monatliche Auswertung pro Eigentümer"
+        - "Ihre Gäste sehen nur Ihre Marke"
+      cta: "Gespräch anfragen"
 
 anfrage:
-  kicker: "Schreiben Sie uns"
+  kicker: "Anfrage in 1 Minute"
   titel: "Erzählen Sie uns kurz von Ihren Wohnungen"
-  untertitel: "4 kurze Fragen, etwa 1 Minute. Wir melden uns persönlich bei Ihnen, nicht mit einer automatischen Mail."
+  untertitel: "4 kurze Fragen. Wir melden uns persönlich bei Ihnen, nicht mit einer automatischen Mail. Unverbindlich und ohne Vertrag."
+  # Handschriftlicher Gruß unter dem Text (leer lassen = kein Gruß)
+  gruss: "Wir freuen uns auf Sie!"
   anliegen_frage: "Ich möchte"
   anliegen:
     test: "{test_tage} Tage testen"
@@ -402,7 +447,9 @@ faq:
       antwort: "Nein. Sie laden uns als Co-Host oder als eigenen Benutzer ein und können den Zugriff jederzeit selbst entziehen."
 
 abschluss:
-  titel: "Der nächste Sonntagabend gehört Ihnen."
+  kicker: "Heute Abend schon?"
+  # Der Satz nach dem ersten Punkt leuchtet in Mint
+  titel: "Ihre Gäste sind gut betreut. Machen Sie Feierabend."
   text: "Jeder Gast bekommt eine Antwort, Sie bekommen mehr Freiheit. Testen Sie {test_tage} Tage ohne Kosten und ohne Vertrag. Oder lassen Sie zuerst Ihr Inserat prüfen: {verbesserungen} konkrete Verbesserungen innerhalb von {check_stunden} Stunden."
 
 footer:

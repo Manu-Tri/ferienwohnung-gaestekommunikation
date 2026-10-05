@@ -5,6 +5,7 @@
  */
 import Basis from "../layouts/Basis.astro";
 import Hero from "../components/Hero.astro";
+import Laufband from "../components/Laufband.astro";
 import Problem from "../components/Problem.astro";
 import Gaestereise from "../components/Gaestereise.astro";
 import Persoenlich from "../components/Persoenlich.astro";
@@ -13,7 +14,6 @@ import Leistungen from "../components/Leistungen.astro";
 import Vergleich from "../components/Vergleich.astro";
 import Ergebnisse from "../components/Ergebnisse.astro";
 import Preise from "../components/Preise.astro";
-import WhiteLabel from "../components/WhiteLabel.astro";
 import Anfrageformular from "../components/Anfrageformular.astro";
 import FAQ from "../components/FAQ.astro";
 import Abschluss from "../components/Abschluss.astro";
@@ -33,6 +33,7 @@ const jsonld = [service(region.einsatzgebiet, region.seo_beschreibung, url), faq
 
 <Basis titel={region.seo_titel} beschreibung={region.seo_beschreibung} jsonld={jsonld} lokaleAnker>
   <Hero titel={region.titel} unterzeile={region.unterzeile} />
+  <Laufband art="punkte" punkte={site.laufband.punkte} beschriftung="Das Wichtigste in Kürze" />
   <section class="abschnitt border-t border-linie bg-karte" aria-labelledby="region-titel">
     <div class="behaelter grid gap-10 md:grid-cols-2">
       <div class="reveal">
@@ -53,7 +54,6 @@ const jsonld = [service(region.einsatzgebiet, region.seo_beschreibung, url), faq
   <Vergleich />
   <Ergebnisse />
   <Preise />
-  <WhiteLabel />
   <Anfrageformular region={region.name} />
   <FAQ />
   <Abschluss />

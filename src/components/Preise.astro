@@ -1,73 +1,160 @@
 ---
 import { euro, site } from "../config/laden";
-import Haken from "./Haken.astro";
-import Kopf from "./Kopf.astro";
 
 const p = site.preise_abschnitt;
 const gp = site.preise.gruenderpreis;
+const preis = site.preise.pro_buchung;
 const frei = gp.plaetze_frei;
 const zeigeZaehler = typeof frei === "number";
+const angebote = site.angebote;
+// Karten-ID für Sprungmarken aus der Navigation
+const kartenId: Record<string, string> = { agentur: "agenturen" };
 ---
 
-<section id="preise" class="abschnitt border-t border-linie bg-karte" aria-labelledby="preise-titel">
-  <div class="behaelter">
-    <Kopf id="preise-titel" kicker={p.kicker} titel={p.titel} />
-
-    <div class="mt-10 grid gap-4 md:mt-12 md:gap-5 lg:grid-cols-2">
-      <div class="reveal relative rounded-[1.25rem] border-2 border-akzent bg-flaeche p-6 md:p-9">
-        <p class="flex items-baseline gap-2">
-          <span class="text-6xl font-extrabold tracking-tight md:text-7xl">{euro(site.preise.pro_buchung)}</span>
-          <span class="text-lg text-leise">{p.einheit}</span>
+<section id="preise" class="preise streifen relative bg-akzent text-white" aria-labelledby="preise-titel">
+  <div class="behaelter abschnitt relative flex flex-col gap-[clamp(1.75rem,4vw,3rem)]">
+    <div class="grid items-end gap-[clamp(1.75rem,4vw,4rem)] lg:grid-cols-2">
+      <div class="reveal flex flex-col gap-3.5">
+        {p.kicker && <p class="kicker">{p.kicker}</p>}
+        <p class="font-display flex flex-wrap items-baseline gap-x-4 font-extrabold">
+          <span class="text-[clamp(3.25rem,7.5vw,6.5rem)] leading-[0.88] tracking-[-0.04em]">{euro(preis)}</span>
+          <span class="text-[clamp(1.25rem,2vw,1.625rem)]">{p.einheit}</span>
         </p>
-        <ul class="mt-7 space-y-3">
-          {
-            p.punkte.map((punkt) => (
-              <li class="flex items-start gap-2.5">
-                <Haken class="mt-1" />
-                {punkt}
-              </li>
-            ))
-          }
+        <h2 id="preise-titel" class="text-[clamp(1.25rem,2vw,1.625rem)] leading-tight">{p.titel}</h2>
+        <p class="text-mint-hell">{p.test_hinweis}</p>
+        <ul class="mt-1 flex flex-wrap gap-2 text-sm font-semibold">
+          {p.punkte.map((punkt) => <li class="rounded-full border-[1.5px] border-white/40 px-3 py-1.5">{punkt}</li>)}
         </ul>
-        <p class="mt-5 text-sm text-leise">{p.abrechnung_booking}</p>
-        <p class="mt-2 text-sm text-leise">{p.buchung_definition}</p>
-        <p class="mt-5 text-sm font-medium">{p.steuer}</p>
-        <a href="#anfrage" data-anliegen="test" class="knopf knopf-primaer mt-7 w-full sm:w-auto">{site.cta.test}</a>
       </div>
 
-      <div class="reveal rounded-[1.25rem] border border-linie bg-akzent-hell p-6 md:p-9">
+      <div
+        class="kosten reveal flex flex-col gap-4 rounded-3xl bg-tinte p-[clamp(1.375rem,2.6vw,2rem)] text-auf-tinte"
+        data-preis={preis}
+        data-max={p.rechner_max}
+      >
+        <label for="kosten-regler" class="text-[1.06rem] font-bold">{p.rechner_frage}</label>
+        <input id="kosten-regler" type="range" min="1" max={p.rechner_max} value={p.rechner_start} class="h-7 w-full accent-mint" />
+        <div class="flex flex-wrap items-baseline justify-between gap-3" aria-live="polite">
+          <span class="text-[1.06rem] font-medium"><span data-anzahl>{p.rechner_start}</span> {p.rechner_einheit}</span>
+          <span class="font-display text-[clamp(2rem,3.6vw,2.75rem)] font-extrabold text-mint">
+            <span data-summe>{euro(p.rechner_start * preis)}</span>{" "}
+            <span class="font-sans text-base font-medium text-auf-tinte-leise">{p.rechner_zeitraum}</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div id="angebote" class="flex scroll-mt-24 flex-col gap-3.5">
+      <h3 class="text-[clamp(1.375rem,2.2vw,1.75rem)]">{angebote.titel}</h3>
+      <ul class="grid gap-[clamp(0.75rem,1.6vw,1.25rem)] md:grid-cols-2 xl:grid-cols-3">
+        {
+          angebote.karten.map((k) => {
+            const dunkel = k.stil === "dunkel";
+            return (
+              <li
+                id={kartenId[k.anliegen]}
+                class:list={[
+                  "reveal flex scroll-mt-24 flex-col gap-3.5 rounded-3xl p-[clamp(1.375rem,2.6vw,1.875rem)]",
+                  dunkel ? "bg-tinte text-auf-tinte" : "bg-flaeche text-text",
+                ]}
+              >
+                <span
+                  class:list={[
+                    "self-start rounded-full px-3 py-1 text-[0.8125rem] font-bold",
+                    k.empfohlen ? "bg-akzent text-white" : dunkel ? "bg-auf-tinte/15" : "bg-sand",
+                  ]}
+                >
+                  {k.etikett}
+                </span>
+                <h4 lang="de" class="text-[clamp(1.25rem,2vw,1.5rem)] font-extrabold [overflow-wrap:break-word] hyphens-auto">
+                  {k.titel}
+                </h4>
+                <p class="text-lg font-bold">{k.preis}</p>
+                <ul class:list={["flex flex-1 flex-col gap-2", dunkel ? "text-auf-tinte-leise" : "text-leise"]}>
+                  {k.punkte.map((punkt) => (
+                    <li class="flex gap-2">
+                      <span aria-hidden="true">✓</span>
+                      <span>{punkt}</span>
+                    </li>
+                  ))}
+                </ul>
+                <a
+                  href="#anfrage"
+                  data-anliegen={k.anliegen}
+                  class:list={["knopf mt-1 w-full", k.empfohlen ? "knopf-primaer" : dunkel ? "knopf-hell" : "knopf-dunkel"]}
+                >
+                  {k.cta}
+                </a>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </div>
+
+    <div class="reveal grid gap-x-10 gap-y-8 rounded-3xl bg-flaeche p-[clamp(1.375rem,2.6vw,2rem)] text-text lg:grid-cols-2">
+      <div>
+        <h3 class="text-xl">{p.test_titel}</h3>
+        <dl class="mt-4 space-y-3">
+          {
+            p.test_bedingungen.map((b) => (
+              <div>
+                <dt class="font-semibold">{b.titel}</dt>
+                <dd class="text-leise">{b.text}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+      <div>
         <div class="flex flex-wrap items-center justify-between gap-3">
-          <h3 class="text-2xl">{p.gruenderpreis_titel}</h3>
+          <h3 class="text-xl">{p.gruenderpreis_titel}</h3>
           {
             zeigeZaehler && (
-              <p class="rounded-full bg-akzent px-3.5 py-1.5 text-sm font-semibold text-white">
-                {p.zaehler_text.replace("{frei}", String(frei))}
-              </p>
+              <p class="rounded-full bg-akzent px-3.5 py-1.5 text-sm font-semibold text-white">{p.zaehler_text.replace("{frei}", String(frei))}</p>
             )
           }
         </div>
-        <p class="mt-4 text-lg">{p.gruenderpreis_text}</p>
+        <p class="mt-3 text-lg">{p.gruenderpreis_text}</p>
         {zeigeZaehler && <p class="mt-1 text-sm text-leise">{p.zaehler_hinweis}</p>}
-
-        <h4 class="mt-7 font-semibold">{p.gp_titel}</h4>
-        <ul class="mt-3 list-disc space-y-1.5 pl-5">
+        <h4 class="mt-6 font-sans text-base font-semibold">{p.gp_titel}</h4>
+        <ul class="mt-2 list-disc space-y-1.5 pl-5 text-leise">
           {p.gp_bedingungen.map((b) => <li>{b}</li>)}
         </ul>
+        <div class="mt-6 space-y-2 border-t border-rahmen pt-5 text-sm text-leise">
+          <p>{p.abrechnung_booking}</p>
+          <p>{p.buchung_definition}</p>
+          <p class="font-medium text-text">{p.steuer}</p>
+        </div>
       </div>
-    </div>
-
-    <div class="reveal mt-5 rounded-[1.25rem] border border-linie bg-flaeche p-6 md:p-9">
-      <h3 class="text-xl">{p.test_titel}</h3>
-      <dl class="mt-5 grid gap-x-8 gap-y-4 md:grid-cols-2">
-        {
-          p.test_bedingungen.map((b) => (
-            <div>
-              <dt class="font-semibold">{b.titel}</dt>
-              <dd class="text-leise">{b.text}</dd>
-            </div>
-          ))
-        }
-      </dl>
     </div>
   </div>
 </section>
+
+<style>
+  .preise {
+    --fokus: var(--gold);
+  }
+  .preise .kicker {
+    color: var(--gold);
+  }
+  /* Auf hellen Karten bleibt der Fokusrahmen dunkel */
+  .preise .bg-flaeche {
+    --fokus: var(--tinte);
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>(".kosten").forEach((box) => {
+    const preis = Number(box.dataset.preis);
+    const regler = box.querySelector<HTMLInputElement>("input[type=range]")!;
+    const anzahl = box.querySelector<HTMLElement>("[data-anzahl]")!;
+    const summe = box.querySelector<HTMLElement>("[data-summe]")!;
+    const format = new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
+    regler.addEventListener("input", () => {
+      const n = Number(regler.value);
+      anzahl.textContent = String(n);
+      summe.textContent = format.format(n * preis);
+    });
+  });
+</script>

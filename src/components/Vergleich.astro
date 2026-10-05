@@ -9,23 +9,23 @@ const zusammenfassung = (anzahl: number) =>
   v.zusammenfassung.replace("{anzahl}", String(anzahl)).replace("{gesamt}", String(gesamt));
 ---
 
-<section id="wunschpaket" class="abschnitt" aria-labelledby="wunschpaket-titel">
+<section id="wunschpaket" class="abschnitt pt-0" aria-labelledby="wunschpaket-titel">
   <div class="behaelter">
     <Kopf id="wunschpaket-titel" kicker={v.kicker} titel={v.titel} text={v.intro} />
 
     <div
-      class="wunschpaket karte reveal mt-10 overflow-hidden md:mt-12"
+      class="wunschpaket karte reveal mt-[clamp(1.75rem,4vw,3.5rem)] overflow-hidden"
       data-zusammenfassung={v.zusammenfassung}
       data-gesamt={gesamt}
       data-leer={v.leer}
     >
       <fieldset>
         <legend class="sr-only">{v.beschriftung}</legend>
-        <ul class="divide-y divide-linie">
+        <ul class="divide-y divide-rahmen">
           {
             v.zeilen.map((zeile, i) => (
               <li>
-                <label class="flex min-h-15 cursor-pointer items-center gap-4 px-4 py-3.5 transition-colors hover:bg-flaeche sm:px-5 md:px-8">
+                <label class="flex min-h-15 cursor-pointer items-center gap-4 px-4 py-4 transition-colors hover:bg-flaeche sm:px-6 md:px-8">
                   <span class="flex-1 text-[0.98rem] leading-snug font-medium sm:text-base">{zeile.aufgabe}</span>
                   <span class="status hidden min-w-28 text-right text-sm whitespace-nowrap text-leise sm:block" aria-hidden="true">
                     <span class="status-sie">{v.label_sie}</span>
@@ -47,9 +47,9 @@ const zusammenfassung = (anzahl: number) =>
         </ul>
       </fieldset>
 
-      <div class="flex flex-col gap-3 border-t border-linie bg-akzent-hell px-4 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-5 md:px-8">
+      <div class="flex flex-col gap-3 bg-sand px-4 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6 md:px-8">
         <div>
-          <p class="font-semibold" data-paket-text aria-live="polite">{zusammenfassung(startAnzahl)}</p>
+          <p class="font-display text-lg font-bold" data-paket-text aria-live="polite">{zusammenfassung(startAnzahl)}</p>
           <p class="mt-1 text-sm text-leise">{v.cta_hinweis}</p>
         </div>
         <a href="#anfrage" data-anliegen="test" data-paket-senden class="knopf knopf-primaer shrink-0">{v.cta}</a>
@@ -67,7 +67,7 @@ const zusammenfassung = (anzahl: number) =>
     width: 3.25rem;
     height: 1.9rem;
     border-radius: 999px;
-    background: var(--rahmen);
+    background: var(--eingabe-rand);
     cursor: pointer;
     transition: background-color 0.2s;
   }

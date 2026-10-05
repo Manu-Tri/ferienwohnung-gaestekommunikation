@@ -1,7 +1,7 @@
 # Landingpage anytime
 
 Statische Lead-Seite für Remote-Gästekommunikation (Airbnb, Booking.com).
-Astro 7, Tailwind CSS 4, keine Cookies, kein Tracking, Schrift (Figtree) lokal. Helles Farbschema: Sonnengelb und Tintenschwarz.
+Astro 7, Tailwind CSS 4, keine Cookies, kein Tracking, Schriften (Bricolage Grotesque, Figtree, Caveat) lokal. Helles Farbschema: warmes Papier, Tannengrün und Tinte.
 
 ## Seiten
 

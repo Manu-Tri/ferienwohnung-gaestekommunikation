@@ -2,17 +2,27 @@
 import { pfad } from "../config/pfad";
 import { site } from "../config/laden";
 import LogoZeichen from "./LogoZeichen.astro";
+
+interface Props {
+  /** Kleinere Variante, z. B. im Fußbereich */
+  klein?: boolean;
+}
+const { klein = false } = Astro.props;
 ---
 
-<a href={pfad("/")} class="group flex items-center gap-2 text-text no-underline" aria-label={`${site.marke.name}, zur Startseite`}>
-  <LogoZeichen class="transition-transform duration-300 group-hover:-rotate-6" />
-  <span class="logo-wort text-[1.45rem] leading-none">{site.marke.name.toLowerCase()}</span>
+<a href={pfad("/")} class="logo group flex shrink-0 items-center gap-2.5 no-underline" aria-label={`${site.marke.name}, zur Startseite`}>
+  <LogoZeichen groesse={klein ? 24 : 30} class="transition-transform duration-300 group-hover:-rotate-6" />
+  <span class:list={["logo-wort leading-none", klein ? "text-lg" : "text-[clamp(1.2rem,1.8vw,1.4rem)]"]}>{site.marke.name.toLowerCase()}</span>
 </a>
 
 <style>
+  .logo {
+    color: inherit;
+  }
   .logo-wort {
-    font-weight: 820;
-    letter-spacing: -0.045em;
-    padding-bottom: 0.12em;
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.08em;
   }
 </style>

@@ -39,17 +39,18 @@ export const siteSchema = z.object({
   seo: z.object({ titel: text, beschreibung: text }),
   navigation: z.array(z.object({ text: text, ziel: text })),
   cta: z.object({ test: text, test_kurz: text, check: text, check_kurz: text }),
-  hero: z.object({
-    kicker: text.optional(),
-    notiz: text.optional(), titel: text, unterzeile: text, vertrauen: liste }),
+  hero: z.object({ kicker: text.optional(), titel: text, unterzeile: text, vertrauen: liste }),
+  laufband: z.object({ punkte: liste.min(1) }),
   chat_demo: z.object({
-    kopf: text,
-    gast_name: text,
-    gast_kuerzel: text,
-    hinweis: text,
-    nachrichten: z
-      .array(z.object({ von: z.enum(["gast", "wir", "trenner"]), zeit: text.optional(), text: text }))
-      .min(2),
+    uhrzeit: text,
+    notiz: text.optional(),
+    beschreibung: text,
+    gast_absender: text,
+    gast_text: text,
+    antwort_absender: text,
+    antwort_text: text,
+    geprueft: text,
+    dank_text: text.optional(),
   }),
   problem: z.object({
     kicker: text.optional(), titel: text, karten: z.array(karte) }),
@@ -104,17 +105,26 @@ export const siteSchema = z.object({
     sichtbar: z.boolean(),
     kicker: text.optional(),
     titel: text,
+    einleitung: text,
+    themen: liste,
+    themen_hinweis: text.optional(),
     text: liste,
     unterschrift: text,
     rolle: text,
     foto: text,
     foto_alt: text,
-    versprechen: liste,
+    foto_platzhalter: text,
   }),
   preise_abschnitt: z.object({
     kicker: text.optional(),
     titel: text,
     einheit: text,
+    test_hinweis: text,
+    rechner_frage: text,
+    rechner_start: z.number().int().positive(),
+    rechner_max: z.number().int().positive(),
+    rechner_einheit: text,
+    rechner_zeitraum: text,
     punkte: liste,
     abrechnung_booking: text,
     steuer: text,
@@ -128,11 +138,27 @@ export const siteSchema = z.object({
     gp_titel: text,
     gp_bedingungen: liste,
   }),
-  white_label: z.object({
-    kicker: text.optional(), titel: text, text: text, punkte: liste, cta: text }),
+  angebote: z.object({
+    titel: text,
+    karten: z
+      .array(
+        z.object({
+          etikett: text,
+          titel: text,
+          preis: text,
+          anliegen: z.enum(["test", "check", "agentur"]),
+          stil: z.enum(["hell", "dunkel"]),
+          empfohlen: z.boolean().optional(),
+          punkte: liste,
+          cta: text,
+        }),
+      )
+      .min(1),
+  }),
   anfrage: z.object({
     kicker: text.optional(),
     untertitel: text.optional(),
+    gruss: text.optional(),
     titel: text,
     anliegen_frage: text,
     anliegen: z.object({ test: text, check: text, agentur: text }),
@@ -168,7 +194,7 @@ export const siteSchema = z.object({
   }),
   faq: z.object({
     kicker: text.optional(), titel: text, fragen: z.array(faqEintrag).min(1) }),
-  abschluss: z.object({ titel: text, text: text }),
+  abschluss: z.object({ kicker: text.optional(), titel: text, text: text }),
   footer: z.object({ hinweis_marken: text }),
   inserats_check: z.object({
     seo_titel: text,

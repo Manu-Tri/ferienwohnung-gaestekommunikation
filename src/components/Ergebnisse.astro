@@ -1,42 +1,35 @@
 ---
+/** Nur echte Zahlen und Kundenstimmen. Solange beide Listen leer sind, wird nichts angezeigt. */
 import { site } from "../config/laden";
+import Laufband from "./Laufband.astro";
 const e = site.ergebnisse;
 const sichtbar = e.kennzahlen.length + e.stimmen.length > 0;
 ---
 
 {
   sichtbar && (
-    <section id="ergebnisse" class="abschnitt border-t border-linie bg-karte" aria-labelledby="ergebnisse-titel">
+    <section id="ergebnisse" class="abschnitt bg-sand" aria-labelledby="ergebnisse-titel">
       <div class="behaelter">
         <h2 id="ergebnisse-titel" class="h2 reveal max-w-3xl">
           {e.titel}
         </h2>
         {e.kennzahlen.length > 0 && (
-          <ul class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <ul class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {e.kennzahlen.map((k) => (
-              <li class="reveal rounded-[1.25rem] border border-linie bg-flaeche p-6">
-                <p class="text-4xl font-semibold tracking-tight text-akzent-text">{k.wert}</p>
+              <li class="reveal rounded-3xl bg-flaeche p-6">
+                <p class="font-display text-4xl font-extrabold text-akzent-text">{k.wert}</p>
                 <p class="mt-2 font-medium">{k.beschreibung}</p>
                 <p class="mt-2 text-sm text-leise">Quelle: {k.quelle}</p>
               </li>
             ))}
           </ul>
         )}
-        {e.stimmen.length > 0 && (
-          <ul class="mt-10 grid gap-5 md:grid-cols-2">
-            {e.stimmen.map((s) => (
-              <li class="reveal">
-                <figure class="h-full rounded-[1.25rem] border border-linie bg-flaeche p-6 md:p-8">
-                  <blockquote class="text-lg">„{s.zitat}“</blockquote>
-                  <figcaption class="mt-4 text-sm text-leise">
-                    {[s.name, s.ort, s.objekte].filter(Boolean).join(", ")}
-                  </figcaption>
-                </figure>
-              </li>
-            ))}
-          </ul>
-        )}
       </div>
+      {e.stimmen.length > 0 && (
+        <div class="mt-10">
+          <Laufband art="stimmen" stimmen={e.stimmen} beschriftung="Stimmen unserer Kunden" />
+        </div>
+      )}
     </section>
   )
 }

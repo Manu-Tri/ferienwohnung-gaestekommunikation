@@ -1,173 +1,140 @@
 ---
+/**
+ * Kurzes Gespräch im grünen Feld: Gast schreibt abends, wir antworten, ein Mensch hat geprüft.
+ * Ohne JavaScript oder bei reduzierter Bewegung ist alles sofort sichtbar.
+ * Mit JavaScript läuft das Gespräch in einer Schleife ab (data-schritt 0 bis 4).
+ */
 import { site } from "../config/laden";
 const c = site.chat_demo;
-/** Die ersten zwei Nachrichten sind sofort sichtbar, die weiteren laufen beim Scrollen ein. */
-const SOFORT = 2;
 ---
 
-<figure class="chat mx-auto w-full max-w-[22rem]" aria-label={`${c.hinweis}: Gespräch mit einem Gast`}>
-  <div class="karte overflow-hidden shadow-[0_24px_60px_-28px_rgb(28_26_23/0.25)]">
-    <div class="flex items-center gap-3 border-b border-linie px-4 py-3">
-      <span class="grid size-8 place-items-center rounded-full bg-karte-2 text-xs font-semibold text-leise" aria-hidden="true">{c.gast_kuerzel}</span>
-      <div class="leading-tight">
-        <p class="text-sm font-semibold">{c.gast_name}</p>
-        <p class="text-xs text-leise">{c.kopf}</p>
-      </div>
+<div class="chat relative flex w-full max-w-[23.75rem] flex-col gap-[clamp(0.5rem,1vw,0.75rem)]" role="img" aria-label={c.beschreibung}>
+  <div class="flex flex-wrap items-baseline gap-x-3">
+    <span class="font-display text-[clamp(1.8rem,4.2vw,3.4rem)] leading-none font-extrabold tracking-[-0.03em] text-auf-tinte">{c.uhrzeit}</span>
+    {c.notiz && <span class="hand text-[clamp(1.5rem,2vw,1.65rem)] leading-[1.1] text-gold">{c.notiz}</span>}
+  </div>
+
+  <div class="blase blase-gast max-w-[88%] self-start">
+    <div class="absender text-[#6b604b]">{c.gast_absender}</div>
+    {c.gast_text}
+  </div>
+
+  <div class="relative max-w-[90%] self-end">
+    <div class="tippen absolute top-0 right-0 inline-flex gap-[5px] rounded-[16px_16px_4px_16px] bg-tinte px-3.5 py-3" aria-hidden="true">
+      <span></span><span></span><span></span>
     </div>
-    <div class="chat-verlauf space-y-3 px-4 py-5">
-      {
-        c.nachrichten.map((n, i) =>
-          n.von === "trenner" ? (
-            <p class="chat-nachricht py-1 text-center text-xs font-medium text-leise" data-spaeter={i >= SOFORT ? "" : undefined}>
-              <span class="rounded-full bg-karte-2 px-3 py-1">{n.text}</span>
-            </p>
-          ) : (
-            <div
-              class:list={["chat-nachricht", n.von === "wir" ? "ml-auto max-w-[88%]" : "max-w-[85%]"]}
-              data-spaeter={i >= SOFORT ? "" : undefined}
-              data-von={n.von}
-            >
-              <p
-                class:list={[
-                  "rounded-2xl px-3.5 py-2.5 text-sm leading-snug",
-                  n.von === "wir" ? "rounded-br-md bg-akzent-hell" : "rounded-bl-md bg-karte-2",
-                ]}
-              >
-                {n.text}
-              </p>
-              {n.zeit && (
-                <p class:list={["mt-1 text-[0.7rem] text-leise", n.von === "wir" ? "pr-1 text-right" : "pl-1"]}>
-                  <time>{n.zeit}</time>
-                </p>
-              )}
-            </div>
-          ),
-        )
-      }
-      <div class="chat-tippen ml-auto w-fit rounded-2xl rounded-br-md bg-akzent-hell px-3.5 py-2.5" aria-hidden="true" hidden>
-        <span></span><span></span><span></span>
-      </div>
+    <div class="blase blase-wir antwort">
+      <div class="absender text-mint">{c.antwort_absender}</div>
+      {c.antwort_text}
     </div>
   </div>
-  <figcaption class="mt-3 text-center text-xs text-leise">{c.hinweis}</figcaption>
-</figure>
+
+  <div class="geprueft self-end text-[clamp(0.75rem,1vw,0.8125rem)] font-semibold text-mint-hell">✓ {c.geprueft}</div>
+
+  {c.dank_text && <div class="blase blase-gast dank max-w-[70%] self-start">{c.dank_text}</div>}
+</div>
 
 <style>
-  /* Mit JavaScript und erlaubter Bewegung: feste Höhe, neue Nachrichten schieben alte nach oben.
-     So verschiebt sich das Layout der Seite nicht. Ohne JavaScript sind alle Nachrichten sichtbar. */
-  :global(.reveal-an) .chat-verlauf {
-    height: 22rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    overflow: hidden;
-    mask-image: linear-gradient(to bottom, transparent 0, #000 2.5rem);
+  .blase {
+    padding: clamp(0.5625rem, 1vw, 0.8125rem) clamp(0.75rem, 1.3vw, 1rem);
+    font-size: clamp(0.84rem, 1.2vw, 0.94rem);
+    line-height: 1.4;
   }
-  :global(.reveal-an) .chat-nachricht[data-spaeter] {
-    display: none;
+  .blase-gast {
+    background: #fff;
+    color: var(--tinte);
+    border-radius: 18px 18px 18px 4px;
+    box-shadow: 0 8px 24px rgb(0 0 0 / 0.15);
   }
-  :global(.reveal-an) .chat-nachricht.eingelaufen {
-    display: block;
-    animation: einlaufen 0.45s ease-out both;
+  .blase-wir {
+    background: var(--tinte);
+    color: var(--auf-tinte);
+    border-radius: 18px 18px 4px 18px;
+    box-shadow: 0 8px 24px rgb(0 0 0 / 0.2);
   }
-  .chat-tippen[hidden] {
-    display: none;
+  .absender {
+    margin-bottom: 3px;
+    font-size: 0.75rem;
+    font-weight: 700;
   }
-  .chat-tippen span {
+  .tippen {
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .tippen span {
     display: inline-block;
-    width: 6px;
-    height: 6px;
-    margin: 0 2px;
-    border-radius: 50%;
-    background: var(--akzent-text);
-    animation: punkt 0.9s infinite ease-in-out;
+    width: 7px;
+    height: 7px;
+    border-radius: 4px;
+    background: var(--auf-tinte);
+    animation: punkt 1.1s infinite;
   }
-  .chat-tippen span:nth-child(2) {
+  .tippen span:nth-child(2) {
     animation-delay: 0.15s;
   }
-  .chat-tippen span:nth-child(3) {
+  .tippen span:nth-child(3) {
     animation-delay: 0.3s;
   }
   @keyframes punkt {
     0%,
+    60%,
     100% {
+      opacity: 0.25;
       transform: translateY(0);
-      opacity: 0.35;
     }
-    50% {
-      transform: translateY(-3px);
-      opacity: 0.9;
-    }
-  }
-  @keyframes einlaufen {
-    from {
-      opacity: 0;
-      transform: translateY(10px) scale(0.98);
-    }
-    to {
+    30% {
       opacity: 1;
-      transform: none;
+      transform: translateY(-3px);
     }
   }
-  @media (min-width: 768px) {
-    :global(.reveal-an) .chat-verlauf {
-      height: 25rem;
-    }
+  .antwort,
+  .dank {
+    transition:
+      opacity 0.45s,
+      transform 0.45s;
+  }
+  .geprueft {
+    transition: opacity 0.4s;
+  }
+  /* Ablauf: 0 = nur Gast, 1 = schreibt …, 2 = Antwort, 3 = geprüft, 4 = Dank */
+  .chat[data-schritt] .antwort,
+  .chat[data-schritt] .dank {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  .chat[data-schritt] .geprueft {
+    opacity: 0;
+  }
+  .chat[data-schritt="1"] .tippen {
+    opacity: 1;
+  }
+  .chat:is([data-schritt="2"], [data-schritt="3"], [data-schritt="4"]) .antwort,
+  .chat[data-schritt="4"] .dank {
+    opacity: 1;
+    transform: none;
+  }
+  .chat:is([data-schritt="3"], [data-schritt="4"]) .geprueft {
+    opacity: 1;
   }
 </style>
 
 <script>
-  // Nachrichten nacheinander einblenden, während der Besucher scrollt.
-  // Scrollt er nicht, laufen sie nach einer Pause von selbst ein.
-  const SCHRITT_PX = 70;
-  const PAUSE_MS = 4500;
-
+  const ABLAUF: [number, number][] = [
+    [0, 700],
+    [1, 1800],
+    [2, 700],
+    [3, 1300],
+    [4, 5000],
+  ];
   document.querySelectorAll<HTMLElement>(".chat").forEach((chat) => {
     if (!document.documentElement.classList.contains("reveal-an")) return;
-    const spaeter = Array.from(chat.querySelectorAll<HTMLElement>(".chat-nachricht[data-spaeter]"));
-    const tippen = chat.querySelector<HTMLElement>(".chat-tippen");
-    if (!spaeter.length) return;
-
-    let gezeigt = 0;
-    let laeuft = false;
-    let timer = 0;
-
-    const naechste = () => {
-      if (laeuft || gezeigt >= spaeter.length) return;
-      const el = spaeter[gezeigt++];
-      const zeigen = () => {
-        if (tippen) tippen.hidden = true;
-        el.classList.add("eingelaufen");
-        laeuft = false;
-        planen();
-        // Wurde inzwischen weiter gescrollt, die nächste Nachricht kurz danach nachholen
-        window.setTimeout(beimScrollen, 350);
-      };
-      laeuft = true;
-      // Vor unseren Antworten kurz „schreibt …“ anzeigen
-      if (el.dataset.von === "wir" && tippen) {
-        tippen.hidden = false;
-        window.setTimeout(zeigen, 1700);
-      } else {
-        zeigen();
-      }
+    let i = 0;
+    const weiter = () => {
+      const [schritt, warten] = ABLAUF[i];
+      chat.dataset.schritt = String(schritt);
+      i = (i + 1) % ABLAUF.length;
+      window.setTimeout(weiter, warten);
     };
-
-    const planen = () => {
-      window.clearTimeout(timer);
-      if (gezeigt < spaeter.length) timer = window.setTimeout(naechste, PAUSE_MS);
-    };
-
-    const beimScrollen = () => {
-      const box = chat.getBoundingClientRect();
-      // Zählung beginnt an der Scrollposition, an der der Chat vollständig im Bild ist
-      const start = Math.max(0, box.bottom + window.scrollY - window.innerHeight);
-      const ziel = Math.floor((window.scrollY - start) / SCHRITT_PX);
-      if (ziel > gezeigt) naechste();
-    };
-
-    window.addEventListener("scroll", beimScrollen, { passive: true });
-    beimScrollen();
-    timer = window.setTimeout(naechste, PAUSE_MS);
+    weiter();
   });
 </script>

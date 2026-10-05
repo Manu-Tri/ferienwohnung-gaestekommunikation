@@ -2,6 +2,7 @@
 import { istVorschau, ohneBasis, pfad } from "../config/pfad";
 import "../styles/global.css";
 import schriftLatin from "@fontsource-variable/figtree/files/figtree-latin-wght-normal.woff2?url";
+import schriftTitel from "@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-opsz-normal.woff2?url";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { site } from "../config/laden";
@@ -32,9 +33,10 @@ const robots = istVorschau ? "noindex, nofollow" : noindex ? "noindex, follow" :
     <meta name="description" content={beschreibung} />
     <link rel="canonical" href={kanonisch} />
     {robots && <meta name="robots" content={robots} />}
-    <meta name="theme-color" content="#fffaf3" />
+    <meta name="theme-color" content="#f3ede1" />
     <link rel="icon" href={pfad("/favicon.svg")} type="image/svg+xml" />
     <link rel="preload" href={schriftLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={schriftTitel} as="font" type="font/woff2" crossorigin />
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="de_DE" />
@@ -50,6 +52,9 @@ const robots = istVorschau ? "noindex, nofollow" : noindex ? "noindex, follow" :
     {jsonld.map((daten) => <script type="application/ld+json" set:html={JSON.stringify(daten)} />)}
 
     <script is:inline>
+      // Beim Laden oben starten, statt an die zuletzt gescrollte Stelle zu springen (Anker wie #anfrage bleiben)
+      if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+      if (!location.hash) addEventListener("load", () => scrollTo(0, 0));
       if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
         document.documentElement.classList.add("reveal-an");
       }
@@ -60,10 +65,10 @@ const robots = istVorschau ? "noindex, nofollow" : noindex ? "noindex, follow" :
       )
     }
   </head>
-  <body class="min-h-screen pb-20 md:pb-0">
+  <body class="min-h-screen">
     <a
       href="#inhalt"
-      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-lg focus:bg-karte focus:px-4 focus:py-2"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-lg focus:bg-karte focus:px-4 focus:py-2 focus:font-semibold"
       >Zum Inhalt springen</a
     >
     <Header fokus={fokus} lokal={lokaleAnker || ohneBasis(Astro.url.pathname) === "/"} />
