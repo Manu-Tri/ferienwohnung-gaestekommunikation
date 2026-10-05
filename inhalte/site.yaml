@@ -76,7 +76,7 @@ analytics:
   plausible_domain: "www.example.de"
 
 seo:
-  titel: "Gästekommunikation für Ferienwohnungen | Jede Nachricht beantwortet | {marke}"
+  titel: "Gästebetreuung für Ferienwohnungen, {start} bis {ende} Uhr | {marke}"
   beschreibung: "Wir beantworten alle Gästenachrichten auf Airbnb und Booking.com von {start} bis {ende} Uhr. {preis} € pro Buchung, ohne Grundgebühr, {test_tage} Tage kostenlos testen."
 
 # ---------------------------------------------------------------------
@@ -99,10 +99,10 @@ cta:
 
 hero:
   # Kleine Zeile über der Überschrift: sagt in 3 Sekunden, was Sie anbieten
-  kicker: "Gästebetreuung für Ferienwohnungen"
+  kicker: "Für Vermieter von Ferienwohnungen"
   # Handschriftliche Notiz neben dem Chat (leer lassen = keine Notiz)
   notiz: "Jede wichtige Antwort liest bei uns ein Mensch."
-  titel: "Ihre Gäste bekommen immer eine Antwort. Sie bekommen mehr Freiheit."
+  titel: "Ihre Ferienwohnung ist gut betreut. Ihre Freizeit gehört wieder Ihnen."
   unterzeile: "Wir kümmern uns um Ihre Gäste, als wären es unsere eigenen: jede Nachricht auf Airbnb und Booking.com, von {start} bis {ende} Uhr, vom ersten Hallo bis zur Bewertung nach der Abreise. {preis} € pro Buchung, die ersten {test_tage} Tage kostenlos."
   vertrauen:
     - "Keine Grundgebühr"
