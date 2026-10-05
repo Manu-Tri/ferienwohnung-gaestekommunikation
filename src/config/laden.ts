@@ -5,7 +5,7 @@ import { z } from "zod";
 import { regionSchema, siteSchema, type Region, type Site } from "./schema";
 
 const ORDNER = join(process.cwd(), "inhalte");
-const RESERVIERT = new Set(["inserats-check", "danke", "impressum", "datenschutz", "404", "robots.txt"]);
+const RESERVIERT = new Set(["inserats-check", "steckbrief", "danke", "impressum", "datenschutz", "404", "robots.txt"]);
 
 function lesen(datei: string): unknown {
   try {
@@ -56,6 +56,8 @@ function variablen(roh: Site): Record<string, string | number> {
     verbesserungen: roh.lead_magnet.verbesserungen,
     region: roh.marke.region,
     email: roh.marke.email,
+    telefon: roh.marke.telefon,
+    steckbrief_link: `${roh.marke.domain}/steckbrief`,
     anbieter: roh.links.buchungsanbieter,
   };
 }

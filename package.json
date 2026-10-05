@@ -5,12 +5,13 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "tsx scripts/infomappe.ts && astro build",
     "preview": "astro preview",
     "check": "astro check",
     "og": "node scripts/og-bild.mjs",
     "pruefen:striche": "node scripts/striche-pruefen.mjs",
-    "platzhalter": "node scripts/platzhalter.mjs"
+    "platzhalter": "node scripts/platzhalter.mjs",
+    "infomappe": "tsx scripts/infomappe.ts"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
@@ -25,8 +26,15 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
+    "@fontsource/bricolage-grotesque": "^5.3.0",
+    "@fontsource/figtree": "^5.3.0",
+    "@pdf-lib/fontkit": "^1.1.1",
     "@types/js-yaml": "^4.0.9",
+    "pdf-lib": "^1.17.1",
+    "qrcode": "^1.5.4",
     "sharp": "^0.35.5",
-    "typescript": "^6.0.3"
+    "tsx": "^4.23.15",
+    "typescript": "^6.0.3",
+    "wawoff2": "^2.0.1"
   }
 }

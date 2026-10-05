@@ -1,0 +1,136 @@
+---
+/**
+ * Wohnungs-Steckbrief: ausführliche Angaben zur Unterkunft nach einer Anfrage.
+ * Die Fragen stehen in inhalte/site.yaml unter "steckbrief" (gleiche Quelle wie das PDF).
+ * Nicht für Suchmaschinen gedacht (noindex), ohne Hauptnavigation.
+ */
+import Basis from "../layouts/Basis.astro";
+import { site } from "../config/laden";
+import { pfad } from "../config/pfad";
+
+const s = site.steckbrief;
+const f = site.formular;
+const name = "steckbrief";
+const istNetlify = f.anbieter === "netlify";
+const action = istNetlify ? pfad("/danke?anliegen=steckbrief") : f.endpunkt;
+const pdf = pfad(`/${site.infomappe.datei}`);
+
+const eingabe =
+  "mt-1.5 block w-full rounded-xl border-2 border-eingabe-rand bg-karte px-3.5 py-3 text-[max(16px,1rem)] aria-invalid:border-fehler";
+const kachel =
+  "flex min-h-[44px] cursor-pointer items-center gap-3 rounded-[0.875rem] border-2 border-eingabe-rand bg-karte px-4 py-2.5 font-semibold transition-colors hover:border-akzent has-checked:border-akzent has-checked:bg-akzent-hell";
+const autocomplete: Record<string, string> = { name: "name", email: "email", telefon: "tel", ort: "address-level2" };
+---
+
+<Basis titel={s.seo_titel} beschreibung={s.einleitung} fokus noindex>
+  <section class="behaelter abschnitt grid items-start gap-[clamp(1.75rem,5vw,4.5rem)] lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
+    <div class="flex flex-col gap-4 lg:sticky lg:top-28">
+      {s.kicker && <p class="etikett">{s.kicker}</p>}
+      <h1 class="h2 !mt-0">{s.titel}</h1>
+      <p class="max-w-[30rem] text-[clamp(1rem,1.5vw,1.19rem)] leading-relaxed text-leise">{s.einleitung}</p>
+      <p class="max-w-[30rem] rounded-[0.875rem] bg-sand px-4 py-3 text-[0.94rem] font-semibold">{s.sicherheit}</p>
+      <p class="text-[0.94rem] text-leise">
+        {s.pdf_hinweis} <a href={pdf} class="textlink" download>{s.pdf_link}</a>
+      </p>
+    </div>
+
+    <form
+      name={name}
+      method="POST"
+      action={action}
+      class="steckbrief flex flex-col gap-8 rounded-[1.75rem] bg-karte p-[clamp(1.25rem,3vw,2.5rem)] shadow-[0_20px_50px_rgb(24_38_28/0.08)]"
+      data-anbieter={f.anbieter}
+      data-fehler-senden={site.anfrage.fehler_senden}
+      data-senden-laeuft={site.anfrage.senden_laeuft}
+      novalidate
+      {...istNetlify ? { "data-netlify": "true", "netlify-honeypot": "firma_website" } : {}}
+    >
+      <input type="hidden" name="form-name" value={name} />
+      <p class="hidden" aria-hidden="true">
+        <label>Bitte nicht ausfüllen <input name="firma_website" tabindex="-1" autocomplete="off" /></label>
+      </p>
+
+      {
+        s.abschnitte.map((abschnitt, i) => (
+          <div class:list={[i > 0 && "border-t border-rahmen pt-7"]}>
+          <fieldset class="flex flex-col gap-5">
+            <legend class="font-display mb-5 flex items-center gap-3 text-[1.25rem] font-bold md:text-[1.4rem]">
+              <span class="grid size-9 shrink-0 place-items-center rounded-full bg-tinte text-base text-auf-tinte" aria-hidden="true">
+                {i + 1}
+              </span>
+              {abschnitt.titel}
+            </legend>
+            {abschnitt.felder.map((feld) => {
+              const id = `s-${feld.name}`;
+              const pflicht = feld.pflicht ?? false;
+              if (feld.typ === "auswahl" || feld.typ === "mehrfach") {
+                return (
+                  <fieldset>
+                    <legend class="font-semibold">{feld.label}</legend>
+                    <div class:list={["mt-2 grid gap-2", feld.optionen!.every((o) => o.length <= 11) ? "grid-cols-2" : "sm:grid-cols-2"]}>
+                      {feld.optionen!.map((option) => (
+                        <label class={kachel}>
+                          <input
+                            type={feld.typ === "auswahl" ? "radio" : "checkbox"}
+                            name={feld.typ === "auswahl" ? feld.name : `${feld.name}[]`}
+                            value={option}
+                            class="size-5 shrink-0 accent-[var(--akzent)]"
+                          />
+                          <span>{option}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </fieldset>
+                );
+              }
+              return (
+                <div>
+                  <label for={id} class="font-semibold">
+                    {feld.label}
+                    {pflicht && <span class="text-akzent-text"> *</span>}
+                  </label>
+                  {feld.typ === "textarea" ? (
+                    <textarea id={id} name={feld.name} rows="3" placeholder={feld.platzhalter} class={eingabe} />
+                  ) : (
+                    <input
+                      id={id}
+                      type={feld.typ}
+                      name={feld.name}
+                      required={pflicht}
+                      placeholder={feld.platzhalter}
+                      autocomplete={autocomplete[feld.name]}
+                      inputmode={feld.typ === "email" ? "email" : feld.typ === "tel" ? "tel" : undefined}
+                      class={eingabe}
+                      aria-describedby={pflicht ? `${id}-fehler` : undefined}
+                      data-fehler={feld.name === "email" ? site.anfrage.fehler_email : feld.name === "name" ? site.anfrage.fehler_name : undefined}
+                    />
+                  )}
+                  {pflicht && <p id={`${id}-fehler`} class="fehler mt-2 font-medium text-fehler" />}
+                </div>
+              );
+            })}
+          </fieldset>
+          </div>
+        ))
+      }
+
+      <div class="border-t border-rahmen pt-7">
+        <p class="text-sm text-leise">
+          {site.anfrage.datenschutz} <a href={pfad("/datenschutz")}>{site.anfrage.datenschutz_link}</a>.
+        </p>
+        <button type="submit" class="knopf knopf-primaer mt-5 w-full sm:w-auto" data-absenden>{s.absenden}</button>
+        <p class="fehler mt-4 font-medium text-fehler" role="alert" data-sende-fehler></p>
+      </div>
+    </form>
+  </section>
+</Basis>
+
+<style>
+  .fehler:empty {
+    display: none;
+  }
+</style>
+
+<script>
+  import "../scripts/steckbrief";
+</script>

@@ -5,3 +5,7 @@ dist/
 .DS_Store
 lighthouse/
 .claude/
+
+# Erzeugt von "npm run infomappe" (läuft auch vor jedem Build)
+public/anytime-infomappe.pdf
+vorlagen/email-infomappe.txt

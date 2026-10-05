@@ -12,7 +12,7 @@
 # Variablen in geschweiften Klammern werden automatisch ersetzt:
 #   {marke} {preis} {start} {ende} {antwortzeit} {test_tage}
 #   {gp_preis} {gp_monate} {gp_plaetze} {check_stunden}
-#   {verbesserungen} {region} {email} {antwort_frist}
+#   {verbesserungen} {region} {email} {telefon} {antwort_frist} {steckbrief_link}
 # Wenn Sie also unten den Preis ändern, ändert er sich überall.
 #
 # Eckige Klammern wie [MARKENNAME] sind offene Platzhalter.
@@ -104,19 +104,19 @@ hero:
   #   "Ihre Gäste bekommen Antwort. Sie bekommen Feierabend."
   #   "Ihre Ferienwohnung ist gut betreut. Ihre Freizeit gehört wieder Ihnen."
   titel: "Wir antworten Ihren Gästen. Sie haben frei."
-  unterzeile: "Alle Nachrichten auf Airbnb und Booking.com, von der Anfrage bis zur Bewertung. Täglich {start} bis {ende} Uhr, Antwort in etwa {antwortzeit} Minuten. Alles Wichtige prüft ein Mensch."
+  unterzeile: "Wir beantworten die Nachrichten Ihrer Gäste auf Airbnb und Booking.com, von der ersten Anfrage bis zur Bewertung. Täglich von {start} bis {ende} Uhr, meist innerhalb von {antwortzeit} Minuten, und so, wie Sie selbst schreiben würden."
   vertrauen:
     - "Keine Grundgebühr"
     - "Monatlich kündbar"
     - "DSGVO-konform"
-    - "Menschen kontrollieren die KI"
+    - "Persönliche Ansprechperson"
 
 # Laufendes Band unter dem ersten Bildschirm. Punkte laufen endlos von rechts nach links.
 laufband:
   punkte:
     - "Immer erreichbar"
     - "Auch sonntags und an Feiertagen"
-    - "KI-unterstützt"
+    - "Persönlich betreut"
     - "Herzliche Antworten in Ihrem Ton"
     - "Keine Grundgebühr"
     - "Monatlich kündbar"
@@ -134,26 +134,26 @@ chat_demo:
   gast_text: "Hallo! Wir stehen vor dem Schlüsselsafe, der Code klappt nicht. Können Sie helfen?"
   antwort_absender: "{marke} · 21:49"
   antwort_text: "Guten Abend! Bitte den Bügel nach dem Code einmal fest nach unten drücken, dann öffnet die Klappe. Willkommen an der Mosel!"
-  geprueft: "von einem Menschen geprüft"
+  geprueft: "gelesen und beantwortet"
   dank_text: "Hat geklappt, vielen Dank!"
 
 problem:
   kicker: "Kennen Sie das?"
-  titel: "Ihre Wohnung macht nie Feierabend. Ihr Handy auch nicht."
+  titel: "Gäste schreiben selten dann, wenn es Ihnen gerade passt."
   # "titel" ist das große Stichwort oben in der Karte, die letzte Karte erscheint in Gold
   karten:
     - titel: "19:30"
-      text: "Das Handy vibriert beim Abendessen. Eine Anfrage, die nicht warten will."
+      text: "Beim Abendessen kommt eine Anfrage. Wer erst am nächsten Morgen antwortet, verliert den Gast manchmal an die Wohnung nebenan."
     - titel: "Sonntag"
-      text: "Statt Ausflug mit der Familie beantworten Sie Fragen zu Parkplatz und Brötchenservice."
+      text: "Eigentlich wollten Sie mit der Familie raus. Stattdessen erklären Sie, wo man parkt und ob es morgens Brötchen gibt."
     - titel: "Im Urlaub"
-      text: "Gäste stehen vor dem Schlüsselsafe, und Sie sitzen am Strand mit schlechtem Netz."
+      text: "Die Gäste stehen vor dem Schlüsselsafe, und Sie liegen am Strand und haben kaum Empfang."
     - titel: "★ ★ ★"
-      text: "Langsame Antworten kosten Buchungen und Sterne in der Bewertung."
+      text: "Wer lange auf eine Antwort wartet, schreibt das gern in die Bewertung. Und dann fehlt ein Stern."
 
 rechner:
   titel: "Was kosten Sie langsame Antworten?"
-  intro: "Schätzen Sie einfach grob. Nichts wird gespeichert."
+  intro: "Grobe Schätzungen reichen. Wir speichern nichts davon."
   # Startwerte der Eingabefelder
   start_objekte: 3
   start_buchungen: 12
@@ -170,8 +170,8 @@ rechner:
 
 gaestereise:
   kicker: "So kümmern wir uns"
-  titel: "Jede Nachricht bekommt eine Antwort. Das spüren Ihre Gäste."
-  text: "Gäste erinnern sich nicht nur an die Wohnung, sondern daran, wie sie sich aufgehoben gefühlt haben. Kommunikation ist bei Airbnb sogar eine eigene Bewertungskategorie. Wer immer eine freundliche Rückmeldung bekommt, reist entspannter an und schreibt eher eine gute Bewertung."
+  titel: "Vom ersten Hallo bis zur Bewertung"
+  text: "Gäste merken sich die Wohnung, aber auch, ob sich jemand um sie gekümmert hat. Bei Airbnb ist Kommunikation sogar eine eigene Bewertungskategorie. Wer schnell eine freundliche Antwort bekommt, reist entspannter an und bewertet eher gut."
   phasen:
     - titel: "Vor der Anreise"
       punkte:
@@ -191,38 +191,38 @@ gaestereise:
         - "Monatlicher Bericht: was Gäste loben, was sie stört"
 
 ablauf:
-  kicker: "So einfach geht's"
-  titel: "In 3 Schritten startklar. Den Rest übernehmen wir."
+  kicker: "Der Start"
+  titel: "So fangen wir gemeinsam an"
   # "hinweis" ist das kleine Etikett oben rechts (leer lassen = kein Etikett)
   schritte:
     - titel: "Co-Host-Einladung"
       hinweis: "Wir helfen dabei"
       text: "Sie laden uns auf Airbnb als Co-Host mit der Berechtigung „Kalender und Postfach“ ein, auf Booking.com als eigenen Benutzer. Wir zeigen Ihnen, wo Sie klicken müssen. Ihre Zugangsdaten bleiben bei Ihnen."
     - titel: "Wir lernen Ihre Unterkunft kennen"
-      hinweis: "Wir machen die Arbeit"
+      hinweis: "Ein kurzes Telefonat"
       text: "Wir rufen Sie kurz an und fragen alles ab, was Gäste wissen wollen: Check-in, Hausregeln, WLAN, Parken, Ansprechpartner vor Ort. Daraus schreiben wir unseren Spickzettel für jede Antwort."
     - titel: "Wir übernehmen"
-      hinweis: "Sie lehnen sich zurück"
+      hinweis: "Ab hier haben Sie frei"
       text: "Ab jetzt antworten wir Ihren Gästen. Sie bekommen abends eine kurze Zusammenfassung und hören nur dann von uns, wenn Sie wirklich entscheiden müssen."
 
 leistungen:
   kicker: "Was wir für Sie tun"
-  titel: "Damit Sie sich um nichts kümmern müssen"
+  titel: "Was wir im Alltag für Sie erledigen"
   karten:
     - titel: "Antworten von {start} bis {ende} Uhr"
-      text: "Jeden Tag, auch am Wochenende und an Feiertagen. Keine Nachricht bleibt liegen."
+      text: "Jeden Tag, auch am Wochenende und an Feiertagen. Wir beantworten jede Nachricht, auch die kleinen."
     - titel: "Check-in-Kommunikation"
       text: "Anreiseinfos zum richtigen Zeitpunkt, Rückfragen zur Schlüsselübergabe, Erinnerung vor dem Check-out."
     - titel: "Notfälle an Ihre Partner vor Ort"
-      text: "Wasserschaden, Stromausfall, ausgesperrte Gäste: Wir informieren sofort Ihre hinterlegte Hausmeisterin, Reinigung oder Sie selbst. Nach festem Ablauf."
+      text: "Bei Wasserschaden, Stromausfall oder ausgesperrten Gästen rufen wir sofort Ihre Hausmeisterin, die Reinigung oder Sie selbst an. Wer wann dran ist, legen wir vorher gemeinsam fest."
     - titel: "Nachkontakt nach der Abreise"
       text: "Am Abreisetag bedanken wir uns persönlich und fragen nach einer Bewertung. Fehlt sie nach einigen Tagen, erinnern wir einmal freundlich."
-    - titel: "Bewertungsmanagement"
+    - titel: "Antworten auf Bewertungen"
       text: "Wir beantworten jede Bewertung in Ihrem Namen, gute wie kritische. Kritik melden wir Ihnen sofort, damit Sie reagieren können."
-    - titel: "Technik hilft, Menschen entscheiden"
-      text: "Eine KI schreibt Entwürfe, damit es schnell geht. Alles Wichtige wie Geld, Stornierungen, Beschwerden oder Notfälle lesen und beantworten wir selbst."
+    - titel: "Feste Ansprechperson für Sie"
+      text: "Sie erreichen uns per Telefon und E-Mail. Wir kennen Ihre Wohnungen, und alles Wichtige wie Geld, Stornierungen, Beschwerden oder Notfälle bearbeiten wir persönlich."
     - titel: "Tägliche Zusammenfassung und Monatsbericht"
-      text: "Jeden Abend eine E-Mail: was gefragt wurde, was wir geantwortet haben, was offen ist. Einmal im Monat: was Gäste in Bewertungen loben und was sie stört."
+      text: "Abends schicken wir Ihnen eine kurze E-Mail mit allem, was gefragt wurde und was noch offen ist. Einmal im Monat fassen wir zusammen, was Gäste loben und was sie stört."
 
 vergleich:
   kicker: "Ganz wie Sie möchten"
@@ -291,16 +291,16 @@ ergebnisse:
 # Foto: Datei nach public/ legen (z. B. public/team.jpg) und unten eintragen: foto: "/team.jpg"
 persoenlich:
   sichtbar: true
-  # Linke Seite: wie Mensch und KI zusammenarbeiten
-  kicker: "Kein Callcenter. Kein Roboter."
-  titel: "Eine KI schreibt vor. Ein Mensch entscheidet."
-  einleitung: "Die KI hilft uns, schnell zu sein. Bei allem, was zählt, liest ein Mensch mit, bevor eine Nachricht rausgeht. Wir kümmern uns um Ihre Gäste, als wären es unsere eigenen."
+  # Linke Seite: wie wir arbeiten. Hier wird der KI-Einsatz einmal offen und ruhig genannt (Transparenz).
+  kicker: "So arbeiten wir"
+  titel: "Zuerst lernen wir Ihre Wohnung kennen"
+  einleitung: "Am Anfang steht ein Gespräch mit Ihnen: über den Check-in, Ihre Hausregeln, Ihre Partner vor Ort und darüber, wie Sie mit Gästen reden. Das schreiben wir uns auf, damit jede Antwort zu Ihnen passt. Beim Formulieren hilft uns eine KI, damit es schnell geht. Was rausgeht, verantworten wir."
   themen:
     - "Geld"
     - "Stornierungen"
     - "Beschwerden"
     - "Notfälle"
-  themen_hinweis: "Diese Themen prüft immer ein Mensch."
+  themen_hinweis: "Diese Themen bearbeiten wir immer persönlich."
   # Rechte Seite: wer hinter anytime steht
   text:
     - "Hallo, ich bin [VORNAME]. [2 bis 3 Sätze in Ihren eigenen Worten: Warum Sie anytime gegründet haben, z. B. eigene Erfahrung als Gastgeber oder Gastgeberin an der Mosel.]"
@@ -312,8 +312,8 @@ persoenlich:
   foto_platzhalter: "Foto: [Person hinter anytime, z. B. an der Mosel]"
 
 preise_abschnitt:
-  kicker: "Fair und einfach"
-  titel: "Ein Preis. Nur wenn Sie Buchungen haben."
+  kicker: "So rechnen wir ab"
+  titel: "Sie zahlen nur für Buchungen, die Sie auch bekommen."
   einheit: "pro Buchung"
   test_hinweis: "Die ersten {test_tage} Tage sind kostenlos."
   # Kleiner Kostenrechner mit Schieberegler
@@ -364,7 +364,7 @@ angebote:
       punkte:
         - "Alle Nachrichten, {start} bis {ende} Uhr"
         - "Antwort in etwa {antwortzeit} Minuten"
-        - "Mensch prüft alles Wichtige"
+        - "Feste Ansprechperson"
         - "{test_tage} Tage kostenlos testen"
       cta: "{test_tage} Tage kostenlos testen"
     - etikett: "Zum Kennenlernen"
@@ -392,7 +392,7 @@ angebote:
 anfrage:
   kicker: "Anfrage in 1 Minute"
   titel: "Erzählen Sie uns kurz von Ihren Wohnungen"
-  untertitel: "4 kurze Fragen. Wir melden uns persönlich bei Ihnen, nicht mit einer automatischen Mail. Unverbindlich und ohne Vertrag."
+  untertitel: "Es sind vier kurze Fragen. Danach meldet sich jemand von uns persönlich bei Ihnen. Die Anfrage ist unverbindlich und kostet nichts."
   # Handschriftlicher Gruß unter dem Text (leer lassen = kein Gruß)
   gruss: "Wir freuen uns auf Sie!"
   anliegen_frage: "Ich möchte"
@@ -446,16 +446,16 @@ anfrage:
 
 faq:
   kicker: "Gut zu wissen"
-  titel: "Fragen, die uns oft gestellt werden"
+  titel: "Häufige Fragen"
   fragen:
     - frage: "Ist das mit den Regeln von Airbnb vereinbar?"
       antwort: "Ja. Airbnb sieht Co-Hosts ausdrücklich vor, mit verschiedenen Berechtigungsstufen und der Möglichkeit, Co-Hosts an der Auszahlung zu beteiligen. Wir kommunizieren ausschließlich über das Postfach der Plattform. Wir sind ein unabhängiger Dienstleister und nicht mit Airbnb oder Booking.com verbunden. [ZU PRÜFEN: welche Berechtigungsstufe für die Auszahlungsbeteiligung nötig ist]"
     - frage: "Welche Plattformen unterstützen Sie?"
       antwort: "Airbnb und Booking.com. [WEITERE PLATTFORMEN ODER CHANNEL MANAGER]"
     - frage: "Wie gehen Sie mit den Daten meiner Gäste um?"
-      antwort: "Wir verarbeiten Gästedaten nur in Ihrem Auftrag und schließen dafür einen Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO. Wir sehen nur, was die Plattform einem Co-Host zeigt. [SPEICHERORT UND HOSTING DER WISSENSBASIS UND DER KI]"
-    - frage: "Wofür setzen Sie KI ein?"
-      antwort: "Für Entwürfe von Antworten auf Basis Ihrer Wissensbasis. Routinefragen wie WLAN oder Anreise können nach Ihrer Freigabe direkt beantwortet werden. Alles zu Geld, Stornierung, Beschwerden, Schäden und Notfällen prüft vor dem Versand ein Mensch."
+      antwort: "Wir verarbeiten Gästedaten nur in Ihrem Auftrag und schließen dafür einen Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO. Wir sehen nur, was die Plattform einem Co-Host zeigt. [SPEICHERORT UND HOSTING DER WISSENSBASIS UND DER EINGESETZTEN SOFTWARE]"
+    - frage: "Setzen Sie Künstliche Intelligenz ein?"
+      antwort: "Ja. Eine KI schreibt Vorschläge für Antworten auf Basis der Angaben zu Ihrer Wohnung, damit Ihre Gäste schnell eine Antwort bekommen. Routinefragen wie WLAN oder Anreise können nach Ihrer Freigabe direkt beantwortet werden. Alles zu Geld, Stornierungen, Beschwerden, Schäden und Notfällen bearbeiten wir persönlich, bevor etwas rausgeht."
     - frage: "Wie läuft der Nachkontakt mit den Gästen?"
       antwort: "Am Abreisetag schicken wir eine persönliche Dankesnachricht und bitten um eine Bewertung. Wir fragen jeden Gast, ohne Gegenleistung und nach den Regeln der Plattform. Fehlt die Bewertung nach einigen Tagen, erinnern wir einmal. Jede eingehende Bewertung beantworten wir in Ihrem Namen."
     - frage: "Was passiert bei einem Notfall in der Nacht?"
@@ -474,8 +474,8 @@ faq:
 abschluss:
   kicker: "Heute Abend schon?"
   # Der Satz nach dem ersten Punkt leuchtet in Mint
-  titel: "Ihre Gäste sind gut betreut. Machen Sie Feierabend."
-  text: "Jeder Gast bekommt eine Antwort, Sie bekommen mehr Freiheit. Testen Sie {test_tage} Tage ohne Kosten und ohne Vertrag. Oder lassen Sie zuerst Ihr Inserat prüfen: {verbesserungen} konkrete Verbesserungen innerhalb von {check_stunden} Stunden."
+  titel: "Ihre Gäste sind gut versorgt. Ihr Abend gehört wieder Ihnen."
+  text: "Probieren Sie uns {test_tage} Tage lang aus, kostenlos und ohne Vertrag. Wenn Sie uns erst einmal kennenlernen möchten, sehen wir uns vorher Ihr Inserat an und schicken Ihnen innerhalb von {check_stunden} Stunden {verbesserungen} konkrete Vorschläge."
 
 footer:
   hinweis_marken: "Airbnb und Booking.com sind Marken ihrer jeweiligen Inhaber. {marke} ist ein unabhängiger Dienstleister und steht in keiner Verbindung zu diesen Unternehmen."
@@ -487,7 +487,7 @@ inserats_check:
   seo_titel: "Kostenloser Inserats-Check für Ferienwohnungen | {marke}"
   seo_beschreibung: "{verbesserungen} konkrete Verbesserungen für Ihr Airbnb- oder Booking.com-Inserat, innerhalb von {check_stunden} Stunden per E-Mail. Kostenlos und ohne Verpflichtung."
   titel: "Kostenloser Inserats-Check: {verbesserungen} konkrete Verbesserungen für Ihr Ferienwohnungs-Inserat."
-  unterzeile: "Innerhalb von {check_stunden} Stunden per E-Mail. Kostenlos und ohne Verpflichtung."
+  unterzeile: "Sie bekommen die Liste innerhalb von {check_stunden} Stunden per E-Mail. Der Check ist kostenlos und verpflichtet Sie zu nichts."
   was_titel: "Was wir uns ansehen"
   was_punkte:
     - "Titel und erste Bildzeile"
@@ -498,9 +498,9 @@ inserats_check:
   was_hinweis: "[INHALT DES CHECKS BESTÄTIGEN]"
   nutzen:
     - titel: "{verbesserungen} konkrete Punkte"
-      text: "Keine allgemeinen Tipps, sondern Änderungen, die Sie direkt umsetzen können."
+      text: "Änderungen, die Sie direkt in Ihrem Inserat umsetzen können."
     - titel: "In {check_stunden} Stunden"
-      text: "Per E-Mail, als kurze Liste mit Begründung."
+      text: "Sie bekommen eine kurze Liste per E-Mail, jeden Punkt mit Begründung."
     - titel: "Ohne Konto-Zugang"
       text: "Der öffentliche Link zu Ihrem Inserat genügt."
   formular_titel: "Inserats-Check anfordern"
@@ -515,6 +515,107 @@ inserats_check:
       antwort: "[WER PRÜFT: Name oder Rolle, Erfahrung in Worten, keine erfundenen Zahlen]"
 
 # ---------------------------------------------------------------------
+# WOHNUNGS-STECKBRIEF (Seite /steckbrief und Seiten 3 bis 4 der Infomappe)
+# Die Fragen stehen nur hier. Online-Formular und PDF werden daraus erzeugt.
+# Feldarten (typ): text, email, tel, textarea, auswahl (eine Antwort), mehrfach (mehrere Antworten)
+# "name" ist der technische Feldname: nur Kleinbuchstaben, keine Leerzeichen, nach dem Start nicht mehr ändern.
+# Nach Änderungen das PDF neu erzeugen: im Terminal "npm run infomappe".
+# ---------------------------------------------------------------------
+steckbrief:
+  seo_titel: "Wohnungs-Steckbrief | {marke}"
+  kicker: "Etwa 10 Minuten"
+  titel: "Ihr Wohnungs-Steckbrief"
+  einleitung: "Mit diesen Angaben betreuen wir Ihre Gäste vom ersten Tag an so, als wären Sie selbst da. Nur Name und E-Mail sind Pflicht. Was Sie gerade nicht wissen, klären wir gern am Telefon."
+  sicherheit: "Bitte tragen Sie keine Safe-Codes, Türcodes oder Passwörter ein. Die besprechen wir sicher am Telefon."
+  pdf_hinweis: "Lieber auf Papier?"
+  pdf_link: "Steckbrief als PDF herunterladen"
+  absenden: "Steckbrief senden"
+  abschnitte:
+    - titel: "Ihre Kontaktdaten"
+      felder:
+        - { name: "name", label: "Vor- und Nachname", typ: "text", pflicht: true }
+        - { name: "email", label: "E-Mail-Adresse", typ: "email", pflicht: true }
+        - { name: "telefon", label: "Telefon", typ: "tel" }
+        - { name: "erreichbar", label: "Wann erreichen wir Sie am besten?", typ: "text", platzhalter: "z. B. werktags ab 17 Uhr" }
+    - titel: "Ihre Unterkunft"
+      felder:
+        - { name: "unterkunft", label: "Name der Unterkunft", typ: "text", platzhalter: "z. B. Ferienwohnung Moselblick" }
+        - { name: "ort", label: "Ort", typ: "text" }
+        - { name: "anzahl", label: "Wie viele Ferienwohnungen betreuen Sie?", typ: "auswahl", optionen: ["1", "2 bis 3", "4 bis 6", "7 bis 10", "mehr als 10"] }
+        - { name: "gaeste", label: "Für wie viele Gäste ist die Unterkunft ausgelegt?", typ: "text" }
+        - { name: "plattformen", label: "Wo vermieten Sie?", typ: "mehrfach", optionen: ["Airbnb", "Booking.com", "Eigene Website", "Andere"] }
+        - { name: "inserate", label: "Links zu Ihren Inseraten", typ: "textarea" }
+    - titel: "Anreise und Abreise"
+      felder:
+        - { name: "checkin", label: "Check-in ab", typ: "text", platzhalter: "z. B. 15 Uhr" }
+        - { name: "checkout", label: "Check-out bis", typ: "text", platzhalter: "z. B. 10 Uhr" }
+        - { name: "schluessel", label: "Wie bekommen Gäste den Schlüssel?", typ: "auswahl", optionen: ["Schlüsselsafe", "Persönliche Übergabe", "Elektronisches Schloss", "Nachbar oder Hausmeister", "Anders"] }
+        - { name: "anreise", label: "Wie finden Gäste den Eingang, und wo parken sie?", typ: "textarea" }
+        - { name: "flexibel", label: "Sind frühe Anreise oder später Check-out möglich?", typ: "auswahl", optionen: ["Ja, gegen Absprache", "Nein", "Bitte jedes Mal bei mir nachfragen"] }
+    - titel: "Während des Aufenthalts"
+      felder:
+        - { name: "ausstattung", label: "Wonach fragen Gäste oft?", typ: "textarea", platzhalter: "z. B. Heizung, Kamin, Waschmaschine, Kinderbett, Fahrräder" }
+        - { name: "hausregeln", label: "Ihre Hausregeln", typ: "textarea", platzhalter: "z. B. Haustiere, Rauchen, Ruhezeiten, Müll" }
+        - { name: "tipps", label: "Ihre Tipps für die Umgebung", typ: "textarea", platzhalter: "z. B. Bäcker, Restaurants, Weingüter, Ausflüge" }
+    - titel: "Ihre Partner vor Ort"
+      felder:
+        - { name: "reinigung", label: "Reinigung: Name und Telefon", typ: "text" }
+        - { name: "hausmeister", label: "Hausmeister oder Handwerker: Name und Telefon", typ: "text" }
+        - { name: "notfall", label: "Wer hilft bei Notfällen wie Wasserschaden oder Stromausfall?", typ: "textarea" }
+        - { name: "rueckfragen", label: "Wann dürfen wir Sie bei dringenden Fragen anrufen?", typ: "auswahl", optionen: ["Jederzeit", "Nur tagsüber", "Nur in Notfällen"] }
+    - titel: "Ihr Stil und Ihre Wünsche"
+      felder:
+        - { name: "anrede", label: "Wie sollen wir Ihre Gäste ansprechen?", typ: "auswahl", optionen: ["Mit Sie", "Mit Du", "So, wie der Gast schreibt"] }
+        - { name: "ton", label: "Welcher Ton passt zu Ihnen?", typ: "auswahl", optionen: ["Herzlich und locker", "Freundlich und sachlich", "Eher förmlich"] }
+        - { name: "aufgaben", label: "Was sollen wir übernehmen?", typ: "mehrfach", optionen: ["Gästefragen beantworten", "Check-in-Infos versenden", "Notfälle an Partner weitergeben", "Dank und Bitte um Bewertung", "Bewertungen beantworten"] }
+        - { name: "wichtig", label: "Was ist Ihnen im Umgang mit Gästen besonders wichtig?", typ: "textarea" }
+    - titel: "Zum Schluss"
+      felder:
+        - { name: "start", label: "Ab wann möchten Sie starten?", typ: "text" }
+        - { name: "anmerkungen", label: "Möchten Sie uns noch etwas sagen?", typ: "textarea" }
+
+# ---------------------------------------------------------------------
+# INFOMAPPE (PDF zum Verschicken) und E-MAIL-VORLAGE
+# Erzeugen mit: npm run infomappe
+#   -> public/anytime-infomappe.pdf (auch auf der Website abrufbar)
+#   -> vorlagen/email-infomappe.txt (Text zum Kopieren in Ihr E-Mail-Programm)
+# Leistungen, Ablauf, Preise und Steckbrief kommen automatisch aus dieser Datei.
+# ---------------------------------------------------------------------
+infomappe:
+  datei: "anytime-infomappe.pdf"
+  titel: "Wir antworten Ihren Gästen. Sie haben frei."
+  untertitel: "Gästebetreuung für Ferienwohnungen auf Airbnb und Booking.com"
+  einleitung: "Gästefragen kommen gern beim Abendessen, am Sonntag oder im Urlaub. Wir übernehmen diese Nachrichten für Sie, von der ersten Anfrage bis zur Bewertung, und schreiben so, wie Sie selbst schreiben würden. Sie bekommen abends eine kurze Zusammenfassung und haben bei uns eine feste Ansprechperson."
+  leistungen_titel: "Was wir für Sie übernehmen"
+  ablauf_titel: "So starten Sie"
+  preis_titel: "So rechnen wir ab"
+  preis_zeile: "pro Buchung. Keine Grundgebühr, monatlich kündbar, die ersten {test_tage} Tage kostenlos."
+  steckbrief_titel: "Ihr Wohnungs-Steckbrief"
+  steckbrief_einleitung: "Füllen Sie den Steckbrief einfach direkt in diesem PDF aus, speichern Sie ihn und senden Sie ihn an {email}. Gedruckt und ausgefüllt als Foto geht auch. Nur Name und E-Mail sind Pflicht."
+  online_titel: "Lieber online?"
+  online_text: "Den Steckbrief können Sie auch bequem auf unserer Website ausfüllen:"
+  rueckweg_text: "Oder ausgefüllt zurück an: {email}"
+  abschluss_text: "Vielen Dank! Bitte senden Sie den ausgefüllten Steckbrief an {email}."
+  kontakt_titel: "Fragen? Wir sind für Sie da."
+  email_betreff: "Ihre Infomappe von {marke}: So betreuen wir Ihre Gäste"
+  email_text: |
+    Guten Tag [ANREDE UND NAME],
+
+    vielen Dank für Ihr Interesse an {marke}. Im Anhang finden Sie unsere Infomappe: Darin steht, was wir für Sie und Ihre Gäste übernehmen, wie der Start abläuft und was es kostet.
+
+    Auf den letzten Seiten finden Sie Ihren Wohnungs-Steckbrief. Damit lernen wir Ihre Unterkunft kennen und können Ihre Gäste vom ersten Tag an so betreuen, als wären Sie selbst da. Sie können ihn direkt im PDF ausfüllen und an diese Adresse zurücksenden.
+
+    Lieber online? Dann füllen Sie den Steckbrief hier aus:
+    {steckbrief_link}
+
+    Was Sie gerade nicht wissen, klären wir gern in einem kurzen Telefonat. Die ersten {test_tage} Tage sind kostenlos und unverbindlich.
+
+    Herzliche Grüße
+    [IHR NAME]
+    {marke}
+    {telefon}
+
+# ---------------------------------------------------------------------
 # SEITE /danke
 # ---------------------------------------------------------------------
 danke:
@@ -523,6 +624,11 @@ danke:
   text_check: "Ihr Inserats-Check kommt innerhalb von {check_stunden} Stunden an die angegebene E-Mail-Adresse."
   text_test: "Wir melden uns innerhalb von {antwort_frist} mit den nächsten Schritten für Ihren {test_tage}-Tage-Test."
   text_agentur: "Wir melden uns innerhalb von {antwort_frist}, um ein Gespräch zu vereinbaren."
+  text_steckbrief: "Vielen Dank für Ihren Steckbrief! Wir sehen ihn uns an und melden uns innerhalb von {antwort_frist}, um die letzten Fragen kurz am Telefon zu klären."
+  # Hinweis auf den Steckbrief nach einer Anfrage (leer lassen = kein Hinweis)
+  steckbrief_titel: "Schon jetzt Zeit sparen?"
+  steckbrief_text: "Erzählen Sie uns in etwa 10 Minuten von Ihrer Unterkunft. Dann geht der Start noch schneller."
+  steckbrief_button: "Wohnungs-Steckbrief ausfüllen"
   naechster_titel: "Nächster Schritt"
   naechster_text: "Wenn Sie direkt einen Termin für ein 15-minütiges Gespräch wählen möchten:"
   termin_button: "Termin auswählen"

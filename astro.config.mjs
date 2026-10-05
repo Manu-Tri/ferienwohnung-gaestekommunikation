@@ -19,7 +19,7 @@ export default defineConfig({
   build: { format: "directory" },
   integrations: [
     sitemap({
-      filter: (seite) => !seite.includes("/danke"),
+      filter: (seite) => !seite.includes("/danke") && !seite.includes("/steckbrief"),
     }),
   ],
   vite: {

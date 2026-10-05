@@ -13,9 +13,21 @@ const hatTerminlink = /^https?:\/\//.test(site.links.buchungslink);
         <svg viewBox="0 0 24 24" width="28" height="28"><path d="M6 12.5l4 4L18 8" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
       </span>
       <h1 class="mt-7 text-4xl md:text-5xl">{d.titel}</h1>
-      <p class="mt-5 text-lg" data-danke-text data-check={d.text_check} data-test={d.text_test} data-agentur={d.text_agentur}>
+      <p class="mt-5 text-lg" data-danke-text data-check={d.text_check} data-test={d.text_test} data-agentur={d.text_agentur} data-steckbrief={d.text_steckbrief}>
         {d.text_allgemein}
       </p>
+
+      {
+        d.steckbrief_titel && d.steckbrief_button && (
+          <div class="mt-10 rounded-[1.25rem] bg-sand p-6" data-steckbrief-hinweis>
+            <h2 class="text-2xl">{d.steckbrief_titel}</h2>
+            {d.steckbrief_text && <p class="mt-2 text-leise">{d.steckbrief_text}</p>}
+            <a href={pfad("/steckbrief")} class="knopf knopf-primaer mt-5">
+              {d.steckbrief_button}
+            </a>
+          </div>
+        )
+      }
 
       <div class="mt-10 border-t border-linie pt-8">
         <h2 class="text-2xl">{d.naechster_titel}</h2>
@@ -41,7 +53,9 @@ const hatTerminlink = /^https?:\/\//.test(site.links.buchungslink);
 <script>
   const absatz = document.querySelector<HTMLElement>("[data-danke-text]");
   const anliegen = new URLSearchParams(window.location.search).get("anliegen");
-  if (absatz && anliegen && ["check", "test", "agentur"].includes(anliegen)) {
+  if (absatz && anliegen && ["check", "test", "agentur", "steckbrief"].includes(anliegen)) {
     absatz.textContent = absatz.dataset[anliegen] ?? absatz.textContent;
   }
+  // Wer den Steckbrief gerade gesendet hat, braucht den Hinweis darauf nicht mehr
+  if (anliegen === "steckbrief") document.querySelector<HTMLElement>("[data-steckbrief-hinweis]")?.remove();
 </script>

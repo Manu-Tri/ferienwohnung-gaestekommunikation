@@ -209,12 +209,68 @@ export const siteSchema = z.object({
     formular_titel: text,
     faq: z.array(faqEintrag),
   }),
+  steckbrief: z.object({
+    seo_titel: text,
+    kicker: text.optional(),
+    titel: text,
+    einleitung: text,
+    sicherheit: text,
+    pdf_hinweis: text,
+    pdf_link: text,
+    absenden: text,
+    abschnitte: z
+      .array(
+        z.object({
+          titel: text,
+          felder: z
+            .array(
+              z
+                .object({
+                  name: z.string().regex(/^[a-z0-9_]+$/, "Feldname: nur Kleinbuchstaben, Zahlen und Unterstriche"),
+                  label: text,
+                  typ: z.enum(["text", "email", "tel", "textarea", "auswahl", "mehrfach"]),
+                  pflicht: z.boolean().optional(),
+                  platzhalter: text.optional(),
+                  optionen: liste.optional(),
+                })
+                .refine((f) => !["auswahl", "mehrfach"].includes(f.typ) || (f.optionen?.length ?? 0) > 0, {
+                  message: "Felder vom Typ auswahl oder mehrfach brauchen optionen",
+                }),
+            )
+            .min(1),
+        }),
+      )
+      .min(1),
+  }),
+  infomappe: z.object({
+    datei: z.string().regex(/^[a-z0-9-]+\.pdf$/),
+    titel: text,
+    untertitel: text,
+    einleitung: text,
+    leistungen_titel: text,
+    ablauf_titel: text,
+    preis_titel: text,
+    preis_zeile: text,
+    steckbrief_titel: text,
+    steckbrief_einleitung: text,
+    online_titel: text,
+    online_text: text,
+    rueckweg_text: text,
+    abschluss_text: text,
+    kontakt_titel: text,
+    email_betreff: text,
+    email_text: text,
+  }),
   danke: z.object({
     titel: text,
     text_allgemein: text,
     text_check: text,
     text_test: text,
     text_agentur: text,
+    text_steckbrief: text,
+    steckbrief_titel: text.optional(),
+    steckbrief_text: text.optional(),
+    steckbrief_button: text.optional(),
     naechster_titel: text,
     naechster_text: text,
     termin_button: text,

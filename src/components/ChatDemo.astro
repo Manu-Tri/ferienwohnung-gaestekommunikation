@@ -1,6 +1,6 @@
 ---
 /**
- * Kurzes Gespräch im grünen Feld: Gast schreibt abends, wir antworten, ein Mensch hat geprüft.
+ * Kurzes Gespräch: Gast schreibt abends, wir antworten herzlich, Doppelhäkchen „gelesen und beantwortet“.
  * Ohne JavaScript oder bei reduzierter Bewegung ist alles sofort sichtbar.
  * Mit JavaScript läuft das Gespräch in einer Schleife ab (data-schritt 0 bis 4).
  */
@@ -29,7 +29,7 @@ const c = site.chat_demo;
     </div>
   </div>
 
-  <div class="geprueft self-end text-[0.875rem] font-semibold text-akzent-text">✓ {c.geprueft}</div>
+  <div class="geprueft self-end text-[0.875rem] font-semibold text-akzent-text"><span aria-hidden="true">✓✓</span> {c.geprueft}</div>
 
   {c.dank_text && <div class="blase blase-gast dank max-w-[70%] self-start">{c.dank_text}</div>}
 </div>
