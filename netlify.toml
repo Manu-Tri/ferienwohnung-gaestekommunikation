@@ -5,6 +5,11 @@
 [build.environment]
   NODE_VERSION = "24"
 
+# Vorübergehend: Produktion trotz offener Platzhalter veröffentlichen (siehe "npm run platzhalter").
+# Sobald alle Platzhalter ausgefüllt sind, diesen Block löschen, dann sperrt der Build wieder.
+[context.production.environment]
+  PLATZHALTER_ERLAUBT = "true"
+
 [[headers]]
   for = "/*"
   [headers.values]
