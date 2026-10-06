@@ -1,72 +1,116 @@
 ---
 /**
- * Kurzes Gespräch: Gast schreibt abends, wir antworten herzlich, Doppelhäkchen „gelesen und beantwortet“.
+ * Kurzes Gespräch im Handy: Gast schreibt abends, wir antworten herzlich, Doppelhäkchen „gelesen und beantwortet“.
  * Ohne JavaScript oder bei reduzierter Bewegung ist alles sofort sichtbar.
- * Mit JavaScript läuft das Gespräch in einer Schleife ab (data-schritt 0 bis 4).
+ * Mit JavaScript laufen die Nachrichten nacheinander ein, vor jeder Antwort von uns kurz „schreibt …“.
+ * Am Handy nur bis zur ersten Antwort, damit der Rahmen kompakt bleibt und nicht leer wirkt.
  */
 import { site } from "../config/laden";
 const c = site.chat_demo;
+const vonListe = c.nachrichten.map((n) => n.von);
+const ersteWir = vonListe.indexOf("wir");
+const letzteWir = vonListe.lastIndexOf("wir");
+// Häkchen-Zeile: am Handy unter der ersten Antwort, sonst unter der letzten
+const haekchen = (i: number) => (i === ersteWir && i === letzteWir ? "" : i === ersteWir ? "nur-schmal" : i === letzteWir ? "nur-breit" : null);
 ---
 
-<div class="chat relative flex w-full max-w-[23.75rem] flex-col gap-[clamp(0.5rem,1vw,0.75rem)]" role="img" aria-label={c.beschreibung}>
-  <div class="flex flex-wrap items-baseline gap-x-3">
-    {c.uhrzeit && <span class="font-display text-[clamp(1.8rem,4.2vw,3.4rem)] leading-none font-extrabold tracking-[-0.03em] text-tinte">{c.uhrzeit}</span>}
-    {c.notiz && <span class="hand text-[clamp(1.5rem,2vw,1.65rem)] leading-[1.1] text-akzent-text">{c.notiz}</span>}
-  </div>
+<div class="chat-rahmen relative w-full max-w-[22.5rem]">
+  {
+    (c.uhrzeit || c.notiz) && (
+      <p class="notiz mb-3 flex flex-wrap items-baseline gap-x-3">
+        {c.uhrzeit && <span class="font-display text-[clamp(2rem,4vw,3rem)] leading-none font-extrabold text-auf-tinte">{c.uhrzeit}</span>}
+        {c.notiz && <span class="hand text-[clamp(1.45rem,2vw,1.7rem)] leading-[1.1] text-gold">{c.notiz}</span>}
+      </p>
+    )
+  }
 
-  <div class="blase blase-gast gast max-w-[88%] self-start">
-    <div class="absender text-[#6b604b]">{c.gast_absender}</div>
-    {c.gast_text}
-  </div>
-
-  <div class="relative max-w-[90%] self-end">
-    <div class="tippen absolute top-0 right-0 inline-flex gap-[5px] rounded-[16px_16px_4px_16px] bg-tinte px-3.5 py-3" aria-hidden="true">
-      <span></span><span></span><span></span>
+  <div class="telefon">
+    <div class="chat flex flex-col justify-end gap-2" role="img" aria-label={c.beschreibung}>
+      {
+        c.nachrichten.map((n, i) =>
+          n.von === "gast" ? (
+            <div class:list={["nachricht blase blase-gast max-w-[86%] self-start", i > ersteWir && "nur-breit"]} data-i={i}>
+              {n.absender && <div class="absender text-leise">{n.absender}</div>}
+              {n.text}
+            </div>
+          ) : (
+            <>
+              <div class:list={["relative max-w-[88%] self-end", i > ersteWir && "nur-breit"]}>
+                <div class="tippen ml-auto w-fit gap-[5px] rounded-[14px_14px_4px_14px] bg-akzent px-3.5 py-3" data-fuer={i} aria-hidden="true">
+                  <span />
+                  <span />
+                  <span />
+                </div>
+                <div class="nachricht blase blase-wir" data-i={i} data-wir>
+                  {n.absender && <div class="absender text-mint-hell">{n.absender}</div>}
+                  {n.text}
+                </div>
+              </div>
+              {haekchen(i) !== null && (
+                <div class:list={["geprueft -mt-1 flex items-center gap-1.5 self-end text-[0.875rem] font-semibold text-mint", haekchen(i)]} data-nach={i}>
+                  <svg viewBox="0 0 20 12" width="18" height="11" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M1 6.5l3.6 3.6L12 2M8.6 9.4l.7.7L16.7 2" />
+                  </svg>
+                  {c.geprueft}
+                </div>
+              )}
+            </>
+          ),
+        )
+      }
     </div>
-    <div class="blase blase-wir antwort">
-      <div class="absender text-mint">{c.antwort_absender}</div>
-      {c.antwort_text}
-    </div>
   </div>
-
-  <div class="geprueft self-end text-[0.875rem] font-semibold text-akzent-text"><span aria-hidden="true">✓✓</span> {c.geprueft}</div>
-
-  {c.dank_text && <div class="blase blase-gast dank max-w-[70%] self-start">{c.dank_text}</div>}
 </div>
 
 <style>
+  .telefon {
+    padding: 0.875rem 0.75rem 1.25rem;
+    border-radius: 2rem;
+    background: var(--tinte-tief);
+    border: 1px solid rgb(238 240 234 / 0.14);
+    box-shadow:
+      0 0 0 6px rgb(238 240 234 / 0.04),
+      0 30px 60px -20px rgb(0 0 0 / 0.5);
+  }
+  /* Kleine Kamera-Kerbe, damit der Rahmen als Handy lesbar ist */
+  .telefon::before {
+    content: "";
+    display: block;
+    width: 4.5rem;
+    height: 0.35rem;
+    margin: 0 auto 0.875rem;
+    border-radius: 1rem;
+    background: rgb(238 240 234 / 0.16);
+  }
   .blase {
-    padding: clamp(0.5625rem, 1vw, 0.8125rem) clamp(0.75rem, 1.3vw, 1rem);
-    font-size: clamp(0.94rem, 1.2vw, 1rem);
-    line-height: 1.4;
+    padding: 0.55rem 0.8rem;
+    font-size: clamp(0.92rem, 1.1vw, 0.97rem);
+    line-height: 1.38;
   }
   .blase-gast {
-    background: #fff;
-    color: var(--tinte);
-    border-radius: 18px 18px 18px 4px;
-    box-shadow: 0 10px 30px rgb(24 38 28 / 0.12);
+    background: var(--flaeche);
+    color: var(--text);
+    border-radius: 14px 14px 14px 4px;
   }
   .blase-wir {
-    background: var(--tinte);
-    color: var(--auf-tinte);
-    border-radius: 18px 18px 4px 18px;
-    box-shadow: 0 10px 30px rgb(24 38 28 / 0.22);
+    background: var(--akzent);
+    color: var(--auf-akzent);
+    border-radius: 14px 14px 4px 14px;
   }
   .absender {
-    margin-bottom: 3px;
-    font-size: 0.875rem;
+    margin-bottom: 2px;
+    font-size: 0.85rem;
     font-weight: 700;
   }
   .tippen {
-    opacity: 0;
-    transition: opacity 0.2s;
+    display: none;
   }
   .tippen span {
     display: inline-block;
     width: 7px;
     height: 7px;
     border-radius: 4px;
-    background: var(--auf-tinte);
+    background: var(--auf-akzent);
     animation: punkt 1.1s infinite;
   }
   .tippen span:nth-child(2) {
@@ -79,7 +123,7 @@ const c = site.chat_demo;
     0%,
     60%,
     100% {
-      opacity: 0.25;
+      opacity: 0.3;
       transform: translateY(0);
     }
     30% {
@@ -87,70 +131,107 @@ const c = site.chat_demo;
       transform: translateY(-3px);
     }
   }
-  /* Nachrichten tauchen weich auf: leicht von unten, etwas kleiner, unscharf */
-  .gast,
-  .antwort,
-  .dank {
+  .nachricht {
     transform-origin: bottom left;
-    transition:
-      opacity 0.6s ease,
-      transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-      filter 0.6s ease;
   }
-  .antwort {
+  .nachricht[data-wir] {
     transform-origin: bottom right;
   }
-  .geprueft {
-    transition: opacity 0.4s;
+  /* Ablauf nur mit JavaScript, wie in einer Chat-App: Die Höhe steht fest, neue Nachrichten
+     erscheinen unten und schieben die älteren nach oben. */
+  .chat[data-lauf] .nachricht:not(.da),
+  .chat[data-lauf] .geprueft:not(.da) {
+    display: none;
   }
-  /* Ablauf: leer = noch nichts, 0 = Gast, 1 = schreibt …, 2 = Antwort, 3 = geprüft, 4 = Dank */
-  .chat[data-schritt] .gast,
-  .chat[data-schritt] .antwort,
-  .chat[data-schritt] .dank {
-    opacity: 0;
-    transform: translateY(14px) scale(0.96);
-    filter: blur(6px);
+  .chat[data-lauf] .tippen.an {
+    display: flex;
+    animation: rein 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   }
-  .chat[data-schritt]:not([data-schritt="leer"]) .gast {
-    opacity: 1;
-    transform: none;
-    filter: none;
+  .chat[data-lauf] .da {
+    animation: rein 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   }
-  .chat[data-schritt] .geprueft {
-    opacity: 0;
+  @keyframes rein {
+    from {
+      opacity: 0;
+      transform: translateY(10px) scale(0.97);
+    }
   }
-  .chat[data-schritt="1"] .tippen {
-    opacity: 1;
+  @media (max-width: 639px) {
+    .nur-breit {
+      display: none !important;
+    }
   }
-  .chat:is([data-schritt="2"], [data-schritt="3"], [data-schritt="4"]) .antwort,
-  .chat[data-schritt="4"] .dank {
-    opacity: 1;
-    transform: none;
-    filter: none;
-  }
-  .chat:is([data-schritt="3"], [data-schritt="4"]) .geprueft {
-    opacity: 1;
+  @media (min-width: 640px) {
+    .nur-schmal {
+      display: none !important;
+    }
   }
 </style>
 
 <script>
-  const ABLAUF: [string, number][] = [
-    ["leer", 900],
-    ["0", 1000],
-    ["1", 1800],
-    ["2", 700],
-    ["3", 1300],
-    ["4", 5000],
-  ];
-  document.querySelectorAll<HTMLElement>(".chat").forEach((chat) => {
+  const warte = (ms: number) => new Promise((r) => window.setTimeout(r, ms));
+  const DURCHLAEUFE = 3;
+  document.querySelectorAll<HTMLElement>(".chat").forEach(async (chat) => {
     if (!document.documentElement.classList.contains("reveal-an")) return;
-    let i = 0;
-    const weiter = () => {
-      const [schritt, warten] = ABLAUF[i];
-      chat.dataset.schritt = schritt;
-      i = (i + 1) % ABLAUF.length;
-      window.setTimeout(weiter, warten);
+    // Nur abspielen, solange der Chat im Bild ist
+    let imBild = true;
+    let weiter: (() => void) | null = null;
+    new IntersectionObserver(([e]) => {
+      imBild = e.isIntersecting;
+      if (imBild && weiter) {
+        weiter();
+        weiter = null;
+      }
+    }).observe(chat);
+    const schritt = async (ms: number) => {
+      await warte(ms);
+      if (!imBild) await new Promise<void>((r) => (weiter = r));
     };
-    weiter();
+    const alle = [...chat.querySelectorAll<HTMLElement>(".nachricht")];
+    const haekchen = [...chat.querySelectorAll<HTMLElement>(".geprueft")];
+    // Höhe des fertigen Gesprächs festhalten (am Handy kürzer), damit die Seite nicht springt
+    const messen = () => {
+      delete chat.dataset.lauf;
+      chat.style.height = "";
+      chat.style.height = `${chat.offsetHeight}px`;
+      chat.dataset.lauf = "";
+    };
+    messen();
+    let breite = window.innerWidth;
+    window.addEventListener("resize", () => {
+      if (window.innerWidth === breite) return;
+      breite = window.innerWidth;
+      const da = chat.querySelectorAll(".da");
+      messen();
+      da.forEach((el) => el.classList.add("da"));
+    });
+    // Am Handy ausgeblendete Nachrichten (Klasse nur-breit) überspringen
+    const schmal = window.matchMedia("(max-width: 639px)");
+    const sichtbar = (el: HTMLElement) =>
+      schmal.matches ? !el.closest(".nur-breit") : !el.classList.contains("nur-schmal");
+    for (let runde = 0; runde < DURCHLAEUFE; runde++) {
+      const nachrichten = alle.filter(sichtbar);
+      const meineHaekchen = haekchen.filter(sichtbar);
+      alle.forEach((n) => n.classList.remove("da"));
+      haekchen.forEach((h) => h.classList.remove("da"));
+      // Beim ersten Mal steht die Frage des Gastes sofort da
+      if (runde > 0) await schritt(900);
+      for (const n of nachrichten) {
+        if (n.hasAttribute("data-wir")) {
+          const tippen = chat.querySelector<HTMLElement>(`.tippen[data-fuer="${n.dataset.i}"]`);
+          tippen?.classList.add("an");
+          await schritt(1700);
+          tippen?.classList.remove("an");
+        }
+        n.classList.add("da");
+        const h = meineHaekchen.find((x) => x.dataset.nach === n.dataset.i);
+        if (h) {
+          await schritt(700);
+          h.classList.add("da");
+        }
+        await schritt(n.hasAttribute("data-wir") ? 1200 : 1000);
+      }
+      if (runde < DURCHLAEUFE - 1) await schritt(5000);
+    }
   });
 </script>

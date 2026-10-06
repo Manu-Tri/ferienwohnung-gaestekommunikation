@@ -1,36 +1,31 @@
 ---
 import { site } from "../config/laden";
-import Rechner from "./Rechner.astro";
 import Kopf from "./Kopf.astro";
 const p = site.problem;
 ---
 
-<section class="dunkel bg-tinte text-auf-tinte" aria-labelledby="problem-titel">
+<section class="problem" aria-labelledby="problem-titel">
   <div class="behaelter abschnitt flex flex-col gap-[clamp(1.75rem,4vw,3.5rem)]">
-    <Kopf id="problem-titel" kicker={p.kicker} titel={p.titel} art="hand" />
-    <ul class="karten reveal grid grid-cols-2 gap-[2px] overflow-hidden rounded-3xl bg-auf-tinte/15 xl:grid-cols-4">
+    <Kopf id="problem-titel" titel={p.titel} />
+    <ul class="karten reveal grid grid-cols-2 gap-x-[clamp(1rem,3vw,2.5rem)] gap-y-8 xl:grid-cols-4">
       {
-        p.karten.map((karte, i) => (
-          <li class="flex flex-col gap-2 bg-tinte p-4 sm:gap-2.5 sm:p-[clamp(1.375rem,2.6vw,2rem)]">
-            <h3 class:list={["text-[clamp(1.4rem,3vw,2.5rem)] leading-none font-extrabold", i === p.karten.length - 1 ? "text-gold" : "text-mint"]}>
-              {karte.titel}
+        p.karten.map((karte) => (
+          <li class="flex flex-col gap-2 border-t-2 border-text pt-4 sm:gap-3">
+            <h3 class="text-[clamp(2rem,4.2vw,3.4rem)] leading-none font-extrabold [font-stretch:62%]">
+              {/^[★☆\s]+$/.test(karte.titel) ? (
+                <>
+                  <span aria-hidden="true">{karte.titel}</span>
+                  <span class="sr-only">Bewertungen</span>
+                </>
+              ) : (
+                karte.titel
+              )}
             </h3>
-            <p class="text-[0.94rem] leading-snug text-auf-tinte-leise sm:text-base sm:leading-normal">{karte.text}</p>
+            <p class="text-[0.94rem] leading-snug text-leise sm:text-base sm:leading-normal">{karte.text}</p>
           </li>
         ))
       }
     </ul>
-    <div class="reveal">
-      <Rechner />
-    </div>
   </div>
 </section>
 
-<style>
-  .dunkel {
-    --fokus: var(--mint);
-  }
-  .dunkel :global(.kicker) {
-    color: var(--gold);
-  }
-</style>

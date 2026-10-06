@@ -2,35 +2,33 @@
 /** Wie wir arbeiten (links) und wer hinter dem Angebot steht (rechts). */
 import { site } from "../config/laden";
 import { pfad } from "../config/pfad";
+import { hatPlatzhalter } from "../config/platzhalter";
 const p = site.persoenlich;
+// Die Person erscheint erst, wenn Name, Rolle und Text echt ausgefüllt sind
+const personFertig = ![p.unterschrift, p.rolle, ...p.text].some(hatPlatzhalter);
+const fotoFertig = Boolean(p.foto) && !hatPlatzhalter(p.foto_alt);
 ---
 
 {
   p.sichtbar && (
     <section id="team" class="bg-sand" aria-labelledby="team-titel">
-      <div class="behaelter abschnitt grid items-center gap-[clamp(2rem,5vw,4.5rem)] md:grid-cols-2">
+      <div class:list={["behaelter abschnitt grid items-center gap-[clamp(2rem,5vw,4.5rem)]", personFertig && "md:grid-cols-2"]}>
         <div class="reveal flex flex-col gap-5">
-          {p.kicker && <p class="kicker">{p.kicker}</p>}
           <h2 id="team-titel" class="h2 !mt-0">
-            {p.titel.includes(". ") ? (
-              <>
-                {p.titel.slice(0, p.titel.indexOf(". ") + 1)} <span class="betont">{p.titel.slice(p.titel.indexOf(". ") + 2)}</span>
-              </>
-            ) : (
-              p.titel
-            )}
+            {p.titel}
           </h2>
           <p class="max-w-[35rem] text-[clamp(1rem,1.5vw,1.19rem)] leading-relaxed text-leise">{p.einleitung}</p>
           <ul class="grid max-w-[32.5rem] grid-cols-2 gap-2.5">
             {p.themen.map((thema) => (
-              <li class="rounded-[0.875rem] bg-flaeche px-4 py-3.5 font-bold">{thema}</li>
+              <li class="rounded-lg bg-flaeche px-4 py-3.5 font-bold">{thema}</li>
             ))}
           </ul>
           {p.themen_hinweis && <p class="text-[0.94rem] font-semibold text-leise">{p.themen_hinweis}</p>}
         </div>
 
+        {personFertig && (
         <figure class="reveal flex w-full max-w-[32.5rem] flex-col gap-4">
-          {p.foto ? (
+          {fotoFertig && (
             <img
               src={pfad(p.foto)}
               alt={p.foto_alt}
@@ -40,10 +38,6 @@ const p = site.persoenlich;
               decoding="async"
               class="foto aspect-[4/3.4] max-h-[27.5rem] w-full object-cover"
             />
-          ) : (
-            <div class="foto platzhalter flex aspect-[4/3.4] max-h-[27.5rem] items-end p-5">
-              <span class="rounded-md bg-sand px-2 py-1 font-mono text-sm text-[#5f5440]">{p.foto_platzhalter}</span>
-            </div>
           )}
           <figcaption class="flex flex-col gap-1">
             <span class="font-display text-[1.19rem] font-bold">
@@ -54,16 +48,15 @@ const p = site.persoenlich;
             ))}
           </figcaption>
         </figure>
+        )}
       </div>
     </section>
   )
 }
 
 <style>
+  /* Oben gerundet wie eine Haustür */
   .foto {
-    border-radius: 180px 24px 24px 24px;
-  }
-  .platzhalter {
-    background: repeating-linear-gradient(135deg, var(--sand-dunkel) 0 10px, #dacdb3 10px 20px);
+    border-radius: 999px 999px 0.75rem 0.75rem / 260px 260px 0.75rem 0.75rem;
   }
 </style>

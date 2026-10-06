@@ -1,4 +1,5 @@
 ---
+import { nurFertig } from "../config/platzhalter";
 /** Fokussierte Landingpage für Briefaktionen, Partner und Anzeigen. Ohne Hauptnavigation. */
 import Basis from "../layouts/Basis.astro";
 import Anfrageformular from "../components/Anfrageformular.astro";
@@ -33,7 +34,7 @@ const jsonld = [service(site.marke.einsatzgebiet, c.seo_beschreibung, url), faqS
           ))
         }
       </ul>
-      <p class="mt-5 text-sm text-leise">{c.was_hinweis}</p>
+      {nurFertig(c.was_hinweis) && <p class="mt-5 text-sm text-leise">{c.was_hinweis}</p>}
     </div>
   </section>
 

@@ -1,0 +1,677 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-06T08:06:42.031Z",
+  "title": "Design System: anytime – Moselabend",
+  "extensions": {
+    "colorMeta": {
+      "tinte": {
+        "role": "neutral",
+        "displayName": "Schiefer",
+        "canonical": "#22303d",
+        "tonalRamp": [
+          "hsl(209 28% 15%)",
+          "hsl(209 28% 25%)",
+          "hsl(209 28% 35%)",
+          "hsl(209 28% 45%)",
+          "hsl(209 28% 55%)",
+          "hsl(209 28% 70%)",
+          "hsl(209 28% 85%)",
+          "hsl(209 28% 95%)"
+        ]
+      },
+      "tinte-tief": {
+        "role": "neutral",
+        "displayName": "Tiefer Schiefer",
+        "canonical": "#1a2531",
+        "tonalRamp": [
+          "hsl(211 31% 15%)",
+          "hsl(211 31% 25%)",
+          "hsl(211 31% 35%)",
+          "hsl(211 31% 45%)",
+          "hsl(211 31% 55%)",
+          "hsl(211 31% 70%)",
+          "hsl(211 31% 85%)",
+          "hsl(211 31% 95%)"
+        ]
+      },
+      "tinte-hover": {
+        "role": "neutral",
+        "displayName": "Schiefer Hover",
+        "canonical": "#34465a",
+        "tonalRamp": [
+          "hsl(212 27% 15%)",
+          "hsl(212 27% 25%)",
+          "hsl(212 27% 35%)",
+          "hsl(212 27% 45%)",
+          "hsl(212 27% 55%)",
+          "hsl(212 27% 70%)",
+          "hsl(212 27% 85%)",
+          "hsl(212 27% 95%)"
+        ]
+      },
+      "auf-tinte": {
+        "role": "neutral",
+        "displayName": "Kalk auf Schiefer",
+        "canonical": "#eef0ea",
+        "tonalRamp": [
+          "hsl(80 17% 15%)",
+          "hsl(80 17% 25%)",
+          "hsl(80 17% 35%)",
+          "hsl(80 17% 45%)",
+          "hsl(80 17% 55%)",
+          "hsl(80 17% 70%)",
+          "hsl(80 17% 85%)",
+          "hsl(80 17% 95%)"
+        ]
+      },
+      "auf-tinte-leise": {
+        "role": "neutral",
+        "displayName": "Schieferhell",
+        "canonical": "#c3ccd3",
+        "tonalRamp": [
+          "hsl(206 15% 15%)",
+          "hsl(206 15% 25%)",
+          "hsl(206 15% 35%)",
+          "hsl(206 15% 45%)",
+          "hsl(206 15% 55%)",
+          "hsl(206 15% 70%)",
+          "hsl(206 15% 85%)",
+          "hsl(206 15% 95%)"
+        ]
+      },
+      "akzent": {
+        "role": "primary",
+        "displayName": "Weinlaubgrün",
+        "canonical": "#2e6b3f",
+        "tonalRamp": [
+          "hsl(137 40% 15%)",
+          "hsl(137 40% 25%)",
+          "hsl(137 40% 35%)",
+          "hsl(137 40% 45%)",
+          "hsl(137 40% 55%)",
+          "hsl(137 40% 70%)",
+          "hsl(137 40% 85%)",
+          "hsl(137 40% 95%)"
+        ]
+      },
+      "akzent-stark": {
+        "role": "primary",
+        "displayName": "Tiefes Weinlaub",
+        "canonical": "#265a34",
+        "tonalRamp": [
+          "hsl(136 41% 15%)",
+          "hsl(136 41% 25%)",
+          "hsl(136 41% 35%)",
+          "hsl(136 41% 45%)",
+          "hsl(136 41% 55%)",
+          "hsl(136 41% 70%)",
+          "hsl(136 41% 85%)",
+          "hsl(136 41% 95%)"
+        ]
+      },
+      "auf-akzent": {
+        "role": "primary",
+        "displayName": "Weiß auf Grün",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "hsl(0 0% 15%)",
+          "hsl(0 0% 25%)",
+          "hsl(0 0% 35%)",
+          "hsl(0 0% 45%)",
+          "hsl(0 0% 55%)",
+          "hsl(0 0% 70%)",
+          "hsl(0 0% 85%)",
+          "hsl(0 0% 95%)"
+        ]
+      },
+      "akzent-hell": {
+        "role": "primary",
+        "displayName": "Blasses Laub",
+        "canonical": "#dbe9d9",
+        "tonalRamp": [
+          "hsl(113 27% 15%)",
+          "hsl(113 27% 25%)",
+          "hsl(113 27% 35%)",
+          "hsl(113 27% 45%)",
+          "hsl(113 27% 55%)",
+          "hsl(113 27% 70%)",
+          "hsl(113 27% 85%)",
+          "hsl(113 27% 95%)"
+        ]
+      },
+      "akzent-text": {
+        "role": "primary",
+        "displayName": "Laubgrün als Schrift",
+        "canonical": "#255a33",
+        "tonalRamp": [
+          "hsl(136 42% 15%)",
+          "hsl(136 42% 25%)",
+          "hsl(136 42% 35%)",
+          "hsl(136 42% 45%)",
+          "hsl(136 42% 55%)",
+          "hsl(136 42% 70%)",
+          "hsl(136 42% 85%)",
+          "hsl(136 42% 95%)"
+        ]
+      },
+      "mint": {
+        "role": "secondary",
+        "displayName": "Helles Laubgrün",
+        "canonical": "#a3d89b",
+        "tonalRamp": [
+          "hsl(112 44% 15%)",
+          "hsl(112 44% 25%)",
+          "hsl(112 44% 35%)",
+          "hsl(112 44% 45%)",
+          "hsl(112 44% 55%)",
+          "hsl(112 44% 70%)",
+          "hsl(112 44% 85%)",
+          "hsl(112 44% 95%)"
+        ]
+      },
+      "mint-hover": {
+        "role": "secondary",
+        "displayName": "Helles Laubgrün Hover",
+        "canonical": "#b8e3b1",
+        "tonalRamp": [
+          "hsl(112 47% 15%)",
+          "hsl(112 47% 25%)",
+          "hsl(112 47% 35%)",
+          "hsl(112 47% 45%)",
+          "hsl(112 47% 55%)",
+          "hsl(112 47% 70%)",
+          "hsl(112 47% 85%)",
+          "hsl(112 47% 95%)"
+        ]
+      },
+      "mint-hell": {
+        "role": "secondary",
+        "displayName": "Laubhauch",
+        "canonical": "#e2f1df",
+        "tonalRamp": [
+          "hsl(110 39% 15%)",
+          "hsl(110 39% 25%)",
+          "hsl(110 39% 35%)",
+          "hsl(110 39% 45%)",
+          "hsl(110 39% 55%)",
+          "hsl(110 39% 70%)",
+          "hsl(110 39% 85%)",
+          "hsl(110 39% 95%)"
+        ]
+      },
+      "gold": {
+        "role": "tertiary",
+        "displayName": "Lampengelb",
+        "canonical": "#f4c95d",
+        "tonalRamp": [
+          "hsl(43 87% 15%)",
+          "hsl(43 87% 25%)",
+          "hsl(43 87% 35%)",
+          "hsl(43 87% 45%)",
+          "hsl(43 87% 55%)",
+          "hsl(43 87% 70%)",
+          "hsl(43 87% 85%)",
+          "hsl(43 87% 95%)"
+        ]
+      },
+      "flaeche": {
+        "role": "neutral",
+        "displayName": "Kalkhell",
+        "canonical": "#eef0ea",
+        "tonalRamp": [
+          "hsl(80 17% 15%)",
+          "hsl(80 17% 25%)",
+          "hsl(80 17% 35%)",
+          "hsl(80 17% 45%)",
+          "hsl(80 17% 55%)",
+          "hsl(80 17% 70%)",
+          "hsl(80 17% 85%)",
+          "hsl(80 17% 95%)"
+        ]
+      },
+      "sand": {
+        "role": "neutral",
+        "displayName": "Sand",
+        "canonical": "#dfe4da",
+        "tonalRamp": [
+          "hsl(90 16% 15%)",
+          "hsl(90 16% 25%)",
+          "hsl(90 16% 35%)",
+          "hsl(90 16% 45%)",
+          "hsl(90 16% 55%)",
+          "hsl(90 16% 70%)",
+          "hsl(90 16% 85%)",
+          "hsl(90 16% 95%)"
+        ]
+      },
+      "karte": {
+        "role": "neutral",
+        "displayName": "Weiß",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "hsl(0 0% 15%)",
+          "hsl(0 0% 25%)",
+          "hsl(0 0% 35%)",
+          "hsl(0 0% 45%)",
+          "hsl(0 0% 55%)",
+          "hsl(0 0% 70%)",
+          "hsl(0 0% 85%)",
+          "hsl(0 0% 95%)"
+        ]
+      },
+      "karte-2": {
+        "role": "neutral",
+        "displayName": "Kalkgrau",
+        "canonical": "#e5e9e1",
+        "tonalRamp": [
+          "hsl(90 15% 15%)",
+          "hsl(90 15% 25%)",
+          "hsl(90 15% 35%)",
+          "hsl(90 15% 45%)",
+          "hsl(90 15% 55%)",
+          "hsl(90 15% 70%)",
+          "hsl(90 15% 85%)",
+          "hsl(90 15% 95%)"
+        ]
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "Nachttinte",
+        "canonical": "#1d2833",
+        "tonalRamp": [
+          "hsl(210 28% 15%)",
+          "hsl(210 28% 25%)",
+          "hsl(210 28% 35%)",
+          "hsl(210 28% 45%)",
+          "hsl(210 28% 55%)",
+          "hsl(210 28% 70%)",
+          "hsl(210 28% 85%)",
+          "hsl(210 28% 95%)"
+        ]
+      },
+      "text-leise": {
+        "role": "neutral",
+        "displayName": "Grauschiefer",
+        "canonical": "#45505b",
+        "tonalRamp": [
+          "hsl(210 14% 15%)",
+          "hsl(210 14% 25%)",
+          "hsl(210 14% 35%)",
+          "hsl(210 14% 45%)",
+          "hsl(210 14% 55%)",
+          "hsl(210 14% 70%)",
+          "hsl(210 14% 85%)",
+          "hsl(210 14% 95%)"
+        ]
+      },
+      "linie": {
+        "role": "neutral",
+        "displayName": "Linie",
+        "canonical": "#b4bdb6",
+        "tonalRamp": [
+          "hsl(133 6% 15%)",
+          "hsl(133 6% 25%)",
+          "hsl(133 6% 35%)",
+          "hsl(133 6% 45%)",
+          "hsl(133 6% 55%)",
+          "hsl(133 6% 70%)",
+          "hsl(133 6% 85%)",
+          "hsl(133 6% 95%)"
+        ]
+      },
+      "rahmen": {
+        "role": "neutral",
+        "displayName": "Rahmen",
+        "canonical": "#d2d8d0",
+        "tonalRamp": [
+          "hsl(105 9% 15%)",
+          "hsl(105 9% 25%)",
+          "hsl(105 9% 35%)",
+          "hsl(105 9% 45%)",
+          "hsl(105 9% 55%)",
+          "hsl(105 9% 70%)",
+          "hsl(105 9% 85%)",
+          "hsl(105 9% 95%)"
+        ]
+      },
+      "eingabe-rand": {
+        "role": "neutral",
+        "displayName": "Eingaberand",
+        "canonical": "#7c8790",
+        "tonalRamp": [
+          "hsl(207 8% 15%)",
+          "hsl(207 8% 25%)",
+          "hsl(207 8% 35%)",
+          "hsl(207 8% 45%)",
+          "hsl(207 8% 55%)",
+          "hsl(207 8% 70%)",
+          "hsl(207 8% 85%)",
+          "hsl(207 8% 95%)"
+        ]
+      },
+      "fehler": {
+        "role": "error",
+        "displayName": "Fehlerrot",
+        "canonical": "#b42318",
+        "tonalRamp": [
+          "hsl(4 76% 15%)",
+          "hsl(4 76% 25%)",
+          "hsl(4 76% 35%)",
+          "hsl(4 76% 45%)",
+          "hsl(4 76% 55%)",
+          "hsl(4 76% 70%)",
+          "hsl(4 76% 85%)",
+          "hsl(4 76% 95%)"
+        ]
+      },
+      "fokus": {
+        "role": "neutral",
+        "displayName": "Fokus",
+        "canonical": "#1d2833",
+        "tonalRamp": [
+          "hsl(210 28% 15%)",
+          "hsl(210 28% 25%)",
+          "hsl(210 28% 35%)",
+          "hsl(210 28% 45%)",
+          "hsl(210 28% 55%)",
+          "hsl(210 28% 70%)",
+          "hsl(210 28% 85%)",
+          "hsl(210 28% 95%)"
+        ]
+      },
+      "tal-fern": {
+        "role": "neutral",
+        "displayName": "Ferne Hügel",
+        "canonical": "#2c3c4b",
+        "tonalRamp": [
+          "hsl(209 26% 15%)",
+          "hsl(209 26% 25%)",
+          "hsl(209 26% 35%)",
+          "hsl(209 26% 45%)",
+          "hsl(209 26% 55%)",
+          "hsl(209 26% 70%)",
+          "hsl(209 26% 85%)",
+          "hsl(209 26% 95%)"
+        ]
+      },
+      "tal-fluss": {
+        "role": "neutral",
+        "displayName": "Mosel",
+        "canonical": "#3a5266",
+        "tonalRamp": [
+          "hsl(207 28% 15%)",
+          "hsl(207 28% 25%)",
+          "hsl(207 28% 35%)",
+          "hsl(207 28% 45%)",
+          "hsl(207 28% 55%)",
+          "hsl(207 28% 70%)",
+          "hsl(207 28% 85%)",
+          "hsl(207 28% 95%)"
+        ]
+      },
+      "haus": {
+        "role": "neutral",
+        "displayName": "Haus",
+        "canonical": "#101820",
+        "tonalRamp": [
+          "hsl(210 33% 15%)",
+          "hsl(210 33% 25%)",
+          "hsl(210 33% 35%)",
+          "hsl(210 33% 45%)",
+          "hsl(210 33% 55%)",
+          "hsl(210 33% 70%)",
+          "hsl(210 33% 85%)",
+          "hsl(210 33% 95%)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display schmal",
+        "purpose": "Erster Satz der Hero- und Abschlussüberschrift (Arbeit)."
+      },
+      "display-weit": {
+        "displayName": "Display weit",
+        "purpose": "Zweiter Satz derselben Überschrift (Feierabend)."
+      },
+      "headline": {
+        "displayName": "Abschnittsüberschrift",
+        "purpose": "Alle Abschnittsköpfe (.h2), ohne Vorzeile."
+      },
+      "title": {
+        "displayName": "Titel",
+        "purpose": "Karten-, Phasen- und Schritttitel."
+      },
+      "lead": {
+        "displayName": "Einleitung",
+        "purpose": "Text unter Überschriften, max. 36 rem, text-leise."
+      },
+      "body": {
+        "displayName": "Fließtext",
+        "purpose": "Grundtext, Wurzel 16 px."
+      },
+      "label": {
+        "displayName": "Beschriftung",
+        "purpose": "Vertrauenspunkte, Navigation, Etiketten; nie unter 0,875 rem."
+      },
+      "hand": {
+        "displayName": "Handschrift",
+        "purpose": "Seltene persönliche Randnotizen; Gold nur auf Schiefer."
+      }
+    },
+    "shadows": [
+      {
+        "name": "handy",
+        "value": "0 0 0 6px rgb(238 240 234 / 0.04), 0 30px 60px -20px rgb(0 0 0 / 0.5)",
+        "purpose": "Nur der Handyrahmen der Chat-Demo auf Schiefer."
+      },
+      {
+        "name": "formular",
+        "value": "0 20px 50px rgb(29 40 51 / 0.08)",
+        "purpose": "Schwebende Formularkarte im Tag."
+      },
+      {
+        "name": "menue",
+        "value": "0 20px 50px -20px rgb(29 40 51 / 0.35)",
+        "purpose": "Ausgeklapptes mobiles Menü."
+      }
+    ],
+    "motion": [
+      {
+        "name": "knopf",
+        "value": "0.15s",
+        "purpose": "Farb- und Druckübergänge der Knöpfe; beim Drücken 2 px nach unten."
+      },
+      {
+        "name": "reveal",
+        "value": "opacity 0.6s ease, transform 0.6s ease (translateY 14px)",
+        "purpose": "Dezentes Einblenden beim Scrollen; nur mit JavaScript und ohne reduzierte Bewegung."
+      },
+      {
+        "name": "ease-ankommen",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Chatnachrichten (0.5 s), Tipp-Punkte (0.3 s), FAQ-Plus (0.25 s), Licht im Tal (1.4 s)."
+      },
+      {
+        "name": "chat-ablauf",
+        "value": "Tippen 1.7 s, Pause 1.0 bis 1.2 s, 3 Durchläufe",
+        "purpose": "Chat-Demo pausiert außerhalb des Bildes und endet nach drei Durchläufen."
+      },
+      {
+        "name": "laufband",
+        "value": "55s linear infinite",
+        "purpose": "Grünes Band; hält bei Zeiger, Fokus und Pausenknopf; steht bei reduzierter Bewegung."
+      },
+      {
+        "name": "reduzierte-bewegung",
+        "value": "animation/transition 0.01ms, scroll-behavior auto",
+        "purpose": "Globale Abschaltung bei prefers-reduced-motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px",
+        "note": "Chat in voller Länge; darunter wischbare Kartenreihen."
+      },
+      {
+        "name": "md",
+        "value": "768px",
+        "note": "Klebende Knopfleiste nur darunter."
+      },
+      {
+        "name": "lg",
+        "value": "1024px",
+        "note": "Hero zweispaltig, klebende Erklärspalten."
+      },
+      {
+        "name": "xl",
+        "value": "1280px",
+        "note": "Volle Navigation in der Kopfzeile."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primärknopf (Tag)",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Hauptknopf auf hellen Flächen: Weinlaubgrün mit weißer Schrift.",
+      "html": "<div class=\"ds-tag\"><a href=\"#\" class=\"ds-btn-primary\">30 Tage kostenlos testen</a></div>",
+      "css": ".ds-tag { background: #eef0ea; padding: 1.5rem; } .ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; min-height: 3rem; padding: 0.875rem 1.6rem; border: 0; border-radius: 0.5rem; font-family: 'Archivo Variable', ui-sans-serif, system-ui, sans-serif; font-weight: 700; line-height: 1.2; text-decoration: none; cursor: pointer; transition: background-color 0.15s, transform 0.15s; background: #2e6b3f; color: #ffffff; } .ds-btn-primary:hover { background: #265a34; } .ds-btn-primary:active { transform: translateY(2px); } .ds-btn-primary:focus-visible { outline: 3px solid #1d2833; outline-offset: 3px; }"
+    },
+    {
+      "name": "Mint-Knopf (Abend)",
+      "kind": "button",
+      "refersTo": "button-mint",
+      "description": "Einziger Knopf auf Schiefer in Kopfzeile, Hero und Abschluss; groß im Hero.",
+      "html": "<div class=\"ds-abend\"><a href=\"#\" class=\"ds-btn-mint\">30 Tage kostenlos testen</a> <a href=\"#\" class=\"ds-textlink\">Kostenlosen Inserats-Check anfordern</a></div>",
+      "css": ".ds-abend { background: #22303d; padding: 1.5rem; display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center; } .ds-btn-mint { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; min-height: 3rem; padding: 0.875rem 1.6rem; border: 0; border-radius: 0.5rem; font-family: 'Archivo Variable', ui-sans-serif, system-ui, sans-serif; font-weight: 700; line-height: 1.2; text-decoration: none; cursor: pointer; transition: background-color 0.15s, transform 0.15s; padding: 1.05rem 2rem; font-size: 1.1rem; background: #a3d89b; color: #1a2531; } .ds-btn-mint:hover { background: #b8e3b1; } .ds-btn-mint:active { transform: translateY(2px); } .ds-btn-mint:focus-visible { outline: 3px solid #a3d89b; outline-offset: 3px; } .ds-textlink { font-family: 'Archivo Variable', ui-sans-serif, system-ui, sans-serif; color: #eef0ea; font-weight: 700; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 5px; padding-block: 12px; } .ds-textlink:hover { color: #a3d89b; }"
+    },
+    {
+      "name": "Dunkler und heller Knopf",
+      "kind": "button",
+      "refersTo": "button-dunkel",
+      "description": "Nebenknöpfe der Preiskarten: Schiefer auf hellen, kalkhell auf dunklen Karten.",
+      "html": "<div class=\"ds-paar\"><a href=\"#\" class=\"ds-btn-dunkel\">Anfragen</a><span class=\"ds-dunkelgrund\"><a href=\"#\" class=\"ds-btn-hell\">Anfragen</a></span></div>",
+      "css": ".ds-paar { display: flex; gap: 1rem; background: #eef0ea; padding: 1.5rem; } .ds-dunkelgrund { background: #22303d; padding: 1rem; border-radius: 0.75rem; } .ds-btn-dunkel { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; min-height: 3rem; padding: 0.875rem 1.6rem; border: 0; border-radius: 0.5rem; font-family: 'Archivo Variable', ui-sans-serif, system-ui, sans-serif; font-weight: 700; line-height: 1.2; text-decoration: none; cursor: pointer; transition: background-color 0.15s, transform 0.15s; background: #22303d; color: #eef0ea; } .ds-btn-dunkel:hover { background: #34465a; } .ds-btn-hell { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; min-height: 3rem; padding: 0.875rem 1.6rem; border: 0; border-radius: 0.5rem; font-family: 'Archivo Variable', ui-sans-serif, system-ui, sans-serif; font-weight: 700; line-height: 1.2; text-decoration: none; cursor: pointer; transition: background-color 0.15s, transform 0.15s; background: #eef0ea; color: #22303d; } .ds-btn-hell:hover { background: #ffffff; } .ds-btn-dunkel:focus-visible { outline: 3px solid #1d2833; outline-offset: 3px; } .ds-btn-hell:focus-visible { outline: 3px solid #a3d89b; outline-offset: 3px; }"
+    },
+    {
+      "name": "Eingabefeld",
+      "kind": "input",
+      "refersTo": "eingabe",
+      "description": "Weißes Feld mit 2-px-Rand (3:1), 0,75 rem Rundung, mindestens 16 px.",
+      "html": "<label class=\"ds-feld\">E-Mail<input class=\"ds-input\" type=\"email\" placeholder=\"name@beispiel.de\"></label>",
+      "css": ".ds-feld { font-family: 'Archivo Variable', ui-sans-serif, system-ui, sans-serif; display: block; font-weight: 600; color: #1d2833; } .ds-input { margin-top: 0.375rem; display: block; width: 100%; box-sizing: border-box; padding: 0.75rem 0.875rem; font: inherit; font-weight: 400; font-size: max(16px, 1rem); background: #ffffff; border: 2px solid #7c8790; border-radius: 0.75rem; color: #1d2833; } .ds-input:hover { border-color: #2e6b3f; } .ds-input:focus-visible { outline: 3px solid #1d2833; outline-offset: 3px; } .ds-input[aria-invalid=\"true\"] { border-color: #b42318; }"
+    },
+    {
+      "name": "Kopfzeile",
+      "kind": "nav",
+      "refersTo": "tinte",
+      "description": "Klebende Schieferleiste mit Logo, Navigation und kleinem Mint-Knopf.",
+      "html": "<header class=\"ds-kopf\"><span class=\"ds-logo\"><svg width=\"26\" height=\"26\" viewBox=\"0 0 32 32\" aria-hidden=\"true\"><path d=\"M9 1h14a8 8 0 0 1 8 8v14a8 8 0 0 1-8 8H3a2 2 0 0 1-2-2V9a8 8 0 0 1 8-8z\" fill=\"#a3d89b\"/><path d=\"M7.6 16.6l3.7 3.7 7.9-8.5M15.4 19.3l1 1 7.9-8.5\" fill=\"none\" stroke=\"#22303d\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>anytime</span><nav class=\"ds-nav\"><a href=\"#\">Leistungen</a><a href=\"#\">Preise</a><a href=\"#\">Fragen</a></nav><a href=\"#\" class=\"ds-btn-klein\">Kostenlos testen</a></header>",
+      "css": ".ds-kopf { font-family: 'Archivo Variable', ui-sans-serif, system-ui, sans-serif; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; height: 5rem; padding-inline: 1.5rem; background: #22303d; color: #eef0ea; } .ds-logo { display: flex; align-items: center; gap: 0.5rem; font-weight: 800; font-size: 1.2rem; } .ds-nav { display: flex; gap: 1.75rem; } .ds-nav a { color: #c3ccd3; font-weight: 500; text-decoration: none; } .ds-nav a:hover { color: #a3d89b; } .ds-nav a:focus-visible, .ds-btn-klein:focus-visible { outline: 3px solid #a3d89b; outline-offset: 3px; border-radius: 6px; } .ds-btn-klein { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; min-height: 3rem; padding: 0.875rem 1.6rem; border: 0; border-radius: 0.5rem; font-family: 'Archivo Variable', ui-sans-serif, system-ui, sans-serif; font-weight: 700; line-height: 1.2; text-decoration: none; cursor: pointer; transition: background-color 0.15s, transform 0.15s; min-height: 2.75rem; padding: 0.6rem 1rem; font-size: 0.94rem; background: #a3d89b; color: #1a2531; } .ds-btn-klein:hover { background: #b8e3b1; }"
+    },
+    {
+      "name": "Karte mit Häkchen-Liste",
+      "kind": "card",
+      "refersTo": "karte",
+      "description": "Weiße, flache Karte (0,75 rem) mit gezeichneten Masken-Häkchen und Etikett.",
+      "html": "<div class=\"ds-tag\"><article class=\"ds-karte\"><span class=\"ds-etikett\">Für Vermieter</span><h4 class=\"ds-titel\">Gästekommunikation</h4><ul class=\"ds-haken\"><li>Antwort in etwa 15 Minuten</li><li>Menschen prüfen alles Wichtige</li><li>Monatlich kündbar</li></ul></article></div>",
+      "css": ".ds-tag { background: #eef0ea; padding: 1.5rem; } .ds-karte { font-family: 'Archivo Variable', ui-sans-serif, system-ui, sans-serif; display: flex; flex-direction: column; gap: 0.875rem; background: #ffffff; border-radius: 0.75rem; padding: 2rem; color: #1d2833; max-width: 22rem; } .ds-etikett { align-self: flex-start; background: #dfe4da; border-radius: 999px; padding: 0.25rem 0.75rem; font-size: 0.875rem; font-weight: 700; } .ds-titel { margin: 0; font-size: 1.5rem; font-weight: 800; font-stretch: 78%; line-height: 1.05; } .ds-haken { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; color: #45505b; } .ds-haken li { display: flex; gap: 0.6rem; } .ds-haken li::before { content: \"\"; width: 1rem; height: 1lh; flex-shrink: 0; background: #255a33; mask: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2.5 8.5l3.5 3.5 7.5-8' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E\") center / 1rem no-repeat; -webkit-mask: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2.5 8.5l3.5 3.5 7.5-8' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E\") center / 1rem no-repeat; }"
+    },
+    {
+      "name": "Arbeit-und-Abend-Überschrift",
+      "kind": "custom",
+      "refersTo": "display",
+      "description": "Zweisätzige Großüberschrift: Satz 1 schmal und schwer, Satz 2 breit und leicht.",
+      "html": "<div class=\"ds-abend-h\"><h1 class=\"ds-titel-h\"><span class=\"ds-eng\">Ihre Gäste bekommen sofort Antwort.</span><span class=\"ds-weit\">Sie haben Feierabend.</span></h1></div>",
+      "css": ".ds-abend-h { background: #22303d; color: #eef0ea; padding: 2rem; } .ds-titel-h { font-family: 'Archivo Variable', ui-sans-serif, system-ui, sans-serif; margin: 0; display: flex; flex-direction: column; gap: 0.12em; font-size: clamp(2.4rem, 6vw, 4.5rem); line-height: 0.92; } .ds-eng { font-stretch: 64%; font-weight: 850; } .ds-weit { font-stretch: 125%; font-weight: 300; font-size: 0.74em; letter-spacing: -0.01em; }"
+    },
+    {
+      "name": "Chat-Demo",
+      "kind": "custom",
+      "refersTo": "blase-wir",
+      "description": "Handyrahmen auf Schiefer mit Uhrzeit, goldener Handnotiz, Gast- und Antwortblase und Doppelhäkchen.",
+      "html": "<div class=\"ds-abend-c\"><p class=\"ds-notiz\"><span class=\"ds-zeit\">21:47</span><span class=\"ds-hand\">Sie sind beim Essen</span></p><div class=\"ds-telefon\"><div class=\"ds-blase ds-gast\">Wo finden wir den Schlüssel?</div><div class=\"ds-blase ds-wir\">Guten Abend! Der Schlüsselsafe hängt links neben der Haustür, der Code ist 4711.</div><div class=\"ds-geprueft\"><svg viewBox=\"0 0 20 12\" width=\"18\" height=\"11\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M1 6.5l3.6 3.6L12 2M8.6 9.4l.7.7L16.7 2\"/></svg>Gelesen und beantwortet</div></div></div>",
+      "css": ".ds-abend-c { font-family: 'Archivo Variable', ui-sans-serif, system-ui, sans-serif; background: #22303d; padding: 2rem; max-width: 24rem; } .ds-notiz { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.75rem; margin: 0 0 0.75rem; } .ds-zeit { font-size: 2.6rem; font-weight: 800; line-height: 1; color: #eef0ea; } .ds-hand { font-family: Caveat, 'Comic Sans MS', cursive; font-weight: 600; font-size: 1.6rem; line-height: 1.1; color: #f4c95d; } .ds-telefon { display: flex; flex-direction: column; gap: 0.5rem; padding: 1.25rem 0.75rem; border-radius: 2rem; background: #1a2531; border: 1px solid rgb(238 240 234 / 0.14); box-shadow: 0 0 0 6px rgb(238 240 234 / 0.04), 0 30px 60px -20px rgb(0 0 0 / 0.5); } .ds-blase { max-width: 86%; padding: 0.55rem 0.8rem; font-size: 0.95rem; line-height: 1.38; } .ds-gast { align-self: flex-start; background: #eef0ea; color: #1d2833; border-radius: 14px 14px 14px 4px; } .ds-wir { align-self: flex-end; background: #2e6b3f; color: #ffffff; border-radius: 14px 14px 4px 14px; } .ds-geprueft { align-self: flex-end; display: flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; font-weight: 600; color: #a3d89b; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Moselabend",
+    "overview": "Die Seite erzählt einen Feierabend an der Mosel. Oben und unten ist Abend: schieferblaue Flächen tragen Kopfzeile, Hero und Abschluss, darunter liegt das gezeichnete Moseltal mit Weinberghängen, Fluss und einem Haus, in dessen Fenster Lampenlicht brennt. Dazwischen ist Tag: kalkhelles, leicht grünliches Grau, weiße Karten, ruhige Listen. Grün aus dem Weinlaub ist die Farbe der Handlung, Gold ist das Licht der Lampe und kommt nur im Abend vor.\n\nDie Typografie trägt die Idee des Angebots. Eine einzige Schrift, Archivo, deren Breitenachse Bedeutung hat: Der erste Satz einer großen Überschrift ist schmal und schwer gesetzt (die Arbeit), der zweite breit und leicht (der freie Abend). Handschrift kommt nur in wenigen persönlichen Notizen vor und macht die Seite menschlich, ohne sie zu verspielen.\n\nDie Seite ist mobil zuerst gebaut, dicht und ruhig, mit kleinen Rundungen und flachen Flächen. Tiefe entsteht durch den Wechsel von Abend und Tag, nicht durch Schatten. Bewegung ist sparsam, endet von selbst und respektiert reduzierte Bewegung vollständig.",
+    "keyCharacteristics": [
+      "Schieferabend (Kopf, Hero, Abschluss) rahmt kalkhellen Tag (alle Inhaltsabschnitte).",
+      "Eine Schrift, Archivo Variable; die Breite (64 % bis 125 %) erzählt Arbeit und Feierabend.",
+      "Weinlaubgrün mit weißer Schrift für Handlungen im Tag, helles Laubgrün mit dunkler Schrift im Abend.",
+      "Lampengelb als einziges warmes Licht, nur auf Schiefer.",
+      "Gezeichnete Zeichen (SVG, Masken) statt Schriftzeichen; das Doppelhäkchen ist das Markenmotiv.",
+      "Kleine Rundungen (Knöpfe 0,5 rem, Karten 0,75 rem), flach, ohne dekorative Schatten."
+    ],
+    "rules": [
+      {
+        "name": "The Lampenlicht Rule",
+        "body": "Gold ist Licht, kein Akzent. Es erscheint nur auf Schiefer; auf kalkhellen Flächen (1,4:1) und als Schrift auf Grün ist es verboten.",
+        "section": "colors"
+      },
+      {
+        "name": "The Zwei-Grün Rule",
+        "body": "Im Tag ist der Knopf Weinlaubgrün mit weißer Schrift, im Abend helles Laubgrün mit dunkler Schrift. Nie Weinlaubgrün auf Schiefer, nie Mint auf kalkhell.",
+        "section": "colors"
+      },
+      {
+        "name": "The Eine-Quelle Rule",
+        "body": "Jede Farbe lebt als Variable in `:root` und `@theme inline` von `src/styles/global.css`. Keine Hexwerte in Komponenten.",
+        "section": "colors"
+      },
+      {
+        "name": "The Arbeit-und-Abend Rule",
+        "body": "Zweisätzige Großüberschriften setzen Satz 1 schmal und schwer (64 %, 850), Satz 2 breit und leicht (125 %, 300). Die Breite trägt Bedeutung und wird nicht als Dekor auf andere Texte übertragen.",
+        "section": "typography"
+      },
+      {
+        "name": "The Eine-Schrift Rule",
+        "body": "Archivo ist die einzige Satzschrift. Keine zweite Display- oder Systemschrift.",
+        "section": "typography"
+      },
+      {
+        "name": "The Randnotiz Rule",
+        "body": "Caveat nur für kurze persönliche Notizen, höchstens eine pro Abschnitt, nie für Überschriften, Knöpfe oder Beschriftungen.",
+        "section": "typography"
+      },
+      {
+        "name": "The Abend-Rahmen Rule",
+        "body": "Schiefer öffnet und schließt die Seite; dazwischen wechseln nur kalkhell, Sand und ein grüner Abschnitt (Preise).",
+        "section": "layout"
+      },
+      {
+        "name": "The Flach-im-Fluss Rule",
+        "body": "Was im Lesefluss liegt, ist flach. Schatten nur für schwebende Objekte, immer weich und diffus.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Gezeichnet Rule",
+        "body": "Häkchen, Plus, Menü und Pause sind gezeichnete SVG-Pfade oder Masken mit runden Enden (Strich 2 bis 2,4). Keine Unicode-Zeichen oder Emoji als Symbole.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "Do Abend (tinte) für Kopfzeile, Hero, Abschluss und Fußzeile, Tag (flaeche, karte, sand) für alles dazwischen.",
+      "Do Weinlaubgrün (akzent) mit weißer Schrift für Hauptknöpfe im Tag, Mint mit tinte-tief für Knöpfe auf Schiefer.",
+      "Do zweisätzige Großüberschriften am ersten Punkt teilen: Satz 1 bei 64 % Breite und 850, Satz 2 bei 125 % und 300.",
+      "Do Abschnittsüberschriften mit `.h2` (800, 72 %) direkt und ohne Vorzeile beginnen.",
+      "Do Symbole als SVG-Pfad oder Maske zeichnen, runde Enden, Strich 2 bis 2,4.",
+      "Do jede Bewegung bei `prefers-reduced-motion` abschalten und ohne JavaScript den Endzustand zeigen; wiederholte Animationen enden von selbst oder lassen sich anhalten.",
+      "Do alle Texte in `inhalte/site.yaml` pflegen; Platzhalter in [ECKIGEN KLAMMERN] blendet `src/config/platzhalter.ts` aus, und der Produktions-Build bricht ab, solange welche offen sind."
+    ],
+    "donts": [
+      "Don't Gold auf hellen oder grünen Flächen als Schrift oder Fläche einsetzen.",
+      "Don't Vorzeilen oder Kicker über Abschnittsüberschriften setzen; sie wurden bewusst entfernt.",
+      "Don't Unicode-Häkchen, Pfeile, Plus-Zeichen oder Emoji als Symbole verwenden.",
+      "Don't eine zweite Satzschrift oder eine Systemschrift als Display-Stimme einführen.",
+      "Don't Caveat für Überschriften, Knöpfe oder mehr als eine Notiz pro Abschnitt verwenden.",
+      "Don't Karten im Lesefluss mit Schatten oder Rahmen versehen; Rundungen über 0,75 rem nur für Pillen, Blasen und den Handyrahmen.",
+      "Don't Texte fest in Komponenten schreiben oder Platzhalter mit erfundenen Werten füllen."
+    ]
+  }
+}

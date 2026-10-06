@@ -45,12 +45,12 @@ export const siteSchema = z.object({
     uhrzeit: text.optional(),
     notiz: text.optional(),
     beschreibung: text,
-    gast_absender: text,
-    gast_text: text,
-    antwort_absender: text,
-    antwort_text: text,
     geprueft: text,
-    dank_text: text.optional(),
+    nachrichten: z
+      .array(z.object({ von: z.enum(["gast", "wir"]), absender: text.optional(), text: text }))
+      .min(2)
+      .max(6)
+      .refine((liste) => liste.some((n) => n.von === "wir"), { message: "Mindestens eine Nachricht muss von uns sein" }),
   }),
   problem: z.object({
     kicker: text.optional(), titel: text, karten: z.array(karte) }),
@@ -194,7 +194,12 @@ export const siteSchema = z.object({
     fehler_senden: text,
   }),
   faq: z.object({
-    kicker: text.optional(), titel: text, fragen: z.array(faqEintrag).min(1) }),
+    kicker: text.optional(),
+    titel: text,
+    sichtbar: z.number().int().positive().optional(),
+    weitere: text.optional(),
+    fragen: z.array(faqEintrag).min(1),
+  }),
   abschluss: z.object({ kicker: text.optional(), titel: text, text: text }),
   footer: z.object({ hinweis_marken: text }),
   inserats_check: z.object({

@@ -1,6 +1,7 @@
 ---
 import { site } from "../config/laden";
 import { pfad } from "../config/pfad";
+import { nurFertig } from "../config/platzhalter";
 import Logo from "./Logo.astro";
 const jahr = new Date().getFullYear();
 ---
@@ -17,13 +18,13 @@ const jahr = new Date().getFullYear();
     </nav>
     <span class="hidden flex-1 md:block"></span>
     <nav aria-label="Rechtliches und Kontakt" class="contents">
-      <a href={`mailto:${site.marke.email}`}>{site.marke.email}</a>
+      {nurFertig(site.marke.email) && <a href={`mailto:${site.marke.email}`}>{site.marke.email}</a>}
       <a href={pfad("/impressum")}>Impressum</a>
       <a href={pfad("/datenschutz")}>Datenschutz</a>
     </nav>
   </div>
   <div class="behaelter flex flex-col gap-2 border-t border-auf-tinte/10 pt-5 pb-24 text-sm md:flex-row md:justify-between md:pb-5">
-    <p>© {jahr} {site.marke.name}{site.marke.ort && `, ${site.marke.ort}`}</p>
+    <p>© {jahr} {site.marke.name}{nurFertig(site.marke.ort) && `, ${site.marke.ort}`}</p>
     <p class="max-w-2xl md:text-right">{site.footer.hinweis_marken}</p>
   </div>
 </footer>

@@ -21,7 +21,7 @@ const f_liste = [
 ];
 ---
 
-<aside id="rechner" class="rechner grid overflow-hidden rounded-3xl bg-flaeche text-text lg:grid-cols-[1fr_24rem]" data-preis={preis} aria-labelledby="rechner-titel">
+<aside id="rechner" class="rechner grid overflow-hidden rounded-xl bg-karte text-text lg:grid-cols-[1fr_24rem]" data-preis={preis} aria-labelledby="rechner-titel">
   <div class="p-[clamp(1.375rem,2.6vw,2rem)]">
     <h3 id="rechner-titel" class="text-[clamp(1.25rem,2vw,1.5rem)]">{r.titel}</h3>
     <p class="mt-1 text-sm text-leise">{r.intro}</p>
@@ -137,7 +137,7 @@ const f_liste = [
     margin-top: -8px;
     border-radius: 50%;
     background: var(--akzent);
-    border: 3px solid #fff;
+    border: 3px solid var(--karte);
     box-shadow: 0 1px 4px rgb(0 0 0 / 0.2);
   }
   .regler::-moz-range-thumb {
@@ -145,7 +145,7 @@ const f_liste = [
     height: 16px;
     border-radius: 50%;
     background: var(--akzent);
-    border: 3px solid #fff;
+    border: 3px solid var(--karte);
     box-shadow: 0 1px 4px rgb(0 0 0 / 0.2);
   }
 </style>

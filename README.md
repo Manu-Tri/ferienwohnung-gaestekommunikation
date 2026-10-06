@@ -1,7 +1,7 @@
 # Landingpage anytime
 
 Statische Lead-Seite für Remote-Gästekommunikation (Airbnb, Booking.com).
-Astro 7, Tailwind CSS 4, keine Cookies, kein Tracking, Schriften (Bricolage Grotesque, Figtree, Caveat) lokal. Helles Farbschema: warmes Papier, Tannengrün und Tinte.
+Astro 7, Tailwind CSS 4, keine Cookies, kein Tracking, Schriften (Archivo, Caveat) lokal. Design „Moselabend“: Schieferblau für Kopf, Hero und Abschluss, kalkhelles Grau für die übrigen Abschnitte, Weinlaubgrün für Knöpfe. Details in DESIGN.md. Infomappe und Postkarte nutzen noch die früheren Schriften (Bricolage Grotesque, Figtree).
 
 ## Seiten
 
@@ -82,7 +82,8 @@ Lokal (`npm run dev`, `npm run preview`) schlägt das Absenden fehl, weil Netlif
 - `inhalte/site.yaml` wird beim Build gelesen und per Zod-Schema geprüft (`src/config/schema.ts`, `src/config/laden.ts`).
 - Kein Framework im Browser. Kleine Skripte: Rechner, Mehrschritt-Formular, Sticky-Leiste, Scroll-Einblendung, Leadquelle.
 - Ohne JavaScript funktioniert das Formular als normales Formular mit allen Feldern untereinander.
-- Bewusst nur ein helles Farbschema (Farben in src/styles/global.css). Animationen sind bei „Bewegung reduzieren“ aus.
+- Bewusst kein Dunkelmodus (Farben in src/styles/global.css). Animationen sind bei „Bewegung reduzieren“ aus, das Laufband lässt sich anhalten.
+- Offene Platzhalter in eckigen Klammern werden auf der Seite nicht angezeigt. Ein Produktions-Build auf Netlify (CONTEXT=production) bricht ab, solange Platzhalter oder die Beispiel-Domain offen sind. Trotzdem veröffentlichen: Umgebungsvariable PLATZHALTER_ERLAUBT=true.
 - Strukturierte Daten: `Service` mit `areaServed` und `FAQPage`.
 - Lighthouse mobil (lokal gemessen): 100 in allen vier Kategorien auf `/`, `/inserats-check`, `/mosel`.
 

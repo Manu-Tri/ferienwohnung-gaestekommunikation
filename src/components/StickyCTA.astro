@@ -16,11 +16,11 @@ const { nurCheck = false } = Astro.props;
 >
   {
     nurCheck ? (
-      <a href="#anfrage" data-anliegen="check" class="knopf knopf-primaer w-full !shadow-none">
+      <a href="#anfrage" data-anliegen="check" class="knopf knopf-primaer knopf-flach w-full">
         {site.cta.check_kurz} anfordern
       </a>
     ) : (
-      <a href="#anfrage" data-anliegen="test" class="knopf knopf-primaer w-full !shadow-none">
+      <a href="#anfrage" data-anliegen="test" class="knopf knopf-primaer knopf-flach w-full">
         {site.cta.test}
       </a>
     )

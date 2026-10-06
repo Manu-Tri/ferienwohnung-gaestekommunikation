@@ -1,4 +1,5 @@
 import { site } from "./laden";
+import { hatPlatzhalter, nurFertig, ohnePlatzhalter } from "./platzhalter";
 
 const domain = site.marke.domain;
 
@@ -9,12 +10,12 @@ export function anbieter() {
     "@id": `${domain}/#organisation`,
     name: site.marke.name,
     url: domain,
-    email: site.marke.email,
-    telephone: site.marke.telefon,
+    email: nurFertig(site.marke.email) || undefined,
+    telephone: nurFertig(site.marke.telefon) || undefined,
     address: {
       "@type": "PostalAddress",
-      streetAddress: i.strasse,
-      addressLocality: i.plz_ort,
+      streetAddress: nurFertig(i.strasse) || undefined,
+      addressLocality: nurFertig(i.plz_ort) || undefined,
       addressCountry: "DE",
     },
   };
@@ -29,7 +30,7 @@ export function service(gebiete: string[], beschreibung: string, url: string) {
     description: beschreibung,
     url,
     provider: anbieter(),
-    areaServed: gebiete.map((name) => ({ "@type": "Place", name })),
+    areaServed: gebiete.filter((name) => !hatPlatzhalter(name)).map((name) => ({ "@type": "Place", name })),
     availableLanguage: "de",
     offers: {
       "@type": "Offer",
@@ -51,10 +52,13 @@ export function faqSeite(fragen: { frage: string; antwort: string }[]) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: fragen.map((f) => ({
-      "@type": "Question",
-      name: f.frage,
-      acceptedAnswer: { "@type": "Answer", text: f.antwort },
-    })),
+    mainEntity: fragen
+      .map((f) => ({ frage: f.frage, antwort: ohnePlatzhalter(f.antwort) }))
+      .filter((f) => f.antwort)
+      .map((f) => ({
+        "@type": "Question",
+        name: f.frage,
+        acceptedAnswer: { "@type": "Answer", text: f.antwort },
+      })),
   };
 }

@@ -25,10 +25,10 @@ const autocomplete: Record<string, string> = { name: "name", email: "email", tel
 <Basis titel={s.seo_titel} beschreibung={s.einleitung} fokus noindex>
   <section class="behaelter abschnitt grid items-start gap-[clamp(1.75rem,5vw,4.5rem)] lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
     <div class="flex flex-col gap-4 lg:sticky lg:top-28">
-      {s.kicker && <p class="etikett">{s.kicker}</p>}
-      <h1 class="h2 !mt-0">{s.titel}</h1>
+      <h1 class="h2">{s.titel}</h1>
+      {s.kicker && <p class="hand text-[1.6rem] leading-none text-akzent-text">{s.kicker}</p>}
       <p class="max-w-[30rem] text-[clamp(1rem,1.5vw,1.19rem)] leading-relaxed text-leise">{s.einleitung}</p>
-      <p class="max-w-[30rem] rounded-[0.875rem] bg-sand px-4 py-3 text-[0.94rem] font-semibold">{s.sicherheit}</p>
+      <p class="max-w-[30rem] rounded-lg bg-sand px-4 py-3 text-[0.94rem] font-semibold">{s.sicherheit}</p>
       <p class="text-[0.94rem] text-leise">
         {s.pdf_hinweis} <a href={pdf} class="textlink" download>{s.pdf_link}</a>
       </p>
@@ -38,7 +38,7 @@ const autocomplete: Record<string, string> = { name: "name", email: "email", tel
       name={name}
       method="POST"
       action={action}
-      class="steckbrief flex flex-col gap-8 rounded-[1.75rem] bg-karte p-[clamp(1.25rem,3vw,2.5rem)] shadow-[0_20px_50px_rgb(24_38_28/0.08)]"
+      class="steckbrief flex flex-col gap-8 rounded-xl bg-karte p-[clamp(1.25rem,3vw,2.5rem)] shadow-[0_20px_50px_rgb(29_40_51/0.08)]"
       data-anbieter={f.anbieter}
       data-fehler-senden={site.anfrage.fehler_senden}
       data-senden-laeuft={site.anfrage.senden_laeuft}

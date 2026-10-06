@@ -1,48 +1,51 @@
-@import "@fontsource-variable/figtree/wght.css";
-@import "@fontsource-variable/bricolage-grotesque/opsz.css";
+@import "@fontsource-variable/archivo/wdth.css";
 @import "@fontsource/caveat/600.css";
 @import "tailwindcss";
 
-/* Warmes Papier, Tannengrün und tiefe Tinte. Kräftiges Grün für Knöpfe (weiße Schrift, 5:1),
-   dunkleres Grün für kleine grüne Schrift auf hellen Flächen, Mint und Gold nur auf dunklen
-   oder grünen Flächen. Alle Farben werden nur hier geändert. */
+/* Moselabend: Schieferblau für den Abend (Kopf, Hero, Abschluss), kalkhelles Grau für den Tag,
+   Weinlaubgrün für Knöpfe (weiße Schrift, 6:1), helles Laubgrün für Knöpfe auf Schiefer,
+   Lampengelb nur für Licht im Bild und Handschrift auf Schiefer. Alle Farben werden nur hier geändert. */
 :root {
   color-scheme: light;
-  --flaeche: #f3ede1;
-  --sand: #e2d6bf;
-  --sand-dunkel: #d4c6aa;
+  --flaeche: #eef0ea;
+  --sand: #dfe4da;
   --karte: #ffffff;
-  --karte-2: #ebe3d3;
-  --text: #18261c;
-  --text-leise: #3f4a42;
-  --linie: #c9bda4;
-  --rahmen: #d9cfbb;
+  --karte-2: #e5e9e1;
+  --text: #1d2833;
+  --text-leise: #45505b;
+  --linie: #b4bdb6;
+  --rahmen: #d2d8d0;
   /* Rand von Eingabefeldern und Schaltern, 3:1 auf Weiß */
-  --eingabe-rand: #9a8e74;
-  --akzent: #2f7a4a;
-  --akzent-stark: #286b40;
-  --akzent-schatten: #1d5233;
+  --eingabe-rand: #7c8790;
+  --akzent: #2e6b3f;
+  --akzent-stark: #265a34;
+  --akzent-schatten: #1b4326;
   --auf-akzent: #ffffff;
-  --akzent-hell: #dcebdc;
-  --akzent-text: #24633b;
-  --mint: #8fd3a5;
-  --mint-schatten: #4f9a68;
-  --mint-hell: #e3f2e7;
-  --gold: #f7d79a;
-  --tinte: #18261c;
-  --auf-tinte: #f3ede1;
-  --auf-tinte-leise: #d9d2c3;
+  --akzent-hell: #dbe9d9;
+  --akzent-text: #255a33;
+  --mint: #a3d89b;
+  --mint-hell: #e2f1df;
+  --mint-hover: #b8e3b1;
+  --gold: #f4c95d;
+  --tinte: #22303d;
+  --tinte-tief: #1a2531;
+  --tinte-hover: #34465a;
+  /* Moseltal im Hero und Abschluss */
+  --tal-fern: #2c3c4b;
+  --tal-fluss: #3a5266;
+  --haus: #101820;
+  --auf-tinte: #eef0ea;
+  --auf-tinte-leise: #c3ccd3;
   --fehler: #b42318;
-  --fokus: #18261c;
+  --fokus: #1d2833;
 }
 
 @theme inline {
-  --font-sans: "Figtree Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-display: "Bricolage Grotesque Variable", "Figtree Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Archivo Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Archivo Variable", ui-sans-serif, system-ui, sans-serif;
   --font-hand: "Caveat", "Comic Sans MS", cursive;
   --color-flaeche: var(--flaeche);
   --color-sand: var(--sand);
-  --color-sand-dunkel: var(--sand-dunkel);
   --color-karte: var(--karte);
   --color-karte-2: var(--karte-2);
   --color-text: var(--text);
@@ -61,14 +64,15 @@
   --color-gold: var(--gold);
   --color-fehler: var(--fehler);
   --color-tinte: var(--tinte);
+  --color-tinte-tief: var(--tinte-tief);
   --color-auf-tinte: var(--auf-tinte);
   --color-auf-tinte-leise: var(--auf-tinte-leise);
 }
 
 @layer base {
   html {
-    /* Grundgröße: alles skaliert mit (15 px statt 16 px, Browser-Einstellung bleibt wirksam) */
-    font-size: 93.75%;
+    /* Grundgröße 16 px (Browser-Einstellung bleibt wirksam), damit Nebentexte nicht unter 14 px fallen */
+    font-size: 100%;
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
     scroll-padding-top: 5rem;
@@ -87,10 +91,11 @@
   h3,
   h4 {
     font-family: var(--font-display);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
+    font-stretch: 78%;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
     text-wrap: balance;
-    font-weight: 700;
+    font-weight: 750;
   }
   p {
     text-wrap: pretty;
@@ -143,23 +148,18 @@
   }
   /* Große, eng gesetzte Abschnittsüberschrift */
   .h2 {
-    font-size: clamp(1.9rem, 3.8vw, 3.25rem);
+    font-size: clamp(2.1rem, 4.4vw, 3.75rem);
     font-weight: 800;
-    line-height: 0.98;
-    letter-spacing: -0.03em;
+    font-stretch: 72%;
+    line-height: 0.96;
+    letter-spacing: -0.015em;
   }
-  .h2 + p,
-  .kicker + .h2,
-  .etikett + .h2 {
+  .h2 + p {
     margin-top: 0.875rem;
-  }
-  /* Grüner Satzteil in Überschriften */
-  .betont {
-    color: var(--akzent);
   }
   .karte {
     background: var(--karte);
-    border-radius: 1.5rem;
+    border-radius: 0.75rem;
   }
   .knopf {
     display: inline-flex;
@@ -168,7 +168,7 @@
     gap: 0.5rem;
     min-height: 3rem;
     padding: 0.875rem 1.6rem;
-    border-radius: 0.875rem;
+    border-radius: 0.5rem;
     font-weight: 700;
     line-height: 1.2;
     text-align: center;
@@ -180,27 +180,41 @@
       box-shadow 0.15s;
     cursor: pointer;
   }
+  /* Größen: klein für die Kopfzeile, groß für den Hauptknopf im Hero und im Abschluss */
+  .knopf-klein {
+    min-height: 2.75rem;
+    padding: 0.6rem 1rem;
+    font-size: 0.94rem;
+  }
+  .knopf-gross {
+    padding: 1.05rem 2rem;
+    font-size: 1.1rem;
+  }
+  /* Knopf, der unten am Bildschirm klebt: ohne Schattenkante */
+  .knopf-flach {
+    box-shadow: none;
+  }
   .knopf:active {
     transform: translateY(2px);
   }
   .knopf-primaer {
     background: var(--akzent);
     color: var(--auf-akzent);
-    box-shadow: 0 4px 0 var(--akzent-schatten);
+    box-shadow: 0 6px 16px -6px color-mix(in srgb, var(--akzent-schatten) 70%, transparent);
   }
   .knopf-primaer:hover {
     background: var(--akzent-stark);
     color: var(--auf-akzent);
   }
   .knopf-primaer:active {
-    box-shadow: 0 2px 0 var(--akzent-schatten);
+    box-shadow: 0 2px 6px -2px color-mix(in srgb, var(--akzent-schatten) 70%, transparent);
   }
   .knopf-dunkel {
     background: var(--tinte);
     color: var(--auf-tinte);
   }
   .knopf-dunkel:hover {
-    background: #2c3a31;
+    background: var(--tinte-hover);
     color: var(--auf-tinte);
   }
   .knopf-hell {
@@ -208,17 +222,21 @@
     color: var(--tinte);
   }
   .knopf-hell:hover {
-    background: #fff;
+    background: var(--karte);
     color: var(--tinte);
   }
-  .knopf-sekundaer {
-    border: 2px solid var(--linie);
-    color: var(--text);
-    background: transparent;
+  /* Auf Schiefer: helles Laubgrün mit dunkler Schrift */
+  .knopf-mint {
+    background: var(--mint);
+    color: var(--tinte-tief);
+    box-shadow: 0 8px 20px -8px color-mix(in srgb, var(--haus) 80%, transparent);
   }
-  .knopf-sekundaer:hover {
-    border-color: var(--tinte);
-    color: var(--text);
+  .knopf-mint:hover {
+    background: var(--mint-hover);
+    color: var(--tinte-tief);
+  }
+  .knopf-mint:active {
+    box-shadow: 0 2px 6px -2px color-mix(in srgb, var(--haus) 80%, transparent);
   }
   /* Unterstrichener Textlink als zweite Handlung neben dem Hauptknopf */
   .textlink {
@@ -229,19 +247,8 @@
     text-decoration-thickness: 2px;
     text-underline-offset: 5px;
   }
-  /* Sandfarbenes Etikett über Überschriften auf hellen Flächen */
-  .etikett {
-    display: inline-block;
-    align-self: flex-start;
-    border-radius: 999px;
-    background: var(--sand);
-    padding: 0.4rem 0.8rem;
-    font-size: 0.875rem;
-    font-weight: 700;
-    line-height: 1.2;
-  }
-  /* Handschriftliche Zeile über Überschriften auf dunklen oder farbigen Flächen */
-  .kicker {
+  /* Handschriftliche Zeile, z. B. der Gruß neben dem Formular */
+  .gruss {
     display: block;
     font-family: var(--font-hand);
     font-size: clamp(1.5rem, 2vw, 1.65rem);
@@ -249,36 +256,47 @@
     line-height: 1.1;
     color: var(--akzent-text);
   }
+  /* Liste mit gezeichneten Häkchen in der Akzentfarbe */
+  .haken-liste > li {
+    display: flex;
+    gap: 0.6rem;
+  }
+  .haken-liste > li::before {
+    content: "";
+    width: 1rem;
+    height: 1lh;
+    flex-shrink: 0;
+    background: var(--haken-farbe, var(--akzent-text));
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2.5 8.5l3.5 3.5 7.5-8' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 1rem no-repeat;
+  }
+  /* Gezeichnetes Plus zum Aufklappen, dreht sich beim Öffnen zum Kreuz */
+  .plus {
+    position: relative;
+    flex-shrink: 0;
+    width: 1rem;
+    height: 1rem;
+    color: var(--akzent-text);
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .plus::before,
+  .plus::after {
+    content: "";
+    position: absolute;
+    inset: 50% 0 auto;
+    height: 2px;
+    margin-top: -1px;
+    border-radius: 1px;
+    background: currentColor;
+  }
+  .plus::after {
+    transform: rotate(90deg);
+  }
+  details[open] > summary > .plus {
+    transform: rotate(45deg);
+  }
   .hand {
     font-family: var(--font-hand);
     font-weight: 600;
-  }
-  /* Auf dem Handy: Karten als wischbare Reihe, die nächste Karte schaut am Rand hervor.
-     Ab 640 px gilt wieder das normale Raster der jeweiligen Liste. */
-  @media (max-width: 639px) {
-    .wischen {
-      display: flex !important;
-      gap: 0.75rem;
-      margin-inline: calc(-1 * clamp(1.25rem, 5vw, 4rem));
-      padding-inline: clamp(1.25rem, 5vw, 4rem);
-      padding-bottom: 0.5rem;
-      overflow-x: auto;
-      overscroll-behavior-x: contain;
-      scroll-snap-type: x mandatory;
-      scroll-padding-inline: clamp(1.25rem, 5vw, 4rem);
-      scrollbar-width: none;
-    }
-    .wischen::-webkit-scrollbar {
-      display: none;
-    }
-    .wischen > * {
-      flex: 0 0 84%;
-      scroll-snap-align: start;
-    }
-  }
-  /* Feine diagonale Streifen auf grünen Flächen */
-  .streifen {
-    background-image: repeating-linear-gradient(-28deg, rgb(255 255 255 / 0.07) 0 3px, transparent 3px 30px);
   }
   .nur-sr {
     position: absolute;

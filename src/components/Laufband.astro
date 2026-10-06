@@ -27,21 +27,23 @@ const wiederholen = <T,>(liste: T[], mindestens: number) =>
 const gruppen = [false, true];
 ---
 
-<section class:list={["laufband overflow-hidden", props.art === "punkte" ? "bg-akzent py-4 text-white" : "py-2"]} aria-label={props.beschriftung} style={`--dauer:${dauer}s`}>
+<section class:list={["laufband relative overflow-hidden", props.art === "punkte" ? "bg-akzent py-3.5 text-auf-akzent" : "py-2"]} aria-label={props.beschriftung} style={`--dauer:${dauer}s`}>
   <div class="laufband-spur flex w-max">
     {
       gruppen.map((kopie) => (
         <ul class="laufband-gruppe flex shrink-0 items-stretch" aria-hidden={kopie ? "true" : undefined}>
           {props.art === "punkte"
             ? wiederholen(props.punkte, 8).map((punkt) => (
-                <li class="font-display flex items-center text-[clamp(1.05rem,1.6vw,1.3rem)] font-bold whitespace-nowrap">
+                <li class="font-display flex items-center text-[clamp(1.1rem,1.7vw,1.4rem)] font-bold whitespace-nowrap [font-stretch:72%]">
                   <span class="px-6">{punkt}</span>
-                  <span class="text-gold" aria-hidden="true">✦</span>
+                  <svg class="text-mint" viewBox="0 0 20 12" width="22" height="13" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M1 6.5l3.6 3.6L12 2M8.6 9.4l.7.7L16.7 2" />
+                  </svg>
                 </li>
               ))
             : wiederholen(props.stimmen, 4).map((s) => (
                 <li class="mr-4 flex w-[min(22rem,80vw)] shrink-0">
-                  <figure class="flex w-full flex-col gap-3 rounded-3xl bg-karte p-6">
+                  <figure class="flex w-full flex-col gap-3 rounded-xl bg-karte p-6">
                     {s.beispiel && <span class="self-start rounded-full bg-sand px-2.5 py-0.5 text-[0.875rem] font-bold text-leise">Beispiel</span>}
                     <blockquote class="leading-relaxed">„{s.zitat}“</blockquote>
                     <figcaption class="mt-auto pt-1 text-sm text-leise">
@@ -55,6 +57,12 @@ const gruppen = [false, true];
       ))
     }
   </div>
+  <button type="button" class="laufband-pause" aria-pressed="false" aria-label="Laufband anhalten">
+    <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" fill="currentColor">
+      <path class="zeichen-pause" d="M4 3h3v10H4zM9 3h3v10H9z" />
+      <path class="zeichen-weiter" d="M5 3l8 5-8 5z" />
+    </svg>
+  </button>
 </section>
 
 <style>
@@ -62,8 +70,31 @@ const gruppen = [false, true];
     animation: laufen var(--dauer) linear infinite;
   }
   .laufband:hover .laufband-spur,
-  .laufband:focus-within .laufband-spur {
+  .laufband.angehalten .laufband-spur {
     animation-play-state: paused;
+  }
+  /* Knopf zum Anhalten (WCAG 2.2.2), nur wenn sich das Band bewegt */
+  .laufband-pause {
+    display: none;
+    position: absolute;
+    inset-block: 0;
+    right: 0;
+    width: 3rem;
+    place-items: center;
+    cursor: pointer;
+    color: inherit;
+    background: inherit;
+    box-shadow: -1rem 0 1rem -0.25rem var(--akzent);
+  }
+  :global(.reveal-an) .laufband-pause {
+    display: grid;
+  }
+  .laufband-pause .zeichen-weiter,
+  .laufband.angehalten .laufband-pause .zeichen-pause {
+    display: none;
+  }
+  .laufband.angehalten .laufband-pause .zeichen-weiter {
+    display: inline;
   }
   @keyframes laufen {
     to {
@@ -71,6 +102,9 @@ const gruppen = [false, true];
     }
   }
   @media (prefers-reduced-motion: reduce) {
+    .laufband-pause {
+      display: none !important;
+    }
     .laufband {
       overflow-x: auto;
     }
@@ -82,3 +116,13 @@ const gruppen = [false, true];
     }
   }
 </style>
+
+<script>
+  document.querySelectorAll<HTMLElement>(".laufband").forEach((band) => {
+    const knopf = band.querySelector<HTMLButtonElement>(".laufband-pause");
+    knopf?.addEventListener("click", () => {
+      const an = band.classList.toggle("angehalten");
+      knopf.setAttribute("aria-pressed", String(an));
+    });
+  });
+</script>

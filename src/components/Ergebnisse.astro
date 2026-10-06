@@ -16,7 +16,7 @@ const sichtbar = e.kennzahlen.length + e.stimmen.length > 0;
         {e.kennzahlen.length > 0 && (
           <ul class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {e.kennzahlen.map((k) => (
-              <li class="reveal rounded-3xl bg-flaeche p-6">
+              <li class="reveal rounded-xl bg-flaeche p-6">
                 <p class="font-display text-4xl font-extrabold text-akzent-text">{k.wert}</p>
                 <p class="mt-2 font-medium">{k.beschreibung}</p>
                 <p class="mt-2 text-sm text-leise">Quelle: {k.quelle}</p>

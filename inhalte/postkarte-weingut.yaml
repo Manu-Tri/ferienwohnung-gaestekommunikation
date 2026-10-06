@@ -1,0 +1,28 @@
+# Postkarte für Weingüter mit Gästezimmern (A6 quer)
+# Erzeugen mit:  npm run postkarte   ->  vorlagen/postkarte-weingut.pdf
+# Platzhalter wie in site.yaml: {preis} {test_tage} {start} {ende} {antwortzeit}
+#   {check_stunden} {verbesserungen} {email} {telefon} {ort}
+# Bitte keine Gedankenstriche verwenden.
+
+# Wird an den Link im QR-Code angehängt, damit Sie sehen, wer über die Karte kommt
+quelle: "postkarte-weingut"
+
+vorne:
+  zielgruppe: "Für Weingüter mit Gästezimmern"
+  titel: "Wer antwortet Ihren Gästen, während Sie im Weinberg stehen?"
+  uhrzeit: "18:52, Sie sind noch bei der Lese"
+  gast: "Hallo! Wir kommen morgen gegen 15 Uhr. Können wir abends noch eine Weinprobe machen?"
+  antwort: "Herzlich willkommen! Um 18 Uhr sind noch zwei Plätze frei, ich trage Sie gern ein. Der Schlüssel liegt ab 14 Uhr im Kasten neben der Hoftür."
+
+hinten:
+  anrede: "Guten Tag,"
+  text:
+    - "im Herbst wird im Weingut jede Hand gebraucht. Die Gäste in Ihren Zimmern schreiben trotzdem: Wann kann ich einchecken? Gibt es noch Platz bei der Weinprobe?"
+    - "Diese Nachrichten auf Airbnb und Booking.com beantworten wir für Sie, täglich von {start} bis {ende} Uhr, meist in {antwortzeit} Minuten. Wir weisen auf Ihre Weinprobe und Ihren Hofladen hin. Alles Wichtige prüft bei uns ein Mensch."
+  angebot_titel: "Zum Kennenlernen kostenlos:"
+  angebot: "Wir schauen uns Ihr Inserat an und schicken Ihnen in {check_stunden} Stunden {verbesserungen} konkrete Verbesserungen."
+  fakten: "{preis} € pro Buchung · keine Grundgebühr · {test_tage} Tage kostenlos testen"
+  gruss: "Herzliche Grüße von der Mosel"
+  name: "[IHR NAME]"
+  qr_hinweis: "Inserats-Check anfordern"
+  briefmarke: "Bitte frankieren"

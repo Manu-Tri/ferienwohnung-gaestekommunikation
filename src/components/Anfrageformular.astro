@@ -1,6 +1,7 @@
 ---
 import { pfad } from "../config/pfad";
 import { site } from "../config/laden";
+import { hatPlatzhalter } from "../config/platzhalter";
 
 interface Props {
   titel?: string;
@@ -13,6 +14,8 @@ const { titel = site.anfrage.titel, anliegenFest, region = "" } = Astro.props;
 const a = site.anfrage;
 const f = site.formular;
 const istNetlify = f.anbieter === "netlify";
+// Ohne echte E-Mail-Adresse den Hinweis „schreiben Sie an …“ weglassen
+const fehlerSenden = hatPlatzhalter(site.marke.email) ? a.fehler_senden.replace(/\s+oder schreiben Sie an\s+\S+?\.?$/, ".") : a.fehler_senden;
 const action = istNetlify ? pfad("/danke") : f.endpunkt;
 const anliegen = [
   { wert: "test", text: a.anliegen.test },
@@ -22,7 +25,7 @@ const anliegen = [
 
 // Segment-Umschalter für das Anliegen
 const segment =
-  "relative flex min-h-12 cursor-pointer items-center justify-center rounded-[0.625rem] px-1.5 py-2 text-center text-[0.875rem] leading-tight font-bold text-leise transition-colors has-checked:bg-akzent has-checked:text-white has-focus-visible:outline-3 has-focus-visible:outline-offset-2 has-focus-visible:outline-tinte sm:text-[0.95rem]";
+  "relative flex min-h-12 cursor-pointer items-center justify-center rounded-[0.625rem] px-1.5 py-2 text-center text-[0.875rem] leading-tight font-bold text-leise transition-colors has-checked:bg-akzent has-checked:text-auf-akzent has-focus-visible:outline-3 has-focus-visible:outline-offset-2 has-focus-visible:outline-tinte sm:text-[0.95rem]";
 const kachel =
   "flex min-h-14 cursor-pointer items-center gap-3 rounded-[0.875rem] border-2 border-eingabe-rand bg-karte px-4 py-3 font-semibold transition-colors hover:border-akzent has-checked:border-akzent has-checked:bg-akzent-hell";
 const eingabe =
@@ -33,20 +36,19 @@ const frage = "font-display text-[1.25rem] leading-snug font-bold md:text-[1.4re
 <section id="anfrage" class="abschnitt" aria-labelledby="anfrage-titel">
   <div class="behaelter grid items-start gap-[clamp(1.75rem,5vw,4.5rem)] lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
     <div class="flex flex-col gap-4 lg:sticky lg:top-28">
-      {a.kicker && <p class="etikett">{a.kicker}</p>}
       <h2 id="anfrage-titel" class="h2 !mt-0">{titel}</h2>
       {a.untertitel && <p class="max-w-[30rem] text-[clamp(1rem,1.5vw,1.19rem)] leading-relaxed text-leise">{a.untertitel}</p>}
-      {a.gruss && <p class="kicker">{a.gruss}</p>}
+      {a.gruss && <p class="gruss">{a.gruss}</p>}
     </div>
 
     <form
       name={f.name}
       method="POST"
       action={action}
-      class="anfrage rounded-[1.75rem] bg-karte p-[clamp(1.25rem,3vw,2.5rem)] shadow-[0_20px_50px_rgb(24_38_28/0.08)]"
+      class="anfrage rounded-xl bg-karte p-[clamp(1.25rem,3vw,2.5rem)] shadow-[0_20px_50px_rgb(29_40_51/0.08)]"
       data-anbieter={f.anbieter}
       data-schritt-text={a.schritt}
-      data-fehler-senden={a.fehler_senden}
+      data-fehler-senden={fehlerSenden}
       data-senden-laeuft={a.senden_laeuft}
       {...istNetlify ? { "data-netlify": "true", "netlify-honeypot": "firma_website" } : {}}
     >
@@ -87,7 +89,7 @@ const frage = "font-display text-[1.25rem] leading-snug font-bold md:text-[1.4re
           {a.schritt.replace("{nr}", "1")}
         </p>
         <div class="mt-2 h-1.5 overflow-hidden rounded-full bg-sand" aria-hidden="true">
-          <div class="h-full w-1/4 rounded-full bg-akzent transition-[width] duration-300" data-fortschritt-balken></div>
+          <div style="transform: scaleX(0.25)" class="h-full w-full origin-left rounded-full bg-akzent transition-transform duration-300 ease-out" data-fortschritt-balken></div>
         </div>
       </div>
 
@@ -106,7 +108,7 @@ const frage = "font-display text-[1.25rem] leading-snug font-bold md:text-[1.4re
             }
           </div>
         </fieldset>
-        <p id="fehler-1" class="fehler mt-3 font-medium text-fehler" data-fehler-box></p>
+        <p id="fehler-1" class="fehler mt-3 font-medium text-fehler" role="alert" data-fehler-box></p>
       </div>
 
       <!-- Schritt 2 -->
@@ -124,7 +126,7 @@ const frage = "font-display text-[1.25rem] leading-snug font-bold md:text-[1.4re
             }
           </div>
         </fieldset>
-        <p id="fehler-2" class="fehler mt-3 font-medium text-fehler" data-fehler-box></p>
+        <p id="fehler-2" class="fehler mt-3 font-medium text-fehler" role="alert" data-fehler-box></p>
         <label class="mt-6 block font-semibold">
           {a.label_region}
           <input type="text" name="region" value={region} autocomplete="address-level2" class={eingabe} />
@@ -146,7 +148,7 @@ const frage = "font-display text-[1.25rem] leading-snug font-bold md:text-[1.4re
             }
           </div>
         </fieldset>
-        <p id="fehler-3" class="fehler mt-3 font-medium text-fehler" data-fehler-box></p>
+        <p id="fehler-3" class="fehler mt-3 font-medium text-fehler" role="alert" data-fehler-box></p>
         <label class="mt-6 block font-semibold">
           {a.label_problem_text}
           <textarea name="problem_text" rows="3" class={eingabe}></textarea>

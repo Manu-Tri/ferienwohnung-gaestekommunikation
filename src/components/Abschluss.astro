@@ -1,39 +1,37 @@
 ---
 import { site } from "../config/laden";
+import Tal from "./Tal.astro";
 const a = site.abschluss;
-// Satz nach dem ersten Punkt leuchtet in Mint
+// Wie im Hero: erster Satz schmal und kräftig, zweiter breit und leicht
 const trenner = a.titel.indexOf(". ");
 const satz1 = trenner > 0 ? a.titel.slice(0, trenner + 1) : a.titel;
 const satz2 = trenner > 0 ? a.titel.slice(trenner + 2) : "";
 ---
 
-<section class="abschluss bg-tinte text-auf-tinte" aria-labelledby="abschluss-titel" data-ohne-leiste>
-  <div class="behaelter reveal flex flex-col items-start gap-[clamp(1.25rem,3vw,2rem)] py-[clamp(4rem,9vw,8rem)]">
-    {a.kicker && <p class="kicker !text-gold">{a.kicker}</p>}
-    <h2 id="abschluss-titel" class="max-w-[62.5rem] text-[clamp(2.25rem,5.4vw,5rem)] leading-[0.92] font-extrabold tracking-[-0.04em]">
-      {satz1}
-      {satz2 && <> <span class="text-mint">{satz2}</span></>}
+<section class="abschluss relative overflow-hidden bg-tinte text-auf-tinte" aria-labelledby="abschluss-titel" data-ohne-leiste>
+  <div class="behaelter reveal relative z-10 flex flex-col items-start gap-[clamp(1.25rem,3vw,2rem)] pt-[clamp(4rem,9vw,8rem)] pb-[clamp(8rem,17vw,16rem)]">
+    <h2 id="abschluss-titel" class="flex max-w-[62.5rem] flex-col gap-[0.15em] text-[clamp(2.4rem,5.8vw,5.2rem)] leading-[0.92]">
+      <span class="font-extrabold [font-stretch:64%]">{satz1}</span>
+      {satz2 && <>{" "}<span class="text-[0.72em] font-light [font-stretch:125%]">{satz2}</span></>}
     </h2>
-    <p class="max-w-[42rem] text-[clamp(1rem,1.5vw,1.19rem)] leading-relaxed text-auf-tinte-leise">{a.text}</p>
+    <p class="max-w-[36rem] text-[clamp(1rem,1.5vw,1.19rem)] leading-relaxed text-auf-tinte-leise">{a.text}</p>
     <div class="flex flex-wrap items-center gap-x-[1.375rem] gap-y-3">
-      <a href="#anfrage" data-anliegen="test" class="knopf knopf-mint !px-7 !py-[1.125rem] text-lg">{site.cta.test}</a>
+      <a href="#anfrage" data-anliegen="test" class="knopf knopf-mint knopf-gross">{site.cta.test}</a>
       <a href="#anfrage" data-anliegen="check" class="textlink text-auf-tinte hover:text-mint">{site.cta.check}</a>
     </div>
   </div>
+  <Tal zeit="nacht" />
 </section>
 
 <style>
   .abschluss {
     --fokus: var(--mint);
   }
-  /* Auf dem dunklen Grund: Mint mit dunkler Schrift, damit der Knopf leuchtet */
-  .knopf-mint {
-    background: var(--mint);
-    color: var(--tinte);
-    box-shadow: 0 4px 0 var(--mint-schatten);
-  }
-  .knopf-mint:hover {
-    background: #a6dfb8;
-    color: var(--tinte);
+  .abschluss :global(.tal) {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    width: 100%;
+    height: clamp(7rem, 16vw, 15rem);
   }
 </style>

@@ -1,8 +1,7 @@
 ---
 import { istVorschau, ohneBasis, pfad } from "../config/pfad";
 import "../styles/global.css";
-import schriftLatin from "@fontsource-variable/figtree/files/figtree-latin-wght-normal.woff2?url";
-import schriftTitel from "@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-opsz-normal.woff2?url";
+import schriftLatin from "@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { site } from "../config/laden";
@@ -33,10 +32,9 @@ const robots = istVorschau ? "noindex, nofollow" : noindex ? "noindex, follow" :
     <meta name="description" content={beschreibung} />
     <link rel="canonical" href={kanonisch} />
     {robots && <meta name="robots" content={robots} />}
-    <meta name="theme-color" content="#f3ede1" />
+    <meta name="theme-color" content="#22303d" />
     <link rel="icon" href={pfad("/favicon.svg")} type="image/svg+xml" />
     <link rel="preload" href={schriftLatin} as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href={schriftTitel} as="font" type="font/woff2" crossorigin />
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="de_DE" />
@@ -52,23 +50,19 @@ const robots = istVorschau ? "noindex, nofollow" : noindex ? "noindex, follow" :
     {jsonld.map((daten) => <script type="application/ld+json" set:html={JSON.stringify(daten)} />)}
 
     <script is:inline>
-      // Seite startet immer oben. Ein Anker (#preise) bleibt nur, wenn man von einer anderen
-      // eigenen Seite gezielt dorthin kommt (z. B. „Kostenlos testen“ im Impressum).
+      // Neu laden beginnt oben. Ein Link mit Anker (#preise), auch aus einer E-Mail oder einem
+      // Facebook-Beitrag, springt an die Stelle. „Zurück“ im Browser kehrt an die alte Position zurück.
       (() => {
-        if ("scrollRestoration" in history) history.scrollRestoration = "manual";
-        const ohneAnker = () => history.replaceState(history.state, "", location.pathname + location.search);
-        let vonEigenerSeite = false;
-        try {
-          const herkunft = new URL(document.referrer);
-          vonEigenerSeite = herkunft.origin === location.origin && herkunft.pathname !== location.pathname;
-        } catch {}
         const art = performance.getEntriesByType("navigation")[0]?.type;
-        if (location.hash && !(art === "navigate" && vonEigenerSeite)) ohneAnker();
-        addEventListener("load", () => {
-          const ziel = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
-          if (ziel) ziel.scrollIntoView({ behavior: "instant" });
-          else scrollTo(0, 0);
-        });
+        if (art !== "back_forward") {
+          if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+          if (location.hash && art === "reload") history.replaceState(history.state, "", location.pathname + location.search);
+          addEventListener("load", () => {
+            const ziel = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+            if (ziel) ziel.scrollIntoView({ behavior: "instant" });
+            else scrollTo(0, 0);
+          });
+        }
         // Sprünge innerhalb der Seite: hinscrollen, aber keinen Anker in die Adresse schreiben,
         // damit Neuladen wieder oben beginnt. Fokus wandert mit (wichtig für Tastatur und Sprunglink).
         document.addEventListener("click", (e) => {

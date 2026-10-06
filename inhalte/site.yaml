@@ -109,12 +109,12 @@ hero:
     - "Keine Grundgebühr"
     - "Monatlich kündbar"
     - "DSGVO-konform"
-    - "Persönliche Ansprechperson"
+    - "Ein Mensch prüft alles Wichtige"
 
 # Laufendes Band unter dem ersten Bildschirm. Punkte laufen endlos von rechts nach links.
 laufband:
   punkte:
-    - "Immer erreichbar"
+    - "Täglich {start} bis {ende} Uhr"
     - "Auch sonntags und an Feiertagen"
     - "Persönlich betreut"
     - "Herzliche Antworten in Ihrem Ton"
@@ -122,23 +122,35 @@ laufband:
     - "Monatlich kündbar"
     - "{test_tage} Tage kostenlos testen"
 
-# Kleines Gespräch im grünen Feld oben rechts. Ohne JavaScript ist alles sofort sichtbar.
+# Kleines Gespräch im ersten Bildschirm. Die Nachrichten erscheinen nacheinander,
+# vor jeder Antwort von uns kurz "schreibt …". Ohne JavaScript ist alles sofort sichtbar.
+# von: "gast" oder "wir". "absender" ist die kleine Zeile über der Nachricht (leer lassen = keine).
+# Bitte nicht mehr als 6 Nachrichten, sonst wird der erste Bildschirm zu hoch.
 chat_demo:
   # Große Uhrzeit über dem Chat (leer lassen = keine Uhrzeit, z. B.  uhrzeit: "21:47")
   uhrzeit: ""
   # Handschriftliche Notiz über dem Chat
   notiz: "Sie sitzen gerade beim Abendessen."
-  # Für Screenreader: beschreibt das Bild in einem Satz
-  beschreibung: "Beispiel: Ein Gast schreibt um 21:47, {marke} antwortet um 21:49"
-  gast_absender: "Gast · Booking.com"
-  gast_text: "Hallo! Wir stehen vor dem Schlüsselsafe, der Code klappt nicht. Können Sie helfen?"
-  antwort_absender: "{marke} · 21:49"
-  antwort_text: "Guten Abend! Bitte den Bügel nach dem Code einmal fest nach unten drücken, dann öffnet die Klappe. Willkommen an der Mosel!"
+  # Für Screenreader: beschreibt das Gespräch in einem Satz
+  beschreibung: "Beispiel: Ein Gast fragt abends nach früherem Check-in und einem Parkplatz, {marke} antwortet nach wenigen Minuten"
+  # Zeile unter unserer letzten Antwort (Doppelhäkchen wird davor gesetzt)
   geprueft: "gelesen und beantwortet"
-  dank_text: "Hat geklappt, vielen Dank!"
+  nachrichten:
+    - von: "gast"
+      absender: "Gast · Airbnb · 21:42"
+      text: "Guten Abend! Wir kommen morgen schon gegen 13 Uhr an. Können wir früher rein?"
+    - von: "wir"
+      absender: "{marke} · 21:44"
+      text: "Guten Abend, schön, dass Sie kommen! Die Wohnung ist ab 14 Uhr fertig. Ihr Gepäck können Sie aber gern schon um 13 Uhr abstellen."
+    - von: "gast"
+      text: "Super! Und wo können wir parken?"
+    - von: "wir"
+      absender: "{marke} · 21:45"
+      text: "Direkt am Haus ist Stellplatz Nummer 3 für Sie reserviert. Gute Fahrt und bis morgen!"
+    - von: "gast"
+      text: "Perfekt, vielen Dank! 😊"
 
 problem:
-  kicker: "Kennen Sie das?"
   titel: "Gäste schreiben selten dann, wenn es Ihnen gerade passt."
   # "titel" ist das große Stichwort oben in der Karte, die letzte Karte erscheint in Gold
   karten:
@@ -169,7 +181,6 @@ rechner:
   cta: "{test_tage} Tage kostenlos testen"
 
 gaestereise:
-  kicker: "So kümmern wir uns"
   titel: "Vom ersten Hallo bis zur Bewertung"
   text: "Gäste merken sich die Wohnung, aber auch, ob sich jemand um sie gekümmert hat. Bei Airbnb ist Kommunikation sogar eine eigene Bewertungskategorie. Wer schnell eine freundliche Antwort bekommt, reist entspannter an und bewertet eher gut."
   phasen:
@@ -182,6 +193,7 @@ gaestereise:
       punkte:
         - "Jede Frage wird beantwortet, von {start} bis {ende} Uhr"
         - "Kurze Nachfrage am ersten Abend, ob alles passt"
+        - "Bei Notfällen rufen wir sofort Ihre Partner vor Ort an"
         - "Probleme lösen, bevor sie in der Bewertung stehen"
     - titel: "Nach der Abreise"
       punkte:
@@ -191,13 +203,12 @@ gaestereise:
         - "Monatlicher Bericht: was Gäste loben, was sie stört"
 
 ablauf:
-  kicker: "Der Start"
   titel: "So fangen wir gemeinsam an"
   # "hinweis" ist das kleine Etikett oben rechts (leer lassen = kein Etikett)
   schritte:
-    - titel: "Co-Host-Einladung"
+    - titel: "Sie laden uns ein"
       hinweis: "Wir helfen dabei"
-      text: "Sie laden uns auf Airbnb als Co-Host mit der Berechtigung „Kalender und Postfach“ ein, auf Booking.com als eigenen Benutzer. Wir zeigen Ihnen, wo Sie klicken müssen. Ihre Zugangsdaten bleiben bei Ihnen."
+      text: "Sie geben uns auf Airbnb und Booking.com Zugriff auf Ihr Postfach, ähnlich wie einer Vertretung. Wir zeigen Ihnen am Telefon jeden Klick. Ihr Passwort bleibt bei Ihnen, und Sie können uns jederzeit selbst wieder entfernen."
     - titel: "Wir lernen Ihre Unterkunft kennen"
       hinweis: "Ein kurzes Telefonat"
       text: "Wir rufen Sie kurz an und fragen alles ab, was Gäste wissen wollen: Check-in, Hausregeln, WLAN, Parken, Ansprechpartner vor Ort. Daraus schreiben wir unseren Spickzettel für jede Antwort."
@@ -206,7 +217,6 @@ ablauf:
       text: "Ab jetzt antworten wir Ihren Gästen. Sie bekommen abends eine kurze Zusammenfassung und hören nur dann von uns, wenn Sie wirklich entscheiden müssen."
 
 leistungen:
-  kicker: "Was wir für Sie tun"
   titel: "Was wir im Alltag für Sie erledigen"
   karten:
     - titel: "Antworten von {start} bis {ende} Uhr"
@@ -225,7 +235,6 @@ leistungen:
       text: "Abends schicken wir Ihnen eine kurze E-Mail mit allem, was gefragt wurde und was noch offen ist. Einmal im Monat fassen wir zusammen, was Gäste loben und was sie stört."
 
 vergleich:
-  kicker: "Ganz wie Sie möchten"
   titel: "Sie entscheiden, was Sie abgeben."
   intro: "Manche Gastgeber möchten alles abgeben, andere nur die Abende und Wochenenden. Stellen Sie sich Ihr Paket zusammen, gern auch für jede Wohnung anders. Wir melden uns mit einem passenden Angebot."
   beschriftung: "Aufgaben, die Sie an {marke} abgeben können"
@@ -262,29 +271,28 @@ vergleich:
 ergebnisse:
   titel: "Ergebnisse unserer Kunden"
   kennzahlen: []
-  # MUSTERTEXTE: ausgedacht, nur zur Ansicht. Jede Karte zeigt deshalb das Etikett "Beispiel".
-  # Vor dem Livegang durch echte Stimmen mit Einwilligung ersetzen (Zeile "beispiel: true" dann löschen)
-  # oder die Liste wieder auf  stimmen: []  setzen.
-  stimmen:
-    - zitat: "Früher lag das Handy beim Abendessen immer neben dem Teller. Heute lese ich abends nur noch die kurze Zusammenfassung und weiß: Es ist alles erledigt."
-      name: "Sabine K."
-      ort: "Bernkastel-Kues"
-      objekte: "3 Ferienwohnungen"
-      beispiel: true
-    - zitat: "Am Pfingstsonntag stand eine Familie vor dem Schlüsselsafe. Ich war auf einer Hochzeit und habe erst am Abend davon erfahren, da war längst alles gelöst."
-      name: "Thomas R."
-      ort: "Traben-Trarbach"
-      objekte: "1 Ferienwohnung"
-      beispiel: true
-    - zitat: "Die Antworten klingen wirklich nach mir, nur freundlicher. Unsere Gäste merken keinen Unterschied, außer dass sie schneller eine Antwort bekommen."
-      name: "Familie Weber"
-      ort: "Cochem"
-      objekte: "2 Ferienwohnungen"
-      beispiel: true
-    - zitat: "Der Inserats-Check hat mir fünf Dinge gezeigt, die ich in zehn Jahren nie bemerkt habe. Zwei davon habe ich noch am selben Abend geändert."
-      name: "Monika S."
-      ort: "Zell an der Mosel"
-      beispiel: true
+  # Nur echte Stimmen mit dokumentierter Einwilligung eintragen. Leer = Abschnitt und Menüpunkt ausgeblendet.
+  stimmen: []
+  # Frühere Mustertexte (ausgedacht, nicht veröffentlichen):
+  #   - zitat: "Früher lag das Handy beim Abendessen immer neben dem Teller. Heute lese ich abends nur noch die kurze Zusammenfassung und weiß: Es ist alles erledigt."
+  #     name: "Sabine K."
+  #     ort: "Bernkastel-Kues"
+  #     objekte: "3 Ferienwohnungen"
+  #     beispiel: true
+  #   - zitat: "Am Pfingstsonntag stand eine Familie vor dem Schlüsselsafe. Ich war auf einer Hochzeit und habe erst am Abend davon erfahren, da war längst alles gelöst."
+  #     name: "Thomas R."
+  #     ort: "Traben-Trarbach"
+  #     objekte: "1 Ferienwohnung"
+  #     beispiel: true
+  #   - zitat: "Die Antworten klingen wirklich nach mir, nur freundlicher. Unsere Gäste merken keinen Unterschied, außer dass sie schneller eine Antwort bekommen."
+  #     name: "Familie Weber"
+  #     ort: "Cochem"
+  #     objekte: "2 Ferienwohnungen"
+  #     beispiel: true
+  #   - zitat: "Der Inserats-Check hat mir fünf Dinge gezeigt, die ich in zehn Jahren nie bemerkt habe. Zwei davon habe ich noch am selben Abend geändert."
+  #     name: "Monika S."
+  #     ort: "Zell an der Mosel"
+  #     beispiel: true
 
 # Persönlicher Abschnitt: wer hinter dem Angebot steht.
 # Das wichtigste Element, damit die Seite menschlich wirkt. Bitte mit echten Angaben füllen.
@@ -292,7 +300,6 @@ ergebnisse:
 persoenlich:
   sichtbar: true
   # Linke Seite: wie wir arbeiten. Hier wird der KI-Einsatz einmal offen und ruhig genannt (Transparenz).
-  kicker: "So arbeiten wir"
   titel: "Zuerst lernen wir Ihre Wohnung kennen"
   einleitung: "Am Anfang steht ein Gespräch mit Ihnen: über den Check-in, Ihre Hausregeln, Ihre Partner vor Ort und darüber, wie Sie mit Gästen reden. Das schreiben wir uns auf, damit jede Antwort zu Ihnen passt. Beim Formulieren hilft uns eine KI, damit es schnell geht. Was rausgeht, verantworten wir."
   themen:
@@ -312,7 +319,6 @@ persoenlich:
   foto_platzhalter: "Foto: [Person hinter anytime, z. B. an der Mosel]"
 
 preise_abschnitt:
-  kicker: "So rechnen wir ab"
   titel: "Sie zahlen nur für Buchungen, die Sie auch bekommen."
   einheit: "pro Buchung"
   test_hinweis: "Die ersten {test_tage} Tage sind kostenlos."
@@ -390,9 +396,8 @@ angebote:
       cta: "Gespräch anfragen"
 
 anfrage:
-  kicker: "Anfrage in 1 Minute"
   titel: "Erzählen Sie uns kurz von Ihren Wohnungen"
-  untertitel: "Es sind vier kurze Fragen. Danach meldet sich jemand von uns persönlich bei Ihnen. Die Anfrage ist unverbindlich und kostet nichts."
+  untertitel: "Vier kurze Fragen, dann meldet sich jemand von uns persönlich bei Ihnen und richtet mit Ihnen den kostenlosen Test ein. Die Anfrage ist unverbindlich und kostet nichts."
   # Handschriftlicher Gruß unter dem Text (leer lassen = kein Gruß)
   gruss: "Wir freuen uns auf Sie!"
   anliegen_frage: "Ich möchte"
@@ -445,35 +450,36 @@ anfrage:
   fehler_senden: "Das hat nicht geklappt. Bitte versuchen Sie es noch einmal oder schreiben Sie an {email}."
 
 faq:
-  kicker: "Gut zu wissen"
   titel: "Häufige Fragen"
+  # Die ersten "sichtbar" Fragen stehen direkt da, der Rest aufklappbar unter "weitere".
+  sichtbar: 6
+  weitere: "Weitere Fragen"
   fragen:
+    - frage: "Setzen Sie Künstliche Intelligenz ein?"
+      antwort: "Ja. Eine KI schreibt Vorschläge für Antworten auf Basis der Angaben zu Ihrer Wohnung, damit Ihre Gäste schnell eine Antwort bekommen. Routinefragen wie WLAN oder Anreise können nach Ihrer Freigabe direkt beantwortet werden. Alles zu Geld, Stornierungen, Beschwerden, Schäden und Notfällen bearbeiten wir persönlich, bevor etwas rausgeht."
+    - frage: "Muss ich meine Zugangsdaten herausgeben?"
+      antwort: "Nein. Sie laden uns als Co-Host oder als eigenen Benutzer ein und können den Zugriff jederzeit selbst entziehen."
+    - frage: "Wird der Test automatisch zum Vertrag?"
+      antwort: "Nein. Nach {test_tage} Tagen fragen wir Sie. Ohne Ihre und unsere Bestätigung entsteht kein Vertrag."
+    - frage: "Wie kündige ich?"
+      antwort: "Monatlich, per E-Mail, ohne Begründung. Zusätzlich entfernen Sie uns als Co-Host. Damit endet unser Zugriff sofort."
+    - frage: "Was passiert bei einem Notfall in der Nacht?"
+      antwort: "Zwischen {ende} und {start} Uhr ist das Postfach nicht besetzt. [ZU KLÄREN: Notfallregel nachts, z. B. automatischer Hinweis mit der Notfallnummer Ihres Partners vor Ort.] Ab {start} Uhr bearbeiten wir offene Nachrichten zuerst."
+    - frage: "Wie gehen Sie mit den Daten meiner Gäste um?"
+      antwort: "Wir verarbeiten Gästedaten nur in Ihrem Auftrag und schließen dafür einen Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO. Wir sehen nur, was die Plattform einem Co-Host zeigt. [SPEICHERORT UND HOSTING DER WISSENSBASIS UND DER EINGESETZTEN SOFTWARE]"
     - frage: "Ist das mit den Regeln von Airbnb vereinbar?"
       antwort: "Ja. Airbnb sieht Co-Hosts ausdrücklich vor, mit verschiedenen Berechtigungsstufen und der Möglichkeit, Co-Hosts an der Auszahlung zu beteiligen. Wir kommunizieren ausschließlich über das Postfach der Plattform. Wir sind ein unabhängiger Dienstleister und nicht mit Airbnb oder Booking.com verbunden. [ZU PRÜFEN: welche Berechtigungsstufe für die Auszahlungsbeteiligung nötig ist]"
     - frage: "Welche Plattformen unterstützen Sie?"
       antwort: "Airbnb und Booking.com. [WEITERE PLATTFORMEN ODER CHANNEL MANAGER]"
-    - frage: "Wie gehen Sie mit den Daten meiner Gäste um?"
-      antwort: "Wir verarbeiten Gästedaten nur in Ihrem Auftrag und schließen dafür einen Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO. Wir sehen nur, was die Plattform einem Co-Host zeigt. [SPEICHERORT UND HOSTING DER WISSENSBASIS UND DER EINGESETZTEN SOFTWARE]"
-    - frage: "Setzen Sie Künstliche Intelligenz ein?"
-      antwort: "Ja. Eine KI schreibt Vorschläge für Antworten auf Basis der Angaben zu Ihrer Wohnung, damit Ihre Gäste schnell eine Antwort bekommen. Routinefragen wie WLAN oder Anreise können nach Ihrer Freigabe direkt beantwortet werden. Alles zu Geld, Stornierungen, Beschwerden, Schäden und Notfällen bearbeiten wir persönlich, bevor etwas rausgeht."
     - frage: "Wie läuft der Nachkontakt mit den Gästen?"
       antwort: "Am Abreisetag schicken wir eine persönliche Dankesnachricht und bitten um eine Bewertung. Wir fragen jeden Gast, ohne Gegenleistung und nach den Regeln der Plattform. Fehlt die Bewertung nach einigen Tagen, erinnern wir einmal. Jede eingehende Bewertung beantworten wir in Ihrem Namen."
-    - frage: "Was passiert bei einem Notfall in der Nacht?"
-      antwort: "Zwischen {ende} und {start} Uhr ist das Postfach nicht besetzt. [ZU KLÄREN: Notfallregel nachts, z. B. automatischer Hinweis mit der Notfallnummer Ihres Partners vor Ort.] Ab {start} Uhr bearbeiten wir offene Nachrichten zuerst."
     - frage: "Was passiert, wenn Ihnen ein Fehler unterläuft?"
       antwort: "Wir sagen es Ihnen am selben Tag, korrigieren die Antwort gegenüber dem Gast und ergänzen die Wissensbasis, damit es nicht wieder passiert. [HAFTUNG UND BETRIEBSHAFTPFLICHT]"
-    - frage: "Wie kündige ich?"
-      antwort: "Monatlich, per E-Mail, ohne Begründung. Zusätzlich entfernen Sie uns als Co-Host. Damit endet unser Zugriff sofort."
     - frage: "Wie läuft die Abrechnung, und weisen Sie Umsatzsteuer aus?"
       antwort: "Auf Airbnb automatisch über die Co-Host-Auszahlung, Sie erhalten zusätzlich eine monatliche Übersicht. Gemäß § 19 UStG wird keine Umsatzsteuer berechnet, die Rechnung weist deshalb keine Umsatzsteuer aus."
-    - frage: "Wird der Test automatisch zum Vertrag?"
-      antwort: "Nein. Nach {test_tage} Tagen fragen wir Sie. Ohne Ihre und unsere Bestätigung entsteht kein Vertrag."
-    - frage: "Muss ich meine Zugangsdaten herausgeben?"
-      antwort: "Nein. Sie laden uns als Co-Host oder als eigenen Benutzer ein und können den Zugriff jederzeit selbst entziehen."
 
 abschluss:
-  kicker: "Heute Abend schon?"
-  # Der Satz nach dem ersten Punkt leuchtet in Mint
+  # Erster Satz schmal und kräftig, zweiter Satz breit und leicht (wie im Hero)
   titel: "Ihre Gäste sind gut versorgt. Ihr Abend gehört wieder Ihnen."
   text: "Probieren Sie uns {test_tage} Tage lang aus, kostenlos und ohne Vertrag. Wenn Sie uns erst einmal kennenlernen möchten, sehen wir uns vorher Ihr Inserat an und schicken Ihnen innerhalb von {check_stunden} Stunden {verbesserungen} konkrete Vorschläge."
 

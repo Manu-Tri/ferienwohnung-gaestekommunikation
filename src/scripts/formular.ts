@@ -24,7 +24,7 @@ function einrichten(form: HTMLFormElement) {
     aktuell = Math.max(0, Math.min(schritte.length - 1, index));
     schritte.forEach((s, i) => s.toggleAttribute("data-aktiv", i === aktuell));
     if (fortschrittText) fortschrittText.textContent = vorlage.replace("{nr}", String(aktuell + 1));
-    if (balken) balken.style.width = `${((aktuell + 1) / schritte.length) * 100}%`;
+    if (balken) balken.style.transform = `scaleX(${(aktuell + 1) / schritte.length})`;
     zurueck.hidden = aktuell === 0;
     weiter.hidden = aktuell === schritte.length - 1;
     if (fokus) {
@@ -66,6 +66,9 @@ function einrichten(form: HTMLFormElement) {
       }
     });
     if (box) box.textContent = gruppenMeldung;
+    const gruppe = schritt.querySelector("fieldset");
+    if (gruppenMeldung) gruppe?.setAttribute("aria-invalid", "true");
+    else gruppe?.removeAttribute("aria-invalid");
 
     // Textfelder
     schritt.querySelectorAll<Feld>("input[data-fehler]:not([type=radio]), textarea[data-fehler]").forEach((feld) => {

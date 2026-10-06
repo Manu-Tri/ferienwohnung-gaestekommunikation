@@ -1,0 +1,81 @@
+---
+/**
+ * Moseltal als Linienbild: zwei Weinberghänge mit Rebzeilen, der Fluss, ein Haus mit Licht im Fenster.
+ * "abend" im Hero, "nacht" im Abschluss: dunklerer Himmel, ein paar Sterne, und das Licht geht aus,
+ * sobald der Abschnitt ins Bild kommt (Feierabend). Ohne JavaScript bleibt das Fenster hell.
+ */
+interface Props {
+  zeit?: "abend" | "nacht";
+  class?: string;
+}
+const { zeit = "abend", class: klasse = "" } = Astro.props;
+const nacht = zeit === "nacht";
+const muster = `reben-${zeit}`;
+const sterne = [
+  [180, 40],
+  [420, 22],
+  [610, 58],
+  [890, 30],
+  [1130, 18],
+  [1310, 46],
+];
+---
+
+<svg
+  class:list={["tal", klasse]}
+  data-zeit={zeit}
+  viewBox="0 0 1440 240"
+  preserveAspectRatio="xMidYMax slice"
+  aria-hidden="true"
+  focusable="false"
+>
+  <defs>
+    <pattern id={muster} width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(18)">
+      <line x1="0" y1="0" x2="0" y2="14" stroke="var(--mint)" stroke-opacity={nacht ? "0.12" : "0.22"} stroke-width="2"></line>
+    </pattern>
+  </defs>
+  {nacht && sterne.map(([x, y]) => <circle cx={x} cy={y} r="1.6" fill="var(--auf-tinte)" opacity="0.55" />)}
+  <path d="M0 132 C 180 76 360 66 560 120 S 920 74 1120 66 S 1360 98 1440 80 V240 H0Z" fill="var(--tal-fern)"></path>
+  <path d="M0 206 C 380 216 980 214 1440 202 V240 H0Z" fill="var(--tal-fluss)"></path>
+  <g class="spiegelung">
+    <path d="M610 214 C 700 211 760 217 860 212" stroke="var(--gold)" stroke-opacity="0.5" stroke-width="2.5" fill="none" stroke-linecap="round"></path>
+    <path d="M660 222 C 720 220 760 224 820 221" stroke="var(--gold)" stroke-opacity="0.3" stroke-width="2" fill="none" stroke-linecap="round"></path>
+  </g>
+  <path d="M0 58 C 240 96 470 162 700 214 L0 226Z" fill="var(--tinte-tief)"></path>
+  <path d="M0 58 C 240 96 470 162 700 214 L0 226Z" fill={`url(#${muster})`}></path>
+  <path d="M1440 100 C 1240 122 1020 172 830 216 L1440 226Z" fill="var(--tinte-tief)"></path>
+  <path d="M1440 100 C 1240 122 1020 172 830 216 L1440 226Z" fill={`url(#${muster})`}></path>
+  <g transform="translate(1004 152) scale(1.6)">
+    <path d="M0 24 L0 9 L15 -4 L30 9 L30 24Z" fill="var(--haus)"></path>
+    <rect x="6" y="11" width="6" height="7" fill="var(--tal-fern)"></rect>
+    <rect class="fenster" x="6" y="11" width="6" height="7" fill="var(--gold)"></rect>
+    <rect x="18" y="11" width="6" height="7" fill="var(--tal-fern)"></rect>
+  </g>
+</svg>
+
+<style>
+  .fenster,
+  .spiegelung {
+    transition: opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .tal.aus .fenster,
+  .tal.aus .spiegelung {
+    opacity: 0;
+  }
+</style>
+
+<script>
+  // Im Abschluss geht das Licht aus, einmal, kurz nachdem das Tal sichtbar wird
+  document.querySelectorAll<SVGElement>('.tal[data-zeit="nacht"]').forEach((tal) => {
+    if (!("IntersectionObserver" in window)) return;
+    const beobachter = new IntersectionObserver(
+      (eintraege) => {
+        if (!eintraege.some((e) => e.isIntersecting)) return;
+        beobachter.disconnect();
+        window.setTimeout(() => tal.classList.add("aus"), 1400);
+      },
+      { threshold: 0.6 },
+    );
+    beobachter.observe(tal);
+  });
+</script>

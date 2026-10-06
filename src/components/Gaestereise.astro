@@ -6,7 +6,7 @@ const g = site.gaestereise;
 
 <section id="betreuung" class="abschnitt" aria-labelledby="betreuung-titel">
   <div class="behaelter flex flex-col gap-[clamp(1.75rem,4vw,3.5rem)]">
-    <Kopf id="betreuung-titel" kicker={g.kicker} titel={g.titel} text={g.text} />
+    <Kopf id="betreuung-titel" titel={g.titel} text={g.text} />
     <ol class="grid gap-x-[clamp(1rem,2vw,1.5rem)] gap-y-10 md:grid-cols-3">
       {
         g.phasen.map((phase, i) => (
@@ -17,10 +17,9 @@ const g = site.gaestereise;
               </span>
               <h3 class="text-[clamp(1.25rem,2vw,1.5rem)]">{phase.titel}</h3>
             </div>
-            <ul class="flex flex-col gap-2.5 leading-snug text-leise">
+            <ul class="haken-liste flex flex-col gap-2.5 leading-snug text-leise">
               {phase.punkte.map((punkt) => (
-                <li class="flex gap-2">
-                  <span class="font-bold text-akzent-text" aria-hidden="true">✓</span>
+                <li>
                   <span>{punkt}</span>
                 </li>
               ))}

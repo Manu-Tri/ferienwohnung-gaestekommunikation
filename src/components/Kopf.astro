@@ -1,27 +1,15 @@
 ---
-/** Einheitlicher Abschnittskopf: kleines Label, Überschrift, optional Einleitung. */
+/** Einheitlicher Abschnittskopf: Überschrift, optional Einleitung. */
 interface Props {
   id: string;
   titel: string;
-  kicker?: string;
   text?: string;
   zentriert?: boolean;
-  /** "etikett" = sandfarbene Pille (helle Flächen), "hand" = handschriftlich (dunkle oder farbige Flächen) */
-  art?: "etikett" | "hand";
-  /** Satz nach dem ersten Punkt farbig hervorheben */
-  betonen?: boolean;
 }
-const { id, titel, kicker, text, zentriert = false, art = "etikett", betonen = false } = Astro.props;
-const trenner = betonen ? titel.indexOf(". ") : -1;
-const satz1 = trenner > 0 ? titel.slice(0, trenner + 1) : titel;
-const satz2 = trenner > 0 ? titel.slice(trenner + 2) : "";
+const { id, titel, text, zentriert = false } = Astro.props;
 ---
 
 <div class:list={["reveal flex max-w-[51rem] flex-col", zentriert && "mx-auto items-center text-center"]}>
-  {kicker && <p class:list={[art === "hand" ? "kicker" : "etikett", zentriert && "!self-center"]}>{kicker}</p>}
-  <h2 id={id} class:list={["h2", kicker && "mt-3.5"]}>
-    {satz1}
-    {satz2 && <> <span class="betont">{satz2}</span></>}
-  </h2>
-  {text && <p class="mt-4 max-w-[42rem] text-[clamp(1rem,1.5vw,1.19rem)] leading-relaxed text-leise md:mt-5">{text}</p>}
+  <h2 id={id} class="h2">{titel}</h2>
+  {text && <p class="mt-4 max-w-[36rem] text-[clamp(1rem,1.5vw,1.19rem)] leading-relaxed text-leise md:mt-5">{text}</p>}
 </div>

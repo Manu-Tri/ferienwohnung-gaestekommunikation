@@ -10,7 +10,6 @@ import Problem from "../components/Problem.astro";
 import Gaestereise from "../components/Gaestereise.astro";
 import Persoenlich from "../components/Persoenlich.astro";
 import Ablauf from "../components/Ablauf.astro";
-import Leistungen from "../components/Leistungen.astro";
 import Vergleich from "../components/Vergleich.astro";
 import Ergebnisse from "../components/Ergebnisse.astro";
 import Preise from "../components/Preise.astro";
@@ -21,6 +20,7 @@ import StickyCTA from "../components/StickyCTA.astro";
 import { regionen, site } from "../config/laden";
 import { faqSeite, service } from "../config/jsonld";
 import type { Region } from "../config/schema";
+import { nurFertig } from "../config/platzhalter";
 
 export function getStaticPaths() {
   return regionen.map((region) => ({ params: { region: region.slug }, props: { region } }));
@@ -28,29 +28,37 @@ export function getStaticPaths() {
 
 const { region } = Astro.props as { region: Region };
 const url = new URL(`/${region.slug}`, Astro.site).href;
+// Unfertige Regionstexte (Platzhalter in eckigen Klammern) nicht anzeigen
+const einleitung = nurFertig(region.einleitung);
+const partner = nurFertig(region.partner_text);
 const jsonld = [service(region.einsatzgebiet, region.seo_beschreibung, url), faqSeite(site.faq.fragen)];
 ---
 
 <Basis titel={region.seo_titel} beschreibung={region.seo_beschreibung} jsonld={jsonld} lokaleAnker>
   <Hero titel={region.titel} unterzeile={region.unterzeile} />
   <Laufband art="punkte" punkte={site.laufband.punkte} beschriftung="Das Wichtigste in Kürze" />
-  <section class="abschnitt border-t border-linie bg-karte" aria-labelledby="region-titel">
-    <div class="behaelter grid gap-10 md:grid-cols-2">
-      <div class="reveal">
-        <h2 id="region-titel" class="h2">{region.einleitung_titel}</h2>
-        <p class="mt-5 text-lg text-leise">{region.einleitung}</p>
-      </div>
-      <div class="reveal rounded-[1.25rem] border border-linie bg-flaeche p-7">
-        <h3 class="text-xl">{region.partner_titel}</h3>
-        <p class="mt-3 text-leise">{region.partner_text}</p>
-      </div>
-    </div>
-  </section>
+  {
+    (einleitung || partner) && (
+      <section class="abschnitt border-t border-linie bg-karte" aria-labelledby="region-titel">
+        <div class="behaelter grid gap-10 md:grid-cols-2">
+          <div class="reveal">
+            <h2 id="region-titel" class="h2">{region.einleitung_titel}</h2>
+            {einleitung && <p class="mt-5 text-lg text-leise">{einleitung}</p>}
+          </div>
+          {partner && (
+            <div class="reveal rounded-xl border border-linie bg-flaeche p-7">
+              <h3 class="text-xl">{region.partner_titel}</h3>
+              <p class="mt-3 text-leise">{partner}</p>
+            </div>
+          )}
+        </div>
+      </section>
+    )
+  }
   <Problem />
   <Gaestereise />
   <Persoenlich />
   <Ablauf />
-  <Leistungen />
   <Vergleich />
   <Ergebnisse />
   <Preise />

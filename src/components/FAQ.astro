@@ -1,32 +1,54 @@
 ---
 import { site } from "../config/laden";
+import { ohnePlatzhalter } from "../config/platzhalter";
 import Kopf from "./Kopf.astro";
 
 interface Props {
   fragen?: { frage: string; antwort: string }[];
   titel?: string;
-  kicker?: string;
 }
-const { fragen = site.faq.fragen, titel = site.faq.titel, kicker = site.faq.kicker } = Astro.props;
+const { fragen = site.faq.fragen, titel = site.faq.titel } = Astro.props;
+// Offene Platzhalter nicht zeigen; Fragen ohne fertige Antwort fallen ganz weg
+const liste = fragen.map((f) => ({ ...f, antwort: ohnePlatzhalter(f.antwort) })).filter((f) => f.antwort);
+const anzahl = site.faq.sichtbar ?? liste.length;
+const gruppen = [liste.slice(0, anzahl), liste.slice(anzahl)];
 ---
 
 <section id="faq" class="abschnitt pt-0" aria-labelledby="faq-titel">
   <div class="behaelter max-w-[60rem]">
-    <Kopf id="faq-titel" kicker={kicker} titel={titel} />
+    <Kopf id="faq-titel" titel={titel} />
     <div class="mt-[clamp(1.5rem,3vw,2.5rem)] border-t-2 border-tinte">
       {
-        fragen.map((f) => (
+        gruppen[0].map((f) => (
           <details class="group border-b-[1.5px] border-linie">
             <summary class="font-display flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-[1.375rem] text-[clamp(1.06rem,1.6vw,1.25rem)] leading-snug font-bold [&::-webkit-details-marker]:hidden">
               {f.frage}
-              <span class="shrink-0 text-2xl leading-none text-akzent-text transition-transform group-open:rotate-45" aria-hidden="true">
-                +
-              </span>
+              <span class="plus" aria-hidden="true" />
             </summary>
-            <p class="max-w-[45rem] pb-[1.375rem] leading-relaxed text-leise">{f.antwort}</p>
+            <p class="max-w-[38rem] pb-[1.375rem] leading-relaxed text-leise">{f.antwort}</p>
           </details>
         ))
       }
     </div>
+    {
+      gruppen[1].length > 0 && (
+        <details class="weitere group/weitere mt-6">
+          <summary class="textlink cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            {site.faq.weitere ?? "Weitere Fragen"} ({gruppen[1].length})
+          </summary>
+          <div class="mt-4 border-t-2 border-tinte">
+            {gruppen[1].map((f) => (
+              <details class="group border-b-[1.5px] border-linie">
+                <summary class="font-display flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-[1.375rem] text-[clamp(1.06rem,1.6vw,1.25rem)] leading-snug font-bold [&::-webkit-details-marker]:hidden">
+                  {f.frage}
+                  <span class="plus" aria-hidden="true" />
+                </summary>
+                <p class="max-w-[38rem] pb-[1.375rem] leading-relaxed text-leise">{f.antwort}</p>
+              </details>
+            ))}
+          </div>
+        </details>
+      )
+    }
   </div>
 </section>

@@ -1,5 +1,6 @@
 ---
 import { euro, site } from "../config/laden";
+import { nurFertig, ohnePlatzhalter } from "../config/platzhalter";
 
 const p = site.preise_abschnitt;
 const gp = site.preise.gruenderpreis;
@@ -11,11 +12,10 @@ const angebote = site.angebote;
 const kartenId: Record<string, string> = { agentur: "agenturen" };
 ---
 
-<section id="preise" class="preise streifen relative bg-akzent text-white" aria-labelledby="preise-titel">
+<section id="preise" class="preise relative bg-akzent text-auf-akzent" aria-labelledby="preise-titel">
   <div class="behaelter abschnitt relative flex flex-col gap-[clamp(1.75rem,4vw,3rem)]">
     <div class="grid items-end gap-[clamp(1.75rem,4vw,4rem)] lg:grid-cols-2">
       <div class="reveal flex flex-col gap-3.5">
-        {p.kicker && <p class="kicker">{p.kicker}</p>}
         <p class="font-display flex flex-wrap items-baseline gap-x-4 font-extrabold">
           <span class="text-[clamp(3.25rem,7.5vw,6.5rem)] leading-[0.88] tracking-[-0.04em]">{euro(preis)}</span>
           <span class="text-[clamp(1.25rem,2vw,1.625rem)]">{p.einheit}</span>
@@ -24,12 +24,12 @@ const kartenId: Record<string, string> = { agentur: "agenturen" };
         <p class="text-mint-hell">{p.test_hinweis}</p>
         <p class="text-sm text-mint-hell">{p.steuer}</p>
         <ul class="mt-1 flex flex-wrap gap-2 text-sm font-semibold">
-          {p.punkte.map((punkt) => <li class="rounded-full border-[1.5px] border-white/40 px-3 py-1.5">{punkt}</li>)}
+          {p.punkte.map((punkt) => <li class="rounded-full border-[1.5px] border-auf-akzent/40 px-3 py-1.5">{punkt}</li>)}
         </ul>
       </div>
 
       <div
-        class="kosten reveal flex flex-col gap-4 rounded-3xl bg-tinte p-[clamp(1.375rem,2.6vw,2rem)] text-auf-tinte"
+        class="kosten reveal flex flex-col gap-4 rounded-xl bg-tinte p-[clamp(1.375rem,2.6vw,2rem)] text-auf-tinte"
         data-preis={preis}
         data-max={p.rechner_max}
       >
@@ -47,7 +47,7 @@ const kartenId: Record<string, string> = { agentur: "agenturen" };
 
     <div id="angebote" class="flex scroll-mt-24 flex-col gap-3.5">
       <h3 class="text-[clamp(1.375rem,2.2vw,1.75rem)]">{angebote.titel}</h3>
-      <ul class="wischen grid gap-[clamp(0.75rem,1.6vw,1.25rem)] md:grid-cols-2 xl:grid-cols-3">
+      <ul class="grid gap-[clamp(0.75rem,1.6vw,1.25rem)] md:grid-cols-2 xl:grid-cols-3">
         {
           angebote.karten.map((k) => {
             const dunkel = k.stil === "dunkel";
@@ -55,14 +55,14 @@ const kartenId: Record<string, string> = { agentur: "agenturen" };
               <li
                 id={kartenId[k.anliegen]}
                 class:list={[
-                  "reveal flex scroll-mt-24 flex-col gap-3.5 rounded-3xl p-[clamp(1.375rem,2.6vw,1.875rem)]",
+                  "reveal flex scroll-mt-24 flex-col gap-3.5 rounded-xl p-[clamp(1.375rem,2.6vw,1.875rem)]",
                   dunkel ? "bg-tinte text-auf-tinte" : "bg-flaeche text-text",
                 ]}
               >
                 <span
                   class:list={[
                     "self-start rounded-full px-3 py-1 text-[0.875rem] font-bold",
-                    k.empfohlen ? "bg-akzent text-white" : dunkel ? "bg-auf-tinte/15" : "bg-sand",
+                    k.empfohlen ? "bg-akzent text-auf-akzent" : dunkel ? "bg-auf-tinte/15" : "bg-sand",
                   ]}
                 >
                   {k.etikett}
@@ -70,11 +70,10 @@ const kartenId: Record<string, string> = { agentur: "agenturen" };
                 <h4 lang="de" class="text-[clamp(1.25rem,2vw,1.5rem)] font-extrabold [overflow-wrap:break-word] hyphens-auto">
                   {k.titel}
                 </h4>
-                <p class="text-lg font-bold">{k.preis}</p>
-                <ul class:list={["flex flex-1 flex-col gap-2", dunkel ? "text-auf-tinte-leise" : "text-leise"]}>
+                <p class="text-lg font-bold">{ohnePlatzhalter(k.preis)}</p>
+                <ul class:list={["haken-liste flex flex-1 flex-col gap-2", dunkel ? "text-auf-tinte-leise [--haken-farbe:var(--mint)]" : "text-leise"]}>
                   {k.punkte.map((punkt) => (
-                    <li class="flex gap-2">
-                      <span aria-hidden="true">✓</span>
+                    <li>
                       <span>{punkt}</span>
                     </li>
                   ))}
@@ -82,7 +81,7 @@ const kartenId: Record<string, string> = { agentur: "agenturen" };
                 <a
                   href="#anfrage"
                   data-anliegen={k.anliegen}
-                  class:list={["knopf mt-1 w-full !px-4", k.empfohlen ? "knopf-primaer" : dunkel ? "knopf-hell" : "knopf-dunkel"]}
+                  class:list={["knopf mt-1 w-full", k.empfohlen ? "knopf-primaer" : dunkel ? "knopf-hell" : "knopf-dunkel"]}
                 >
                   {k.cta}
                 </a>
@@ -93,12 +92,12 @@ const kartenId: Record<string, string> = { agentur: "agenturen" };
       </ul>
     </div>
 
-    <div class="reveal rounded-3xl bg-flaeche p-[clamp(1.375rem,2.6vw,2rem)] text-text">
+    <div class="reveal rounded-xl bg-flaeche p-[clamp(1.375rem,2.6vw,2rem)] text-text">
       <div class="flex flex-wrap items-center justify-between gap-3">
         <h3 class="text-xl">{p.gruenderpreis_titel}</h3>
         {
           zeigeZaehler && (
-            <p class="rounded-full bg-akzent px-3.5 py-1.5 text-sm font-semibold text-white">{p.zaehler_text.replace("{frei}", String(frei))}</p>
+            <p class="rounded-full bg-akzent px-3.5 py-1.5 text-sm font-semibold text-auf-akzent">{p.zaehler_text.replace("{frei}", String(frei))}</p>
           )
         }
       </div>
@@ -108,7 +107,7 @@ const kartenId: Record<string, string> = { agentur: "agenturen" };
       <details class="bedingungen group mt-4 border-t border-rahmen">
         <summary class="flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 pt-3 font-bold [&::-webkit-details-marker]:hidden">
           {p.bedingungen_aufklappen}
-          <span class="shrink-0 text-2xl leading-none text-akzent-text transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+          <span class="plus" aria-hidden="true"></span>
         </summary>
         <div class="grid gap-x-10 gap-y-8 pt-4 pb-1 lg:grid-cols-2">
           <div>
@@ -118,7 +117,7 @@ const kartenId: Record<string, string> = { agentur: "agenturen" };
                 p.test_bedingungen.map((b) => (
                   <div>
                     <dt class="font-semibold">{b.titel}</dt>
-                    <dd class="text-leise">{b.text}</dd>
+                    <dd class="text-leise">{ohnePlatzhalter(b.text)}</dd>
                   </div>
                 ))
               }
@@ -127,12 +126,14 @@ const kartenId: Record<string, string> = { agentur: "agenturen" };
           <div>
             <h4 class="font-sans text-base font-bold">{p.gp_titel}</h4>
             <ul class="mt-3 list-disc space-y-1.5 pl-5 text-leise">
-              {p.gp_bedingungen.map((b) => <li>{b}</li>)}
+              {p.gp_bedingungen.map((b) => <li>{ohnePlatzhalter(b)}</li>)}
             </ul>
-            <div class="mt-6 space-y-2 border-t border-rahmen pt-5 text-sm text-leise">
-              <p>{p.abrechnung_booking}</p>
-              <p>{p.buchung_definition}</p>
-            </div>
+            {(nurFertig(p.abrechnung_booking) || nurFertig(p.buchung_definition)) && (
+              <div class="mt-6 space-y-2 border-t border-rahmen pt-5 text-sm text-leise">
+                {nurFertig(p.abrechnung_booking) && <p>{p.abrechnung_booking}</p>}
+                {nurFertig(p.buchung_definition) && <p>{p.buchung_definition}</p>}
+              </div>
+            )}
           </div>
         </div>
       </details>
@@ -143,9 +144,6 @@ const kartenId: Record<string, string> = { agentur: "agenturen" };
 <style>
   .preise {
     --fokus: var(--gold);
-  }
-  .preise .kicker {
-    color: var(--gold);
   }
   /* Auf hellen Karten bleibt der Fokusrahmen dunkel */
   .preise .bg-flaeche {
